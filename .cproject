@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?fileVersion 4.0.0?><cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
+	<storageModule moduleId="org.eclipse.cdt.core.settings">
+		<cconfiguration id="org.aspectc.acdt.toolchain.configuration.debug.linux.1493719555">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="org.aspectc.acdt.toolchain.configuration.debug.linux.1493719555" moduleId="org.eclipse.cdt.core.settings" name="Debug">
+				<externalSettings/>
+				<extensions>
+					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+				</extensions>
+			</storageModule>
+			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug" cleanCommand="@rm -rf *~ $(REPOFILE)" description="" id="org.aspectc.acdt.toolchain.configuration.debug.linux.1493719555" name="Debug" parent="org.aspectc.acdt.toolchain.configuration.debug.linux">
+					<folderInfo id="org.aspectc.acdt.toolchain.configuration.debug.linux.1493719555." name="/" resourcePath="">
+						<toolChain id="org.aspectc.acdt.toolchain.linux.chain.567836030" name="ACDT Toolchain for Linux" superClass="org.aspectc.acdt.toolchain.linux.chain">
+							<targetPlatform id="org.aspectc.acdt.toolchain.chain.linux.target.618683282" isAbstract="false" name="Target" osList="linux,hpux,aix,qnx" superClass="org.aspectc.acdt.toolchain.chain.linux.target"/>
+							<builder buildPath="${workspace_loc:/AspectC++Libary}/Debug" id="org.aspectc.acdt.toolchain.chain.linux.builder.989732027" managedBuildOn="true" name="ACDT Builder.Debug" superClass="org.aspectc.acdt.toolchain.chain.linux.builder"/>
+							<tool id="org.aspectc.acdt.toolchain.chain.linux.compiler.1957157643" name="ACDT Compiler" superClass="org.aspectc.acdt.toolchain.chain.linux.compiler"/>
+							<tool id="org.aspectc.acdt.toolchain.chain.linux.linker.490209266" name="ACDT Linker" superClass="org.aspectc.acdt.toolchain.chain.linux.linker"/>
+							<tool id="org.aspectc.acdt.toolchain.chain.linux.compiler.cdt.733000116" name="CDT Compiler" superClass="org.aspectc.acdt.toolchain.chain.linux.compiler.cdt">
+								<option id="gnu.cpp.compiler.option.optimization.level.1155690431" superClass="gnu.cpp.compiler.option.optimization.level" value="gnu.cpp.compiler.optimization.level.none" valueType="enumerated"/>
+								<option id="gnu.cpp.compiler.option.debugging.level.1953477484" superClass="gnu.cpp.compiler.option.debugging.level" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
+								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.123976315" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
+							</tool>
+							<tool id="org.aspectc.acdt.toolchain.chain.linux.linker.cdt.1387241765" name="CDT Linker" superClass="org.aspectc.acdt.toolchain.chain.linux.linker.cdt">
+								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.1154674124" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
+									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
+									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
+								</inputType>
+							</tool>
+						</toolChain>
+					</folderInfo>
+				</configuration>
+			</storageModule>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+		</cconfiguration>
+	</storageModule>
+	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+		<project id="AspectC++Libary.org.aspectc.acdt.toolchain.project.464110264" name="Executable" projectType="org.aspectc.acdt.toolchain.project"/>
+	</storageModule>
+	<storageModule moduleId="scannerConfiguration">
+		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		<scannerConfigBuildInfo instanceId="org.aspectc.acdt.toolchain.configuration.debug.linux.1493719555;org.aspectc.acdt.toolchain.configuration.debug.linux.1493719555.;org.aspectc.acdt.toolchain.chain.linux.compiler.cdt.733000116;cdt.managedbuild.tool.gnu.cpp.compiler.input.123976315">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
+</cproject>
