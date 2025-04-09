@@ -1,0 +1,35 @@
+#pragma once
+
+#include "profiler_base.ah"
+
+namespace acp {
+
+	attribute profile();
+
+}
+
+aspect Profiler : public ProfilerBase {
+
+    pointcut dont_profile() = "% Profiler::...::%(...)" || "% acp::...::%(...)";
+
+    advice call(acp::profile() && !dont_profile()) : around() {
+    	static acp::ProfilerData data (JoinPoint::signature ());
+		const auto start = std::chrono::high_resolution_clock::now();
+		tjp->proceed();
+		const auto end = std::chrono::high_resolution_clock::now();
+		data.m_calls++;
+		data.m_exec_time += end - start;
+    }
+
+    static void simple_stat () {
+    	std::cout << "\n\n";
+    	for (acp::ProfilerData *curr = acp::ProfilerData::first (); curr; curr = curr->p_next) {
+    		    	      std::cout << curr->m_signature << ": called " << curr->m_calls << " times within " << curr->m_exec_time.count() << " nanosec.\n";
+    		    	    }
+      }
+
+    virtual void (*summary())() {
+        return &simple_stat;
+      }
+
+};
