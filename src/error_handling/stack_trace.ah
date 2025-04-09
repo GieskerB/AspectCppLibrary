@@ -1,0 +1,36 @@
+#pragma once
+
+#include <iostream>
+#include <stdexcept>
+
+namespace acp {
+
+	class StackTraceForward: public std::runtime_error {
+
+	};
+
+}
+
+aspect StackTrace {
+
+	pointcut dont_trace() = "% StackTrace::...::%(...)" || "% acp::...::%(...)";
+
+	virtual pointcut where();
+
+	pointcut global() = "% ...::%(...)";
+
+	StackTrace() {}
+
+	virtual ~StackTrace() {}
+
+	advice execution(where() && !dont_trace()): around() {
+
+		try {
+			tjp->proceed();
+		} catch (...) {
+			std::cerr << "ERROR\n";
+		}
+
+	}
+
+}
