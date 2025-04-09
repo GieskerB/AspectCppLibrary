@@ -1,6 +1,25 @@
 #pragma once
 
-#include "profiler_base.ah"
+#include <iostream>
+#include <chrono>
+
+
+namespace acp {
+
+	struct ProfilerData {
+		static ProfilerData* &first () { static ProfilerData *data = 0; return data; }
+		struct ProfilerData* p_next;
+		unsigned int m_calls;
+		std::chrono::nanoseconds m_exec_time;
+		const char* m_signature;
+		ProfilerData (const char* n) : m_calls{0}, m_exec_time{0L}, m_signature{n} {
+			ProfilerData *head = first ();
+			first () = this;
+			p_next = head;
+		}
+	};
+
+}
 
 namespace acp {
 
@@ -8,12 +27,28 @@ namespace acp {
 
 }
 
-aspect Profiler : public ProfilerBase {
+aspect Profiler {
+
+protected:
+
+	std::ostream* _os;
+
+public:
 
     pointcut dont_profile() = "% Profiler::...::%(...)" || "% acp::...::%(...)";
 
-    advice call(acp::profile() && !dont_profile()) : around() {
-    	static acp::ProfilerData data (JoinPoint::signature ());
+    pointcut virtual where() = acp::profile();
+
+    pointcut base_where() = acp::profile();
+
+    Profiler(): Profiler(std::cout) {}
+
+    Profiler(std::ostream& os): _os(&os){
+
+    }
+
+    advice execution(where() && !dont_profile()) : around() {
+    	static acp::ProfilerData data (JoinPoint::signature());
 		const auto start = std::chrono::high_resolution_clock::now();
 		tjp->proceed();
 		const auto end = std::chrono::high_resolution_clock::now();
@@ -22,14 +57,20 @@ aspect Profiler : public ProfilerBase {
     }
 
     static void simple_stat () {
+		for (acp::ProfilerData *curr = acp::ProfilerData::first (); curr; curr = curr->p_next) {
+			std::cout << curr->m_signature << ": called "
+					  << curr->m_calls << " times within "
+					  << curr->m_exec_time.count() << " nanosec.\n";
+		}
     	std::cout << "\n\n";
-    	for (acp::ProfilerData *curr = acp::ProfilerData::first (); curr; curr = curr->p_next) {
-    		    	      std::cout << curr->m_signature << ": called " << curr->m_calls << " times within " << curr->m_exec_time.count() << " nanosec.\n";
-    		    	    }
       }
 
     virtual void (*summary())() {
         return &simple_stat;
+      }
+
+    advice execution ("% main(...)") : after () {
+        atexit (summary());
       }
 
 };
