@@ -1,36 +1,91 @@
 #pragma once
 
 #include <iostream>
-#include <stdexcept>
-
-namespace acp {
-
-	class StackTraceForward: public std::runtime_error {
-
-	};
-
-}
+#include <exception>
+#include <cstring>
+#include <vector>
 
 aspect StackTrace {
 
-	pointcut dont_trace() = "% StackTrace::...::%(...)" || "% acp::...::%(...)";
+protected:
 
-	virtual pointcut where();
+	std::exception const* _last_thrown;
+
+	std::vector<std::string> _call_chain;
+
+	/**
+	 * @brief Compares the function signature with the main function signature.
+	 * 
+	 * @param func_sig The function signature to compare without unnecessary spaces. (e.g. "int main(int argc, char* argv[])")
+	 * @return true if the function signature is the main function signature.
+	 * @return false if the function signature is not the main function signature.
+	 */
+	bool is_main_func(const char* func_sig) {
+		if(func_sig == nullptr) return false;
+
+		static const char* main_sig = "int main(";
+		static const size_t len = std::strlen(main_sig);
+
+		return std::strncmp(func_sig,main_sig,len);
+	}
+
+public:
+
+	pointcut dont_trace() = "% StackTrace::...::%(...)" || "% acp::...::%(...)";
 
 	pointcut global() = "% ...::%(...)";
 
-	StackTrace() {}
+	//	virtual pointcut where() = 0;
+	pointcut where() = global();
+
+
+	StackTrace(): _last_thrown(nullptr), _call_chain() {}
 
 	virtual ~StackTrace() {}
 
-	advice execution(where() && !dont_trace()): around() {
+
+	// Interessanter Fehler: wenn call() fehler, wenn execution() kein Fehler...
+
+	advice execution(where() && !dont_trace()) : around() {
+
+		// When calling a function, the exception must have been resolved
+		if (_last_thrown != nullptr) {
+			_last_thrown = nullptr;
+			_call_chain.clear();
+		}
 
 		try {
 			tjp->proceed();
+		} catch (const std::exception& e) {
+			if (is_main_func(tjp->signature()) and _last_thrown != nullptr) {
+				// Print Stack Trace
+				std::cout << "\n\nUNCAUGHT EXCEPTION:\n";
+				for(const auto& call: _call_chain) {
+					std::cout << call<< " \n";
+				}
+				_last_thrown = nullptr;
+				std::cout << "\n\n";
+				return;
+			} else {
+				if (_last_thrown == nullptr) {
+					// Just thrown
+					_call_chain.emplace_back(tjp->signature());
+					_last_thrown = &e;
+				} else if (typeid(*_last_thrown) == typeid(e) and std::string(_last_thrown->what()) == std::string(e.what())){
+					// Exception is still the same
+					_call_chain.emplace_back(tjp->signature());
+				} else {
+					// Exception changed
+					_call_chain.clear();
+					_call_chain.emplace_back(tjp->signature());
+					_last_thrown = &e;
+				}
+				throw;
+			}
 		} catch (...) {
-			std::cerr << "ERROR\n";
+			// Not implemented yet.
 		}
 
 	}
 
-}
+};
