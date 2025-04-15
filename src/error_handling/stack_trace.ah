@@ -25,8 +25,7 @@ protected:
 
 		static const char* main_sig = "int main(";
 		static const size_t len = std::strlen(main_sig);
-
-		return std::strncmp(func_sig,main_sig,len);
+		return !std::strncmp(func_sig,main_sig,len);
 	}
 
 public:
@@ -59,7 +58,7 @@ public:
 		} catch (const std::exception& e) {
 			if (is_main_func(tjp->signature()) and _last_thrown != nullptr) {
 				// Print Stack Trace
-				std::cout << "\n\nUNCAUGHT EXCEPTION:\n";
+				std::cout << "\n\nUNCAUGHT EXCEPTION in " << tjp->signature() <<":\n";
 				for(const auto& call: _call_chain) {
 					std::cout << call<< " \n";
 				}
