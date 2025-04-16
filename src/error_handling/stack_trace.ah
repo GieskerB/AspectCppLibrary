@@ -34,7 +34,7 @@ public:
 
 	pointcut global() = "% ...::%(...)";
 
-	//	virtual pointcut where() = 0;
+//	pointcut virtual where() = 0;
 	pointcut where() = global();
 
 
