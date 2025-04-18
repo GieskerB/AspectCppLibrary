@@ -4,87 +4,108 @@
 #include <exception>
 #include <cstring>
 #include <vector>
+#include <sstream>
+
+namespace acp {
+attribute trace();
+}
 
 aspect StackTrace {
 
 protected:
 
+	bool _editing_stack_trace = false;
+
+	std::string create_err_msg(std::string sign, std::string file, int line) {
+		std::string err_msg { };
+		err_msg += "at ";
+		err_msg += sign;
+		err_msg += " in (";
+		err_msg += file;
+		err_msg += ':';
+		err_msg += std::to_string(line);
+		err_msg += ")\n";
+		return err_msg;
+
+	}
+
 	std::exception const* _last_thrown;
 
 	std::vector<std::string> _call_chain;
-
-	/**
-	 * @brief Compares the function signature with the main function signature.
-	 * 
-	 * @param func_sig The function signature to compare without unnecessary spaces. (e.g. "int main(int argc, char* argv[])")
-	 * @return true if the function signature is the main function signature.
-	 * @return false if the function signature is not the main function signature.
-	 */
-	bool is_main_func(const char* func_sig) {
-		if(func_sig == nullptr) return false;
-
-		static const char* main_sig = "int main(";
-		static const size_t len = std::strlen(main_sig);
-		return !std::strncmp(func_sig,main_sig,len);
-	}
 
 public:
 
 	pointcut dont_trace() = "% StackTrace::...::%(...)" || "% acp::...::%(...)";
 
-	pointcut global() = "% ...::%(...)";
+	pointcut everywhere() = "% ...::%(...)";
 
-//	pointcut virtual where() = 0;
-	pointcut where() = global();
+	pointcut virtual where() = acp::trace();
 
+	pointcut virtual fall_back_func() = "int main(...)";
 
-	StackTrace(): _last_thrown(nullptr), _call_chain() {}
+	StackTrace() :
+			_last_thrown(nullptr), _call_chain() {
+	}
 
-	virtual ~StackTrace() {}
+	virtual ~StackTrace() {
+	}
 
+	advice execution(fall_back_func()) : around()
+		{
+			// When calling a function, the exception must have been resolved
+			if (_last_thrown != nullptr) {
+				_last_thrown = nullptr;
+				_call_chain.clear();
+			}
 
-	// Interessanter Fehler: wenn call() fehler, wenn execution() kein Fehler...
+			try {
+				tjp->proceed();
+			} catch (const std::exception& e) {
+				_editing_stack_trace = true;
+				// Print Stack Trace
+				std::cerr << "\n\nUncaught exception " << e.what() << ":\n";
+				_call_chain.push_back(create_err_msg(tjp->signature(),tjp->filename(),tjp->line()));
+				for (const auto& err_msg : _call_chain) {
+					std::cerr << '\t' << err_msg;
+				}
+				_last_thrown = nullptr;
+				std::cerr << "\n\n";
+				_editing_stack_trace = false;
+				return;
+			} catch (...) {
+				// Not implemented yet.
+			}
+		}
 
-	advice execution(where() && !dont_trace()) : around() {
+		advice call(where() && !dont_trace()) : around(){
 
 		// When calling a function, the exception must have been resolved
-		if (_last_thrown != nullptr) {
+		if (_last_thrown != nullptr and !_editing_stack_trace) {
+			std::cout << "cleared in "<< tjp->signature()<< '\n';
 			_last_thrown = nullptr;
 			_call_chain.clear();
 		}
-
 		try {
 			tjp->proceed();
 		} catch (const std::exception& e) {
-			if (is_main_func(tjp->signature()) and _last_thrown != nullptr) {
-				// Print Stack Trace
-				std::cout << "\n\nUNCAUGHT EXCEPTION in " << tjp->signature() <<":\n";
-				for(const auto& call: _call_chain) {
-					std::cout << call<< " \n";
-				}
-				_last_thrown = nullptr;
-				std::cout << "\n\n";
-				return;
+			_editing_stack_trace = true;
+			if (_last_thrown == nullptr) {
+				// Just thrown
+				_call_chain.push_back(create_err_msg(tjp->signature(),tjp->filename(),tjp->line()));
+				_last_thrown = &e;
+			} else if (typeid(*_last_thrown) == typeid(e) and std::string(_last_thrown->what()) == std::string(e.what())) {
+				// Exception is still the same
+				_call_chain.push_back(create_err_msg(tjp->signature(),tjp->filename(),tjp->line()));
 			} else {
-				if (_last_thrown == nullptr) {
-					// Just thrown
-					_call_chain.emplace_back(tjp->signature());
-					_last_thrown = &e;
-				} else if (typeid(*_last_thrown) == typeid(e) and std::string(_last_thrown->what()) == std::string(e.what())){
-					// Exception is still the same
-					_call_chain.emplace_back(tjp->signature());
-				} else {
-					// Exception changed
-					_call_chain.clear();
-					_call_chain.emplace_back(tjp->signature());
-					_last_thrown = &e;
-				}
-				throw;
+				// Exception changed
+				_call_chain.clear();
+				_call_chain.push_back(create_err_msg(tjp->signature(),tjp->filename(),tjp->line()));
+				_last_thrown = &e;
 			}
+			_editing_stack_trace = false;
+			throw;
 		} catch (...) {
 			// Not implemented yet.
 		}
-
 	}
-
 };
