@@ -12,26 +12,47 @@ attribute trace();
 
 aspect StackTrace {
 
+private:
+
+	static thread_local bool _editing_stack_trace;
+
+	static thread_local std::exception const* _last_thrown;
+
+	static thread_local std::vector<std::string> _call_chain;
+
+
+	void check_reset() {
+		// When calling a function, the exception must have been resolved
+		if (_last_thrown != nullptr and !_editing_stack_trace) {
+			_last_thrown = nullptr;
+			_call_chain.clear();
+		}
+	}
+
 protected:
 
-	bool _editing_stack_trace = false;
-
-	std::string create_err_msg(std::string sign, std::string file, int line) {
+	std::string create_err_msg(const char* sign, const char* file, int line) {
 		std::string err_msg { };
 		err_msg += "at ";
-		err_msg += sign;
+		err_msg += sign; // implicit conversion to std::string
 		err_msg += " in (";
-		err_msg += file;
+		err_msg += file; // implicit conversion to std::string
 		err_msg += ':';
 		err_msg += std::to_string(line);
 		err_msg += ")\n";
 		return err_msg;
-
 	}
 
-	std::exception const* _last_thrown;
-
-	std::vector<std::string> _call_chain;
+	void print_stack_trace(const std::vector<std::string>& call_chain, const char* exception_msg) {
+		std::cerr << "\n\nUncaught exception " << exception_msg << ":\n";
+		for (const auto& err_msg : _call_chain) {
+			std::cerr << '\t' << err_msg;
+		}
+		// Reset values after printing.
+		_last_thrown = nullptr;
+		std::cerr << "\n\n";
+		_editing_stack_trace = false;
+	}
 
 public:
 
@@ -43,48 +64,31 @@ public:
 
 	pointcut virtual fall_back_func() = "int main(...)";
 
-	StackTrace() :
-			_last_thrown(nullptr), _call_chain() {
+	StackTrace() {}
+
+	virtual ~StackTrace() {}
+
+	advice execution(fall_back_func()) : around() {
+
+		check_reset();
+
+		try {
+			tjp->proceed();
+		} catch (const std::exception& e) {
+			_editing_stack_trace = true;
+			_call_chain.push_back(create_err_msg(tjp->signature(),tjp->filename(),tjp->line()));
+			// Print Stack Trace
+			print_stack_trace(_call_chain, e.what());
+			return;
+		} catch (...) {
+			// Not implemented yet.
+		}
 	}
 
-	virtual ~StackTrace() {
-	}
+	advice call(where() && !dont_trace()) : around(){
 
-	advice execution(fall_back_func()) : around()
-		{
-			// When calling a function, the exception must have been resolved
-			if (_last_thrown != nullptr) {
-				_last_thrown = nullptr;
-				_call_chain.clear();
-			}
+		check_reset();
 
-			try {
-				tjp->proceed();
-			} catch (const std::exception& e) {
-				_editing_stack_trace = true;
-				// Print Stack Trace
-				std::cerr << "\n\nUncaught exception " << e.what() << ":\n";
-				_call_chain.push_back(create_err_msg(tjp->signature(),tjp->filename(),tjp->line()));
-				for (const auto& err_msg : _call_chain) {
-					std::cerr << '\t' << err_msg;
-				}
-				_last_thrown = nullptr;
-				std::cerr << "\n\n";
-				_editing_stack_trace = false;
-				return;
-			} catch (...) {
-				// Not implemented yet.
-			}
-		}
-
-		advice call(where() && !dont_trace()) : around(){
-
-		// When calling a function, the exception must have been resolved
-		if (_last_thrown != nullptr and !_editing_stack_trace) {
-			std::cout << "cleared in "<< tjp->signature()<< '\n';
-			_last_thrown = nullptr;
-			_call_chain.clear();
-		}
 		try {
 			tjp->proceed();
 		} catch (const std::exception& e) {
@@ -109,3 +113,10 @@ public:
 		}
 	}
 };
+
+
+thread_local bool StackTrace::_editing_stack_trace = false;
+
+thread_local std::exception const* StackTrace::_last_thrown = nullptr;
+
+thread_local std::vector<std::string> StackTrace::_call_chain{};
