@@ -1,0 +1,56 @@
+#pragma once
+
+#include <stdexcept>
+#include <cerrno>
+#include <cstring>
+
+namespace acp {
+	attribute err_code();
+
+	class ErrnoException : public std::runtime_error {
+
+		std::string _msg;
+		const unsigned int _errno;
+
+		void create_message() {
+			_msg = "A function call set errno to a non zero value:";
+			_msg += std::to_string(_errno);
+			_msg += " which means: <";
+			_msg += std::runtime_error::what();
+			_msg += ">\n";
+		}
+
+	public:
+		ErrnoException() = delete;
+
+		ErrnoException(unsigned int err): std::runtime_error(std::strerror(err)),_errno(err) {
+			create_message();
+		}
+
+		const char* what() const noexcept override {
+			return _msg.c_str();
+		}
+
+		unsigned int get_errno() const {
+			return _errno;
+		}
+
+	};
+
+}
+
+aspect ErrorCodeConverter {
+
+	pointcut global() = "% ...::%(...)";
+
+	pointcut virtual where() = acp::err_code();
+
+	advice execution(where() || global()) : after() {
+		if (errno != 0) {
+			acp::ErrnoException exception(errno);
+			errno = 0;
+			throw exception;
+		}
+		std::cout << "NO PROBLEM in " << tjp->signature() << '\n';
+	}
+};
