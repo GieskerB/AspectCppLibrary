@@ -1,0 +1,15 @@
+#pragma once
+
+#include "stack_trace.ah"
+#include "../util/default_stack_trace_msg_builder.h"
+#include "../util/cerr_printer.h"
+
+aspect DefaultStackTrace : public StackTrace {
+
+public:
+
+	DefaultStackTrace() : StackTrace(new DefaultStackTraceMsgBuilder(), new CerrPrinter()) {}
+
+	virtual ~DefaultStackTrace();
+
+};

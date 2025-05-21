@@ -1,16 +1,25 @@
 #pragma once
 
-#include <iostream>
 #include <exception>
-#include <cstring>
+#include <string>
 #include <vector>
-#include <sstream>
+
+#include "../core/core_aspect.ah"
+#include "../util/stack_trace_msg_builder.h"
+#include "../util/printer.h"
 
 namespace acp {
-attribute trace();
+	attribute trace();
 }
 
-aspect StackTrace {
+aspect StackTrace : public CoreAspect {
+
+
+	pointcut virtual ignore() = "% StackTrace::...::%(...)" || "% acp::...::%(...)";
+
+	pointcut virtual default_where() = acp::trace();
+
+	pointcut virtual fall_back_func() = "int main(...)";
 
 private:
 
@@ -20,6 +29,8 @@ private:
 
 	static thread_local std::vector<std::string> _call_chain;
 
+	StackTraceMsgBuilder* _builder;
+	Printer* _printer;
 
 	void check_reset() {
 		// When calling a function, the exception must have been resolved
@@ -31,42 +42,30 @@ private:
 
 protected:
 
-	std::string create_err_msg(const char* sign, const char* file, int line) {
-		std::string err_msg { };
-		err_msg += "at ";
-		err_msg += sign; // implicit conversion to std::string
-		err_msg += " in (";
-		err_msg += file; // implicit conversion to std::string
-		err_msg += ':';
-		err_msg += std::to_string(line);
-		err_msg += ")\n";
-		return err_msg;
-	}
-
 	void print_stack_trace(const std::vector<std::string>& call_chain, const char* exception_msg) {
-		std::cerr << "\n\nUncaught exception " << exception_msg << ":\n";
+		_printer->print("\n\nUncaught exception ");
+		_printer->print(exception_msg);
+		_printer->print(":\n");
 		for (const auto& err_msg : _call_chain) {
-			std::cerr << '\t' << err_msg;
+			_printer->print('\t');
+			_printer->print(err_msg);
 		}
 		// Reset values after printing.
 		_last_thrown = nullptr;
-		std::cerr << "\n\n";
+		_printer->print("\n\n");
 		_editing_stack_trace = false;
 	}
 
 public:
 
-	pointcut dont_trace() = "% StackTrace::...::%(...)" || "% acp::...::%(...)";
+	virtual StackTrace() = 0;
 
-	pointcut everywhere() = "% ...::%(...)";
+	StackTrace(StackTraceMsgBuilder* builder, Printer* printer) : _builder(builder), _printer(printer) {}
 
-	pointcut virtual where() = acp::trace();
-
-	pointcut virtual fall_back_func() = "int main(...)";
-
-	StackTrace() {}
-
-	virtual ~StackTrace() {}
+	virtual ~StackTrace() {
+		delete _builder;
+		delete _printer;
+	}
 
 	advice execution(fall_back_func()) : around() {
 
@@ -76,7 +75,7 @@ public:
 			tjp->proceed();
 		} catch (const std::exception& e) {
 			_editing_stack_trace = true;
-			_call_chain.push_back(create_err_msg(tjp->signature(),tjp->filename(),tjp->line()));
+			_call_chain.push_back(_builder->build_msg(tjp->signature(),tjp->filename(),tjp->line()));
 			// Print Stack Trace
 			print_stack_trace(_call_chain, e.what());
 			return;
@@ -85,7 +84,7 @@ public:
 		}
 	}
 
-	advice call(where() && !dont_trace()) : around(){
+	advice call(where() && !ignore()) : around(){
 
 		check_reset();
 
