@@ -1,0 +1,16 @@
+#pragma once
+
+aspect CoreAspect {
+
+	pointcut everywhere() = "% ...::%(...)";
+	pointcut in_user_space() = call(everywhere());
+
+	pointcut virtual default_where() = 0;
+
+	pointcut virtual where() = default_where();
+	pointcut virtual ignore() = 0;
+
+	CoreAspect() = default;
+	virtual ~CoreAspect() {}
+
+};
