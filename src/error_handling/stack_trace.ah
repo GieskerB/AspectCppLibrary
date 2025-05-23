@@ -5,8 +5,8 @@
 #include <vector>
 
 #include "../core/core_aspect.ah"
-#include "../util/stack_trace_msg_builder.h"
-#include "../util/printer.h"
+#include "../util/printer.hh"
+#include "../util/stack_trace_msg_builder.hh"
 
 namespace acp {
 	attribute trace();
@@ -17,7 +17,8 @@ aspect StackTrace : public CoreAspect {
 
 	pointcut virtual ignore() = "% StackTrace::...::%(...)" || "% acp::...::%(...)";
 
-	pointcut virtual default_where() = acp::trace();
+//	pointcut virtual default_where() = acp::trace();
+	pointcut virtual default_where() = everywhere();
 
 	pointcut virtual fall_back_func() = "int main(...)";
 
@@ -29,8 +30,8 @@ private:
 
 	static thread_local std::vector<std::string> _call_chain;
 
-	StackTraceMsgBuilder* _builder;
-	Printer* _printer;
+	acp::StackTraceMsgBuilder* _builder;
+	acp::Printer* _printer;
 
 	void check_reset() {
 		// When calling a function, the exception must have been resolved
@@ -58,9 +59,9 @@ protected:
 
 public:
 
-	virtual StackTrace() = 0;
+	StackTrace() : StackTrace(nullptr,nullptr) {}
 
-	StackTrace(StackTraceMsgBuilder* builder, Printer* printer) : _builder(builder), _printer(printer) {}
+	StackTrace(acp::StackTraceMsgBuilder* builder, acp::Printer* printer) : _builder(builder), _printer(printer) {}
 
 	virtual ~StackTrace() {
 		delete _builder;
@@ -94,15 +95,15 @@ public:
 			_editing_stack_trace = true;
 			if (_last_thrown == nullptr) {
 				// Just thrown
-				_call_chain.push_back(create_err_msg(tjp->signature(),tjp->filename(),tjp->line()));
+				_call_chain.push_back(_builder->build_msg(tjp->signature(),tjp->filename(),tjp->line()));
 				_last_thrown = &e;
 			} else if (typeid(*_last_thrown) == typeid(e) and std::string(_last_thrown->what()) == std::string(e.what())) {
 				// Exception is still the same
-				_call_chain.push_back(create_err_msg(tjp->signature(),tjp->filename(),tjp->line()));
+				_call_chain.push_back(_builder->build_msg(tjp->signature(),tjp->filename(),tjp->line()));
 			} else {
 				// Exception changed
 				_call_chain.clear();
-				_call_chain.push_back(create_err_msg(tjp->signature(),tjp->filename(),tjp->line()));
+				_call_chain.push_back(_builder->build_msg(tjp->signature(),tjp->filename(),tjp->line()));
 				_last_thrown = &e;
 			}
 			_editing_stack_trace = false;
