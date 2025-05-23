@@ -4,5 +4,7 @@ docs/latex/
 .tracecompass/
 .vscode/
 
+Debug/
+
 .cproject
 .project
