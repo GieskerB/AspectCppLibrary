@@ -14,7 +14,6 @@ namespace acp {
 
 aspect StackTrace : public CoreAspect {
 
-
 	pointcut virtual ignore() = "% StackTrace::...::%(...)" || "% acp::...::%(...)";
 
 //	pointcut virtual default_where() = acp::trace();
@@ -24,44 +23,15 @@ aspect StackTrace : public CoreAspect {
 
 private:
 
-	/**
-	 * @brief Flag to indicate if we are currently editing the stack trace.
-	 *
-	 * Since an Aspect is always a singleton, the static thread_local variable acts as a member variable on thread level.
-	 *
-	 * While this value is true, entering a function will not reset the stack trace in the event of an exception.
-	 * This is important because in the process of handling the exception in this Aspect, function calls may occurs whilst
-	 * not having dealt with the exception itself.
-	 */
 	static thread_local bool _editing_stack_trace;
 
-	/**
-	 * @brief Pointer to the last thrown exception.
-	 *
-	 * Since an Aspect is always a singleton, the static thread_local variable acts as a member variable on thread level.
-	 *
-	 * This is used to check if the exception has changed or not. In case a function catches an exception and throws another
-	 * again, the stacktrace should reset.
-	 */
 	static thread_local std::exception const* _last_thrown;
 
-	/**
-	 * @brief Ordered list of all function calls from the occurrence of the exception to the current function.
-	 *
-	 * Since an Aspect is always a singleton, the static thread_local variable acts as a member variable on thread level.
-	 *
-	 * Allready stores the correctly formatted error message. Therefore, simple printing the content of this list in order
-	 * will result in a correct stack trace.
-	 */
 	static thread_local std::vector<std::string> _call_chain;
 
+	acp::StackTraceMsgBuilder* _builder;
+	acp::Printer* _printer;
 
-	/**
-	 * @brief Check if the stack trace should be reset.
-	 *
-	 * When calling - therefore entering - a function, the exception must have been resolved. So if the first thing an
-	 * advice should do is call this function before proceeding.
-	 */
 	void check_reset() {
 		// When calling a function, the exception must have been resolved
 		if (_last_thrown != nullptr and !_editing_stack_trace) {
@@ -72,32 +42,6 @@ private:
 
 protected:
 
-	/**
-	 * @brief Create a formatted error message.
-	 *
-	 * @param sign Signature of the function.
-	 * @param file Name of the file of the function.
-	 * @param line Line number of the function call.
-	 * @return Formatted error message.
-	 */
-	std::string create_err_msg(const char* sign, const char* file, int line) {
-		std::string err_msg { };
-		err_msg += "at ";
-		err_msg += sign; // implicit conversion to std::string
-		err_msg += " in (";
-		err_msg += file; // implicit conversion to std::string
-		err_msg += ':';
-		err_msg += std::to_string(line);
-		err_msg += ")\n";
-		return err_msg;
-	}
-
-	/**
-	 * @brief Print the stack trace.
-	 *
-	 * @param call_chain List of function calls.
-	 * @param exception_msg Exception message.
-	 */
 	void print_stack_trace(const std::vector<std::string>& call_chain, const char* exception_msg) {
 		_printer->print("\n\nUncaught exception ");
 		_printer->print(exception_msg);
@@ -122,30 +66,6 @@ public:
 		delete _builder;
 		delete _printer;
 	}
-
-	/**
-	 * @brief Pointcut to exclude certain functions from being traced.
-	 */
-	pointcut dont_trace() = "% StackTrace::...::%(...)" || "% acp::...::%(...)";
-
-
-	/**
-	 * @brief Pointcut which includes every function call. This should be the default pointcut for best stacktrace results.
-	 */
-	pointcut everywhere() = "% ...::%(...)";
-
-	/**
-	 * @brief Pointcut which states around which functions this StackTrace should act upon. Defaults to only functions
-	 * annotated with this [[acp::trace]] attribute.
-	 */
-	pointcut virtual where() = acp::trace();
-
-
-	/**
-	 * @brief Pointcut which states for which one (or multiple) function(s) the StackTrace print is triggered when an
-	 * uncaught exception leaves that function. Defaults to the main function.
-	 */
-	pointcut virtual fall_back_func() = "int main(...)";
 
 	/**
 	 * @brief Advice handles the StackTrace printing when an uncaught exception leaves the function of the pointcut.
