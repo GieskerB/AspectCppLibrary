@@ -4,7 +4,15 @@ docs/latex/
 .tracecompass/
 .vscode/
 
+.svn/
+ACModel/
+bin/
+config/
 Debug/
+DepFiles/
+ObjFiles/
+tools/
+
 
 .cproject
 .project
