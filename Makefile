@@ -136,7 +136,7 @@ endif
   CXXFLAGS += -fno-rtti -Wno-strict-aliasing -Wno-nonnull # hide annoying warnings in Clang headers
   # Clang >= 11 uses C++14 features; "c++14" does not work -> WIN32 not defined on Windows!
   # clang >= 18 requires C++17
-  CXXFLAGS += -std=gnu++17
+  CXXFLAGS += -std=gnu++11
 endif
 
 # profiling
