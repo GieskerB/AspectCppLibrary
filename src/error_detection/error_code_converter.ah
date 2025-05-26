@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __ACP__ERROR_CODE_CONVERTER_AH__
+#define __ACP__ERROR_CODE_CONVERTER_AH__
 
 #include <stdexcept>
 #include <cerrno>
@@ -51,6 +52,7 @@ aspect ErrorCodeConverter {
 			errno = 0;
 			throw exception;
 		}
-		std::cout << "NO PROBLEM in " << tjp->signature() << '\n';
 	}
 };
+
+#endif // __ACP__ERROR_CODE_CONVERTER_AH__

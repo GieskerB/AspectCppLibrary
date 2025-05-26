@@ -266,4 +266,16 @@ $(OBJECTDIR)/%.o : %.cc
 test%:
 	$(MAKE) -C tests -s  $*
 
+%.example_make: %
+	cd examples/$< ; \
+	$(AC) $(ACFLAGS) -I. -p . -d ../$<-out \
+	-r ../$<.acp ; \
+	cp Makefile ../$<-out/Makefile; \
+	cd ../$<-out; g++ -o $< *.cc -lpthread
+
+%.example_run:	%.example_make
+	@echo ""
+	@echo ---- Running $* ----
+	@cd examples/$*-out; `find . -type f -perm -700`
+
 include $(wildcard $(DEPS))

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __ACP__PROFILER_AH__
+#define __ACP__PROFILER_AH__
 
 #include <iostream>
 #include <chrono>
@@ -74,3 +75,5 @@ public:
       }
 
 };
+
+#endif // __ACP__PROFILER_AH__

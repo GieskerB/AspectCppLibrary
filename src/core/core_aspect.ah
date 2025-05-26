@@ -1,6 +1,9 @@
-#pragma once
+#ifndef __ACP__CORE_ASPECT_AH__
+#define __ACP__CORE_ASPECT_AH__
 
 aspect CoreAspect {
+
+public:
 
 	pointcut everywhere() = "% ...::%(...)";
 	pointcut in_user_space() = call(everywhere());
@@ -14,3 +17,5 @@ aspect CoreAspect {
 	virtual ~CoreAspect() {}
 
 };
+
+#endif // __ACP__CORE_ASPECT_AH__

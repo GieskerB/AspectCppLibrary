@@ -1,25 +1,19 @@
-#pragma once
+#ifndef __ACP__STACK_TRACE_AH__
+#define __ACP__STACK_TRACE_AH__
 
 #include <exception>
 #include <string>
 #include <vector>
 
-#include "../core/core_aspect.ah"
 #include "../util/printer.hh"
 #include "../util/stack_trace_msg_builder.hh"
+#include "../core/core_aspect.ah"
 
 namespace acp {
 	attribute trace();
 }
 
 aspect StackTrace : public CoreAspect {
-
-	pointcut virtual ignore() = "% StackTrace::...::%(...)" || "% acp::...::%(...)";
-
-//	pointcut virtual default_where() = acp::trace();
-	pointcut virtual default_where() = everywhere();
-
-	pointcut virtual fall_back_func() = "int main(...)";
 
 private:
 
@@ -57,6 +51,13 @@ protected:
 	}
 
 public:
+
+	pointcut virtual ignore() = "% StackTrace::...::%(...)" || "% acp::...::%(...)";
+
+	pointcut virtual default_where() = everywhere();
+
+	pointcut virtual fall_back_func() = "int main(...)";
+
 
 	StackTrace() : StackTrace(nullptr,nullptr) {}
 
@@ -122,3 +123,5 @@ thread_local bool StackTrace::_editing_stack_trace = false;
 thread_local std::exception const* StackTrace::_last_thrown = nullptr;
 
 thread_local std::vector<std::string> StackTrace::_call_chain{};
+
+#endif // __ACP__STACK_TRACE_AH__
