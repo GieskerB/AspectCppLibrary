@@ -1,3 +1,5 @@
+#if 0
+
 #ifndef __ACP__ERROR_CODE_CONVERTER_AH__
 #define __ACP__ERROR_CODE_CONVERTER_AH__
 
@@ -46,7 +48,8 @@ aspect ErrorCodeConverter {
 
 	pointcut virtual where() = acp::err_code();
 
-	advice execution(where() || global()) : after() {
+	advice execution(where() || global()) : around() {
+		tjp->proceed();
 		if (errno != 0) {
 			acp::ErrnoException exception(errno);
 			errno = 0;
@@ -56,3 +59,4 @@ aspect ErrorCodeConverter {
 };
 
 #endif // __ACP__ERROR_CODE_CONVERTER_AH__
+#endif

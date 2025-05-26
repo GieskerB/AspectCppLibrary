@@ -79,8 +79,13 @@ public:
 			tjp->proceed();
 		} catch (const std::exception& e) {
 			_editing_stack_trace = true;
-			_call_chain.push_back(_builder->build_msg(tjp->signature(),tjp->filename(),tjp->line()));
+volatile auto v =_builder->build_msg(tjp->signature(),tjp->filename(),tjp->line());
+auto b = *(std::string*)(&v);   
+std::cout <<b<<std::endl;
+			// std::cout << "BUILDER: " << (_builder->build_msg(tjp->signature(),tjp->filename(),tjp->line())[0] == 'i') << std::endl;
+			_call_chain.push_back(b);
 			// Print Stack Trace
+			std::cout << "PENIS: (danke Felix)" << _call_chain.back() << std::endl;
 			print_stack_trace(_call_chain, e.what());
 			return;
 		} catch (...) {

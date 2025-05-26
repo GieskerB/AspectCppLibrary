@@ -1,5 +1,16 @@
 Stack Trace Test: Tests for stack trace functionality by throwing an exception caught and uncaught.
 ====================================================================================================
 -Testing Stack Trace with Caught Exception----------------------------------------------------------
+DSMB: 0
+DSMB: 0
+DSMB: 0
 Exception caught: foo-err
 -Testing Stack Trace with Uncaught Exception--------------------------------------------------------
+DSMB: 0
+DSMB: 0
+DSMB: 0
+DSMB: 0
+DSMB: 0
+DSMB: 1
+aösdfjlasdjföint main()
+PENIS: (danke Felix)aösdfjlasdjföint main()

@@ -4,9 +4,10 @@ used directly. Please use the makefile in the toplevel \
 directory of the ApectC++ source tree instead)
 endif
 
-CXX ?= g++ -O6
+CXX ?= g++ -O6 -g
 DIFF=diff --strip-trailing-cr
 ACFLAGS += $(ACOPTFLAGS) -k
+CXXFLAGS+= -g
 
 ifeq ($(filter -r, $(ACFLAGS)),)
   ACFLAGS += -r repo.acp
@@ -67,10 +68,10 @@ ref:   $(PROG)
 
 feature$(EXT): $(OBJECTS)
 	@echo Linking
-	@$(CXX) $(CXXFLAGS) -o $@ $(OBJECTS)
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJECTS)
 
 clean:
-	@rm -rf *.o $(JUNK) *.acc feature$(EXT) *~ *.acp $(PARSER_CONFIG)
+	rm -rf *.o $(JUNK) *.acc feature$(EXT) *~ *.acp $(PARSER_CONFIG)
 
 %.acc : %.cc
 	@echo Weaving $<
