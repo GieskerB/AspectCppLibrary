@@ -17,6 +17,7 @@ tools/
 .project
 
 **/feature
+**/feature.out
 **/Junk/
 **/*.acc
 **/*.acp
