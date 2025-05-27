@@ -11,49 +11,21 @@
 namespace acp {
 
 class DefaultStackTraceMsgBuilder : public StackTraceMsgBuilder {
-    // std::string generate_string(const char* sig, int sig_len, const char* file,
-    //                             int file_len, unsigned int line,
-    //                             int line_len) const {
-    //     const std::string line_str = std::to_string(line);
-    //     const int total_len = sig_len + 3 + file_len + 3 + line_len;
-    //     std::string result(total_len + 1, '\0');
-    //     int pos = 0;
 
-    //     for (int i = 0; i < sig_len; ++i) {
-    //         result.at(pos++) = sig[i];
-    //     }
+	constexpr static unsigned int BUFF_SIZE = 1024;
 
-    //     result.at(pos++) = ' ';
-    //     result.at(pos++) = '|';
-    //     result.at(pos++) = ' ';
-
-    //     for (int i = 0; i < file_len; ++i) {
-    //         result.at(pos++) = file[i];
-    //     }
-
-    //     result.at(pos++) = ' ';
-    //     result.at(pos++) = '|';
-    //     result.at(pos++) = ' ';
-
-    //     for (int i = 0; i < line_len; ++i) {
-    //         result.at(pos++) = line_str[i];
-    //     }
-
-    //     return result;
-    // }
-
-    // int decimal_length(unsigned int v) const {
-    //     if (v < 10) return 1;
-    //     if (v < 100) return 2;
-    //     if (v < 1000) return 3;
-    //     if (v < 10000) return 4;
-    //     if (v < 100000) return 5;
-    //     if (v < 1000000) return 6;
-    //     if (v < 10000000) return 7;
-    //     if (v < 100000000) return 8;
-    //     if (v < 1000000000) return 9;
-    //     return 10;
-    // }
+    int decimal_length(unsigned int v) const {
+        if (v < 10) return 1;
+        if (v < 100) return 2;
+        if (v < 1000) return 3;
+        if (v < 10000) return 4;
+        if (v < 100000) return 5;
+        if (v < 1000000) return 6;
+        if (v < 10000000) return 7;
+        if (v < 100000000) return 8;
+        if (v < 1000000000) return 9;
+        return 10;
+    }
 
    public:
     DefaultStackTraceMsgBuilder() = default;
@@ -61,34 +33,37 @@ class DefaultStackTraceMsgBuilder : public StackTraceMsgBuilder {
 
     virtual std::string build_msg(const char* signature, const char* file,
                                   int line) const override {
-        // return generate_string(signature, std::strlen(signature), file,
-        //                        std::strlen(file), line, decimal_length(line));
 
-        // std::stringstream ss;
-        // ss << signature << " | " << file << " | " << line<< '\n';
-        // return ss.str();
+#if 0 // TODO: TOGGLE this to switch between buggy implementation and the correct one
+        std::stringstream ss;
+        ss << signature << " | " << file << " | " << line<< '\n';
+        return ss.str();
+# else
+		char buf[BUFF_SIZE] = {0};
 
+		const int sig_len = std::strlen(signature);
+		const int file_len = std::strlen(file);
+		const int line_len = decimal_length(line);
+		const int total_len = 3 + sig_len + 5 + file_len + 1 + line_len + 2;
 
-		const char* sig = "int main(int, char**)";
-		const char* fil = "src/main.cc";
-		const char* lin = "42";
+		if (total_len >= BUFF_SIZE) {
+			return "Error: Buffer size is too small for the message.\n";
+		}
 
-	    // std::cout << signature<< '\n';
+		int remaining = BUFF_SIZE - 1; // Reserve space for null terminator
+		char line_str[11] = {0};
+		snprintf(line_str, decimal_length(line)+1, "%d", line);
 
-		std::string res {"aösdfjlasdjfö"};
+		strncat(buf, "at ", remaining); remaining -= 3;
+		strncat(buf, signature, remaining); remaining -= sig_len;
+		strncat(buf, " in (", remaining); remaining -= 5;
+		strncat(buf, file, remaining); remaining -= file_len;
+		strncat(buf, ":", remaining); remaining -= 1;
+		strncat(buf, line_str, remaining); remaining -= line_len;
+		strncat(buf, ")\n", remaining);
 
-	    // res += const_cast<char *>(signature);
-	    // res += const_cast<char *>(file);
-
-		char buf[256] = {0};
-		strncpy(buf, signature, 255);
-		res += buf;
-
-	    // std::cout <<"DSMB: "<< (buf[0] == 'i') << '\n';
-
-	    // res += lin;
-
-		return res;
+		return buf;
+#endif
 	}
 
 };

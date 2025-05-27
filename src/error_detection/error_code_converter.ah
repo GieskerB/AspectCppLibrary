@@ -1,7 +1,7 @@
-#if 0
-
 #ifndef __ACP__ERROR_CODE_CONVERTER_AH__
 #define __ACP__ERROR_CODE_CONVERTER_AH__
+
+#include "../core/core_aspect.ah"
 
 #include <stdexcept>
 #include <cerrno>
@@ -42,13 +42,19 @@ namespace acp {
 
 }
 
-aspect ErrorCodeConverter {
+aspect ErrorCodeConverter : public CoreAspect {
 
-	pointcut global() = "% ...::%(...)";
+public:
 
-	pointcut virtual where() = acp::err_code();
+	pointcut virtual default_where() = everywhere();
 
-	advice execution(where() || global()) : after() {
+#if 0	// TODO: TOGGLE this to switch between buggy implementation and the correct one
+	pointcut virtual ignore() = "Nothing";
+#else
+	pointcut virtual ignore() = "% ErrorCodeConverter::...::%(...)" || "% acp::...::%(...)";
+#endif
+
+	advice execution(where() && !ignore()) : after() {
 		if (errno != 0) {
 			acp::ErrnoException exception(errno);
 			errno = 0;
@@ -58,4 +64,3 @@ aspect ErrorCodeConverter {
 };
 
 #endif // __ACP__ERROR_CODE_CONVERTER_AH__
-#endif

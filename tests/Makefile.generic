@@ -50,10 +50,9 @@ check: all
 SED := $(foreach pat, $(AC_PATTERN_REPLACEMENTS), | sed -e "$(pat)")
 
 diff:  $(PROG)
-	./$(PROG) $(AC_PATTERN_REPLACEMENTS) > $(basename $(PROG)).out
+	./$(PROG) $(AC_PATTERN_REPLACEMENTS) > $(basename $(PROG)).out 2>&1 # Also put Cerr Output to the .ref file
 	@$(DIFF) $(basename $(PROG)).out $(basename $(PROG)).ref
 	@rm $(basename $(PROG)).out
-
 
 diff-only:
 	@cat $(basename $(PROG)).out $(AC_PATTERN_REPLACEMENTS) > $(basename $(PROG)).fil

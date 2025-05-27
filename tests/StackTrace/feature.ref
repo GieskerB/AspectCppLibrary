@@ -1,0 +1,15 @@
+Stack Trace Test: Tests for stack trace functionality by throwing an exception caught and uncaught.
+====================================================================================================
+-Testing Stack Trace with Caught Exception----------------------------------------------------------
+Exception caught: foo-err
+-Testing Stack Trace with Uncaught Exception--------------------------------------------------------
+
+
+Uncaught exception foo-err:
+	at void foo() in (main.cc:9)
+	at void foo1(int,int) in (main.cc:14)
+	at void foo2() in (main.cc:19)
+	at void foo3(std::basic_string<char,std::char_traits<char>,std::allocator<char>>) in (main.cc:24)
+	at void foo4() in (main.cc:39)
+	at int main() in (main.cc:27)
+
