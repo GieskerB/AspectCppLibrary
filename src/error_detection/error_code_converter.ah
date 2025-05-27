@@ -48,8 +48,7 @@ aspect ErrorCodeConverter {
 
 	pointcut virtual where() = acp::err_code();
 
-	advice execution(where() || global()) : around() {
-		tjp->proceed();
+	advice execution(where() || global()) : after() {
 		if (errno != 0) {
 			acp::ErrnoException exception(errno);
 			errno = 0;

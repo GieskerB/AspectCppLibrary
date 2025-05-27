@@ -11,36 +11,36 @@
 namespace acp {
 
 class DefaultStackTraceMsgBuilder : public StackTraceMsgBuilder {
-	// std::string generate_string(const char* sig, int sig_len, const char* file,
-	//                             int file_len, unsigned int line,
-	//                             int line_len) const {
-	//     const std::string line_str = std::to_string(line);
-	//     const int total_len = sig_len + 3 + file_len + 3 + line_len;
-	//     std::string result(total_len + 1, '\0');
-	//     int pos = 0;
+    // std::string generate_string(const char* sig, int sig_len, const char* file,
+    //                             int file_len, unsigned int line,
+    //                             int line_len) const {
+    //     const std::string line_str = std::to_string(line);
+    //     const int total_len = sig_len + 3 + file_len + 3 + line_len;
+    //     std::string result(total_len + 1, '\0');
+    //     int pos = 0;
 
-	//     for (int i = 0; i < sig_len; ++i) {
-	//         result.at(pos++) = sig[i];
-	//     }
+    //     for (int i = 0; i < sig_len; ++i) {
+    //         result.at(pos++) = sig[i];
+    //     }
 
-	//     result.at(pos++) = ' ';
-	//     result.at(pos++) = '|';
-	//     result.at(pos++) = ' ';
+    //     result.at(pos++) = ' ';
+    //     result.at(pos++) = '|';
+    //     result.at(pos++) = ' ';
 
-	//     for (int i = 0; i < file_len; ++i) {
-	//         result.at(pos++) = file[i];
-	//     }
+    //     for (int i = 0; i < file_len; ++i) {
+    //         result.at(pos++) = file[i];
+    //     }
 
-	//     result.at(pos++) = ' ';
-	//     result.at(pos++) = '|';
-	//     result.at(pos++) = ' ';
+    //     result.at(pos++) = ' ';
+    //     result.at(pos++) = '|';
+    //     result.at(pos++) = ' ';
 
-	//     for (int i = 0; i < line_len; ++i) {
-	//         result.at(pos++) = line_str[i];
-	//     }
+    //     for (int i = 0; i < line_len; ++i) {
+    //         result.at(pos++) = line_str[i];
+    //     }
 
-	//     return result;
-	// }
+    //     return result;
+    // }
 
     // int decimal_length(unsigned int v) const {
     //     if (v < 10) return 1;
@@ -64,29 +64,29 @@ class DefaultStackTraceMsgBuilder : public StackTraceMsgBuilder {
         // return generate_string(signature, std::strlen(signature), file,
         //                        std::strlen(file), line, decimal_length(line));
 
-    //     std::stringstream ss;
-    //     ss << signature << " | " << file << " | " << line<< '\n';
-    //     return ss.str();
+        // std::stringstream ss;
+        // ss << signature << " | " << file << " | " << line<< '\n';
+        // return ss.str();
 
 
 		const char* sig = "int main(int, char**)";
 		const char* fil = "src/main.cc";
 		const char* lin = "42";
 
-		// std::cout << signature<< '\n';
+	    // std::cout << signature<< '\n';
 
 		std::string res {"aösdfjlasdjfö"};
 
-		// res += const_cast<char *>(signature);
-		// res += const_cast<char *>(file);
+	    // res += const_cast<char *>(signature);
+	    // res += const_cast<char *>(file);
 
 		char buf[256] = {0};
 		strncpy(buf, signature, 255);
 		res += buf;
 
-		std::cout <<"DSMB: "<< (buf[0] == 'i') << '\n';
+	    // std::cout <<"DSMB: "<< (buf[0] == 'i') << '\n';
 
-		// res += lin;
+	    // res += lin;
 
 		return res;
 	}

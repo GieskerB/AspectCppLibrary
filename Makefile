@@ -24,9 +24,6 @@ TARGET  ?= linux-release
 # include the PUMA configuration variables
 # => set _TARGET, RELEASE, CFLAGS, CXXFLAGS, CPPFLAGS, etc.
 include $(PUMA)/vars.mk
-CPPFLAGS += -g
-CXXFLAGS += -g
-
 
 PLATFORM := $(shell echo $(_TARGET) | cut -d _ -f1)
 ARCH := $(shell echo $(_TARGET) | cut -d _ -f2-)
@@ -121,7 +118,7 @@ endif
 
 CPPFLAGS += -I$(PUMA)/extern -I$(PUMA)/include $(LIBXML2_INC)
 ifeq ($(FRONTEND),Puma)
-  CPPFLAGS += -DFRONTEND_PUMA -g
+  CPPFLAGS += -DFRONTEND_PUMA
 else
   FILTEROUT :=
 ifeq ($(RELEASE),debug)
@@ -134,12 +131,12 @@ endif
     LLVM_CPPFLAGS := $(subst \,/,$(LLVM_CPPFLAGS))
   endif
   LLVM_CPPFLAGS := $(patsubst -I/%, -isystem /%, $(LLVM_CPPFLAGS))
-  CPPFLAGS += $(filter-out $(FILTEROUT),$(LLVM_CPPFLAGS)) -g
+  CPPFLAGS += $(filter-out $(FILTEROUT),$(LLVM_CPPFLAGS))
   CPPFLAGS += -DFRONTEND_CLANG
-  CXXFLAGS += -fno-rtti -Wno-strict-aliasing -Wno-nonnull# hide annoying warnings in Clang headers
+  CXXFLAGS += -fno-rtti -Wno-strict-aliasing -Wno-nonnull # hide annoying warnings in Clang headers
   # Clang >= 11 uses C++14 features; "c++14" does not work -> WIN32 not defined on Windows!
   # clang >= 18 requires C++17
-  CXXFLAGS += -std=gnu++11 -g
+  CXXFLAGS += -std=gnu++11
 endif
 
 # profiling
@@ -194,12 +191,12 @@ DIRS := $(OBJECTDIR) $(DEPDIR) $(BINDIR)
 
 # tool selection
 export AC := $(shell pwd)/$(PROG)
-export AG := $(shell pwd)/$(BINDIR)/ag++$(EXT) -g
+export AG := $(shell pwd)/$(BINDIR)/ag++$(EXT)
 
-MAKE ?= make --debug
+MAKE ?= make
 
 # ac++ settings for tests
-ACFLAGS := -k -v 9 -g
+ACFLAGS := -k -v 9
 
 
 # ******************************
