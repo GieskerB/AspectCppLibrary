@@ -1,5 +1,0 @@
-Stack Trace Test: Tests for stack trace functionality by throwing an exception caught and uncaught.
-====================================================================================================
--Testing Stack Trace with Caught Exception----------------------------------------------------------
-Exception caught: foo-err
--Testing Stack Trace with Uncaught Exception--------------------------------------------------------
