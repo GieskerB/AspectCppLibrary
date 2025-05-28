@@ -1,10 +1,12 @@
-docs/html/
-docs/latex/
+# Documentation files
 
+
+# Hidden Foldern
 .tracecompass/
 .vscode/
 .svn/
 
+# General Project Folder
 ACModel/
 bin/
 config/
@@ -13,9 +15,11 @@ DepFiles/
 ObjFiles/
 tools/
 
+# Hidden Files
 .cproject
 .project
 
+# Tests and Results
 **/feature
 **/feature.out
 **/Junk/

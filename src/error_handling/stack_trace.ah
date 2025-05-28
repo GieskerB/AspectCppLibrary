@@ -11,10 +11,32 @@
 #include "../core/core_aspect.ah"
 
 namespace acp {
+	/**
+	 * \attribute acp::trace
+	 * \brief This attribute is used to mark functions that should be traced for stack traces.
+	 *
+	 * This attribute is not necessary by default, since the aspect acts globally from the beginning.
+	 * But it can be used, if the developer wants to limit the stack trace to specific functions.
+	 * Then they have to disable the global pointcut first.
+	 */
 	attribute trace();
+
+	/**
+	 * \attribute acp::fallback
+	 * \brief This attribute is used to mark functions that should be used to trigger the stacktrace
+	 * in case this function does not catch an exception.
+	 */
 	attribute fallback();
 }
 
+/**
+ * \aspect StackTrace
+ * \brief This aspect is used to handle stack traces and print them when an uncaught exception occurs.
+ *
+ * This aspect uses the acp::StackTraceMsgBuilder to build the messages for the stack trace and the
+ * acp::printer to print them.
+ * By default this aspect will always trigger when an uncaught exception would leave the main function.
+ */
 aspect StackTrace : public CoreAspect {
 
 private:
@@ -71,7 +93,8 @@ public:
 	}
 
 	/**
-	 * @brief Advice handles the StackTrace printing when an uncaught exception leaves the function of the pointcut.
+	 * \advice fallback-advice
+	 * \brief Advice handles the StackTrace printing when an uncaught exception leaves the function of the pointcut.
 	 */
 	advice execution(fallback_func() || main_func()) : around() {
 
@@ -91,7 +114,10 @@ public:
 		}
 	}
 
-
+	/**
+	 * \advice stack-trace-builder-advice
+	 * \brief Advice handles the StackTrace building, in case of an thrown exception.
+	 */
 	advice call(where() && !ignore()) : around(){
 
 		check_reset();

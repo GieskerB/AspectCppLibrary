@@ -1,0 +1,207 @@
+
+
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>StackTrace (Aspect) &mdash; AspectC++ Library 0.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.min.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="CoreAspect (Aspect)" href="core_aspect_ah.html" /> 
+
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <a class="site-nav-toggle hidden-lg-up"><i class="icon-menu"></i></a>
+            <a class="site-title" href="../index.html">
+                AspectC++ Library
+            </a>
+        </div>
+    </header>
+
+
+<div class="breadcrumbs-outer hidden-xs-down">
+    <div class="container">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a></li>
+        
+      <li><code class="docutils literal notranslate"><span class="pre">StackTrace</span></code> (Aspect)</li>
+    
+    
+      <li class="breadcrumbs-aside">
+        
+            
+            <a href="../_sources/generated_docs/stack_trace_ah.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+</div>
+    </div>
+</div>
+    <div class="main-outer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-3 site-nav">
+                    
+<div role="search">
+    <form class="search" action="../search.html" method="get">
+        <div class="icon-input">
+            <input type="text" name="q" placeholder="Search" />
+            <span class="icon-search"></span>
+        </div>
+        <input type="submit" value="Go" class="d-hidden" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+                    <div class="site-nav-tree">
+                        
+                            
+                            
+                                <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="core_aspect_ah.html"><code class="docutils literal notranslate"><span class="pre">CoreAspect</span></code> (Aspect)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="core_aspect_ah.html#default-where-pointcut"><code class="docutils literal notranslate"><span class="pre">default_where</span></code> (Pointcut)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_aspect_ah.html#everywhere-pointcut"><code class="docutils literal notranslate"><span class="pre">everywhere</span></code> (Pointcut)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_aspect_ah.html#ignore-pointcut"><code class="docutils literal notranslate"><span class="pre">ignore</span></code> (Pointcut)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_aspect_ah.html#main-func-pointcut"><code class="docutils literal notranslate"><span class="pre">main_func</span></code> (Pointcut)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_aspect_ah.html#operators-pointcut"><code class="docutils literal notranslate"><span class="pre">operators</span></code> (Pointcut)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_aspect_ah.html#where-pointcut"><code class="docutils literal notranslate"><span class="pre">where</span></code> (Pointcut)</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">StackTrace</span></code> (Aspect)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#acp-fallback-attribute"><code class="docutils literal notranslate"><span class="pre">acp::fallback</span></code> (Attribute)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#acp-trace-attribute"><code class="docutils literal notranslate"><span class="pre">acp::trace</span></code> (Attribute)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fallback-advice-advice"><code class="docutils literal notranslate"><span class="pre">fallback-advice</span></code> (Advice)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#stack-trace-builder-advice-advice"><code class="docutils literal notranslate"><span class="pre">stack-trace-builder-advice</span></code> (Advice)</a></li>
+</ul>
+</li>
+</ul>
+
+                            
+                        
+                    </div>
+                </div>
+                <div class="col-12 col-lg-9">
+                    <div class="document">
+                        
+                            
+  <section id="stacktrace-aspect">
+<h1><code class="docutils literal notranslate"><span class="pre">StackTrace</span></code> (Aspect)<a class="headerlink" href="#stacktrace-aspect" title="Link to this heading">¶</a></h1>
+<p><strong>Brief Description:</strong> This aspect is used to handle stack traces and print them when an uncaught exception occurs.</p>
+<p><strong>Detailed Description:</strong></p>
+<blockquote>
+<div><p>This aspect uses the acp::StackTraceMsgBuilder to build the messages for the stack trace and the
+acp::printer to print them.
+By default this aspect will always trigger when an uncaught exception would leave the main function.</p>
+</div></blockquote>
+<section id="acp-fallback-attribute">
+<span id="src-error-handling-stack-trace-ah-acp-fallback"></span><h2><code class="docutils literal notranslate"><span class="pre">acp::fallback</span></code> (Attribute)<a class="headerlink" href="#acp-fallback-attribute" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> This attribute is used to mark functions that should be used to trigger the stacktrace</p>
+<p><strong>Detailed Description:</strong></p>
+<blockquote>
+<div><p>in case this function does not catch an exception.</p>
+</div></blockquote>
+</section>
+<section id="acp-trace-attribute">
+<span id="src-error-handling-stack-trace-ah-acp-trace"></span><h2><code class="docutils literal notranslate"><span class="pre">acp::trace</span></code> (Attribute)<a class="headerlink" href="#acp-trace-attribute" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> This attribute is used to mark functions that should be traced for stack traces.</p>
+<p><strong>Detailed Description:</strong></p>
+<blockquote>
+<div><p>This attribute is not necessary by default, since the aspect acts globally from the beginning.
+But it can be used, if the developer wants to limit the stack trace to specific functions.
+Then they have to disable the global pointcut first.</p>
+</div></blockquote>
+</section>
+<section id="fallback-advice-advice">
+<span id="src-error-handling-stack-trace-ah-fallback-advice"></span><h2><code class="docutils literal notranslate"><span class="pre">fallback-advice</span></code> (Advice)<a class="headerlink" href="#fallback-advice-advice" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> Advice handles the StackTrace printing when an uncaught exception leaves the function of the pointcut.</p>
+</section>
+<section id="stack-trace-builder-advice-advice">
+<span id="src-error-handling-stack-trace-ah-stack-trace-builder-advice"></span><h2><code class="docutils literal notranslate"><span class="pre">stack-trace-builder-advice</span></code> (Advice)<a class="headerlink" href="#stack-trace-builder-advice-advice" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> Advice handles the StackTrace building, in case of an thrown exception.</p>
+</section>
+</section>
+
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.1.0',
+            LANGUAGE:'en',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/sphinx_highlight.js"></script>
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+    <div class="footer" role="contentinfo">
+        <div class="container">
+            &#169; Copyright 2025, Bjarne Giesker.
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 7.2.6.
+        </div>
+    </div>  
+
+</body>
+</html>

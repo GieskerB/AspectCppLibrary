@@ -1,18 +1,67 @@
 #ifndef __ACP__CORE_ASPECT_AH__
 #define __ACP__CORE_ASPECT_AH__
 
+/**
+ * \aspect CoreAspect
+ * \file src/core/core_aspect.ah
+ * \brief CoreAspect is the base aspect for all aspects in this ACP library.
+ *
+ * CoreAspect defines various pointcuts that are used throught this library.
+ * Some of them are virtual and can be overridden by derived aspects to structure the
+ * implementation of the aspects. The others are meant to be useful pointcuts for a
+ * more user oriented usage of the ACP library.
+ */
 aspect CoreAspect {
 
 public:
 
+	/**
+	 * \pointcut everywhere
+	 * \brief Matches all functions in the whole project.
+	 *
+	 * This pointcut matches all functions. It is ment be used with causion as it
+	 * describes literally every functions and therefore can lead to performance issues.
+	 */
 	pointcut everywhere() = "% ...::%(...)";
-	pointcut main_func() = "int main(...)";
-	pointcut operators() = "% operator %";
-	pointcut in_user_space() = call(everywhere());
 
+	/**
+	 * \pointcut main_func
+	 * \brief Matches every possible agrument variant of the c++ main function.
+	 */
+	pointcut main_func() = "int main(...)";
+
+	/**
+	 * \pointcut operators
+	 * \brief Mathes every operator or conversion function in the whole project.
+	 */
+	pointcut operators() = "% operator %";
+	// pointcut in_user_space() = call(everywhere());
+
+	/**
+	 * \pointcut default_where
+	 * \brief A virtual placeholder for the default pointcut implementation of each aspect
+	 */
 	pointcut virtual default_where() = 0;
 
+	/**
+	 * \pointcut where
+	 * \brief A virtual placeholder for the pointcut that is used used in the main
+	 * advice of each aspect.
+	 *
+	 * This pointcut is can be overridden by derived aspects if they want to change it
+	 * form the default implementation.
+	 * The default implementation is the default_where() pointcut.
+	 */
 	pointcut virtual where() = default_where();
+
+	/**
+	 * \pointcut ignore
+	 * \brief A virtual placeholder for the pointcut that descibes which join points
+	 * should be ignored by the aspect.
+	 *
+	 * It is recommended to use and extend a pointcut definition like with:
+	 * "% <AspectName>::...::%(...)" || "% acp::...::%(...)"
+	 */
 	pointcut virtual ignore() = 0;
 
 	CoreAspect() = default;
