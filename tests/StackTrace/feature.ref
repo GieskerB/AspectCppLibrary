@@ -6,10 +6,10 @@ Exception caught: foo-err
 
 
 Uncaught exception foo-err:
-	at void foo() in (main.cc:9)
-	at void foo1(int,int) in (main.cc:14)
-	at void foo2() in (main.cc:19)
-	at void foo3(std::basic_string<char,std::char_traits<char>,std::allocator<char>>) in (main.cc:24)
-	at void foo4() in (main.cc:39)
-	at int main() in (main.cc:27)
+	at void foo() in (main.cc:8)
+	at void foo1(int,int) in (main.cc:10)
+	at void foo2() in (main.cc:12)
+	at void foo3(std::basic_string<char,std::char_traits<char>,std::allocator<char>>) in (main.cc:14)
+	at void foo4() in (main.cc:28)
+	at int main() in (main.cc:16)
 

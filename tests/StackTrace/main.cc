@@ -1,28 +1,17 @@
 #include "../prettier_tests.hh"
-
+#include <stdexcept>
 
 void foo() {
 	throw std::runtime_error("foo-err");
 }
 
-void foo1 (int a, int b) {
-	foo();
-}
+void foo1 (int a, int b) {foo();}
 
+void foo2 () {foo1(2,3);}
 
-void foo2 () {
-	foo1(2,3);
-}
+void foo3 (const std::string str) {foo2();}
 
-
-void foo3 (const std::string str) {
-	foo2();
-}
-
-
-void foo4 () {
-	foo3("THIS IS A TEST STRING");
-}
+void foo4 () {foo3("THIS IS A TEST STRING");}
 
 int main() {
 	acp::test::print_pretty_start("Stack Trace Test", "Tests for stack trace functionality by throwing an exception caught and uncaught.");

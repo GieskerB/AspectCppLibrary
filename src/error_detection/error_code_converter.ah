@@ -50,6 +50,8 @@ public:
 
 #if 0	// TODO: TOGGLE this to switch between buggy implementation and the correct one
 	pointcut virtual ignore() = "Nothing";
+#elif 0
+	pointcut virtual ignore() = everywhere() && !in_user_space;
 #else
 	pointcut virtual ignore() = "% ErrorCodeConverter::...::%(...)" || "% acp::...::%(...)";
 #endif

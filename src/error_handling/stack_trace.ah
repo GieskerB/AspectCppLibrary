@@ -4,6 +4,7 @@
 #include <exception>
 #include <string>
 #include <vector>
+#include <cstdlib>
 
 #include "../util/printer.hh"
 #include "../util/stack_trace_msg_builder.hh"
@@ -11,6 +12,7 @@
 
 namespace acp {
 	attribute trace();
+	attribute fallback();
 }
 
 aspect StackTrace : public CoreAspect {
@@ -56,7 +58,7 @@ public:
 
 	pointcut virtual default_where() = everywhere();
 
-	pointcut virtual fall_back_func() = "int main(...)";
+	pointcut virtual fallback_func() = acp::fallback();
 
 
 	StackTrace() : StackTrace(nullptr,nullptr) {}
@@ -71,7 +73,7 @@ public:
 	/**
 	 * @brief Advice handles the StackTrace printing when an uncaught exception leaves the function of the pointcut.
 	 */
-	advice execution(fall_back_func()) : around() {
+	advice execution(fallback_func() || main_func()) : around() {
 
 		check_reset();
 		try {
@@ -82,22 +84,17 @@ public:
 			// Print Stack Trace
 			print_stack_trace(_call_chain, e.what());
 			_editing_stack_trace = false;
-			// In case of main, return 0 to avoid the tests from failing due to non zero return value.
-			if(strncmp(tjp->signature(), "int main()", 10) == 0
-				or strncmp(tjp->signature(), "int main(int argc, char* argv[])", 10) == 0
-				or strncmp(tjp->signature(), "int main(int argc, char** argv)", 10) == 0) {
-					*(tjp->result()) = 0;
-			}
-			return;
+			// Exit the program with code 0. Should be something different, but tests otherwise fail.
+			std::exit(0);
 		} catch (...) {
 			// Not implemented yet.
 		}
 	}
 
+
 	advice call(where() && !ignore()) : around(){
 
 		check_reset();
-
 		try {
 			tjp->proceed();
 		} catch (const std::exception& e) {

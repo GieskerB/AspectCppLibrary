@@ -6,6 +6,8 @@ aspect CoreAspect {
 public:
 
 	pointcut everywhere() = "% ...::%(...)";
+	pointcut main_func() = "int main(...)";
+	pointcut operators() = "% operator %";
 	pointcut in_user_space() = call(everywhere());
 
 	pointcut virtual default_where() = 0;

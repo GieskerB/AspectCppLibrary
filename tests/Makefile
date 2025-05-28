@@ -11,7 +11,7 @@ endif
 SHELL=/bin/bash
 DIFF=diff --strip-trailing-cr
 
-ACTESTS = HelloWorld StackTrace
+ACTESTS = HelloWorld StackTrace StackTraceFallback
 
 ifeq ($(FRONTEND),Clang)
 ifneq ($(shell uname -s),Darwin)
