@@ -6,6 +6,13 @@
 
 namespace acp {
 
+/**
+ * \class CerrPrinter
+ * \brief CerrPrinter is a Printer implementation that prints messages to std::cerr.
+ *
+ * This class implements the Printer interface and provides methods to print messages
+ * to the standard error output stream (std::cerr).
+ */
 class CerrPrinter: public Printer {
 
 public:
@@ -13,16 +20,28 @@ public:
 	CerrPrinter() = default;
 	virtual ~CerrPrinter() {}
 
+	/**
+	 * \function print[std::sting]
+	 * \see Printer::print(const std::string& msg)
+	 */
 	inline void print(const std::string& msg) const override{
 		std::cerr << msg;
 	}
 
+	/**
+	 * \function print[c-string]
+	 * \see Printer::print(const char* msg)
+	 */
 	inline void print(const char* msg) const override{
 		std::cerr << msg;
 	}
 
-	inline void print(const char msg) const override{
-		std::cerr << msg;
+	/**
+	 * \function print[char]
+	 * \see Printer::print(const digit msg)
+	 */
+	inline void print(const char digit) const override{
+		std::cerr << digit;
 	}
 
 };

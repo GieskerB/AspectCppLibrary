@@ -60,6 +60,16 @@ private:
 
 protected:
 
+	/**
+	 * \function print_stack_trace
+	 * \brief this function handles everything related to printing the stack trace.
+	 *
+	 * In case a developer wants to change the way the stack trace is printed from the ground up,
+	 * they can write an around advice for this function to replace its countent.
+	 *
+	 * @param call_chain is a std::vector of strings that contains the call chain of the stack trace.
+	 * @param exception_msg is the message of the exception that was thrown.
+	 */
 	void print_stack_trace(const std::vector<std::string>& call_chain, const char* exception_msg) {
 		_printer->print("\n\nUncaught exception ");
 		_printer->print(exception_msg);
@@ -76,10 +86,26 @@ protected:
 
 public:
 
+	/**
+	 * \pointcut ignore
+	 * \see CoreAspect::ignore()
+	 */
 	pointcut virtual ignore() = "% StackTrace::...::%(...)" || "% acp::...::%(...)";
 
+	/**
+	 * \pointcut default_where
+	 * \see CoreAspect::ignore()
+	 */
 	pointcut virtual default_where() = everywhere();
 
+	/**
+	 * \pointcut fallback_func
+	 * \brief This pointcut matches all functions that are marked with the acp::fallback attribute.
+	 *
+	 * Any functions marked with this attribute or the main function will trigger the stack trace to
+	 * be printed if an uncaught exception leaves the function.
+	 *
+	 */
 	pointcut virtual fallback_func() = acp::fallback();
 
 

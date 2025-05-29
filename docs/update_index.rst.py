@@ -29,7 +29,7 @@ def update_index_file():
         with open(index_file, 'a') as f:
             for entry in new_entries:
                 # Füge vor jeder Zeile einen Tabulator hinzu
-                f.write('\t' + entry + '\n')
+                f.write('    ' + entry + '\n')
         print(f"{len(new_entries)} neue Datei(en) wurden zu index.rst hinzugefügt.")
     else:
         print("Keine neuen Dateien zu index.rst hinzuzufügen.")

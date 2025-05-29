@@ -10,6 +10,13 @@
 
 namespace acp {
 
+/**
+ * \class DefaultStackTraceMsgBuilder
+ * \brief DefaultStackTraceMsgBuilder is the default implementation of the StackTraceMsgBuilder interface.
+ *
+ * This class provides a method to build a formatted message for the stack trace.
+ *
+ */
 class DefaultStackTraceMsgBuilder : public StackTraceMsgBuilder {
 
 	constexpr static unsigned int BUFF_SIZE = 1024;

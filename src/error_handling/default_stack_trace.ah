@@ -5,6 +5,16 @@
 #include "../util/default_stack_trace_msg_builder.hh"
 #include "stack_trace.ah"
 
+/**
+ * \aspect DefaultStackTrace
+ * \file src/error_handling/default_stack_trace.ah
+ * \brief DefaultStackTrace is the default aspect for stack traces in this ACP library.
+ *
+ * It uses the default implementation of the StackTraceMsgBuilder and the CerrPrinter to create and print any messages
+ * If the developer wants to use a different StackTraceMsgBuilder or Printer, they can create their own aspect that
+ * extends the original StackTrace aspect.
+ *
+ */
 aspect DefaultStackTrace : public StackTrace {
 
 public:

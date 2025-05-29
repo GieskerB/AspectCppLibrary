@@ -5,6 +5,13 @@
 
 namespace acp {
 
+/**
+ * \interface StackTraceMsgBuilder
+ * \brief StackTraceMsgBuilder is an interface for creating a stack trace messages.
+ *
+ * This interface defines the method for creating a messages for the StackTrace-Aspect.
+ *
+ */
 class StackTraceMsgBuilder {
 
 public:
@@ -12,6 +19,15 @@ public:
 	StackTraceMsgBuilder() = default;
 	virtual ~StackTraceMsgBuilder() {}
 
+	/**
+	 * \function build_msg
+	 * \brief build_msg is a pure virtual function that builds a message for the stack trace.
+	 *
+	 * \param sign is the signature of the function that was called.
+	 * \param file is the name of the file where the function was called.
+	 * \param line is the line number where the function was called.
+	 * \return a string containing the formatted message.
+	 */
 	virtual std::string build_msg(const char* sign, const char* file, int line) const = 0;
 
 };

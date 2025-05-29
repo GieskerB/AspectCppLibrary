@@ -7,7 +7,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>StackTrace (Aspect) &mdash; AspectC++ Library 0.1.0 documentation</title>
+  <title>DefaultStackTraceMsgBuilder (Class) &mdash; AspectC++ Library 0.1.0 documentation</title>
   
 
   
@@ -30,8 +30,8 @@
   <link rel="stylesheet" href="../_static/css/theme.min.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="DefaultStackTrace (Aspect)" href="default_stack_trace_ah.html" />
-    <link rel="prev" title="CoutPrinter (Class)" href="cout_printer_hh.html" /> 
+    <link rel="next" title="OfstreamPrinter (Class)" href="ofstream_printer_hh.html" />
+    <link rel="prev" title="Printer (Interface)" href="printer_hh.html" /> 
 
 </head>
 
@@ -70,13 +70,13 @@
     
       <li><a href="../index.html">Docs</a></li>
         
-      <li><code class="docutils literal notranslate"><span class="pre">StackTrace</span></code> (Aspect)</li>
+      <li><code class="docutils literal notranslate"><span class="pre">DefaultStackTraceMsgBuilder</span></code> (Class)</li>
     
     
       <li class="breadcrumbs-aside">
         
             
-            <a href="../_sources/generated_docs/stack_trace_ah.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/generated_docs/default_stack_trace_msg_builder_hh.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -119,15 +119,15 @@
 <li class="toctree-l2"><a class="reference internal" href="cout_printer_hh.html#print-std-string-function"><code class="docutils literal notranslate"><span class="pre">print[std::string]</span></code> (Function)</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">StackTrace</span></code> (Aspect)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#acp-fallback-attribute"><code class="docutils literal notranslate"><span class="pre">acp::fallback</span></code> (Attribute)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#acp-trace-attribute"><code class="docutils literal notranslate"><span class="pre">acp::trace</span></code> (Attribute)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#default-where-pointcut"><code class="docutils literal notranslate"><span class="pre">default_where</span></code> (Pointcut)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#fallback-advice-advice"><code class="docutils literal notranslate"><span class="pre">fallback-advice</span></code> (Advice)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#fallback-func-pointcut"><code class="docutils literal notranslate"><span class="pre">fallback_func</span></code> (Pointcut)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#ignore-pointcut"><code class="docutils literal notranslate"><span class="pre">ignore</span></code> (Pointcut)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#print-stack-trace-function"><code class="docutils literal notranslate"><span class="pre">print_stack_trace</span></code> (Function)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#stack-trace-builder-advice-advice"><code class="docutils literal notranslate"><span class="pre">stack-trace-builder-advice</span></code> (Advice)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stack_trace_ah.html"><code class="docutils literal notranslate"><span class="pre">StackTrace</span></code> (Aspect)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="stack_trace_ah.html#acp-fallback-attribute"><code class="docutils literal notranslate"><span class="pre">acp::fallback</span></code> (Attribute)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stack_trace_ah.html#acp-trace-attribute"><code class="docutils literal notranslate"><span class="pre">acp::trace</span></code> (Attribute)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stack_trace_ah.html#default-where-pointcut"><code class="docutils literal notranslate"><span class="pre">default_where</span></code> (Pointcut)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stack_trace_ah.html#fallback-advice-advice"><code class="docutils literal notranslate"><span class="pre">fallback-advice</span></code> (Advice)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stack_trace_ah.html#fallback-func-pointcut"><code class="docutils literal notranslate"><span class="pre">fallback_func</span></code> (Pointcut)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stack_trace_ah.html#ignore-pointcut"><code class="docutils literal notranslate"><span class="pre">ignore</span></code> (Pointcut)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stack_trace_ah.html#print-stack-trace-function"><code class="docutils literal notranslate"><span class="pre">print_stack_trace</span></code> (Function)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stack_trace_ah.html#stack-trace-builder-advice-advice"><code class="docutils literal notranslate"><span class="pre">stack-trace-builder-advice</span></code> (Advice)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="default_stack_trace_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultStackTrace</span></code> (Aspect)</a></li>
@@ -141,7 +141,7 @@
 <li class="toctree-l2"><a class="reference internal" href="printer_hh.html#print-std-string-function"><code class="docutils literal notranslate"><span class="pre">print[std::string]</span></code> (Function)</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="default_stack_trace_msg_builder_hh.html"><code class="docutils literal notranslate"><span class="pre">DefaultStackTraceMsgBuilder</span></code> (Class)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">DefaultStackTraceMsgBuilder</span></code> (Class)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ofstream_printer_hh.html"><code class="docutils literal notranslate"><span class="pre">OfstreamPrinter</span></code> (Class)</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="ofstream_printer_hh.html#constructor-constructor"><code class="docutils literal notranslate"><span class="pre">Constructor</span></code> (Constructor)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ofstream_printer_hh.html#destructor-destructor"><code class="docutils literal notranslate"><span class="pre">Destructor</span></code> (Destructor)</a></li>
@@ -169,67 +169,13 @@
                     <div class="document">
                         
                             
-  <section id="stacktrace-aspect">
-<h1><code class="docutils literal notranslate"><span class="pre">StackTrace</span></code> (Aspect)<a class="headerlink" href="#stacktrace-aspect" title="Link to this heading">¶</a></h1>
-<p><strong>Brief Description:</strong> This aspect is used to handle stack traces and print them when an uncaught exception occurs.</p>
+  <section id="defaultstacktracemsgbuilder-class">
+<h1><code class="docutils literal notranslate"><span class="pre">DefaultStackTraceMsgBuilder</span></code> (Class)<a class="headerlink" href="#defaultstacktracemsgbuilder-class" title="Link to this heading">¶</a></h1>
+<p><strong>Brief Description:</strong> DefaultStackTraceMsgBuilder is the default implementation of the StackTraceMsgBuilder interface.</p>
 <p><strong>Detailed Description:</strong></p>
 <blockquote>
-<div><p>This aspect uses the acp::StackTraceMsgBuilder to build the messages for the stack trace and the
-acp::printer to print them.
-By default this aspect will always trigger when an uncaught exception would leave the main function.</p>
+<div><p>This class provides a method to build a formatted message for the stack trace.</p>
 </div></blockquote>
-<section id="acp-fallback-attribute">
-<span id="src-error-handling-stack-trace-ah-acp-fallback"></span><h2><code class="docutils literal notranslate"><span class="pre">acp::fallback</span></code> (Attribute)<a class="headerlink" href="#acp-fallback-attribute" title="Link to this heading">¶</a></h2>
-<p><strong>Brief Description:</strong> This attribute is used to mark functions that should be used to trigger the stacktrace</p>
-<p><strong>Detailed Description:</strong></p>
-<blockquote>
-<div><p>in case this function does not catch an exception.</p>
-</div></blockquote>
-</section>
-<section id="acp-trace-attribute">
-<span id="src-error-handling-stack-trace-ah-acp-trace"></span><h2><code class="docutils literal notranslate"><span class="pre">acp::trace</span></code> (Attribute)<a class="headerlink" href="#acp-trace-attribute" title="Link to this heading">¶</a></h2>
-<p><strong>Brief Description:</strong> This attribute is used to mark functions that should be traced for stack traces.</p>
-<p><strong>Detailed Description:</strong></p>
-<blockquote>
-<div><p>This attribute is not necessary by default, since the aspect acts globally from the beginning.
-But it can be used, if the developer wants to limit the stack trace to specific functions.
-Then they have to disable the global pointcut first.</p>
-</div></blockquote>
-</section>
-<section id="default-where-pointcut">
-<span id="src-error-handling-stack-trace-ah-default-where"></span><h2><code class="docutils literal notranslate"><span class="pre">default_where</span></code> (Pointcut)<a class="headerlink" href="#default-where-pointcut" title="Link to this heading">¶</a></h2>
-</section>
-<section id="fallback-advice-advice">
-<span id="src-error-handling-stack-trace-ah-fallback-advice"></span><h2><code class="docutils literal notranslate"><span class="pre">fallback-advice</span></code> (Advice)<a class="headerlink" href="#fallback-advice-advice" title="Link to this heading">¶</a></h2>
-<p><strong>Brief Description:</strong> Advice handles the StackTrace printing when an uncaught exception leaves the function of the pointcut.</p>
-</section>
-<section id="fallback-func-pointcut">
-<span id="src-error-handling-stack-trace-ah-fallback-func"></span><h2><code class="docutils literal notranslate"><span class="pre">fallback_func</span></code> (Pointcut)<a class="headerlink" href="#fallback-func-pointcut" title="Link to this heading">¶</a></h2>
-<p><strong>Brief Description:</strong> This pointcut matches all functions that are marked with the acp::fallback attribute.</p>
-<p><strong>Detailed Description:</strong></p>
-<blockquote>
-<div><p>Any functions marked with this attribute or the main function will trigger the stack trace to
-be printed if an uncaught exception leaves the function.</p>
-</div></blockquote>
-</section>
-<section id="ignore-pointcut">
-<span id="src-error-handling-stack-trace-ah-ignore"></span><h2><code class="docutils literal notranslate"><span class="pre">ignore</span></code> (Pointcut)<a class="headerlink" href="#ignore-pointcut" title="Link to this heading">¶</a></h2>
-</section>
-<section id="print-stack-trace-function">
-<span id="src-error-handling-stack-trace-ah-print-stack-trace"></span><h2><code class="docutils literal notranslate"><span class="pre">print_stack_trace</span></code> (Function)<a class="headerlink" href="#print-stack-trace-function" title="Link to this heading">¶</a></h2>
-<p><strong>Brief Description:</strong> this function handles everything related to printing the stack trace.</p>
-<p><strong>Detailed Description:</strong></p>
-<blockquote>
-<div><p>In case a developer wants to change the way the stack trace is printed from the ground up,
-they can write an around advice for this function to replace its countent.
-&#64;param call_chain is a std::vector of strings that contains the call chain of the stack trace.
-&#64;param exception_msg is the message of the exception that was thrown.</p>
-</div></blockquote>
-</section>
-<section id="stack-trace-builder-advice-advice">
-<span id="src-error-handling-stack-trace-ah-stack-trace-builder-advice"></span><h2><code class="docutils literal notranslate"><span class="pre">stack-trace-builder-advice</span></code> (Advice)<a class="headerlink" href="#stack-trace-builder-advice-advice" title="Link to this heading">¶</a></h2>
-<p><strong>Brief Description:</strong> Advice handles the StackTrace building, in case of an thrown exception.</p>
-</section>
 </section>
 
 

@@ -80,7 +80,7 @@ def parse_comment_block(comment_lines_raw):
         if not keyword_name_extracted:
             # Regex to find \keyword Name (e.g., \aspect MyAspect)
             # It should capture the keyword itself and the name
-            primary_match = re.match(r'\\([a-zA-Z_]+)\s+([A-Za-z0-9_:-]+)', line)
+            primary_match = re.match(r'\\([a-zA-Z_]+)\s+([A-Za-z0-9_:-\[\]\-]+)', line)
             if primary_match:
                 doc_info['doc_type'] = primary_match.group(1).lower()
                 doc_info['name'] = '``' + primary_match.group(2) + '``' # Format as code in RST
@@ -193,8 +193,8 @@ def process_project_directory(root_dir, output_rst_dir):
                     output_filepath = os.path.join(output_rst_dir, output_filename)
 
                     # Separate aspect entries from other entries
-                    aspect_entries = [e for e in doc_entries_in_file if e.doc_type == 'aspect']
-                    other_entries = [e for e in doc_entries_in_file if e.doc_type != 'aspect']
+                    aspect_entries = [e for e in doc_entries_in_file if e.doc_type == 'aspect' or e.doc_type == 'class' or e.doc_type == 'interface']
+                    other_entries = [e for e in doc_entries_in_file if e.doc_type != 'aspect' and e.doc_type != 'class' and e.doc_type != 'interface']
 
                     # Sort entries for consistent output (optional, but good practice)
                     aspect_entries.sort(key=lambda x: x.name)
