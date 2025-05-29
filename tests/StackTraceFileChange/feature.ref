@@ -1,0 +1,13 @@
+Stack Trace Fallback Test: Tests correct output when stack trace tracks multiple files.
+====================================================================================================
+
+
+Uncaught exception foo-err:
+	at void foo() in (functions_a.hh:4)
+	at void foobar() in (functions_a.hh:8)
+	at void bar() in (functions_b.hh:5)
+	at void barfoo() in (functions_b.hh:7)
+	at void foofoo() in (main.cc:7)
+	at void barbar() in (main.cc:9)
+	at int main() in (main.cc:11)
+

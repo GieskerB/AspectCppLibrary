@@ -1,7 +1,13 @@
 #include "../prettier_tests.hh"
 #include <stdexcept>
 
-#include "functions.hh"
+void foo() {
+	throw std::runtime_error("foo-err");
+}
+
+void foobar () {foo();}
+
+void bar () {foobar();}
 
 [[acp::fallback]]void barfoo () {bar();}
 

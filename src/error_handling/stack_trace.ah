@@ -118,7 +118,7 @@ public:
 	 * \advice stack-trace-builder-advice
 	 * \brief Advice handles the StackTrace building, in case of an thrown exception.
 	 */
-	advice call(where() && !ignore()) : around(){
+	advice execution(where() && !(ignore() || fallback_func() || main_func())) : around(){
 
 		check_reset();
 		try {

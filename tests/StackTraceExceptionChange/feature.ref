@@ -1,0 +1,10 @@
+Stack Trace Test: Tests for stack trace functionality when excpt. changes.
+====================================================================================================
+
+
+Uncaught exception except2-err:
+	at void except2() in (main.cc:12)
+	at void foobar() in (main.cc:20)
+	at void barfoo() in (main.cc:22)
+	at int main() in (main.cc:24)
+

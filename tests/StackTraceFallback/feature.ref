@@ -3,8 +3,8 @@ Stack Trace Fallback Test: Tests correct behaviour of fallback advice
 
 
 Uncaught exception foo-err:
-	at void foo() in (functions.hh:8)
-	at void foobar() in (functions.hh:10)
-	at void bar() in (main.cc:6)
-	at void barfoo() in (main.cc:6)
+	at void foo() in (main.cc:4)
+	at void foobar() in (main.cc:8)
+	at void bar() in (main.cc:10)
+	at void barfoo() in (main.cc:12)
 
