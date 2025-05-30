@@ -130,7 +130,9 @@ public:
 			tjp->proceed();
 		} catch (const std::exception& e) {
 			_editing_stack_trace = true;
-			_call_chain.push_back(_builder->build_msg(tjp->signature(),tjp->filename(),tjp->line()));
+			std::string msg;
+			_builder->build_msg(tjp->signature(),tjp->filename(),tjp->line(),msg);
+			_call_chain.push_back(msg);
 			// Print Stack Trace
 			print_stack_trace(_call_chain, e.what());
 			_editing_stack_trace = false;
@@ -154,15 +156,21 @@ public:
 			_editing_stack_trace = true;
 			if (_last_thrown == nullptr) {
 				// Just thrown
-				_call_chain.push_back(_builder->build_msg(tjp->signature(),tjp->filename(),tjp->line()));
+				std::string msg;
+				_builder->build_msg(tjp->signature(),tjp->filename(),tjp->line(),msg);
+				_call_chain.push_back(msg);
 				_last_thrown = &e;
 			} else if (typeid(*_last_thrown) == typeid(e) and std::string(_last_thrown->what()) == std::string(e.what())) {
 				// Exception is still the same
-				_call_chain.push_back(_builder->build_msg(tjp->signature(),tjp->filename(),tjp->line()));
+				std::string msg;
+				_builder->build_msg(tjp->signature(),tjp->filename(),tjp->line(),msg);
+				_call_chain.push_back(msg);
 			} else {
 				// Exception changed
 				_call_chain.clear();
-				_call_chain.push_back(_builder->build_msg(tjp->signature(),tjp->filename(),tjp->line()));
+				std::string msg;
+				_builder->build_msg(tjp->signature(),tjp->filename(),tjp->line(),msg);
+				_call_chain.push_back(msg);
 				_last_thrown = &e;
 			}
 			_editing_stack_trace = false;

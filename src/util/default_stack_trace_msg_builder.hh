@@ -20,9 +20,7 @@ namespace acp {
  */
 class DefaultStackTraceMsgBuilder : public StackTraceMsgBuilder {
 
-	constexpr static unsigned int BUFF_SIZE = 1024;
-
-    int decimal_length(unsigned int v) const {
+    inline int decimal_length(unsigned int v) const {
         if (v < 10) return 1;
         if (v < 100) return 2;
         if (v < 1000) return 3;
@@ -35,43 +33,28 @@ class DefaultStackTraceMsgBuilder : public StackTraceMsgBuilder {
         return 10;
     }
 
-   public:
+public:
+
     DefaultStackTraceMsgBuilder() = default;
     virtual ~DefaultStackTraceMsgBuilder() {}
 
-    virtual std::string build_msg(const char* signature, const char* file,
-                                  int line) const override {
-
-#if 0 // TODO: TOGGLE this to switch between buggy implementation and the correct one
-        std::stringstream ss;
-        ss << signature << " | " << file << " | " << line<< '\n';
-        return ss.str();
-# else
-		char buf[BUFF_SIZE] = {0};
-
-		const int sig_len = std::strlen(signature);
-		const int file_len = std::strlen(file);
-		const int line_len = decimal_length(line);
-		const int total_len = 3 + sig_len + 5 + file_len + 1 + line_len + 2;
-
-		if (total_len >= BUFF_SIZE) {
-			return "Error: Buffer size is too small for the message.\n";
-		}
-
-		int remaining = BUFF_SIZE - 1; // Reserve space for null terminator
-		char line_str[11] = {0};
+	/**
+	 * \advice build_msg
+	 * \see :ref:`StackTraceMsgBuilder::build_msg <stack_trace_msg_builder_hh_build_msg>`
+	 */
+    virtual void build_msg(const char* signature, const char* file,
+                                  int line, std::string& result) const override {
+		char line_str[12] = {0};
 		snprintf(line_str, decimal_length(line)+1, "%d", line);
 
-		strncat(buf, "at ", remaining); remaining -= 3;
-		strncat(buf, signature, remaining); remaining -= sig_len;
-		strncat(buf, " in (", remaining); remaining -= 5;
-		strncat(buf, file, remaining); remaining -= file_len;
-		strncat(buf, ":", remaining); remaining -= 1;
-		strncat(buf, line_str, remaining); remaining -= line_len;
-		strncat(buf, ")\n", remaining);
-
-		return buf;
-#endif
+		result.clear();
+		result += "at ";
+		result += signature;
+		result += " in (";
+		result += file;
+		result += ":";
+		result += line_str;
+		result += ")\n";
 	}
 
 };
