@@ -27,9 +27,9 @@ public:
 	 * \param sign is the signature of the function that was called.
 	 * \param file is the name of the file where the function was called.
 	 * \param line is the line number where the function was called.
-	 * \return a string containing the formatted message.
+	 * \param result is a reference to a string where the formatted message will be stored.
 	 */
-	virtual std::string build_msg(const char* sign, const char* file, int line) const = 0;
+	virtual void build_msg(const char* sign, const char* file, int line, std::string& result) const = 0;
 
 };
 
