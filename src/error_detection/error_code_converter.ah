@@ -46,17 +46,16 @@ aspect ErrorCodeConverter : public CoreAspect {
 
 public:
 
-	pointcut virtual default_where() = everywhere();
+	ErrorCodeConverter(){std::cout << "ErrorCodeConverter aspect initialized." << std::endl;};
+	~ErrorCodeConverter() = default;
 
-#if 0	// TODO: TOGGLE this to switch between buggy implementation and the correct one
-	pointcut virtual ignore() = "Nothing";
-#elif 0
-	pointcut virtual ignore() = everywhere() && !in_user_space;
-#else
+	pointcut virtual default_where() = acp::err_code();
+
 	pointcut virtual ignore() = "% ErrorCodeConverter::...::%(...)" || "% acp::...::%(...)";
-#endif
 
-	advice execution(where() && !ignore()) : after() {
+	advice execution(everywhere() && !ignore()) && within("StackTrace"): after() {
+	// advice execution(everywhere()) : after() {
+		std::cout << tjp->signature() << std::endl;
 		if (errno != 0) {
 			acp::ErrnoException exception(errno);
 			errno = 0;
