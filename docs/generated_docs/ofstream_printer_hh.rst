@@ -8,8 +8,9 @@
     This class implements the Printer interface and provides methods to print messages
     to a specified output file stream (std::ofstream).
 
+*In file* ``src/util/ofstream_printer.hh``
 
-.. _/src/util/ofstream_printer_hh_``Constructor``:
+.. _ofstream_printer_hh_Constructor:
 
 ``Constructor`` (Constructor)
 -----------------------------
@@ -17,7 +18,7 @@
 **Brief Description:** Construct a new OfstreamPrinter object and open the output file stream.
 
 
-.. _/src/util/ofstream_printer_hh_``Destructor``:
+.. _ofstream_printer_hh_Destructor:
 
 ``Destructor`` (Destructor)
 ---------------------------
@@ -25,21 +26,24 @@
 **Brief Description:** Destroy the Ofstream Printer object and close the output file stream.
 
 
-.. _/src/util/ofstream_printer_hh_``print[c-string]``:
+.. _ofstream_printer_hh_printc-string:
 
 ``print[c-string]`` (Function)
 ------------------------------
 
+*See:* :ref:`Printer::print <printer_hh_printc-string>`
 
-.. _/src/util/ofstream_printer_hh_``print[char]``:
+.. _ofstream_printer_hh_printchar:
 
 ``print[char]`` (Function)
 --------------------------
 
+*See:* :ref:`Printer::print <printer_hh_printchar>`
 
-.. _/src/util/ofstream_printer_hh_``print[std::string]``:
+.. _ofstream_printer_hh_printstdstring:
 
 ``print[std::string]`` (Function)
 ---------------------------------
 
+*See:* :ref:`Printer::print <printer_hh_printstdstring>`
 

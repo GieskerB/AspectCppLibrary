@@ -8,6 +8,7 @@ namespace acp {
 
 /**
  * \class CerrPrinter
+ * \file src/util/cerr_printer.hh
  * \brief CerrPrinter is a Printer implementation that prints messages to std::cerr.
  *
  * This class implements the Printer interface and provides methods to print messages
@@ -21,8 +22,8 @@ public:
 	virtual ~CerrPrinter() {}
 
 	/**
-	 * \function print[std::sting]
-	 * \see Printer::print(const std::string& msg)
+	 * \function print[std::string]
+ 	 * \see :ref:`Printer::print <printer_hh_printstdstring>`
 	 */
 	inline void print(const std::string& msg) const override{
 		std::cerr << msg;
@@ -30,7 +31,7 @@ public:
 
 	/**
 	 * \function print[c-string]
-	 * \see Printer::print(const char* msg)
+ 	 * \see :ref:`Printer::print <printer_hh_printc-string>`
 	 */
 	inline void print(const char* msg) const override{
 		std::cerr << msg;
@@ -38,7 +39,7 @@ public:
 
 	/**
 	 * \function print[char]
-	 * \see Printer::print(const digit msg)
+ 	 * \see :ref:`Printer::print <printer_hh_printchar>`
 	 */
 	inline void print(const char digit) const override{
 		std::cerr << digit;

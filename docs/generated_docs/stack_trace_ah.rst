@@ -9,8 +9,9 @@
     acp::printer to print them.
     By default this aspect will always trigger when an uncaught exception would leave the main function.
 
+*In file* ``src/error_handling/stack_trace.ah``
 
-.. _/src/error_handling/stack_trace_ah_``acp::fallback``:
+.. _stack_trace_ah_acpfallback:
 
 ``acp::fallback`` (Attribute)
 -----------------------------
@@ -22,7 +23,7 @@
     in case this function does not catch an exception.
 
 
-.. _/src/error_handling/stack_trace_ah_``acp::trace``:
+.. _stack_trace_ah_acptrace:
 
 ``acp::trace`` (Attribute)
 --------------------------
@@ -36,13 +37,14 @@
     Then they have to disable the global pointcut first.
 
 
-.. _/src/error_handling/stack_trace_ah_``default_where``:
+.. _stack_trace_ah_default_where:
 
 ``default_where`` (Pointcut)
 ----------------------------
 
+*See:* :ref:`CoreAspect::default_where <core_aspect_ah_default_where>`
 
-.. _/src/error_handling/stack_trace_ah_``fallback-advice``:
+.. _stack_trace_ah_fallback-advice:
 
 ``fallback-advice`` (Advice)
 ----------------------------
@@ -50,7 +52,7 @@
 **Brief Description:** Advice handles the StackTrace printing when an uncaught exception leaves the function of the pointcut.
 
 
-.. _/src/error_handling/stack_trace_ah_``fallback_func``:
+.. _stack_trace_ah_fallback_func:
 
 ``fallback_func`` (Pointcut)
 ----------------------------
@@ -63,13 +65,14 @@
     be printed if an uncaught exception leaves the function.
 
 
-.. _/src/error_handling/stack_trace_ah_``ignore``:
+.. _stack_trace_ah_ignore:
 
 ``ignore`` (Pointcut)
 ---------------------
 
+*See:* :ref:`CoreAspect::ignore <core_aspect_ah_ignore>`
 
-.. _/src/error_handling/stack_trace_ah_``print_stack_trace``:
+.. _stack_trace_ah_print_stack_trace:
 
 ``print_stack_trace`` (Function)
 --------------------------------
@@ -84,7 +87,7 @@
     @param exception_msg is the message of the exception that was thrown.
 
 
-.. _/src/error_handling/stack_trace_ah_``stack-trace-builder-advice``:
+.. _stack_trace_ah_stack-trace-builder-advice:
 
 ``stack-trace-builder-advice`` (Advice)
 ---------------------------------------

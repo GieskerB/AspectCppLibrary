@@ -12,6 +12,7 @@ namespace acp {
 
 /**
  * \class DefaultStackTraceMsgBuilder
+ * \file src/util/default_stack_trace_msg_builder.hh
  * \brief DefaultStackTraceMsgBuilder is the default implementation of the StackTraceMsgBuilder interface.
  *
  * This class provides a method to build a formatted message for the stack trace.

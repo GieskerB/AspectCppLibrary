@@ -10,8 +10,9 @@
     implementation of the aspects. The others are meant to be useful pointcuts for a
     more user oriented usage of the ACP library.
 
+*In file* ``src/core/core_aspect.ah``
 
-.. _/src/core/core_aspect_ah_``default_where``:
+.. _core_aspect_ah_default_where:
 
 ``default_where`` (Pointcut)
 ----------------------------
@@ -19,7 +20,7 @@
 **Brief Description:** A virtual placeholder for the default pointcut implementation of each aspect
 
 
-.. _/src/core/core_aspect_ah_``everywhere``:
+.. _core_aspect_ah_everywhere:
 
 ``everywhere`` (Pointcut)
 -------------------------
@@ -32,7 +33,7 @@
     describes literally every functions and therefore can lead to performance issues.
 
 
-.. _/src/core/core_aspect_ah_``ignore``:
+.. _core_aspect_ah_ignore:
 
 ``ignore`` (Pointcut)
 ---------------------
@@ -46,7 +47,7 @@
     "% <AspectName>::...::%(...)" || "% acp::...::%(...)"
 
 
-.. _/src/core/core_aspect_ah_``main_func``:
+.. _core_aspect_ah_main_func:
 
 ``main_func`` (Pointcut)
 ------------------------
@@ -54,7 +55,7 @@
 **Brief Description:** Matches every possible agrument variant of the c++ main function.
 
 
-.. _/src/core/core_aspect_ah_``operators``:
+.. _core_aspect_ah_operators:
 
 ``operators`` (Pointcut)
 ------------------------
@@ -62,7 +63,7 @@
 **Brief Description:** Mathes every operator or conversion function in the whole project.
 
 
-.. _/src/core/core_aspect_ah_``where``:
+.. _core_aspect_ah_where:
 
 ``where`` (Pointcut)
 --------------------

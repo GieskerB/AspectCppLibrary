@@ -9,4 +9,5 @@
     If the developer wants to use a different StackTraceMsgBuilder or Printer, they can create their own aspect that
     extends the original StackTrace aspect.
 
+*In file* ``src/error_handling/default_stack_trace.ah``
 

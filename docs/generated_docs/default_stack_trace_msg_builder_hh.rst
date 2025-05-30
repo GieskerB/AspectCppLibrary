@@ -7,4 +7,5 @@
 
     This class provides a method to build a formatted message for the stack trace.
 
+*In file* ``src/util/default_stack_trace_msg_builder.hh``
 

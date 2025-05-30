@@ -8,6 +8,7 @@ namespace acp {
 
 /**
  * \class CoutPrinter
+ * \file src/util/cout_printer.hh
  * \brief CoutPrinter is a Printer implementation that prints messages to std::cout.
  *
  * This class implements the Printer interface and provides methods to print messages
@@ -22,7 +23,7 @@ public:
 
 	/**
 	 * \function print[std::string]
-	 * \see Printer::print(const std::string& msg)
+ 	 * \see :ref:`Printer::print <printer_hh_printstdstring>`
 	 */
 	inline void print(const std::string& msg) const override{
 		std::cout << msg;
@@ -30,7 +31,7 @@ public:
 
 	/**
 	 * \function print[c-string]
-	 * \see Printer::print(const char* msg)
+ 	 * \see :ref:`Printer::print <printer_hh_printc-string>`
 	 */
 	inline void print(const char* msg) const override{
 		std::cout << msg;
@@ -38,7 +39,7 @@ public:
 
 	/**
 	 * \function print[char]
-	 * \see Printer::print(const digit msg)
+ 	 * \see :ref:`Printer::print <printer_hh_printchar>`
 	 */
 	inline void print(const char digit) const override{
 		std::cout << digit;

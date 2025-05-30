@@ -28,9 +28,10 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
 html_theme_path = ['_themes']
-html_theme = "karma-sphinx-theme"
-html_static_path = ['_themes/karma-sphinx-theme/static']
+html_static_path = ['_static']
 
+html_theme = "karma-sphinx-theme"
+html_logo = '_static/logo.png'
 html_context = {
     'style': '',  # oder irgendein Default-Stil, wenn dein Theme das erwartet
 }

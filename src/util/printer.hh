@@ -7,6 +7,7 @@ namespace acp {
 
 /**
  * \interface Printer
+ * \file src/util/printer.hh
  * \brief Printer is an interface for printing messages.
  *
  * This interface defines methods for printing messages of different types.

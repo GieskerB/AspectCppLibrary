@@ -8,22 +8,26 @@
     This class implements the Printer interface and provides methods to print messages
     to the standard error output stream (std::cerr).
 
+*In file* ``src/util/cerr_printer.hh``
 
-.. _/src/util/cerr_printer_hh_``print[c-string]``:
+.. _cerr_printer_hh_printc-string:
 
 ``print[c-string]`` (Function)
 ------------------------------
 
+*See:* :ref:`Printer::print <printer_hh_printc-string>`
 
-.. _/src/util/cerr_printer_hh_``print[char]``:
+.. _cerr_printer_hh_printchar:
 
 ``print[char]`` (Function)
 --------------------------
 
+*See:* :ref:`Printer::print <printer_hh_printchar>`
 
-.. _/src/util/cerr_printer_hh_``print[std::sting]``:
+.. _cerr_printer_hh_printstdstring:
 
-``print[std::sting]`` (Function)
---------------------------------
+``print[std::string]`` (Function)
+---------------------------------
 
+*See:* :ref:`Printer::print <printer_hh_printstdstring>`
 

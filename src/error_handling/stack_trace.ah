@@ -31,6 +31,7 @@ namespace acp {
 
 /**
  * \aspect StackTrace
+ * \file src/error_handling/stack_trace.ah
  * \brief This aspect is used to handle stack traces and print them when an uncaught exception occurs.
  *
  * This aspect uses the acp::StackTraceMsgBuilder to build the messages for the stack trace and the
@@ -88,13 +89,13 @@ public:
 
 	/**
 	 * \pointcut ignore
-	 * \see CoreAspect::ignore()
+	 * \see :ref:`CoreAspect::ignore <core_aspect_ah_ignore>`
 	 */
 	pointcut virtual ignore() = "% StackTrace::...::%(...)" || "% acp::...::%(...)";
 
 	/**
 	 * \pointcut default_where
-	 * \see CoreAspect::ignore()
+	 * \see :ref:`CoreAspect::default_where <core_aspect_ah_default_where>`
 	 */
 	pointcut virtual default_where() = everywhere();
 

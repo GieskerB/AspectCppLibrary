@@ -7,8 +7,9 @@
 
     This interface defines methods for printing messages of different types.
 
+*In file* ``src/util/printer.hh``
 
-.. _/src/util/printer_hh_``print[c-string]``:
+.. _printer_hh_printc-string:
 
 ``print[c-string]`` (Function)
 ------------------------------
@@ -16,7 +17,7 @@
 **Brief Description:** print is a pure virtual function that prints a c-string message.
 
 
-.. _/src/util/printer_hh_``print[char]``:
+.. _printer_hh_printchar:
 
 ``print[char]`` (Function)
 --------------------------
@@ -24,7 +25,7 @@
 **Brief Description:** print is a pure virtual function that prints a single char message.
 
 
-.. _/src/util/printer_hh_``print[std::string]``:
+.. _printer_hh_printstdstring:
 
 ``print[std::string]`` (Function)
 ---------------------------------

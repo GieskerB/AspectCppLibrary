@@ -7,6 +7,7 @@ namespace acp {
 
 /**
  * \interface StackTraceMsgBuilder
+ * \file src/util/stack_trace_msg_builder.hh
  * \brief StackTraceMsgBuilder is an interface for creating a stack trace messages.
  *
  * This interface defines the method for creating a messages for the StackTrace-Aspect.
