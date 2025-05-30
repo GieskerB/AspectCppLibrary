@@ -2,62 +2,62 @@
 #define __ACP__ERROR_CODE_CONVERTER_AH__
 
 #include "../core/core_aspect.ah"
+#include "../util/errno_exception.hh"
 
 #include <stdexcept>
 #include <cerrno>
 #include <cstring>
 
 namespace acp {
+	/**
+	 * \attribute acp::err_code
+	 * \brief This attribute should be used to mark functions from which a function call is checked for errno.
+	 *
+	 * Due to some implementations restrictions with the AspectC++ compiler, this attribute is not used.
+	 */
 	attribute err_code();
-
-	class ErrnoException : public std::runtime_error {
-
-		std::string _msg;
-		const unsigned int _errno;
-
-		void create_message() {
-			_msg = "A function call set errno to a non zero value:";
-			_msg += std::to_string(_errno);
-			_msg += " which means: <";
-			_msg += std::runtime_error::what();
-			_msg += ">\n";
-		}
-
-	public:
-		ErrnoException() = delete;
-
-		ErrnoException(unsigned int err): std::runtime_error(std::strerror(err)),_errno(err) {
-			create_message();
-		}
-
-		const char* what() const noexcept override {
-			return _msg.c_str();
-		}
-
-		unsigned int get_errno() const {
-			return _errno;
-		}
-
-	};
-
 }
 
+/**
+ * \aspect ErrorCodeConverter
+ * \file src/error_detection/error_code_converter.ah
+ * \brief This aspect is used to convert error codes from standard library functions into exceptions.
+ *
+ * It checks if errno is set to a non-zero value after a function call and throws an `acp::ErrnoException` with the current value of errno.
+ * It is recommended to use this aspect in conjunction with the StackTrace aspect to get a full stack trace.
+ */
 aspect ErrorCodeConverter : public CoreAspect {
 
 public:
 
-	ErrorCodeConverter(){std::cout << "ErrorCodeConverter aspect initialized." << std::endl;};
+	ErrorCodeConverter() {}
 	~ErrorCodeConverter() = default;
 
-	pointcut virtual default_where() = acp::err_code();
+	/**
+	 * \pointcut default_where
+	 * \see :ref:`CoreAspect::default_where <core_aspect_ah_default_where>`
+	 */
+	pointcut virtual default_where() = everywhere();
 
-	pointcut virtual ignore() = "% ErrorCodeConverter::...::%(...)" || "% acp::...::%(...)";
+	/**
+	 * \pointcut ignore
+	 * \see :ref:`CoreAspect::ignore <core_aspect_ah_ignore>`
+	 */
+	pointcut virtual ignore() = within("ErrorCodeConverter") || within("acp");
 
-	advice execution(everywhere() && !ignore()) && within("StackTrace"): after() {
-	// advice execution(everywhere()) : after() {
-		std::cout << tjp->signature() << std::endl;
+	/**
+	 * \advice errno_check
+	 * \brief Advice checks if errno is set to a non-zero value after the function call.
+	 *
+	 * If this conditions is met, it throws an `acp::ErrnoException` with the current value of errno.
+	 * It is recommended to use this advice in conjunction with the StackTrace aspect to get a full stack trace.
+	 *
+	 */
+	advice call(where())  && !ignore(): after() {
+		// Errno is thread-local, so we can safely access it here
 		if (errno != 0) {
 			acp::ErrnoException exception(errno);
+			// Reset errno after capturing it otherwise it will throw the same exception again
 			errno = 0;
 			throw exception;
 		}

@@ -27,3 +27,5 @@ Welcome to AspectC++ Library's documentation!
     generated_docs/default_stack_trace_msg_builder_hh.rst
     generated_docs/ofstream_printer_hh.rst
     generated_docs/core_aspect_ah.rst
+    generated_docs/errno_exception_hh.rst
+    generated_docs/error_code_converter_ah.rst

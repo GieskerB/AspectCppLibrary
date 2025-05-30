@@ -200,9 +200,8 @@ def process_project_directory(root_dir, output_rst_dir):
                     output_filename = os.path.basename(filepath).replace('.', '_') + '.rst'
                     output_filepath = os.path.join(output_rst_dir, output_filename)
 
-                    # Separate aspect/class/interface entries for top-level heading
-                    main_entities = [e for e in doc_entries_in_file if e.doc_type in ['aspect', 'class', 'interface']]
-                    other_entries = [e for e in doc_entries_in_file if e.doc_type not in ['aspect', 'class', 'interface']]
+                    main_entities = [e for e in doc_entries_in_file if e.doc_type in ['aspect', 'class', 'interface', 'exception']]
+                    other_entries = [e for e in doc_entries_in_file if e.doc_type not in ['aspect', 'class', 'interface', 'exception']]
 
                     # Sort entries for consistent output
                     main_entities.sort(key=lambda x: x.name)

@@ -25,3 +25,5 @@ tools/
 **/Junk/
 **/*.acc
 **/*.acp
+tests/ErrorCodeConverter/temp_file_for_badf.txt
+tests/ErrorCodeConverter/temp_file_for_eexist.txt
