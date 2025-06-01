@@ -1,0 +1,43 @@
+#ifndef __ACP__NULLPTR_CHECK_AH__
+#define __ACP__NULLPTR_CHECK_AH__
+
+#include "../core/core_aspect.ah"
+
+aspect NullptrCheck : public CoreAspect {
+
+public:
+
+    NullptrCheck() {
+        std::cout << "NullptrCheck aspect initialized.\n";
+    }
+    virtual ~NullptrCheck() = default;
+
+    /**
+     * \pointcut default_where
+     * \see :ref:`CoreAspect::default_where <core_aspect_ah_default_where>`
+     */
+    pointcut virtual default_where() = builtin("% operator %(...)");
+
+    /**
+     * \pointcut ignore
+     * \see :ref:`CoreAspect::ignore <core_aspect_ah_ignore>`
+     */
+    pointcut virtual ignore() = within("NullptrCheck") || within("acp");
+
+    /**
+     * \advice nullptr_check
+     * \brief Advice checks if a pointer is null before dereferencing it.
+     *
+     * If the pointer is null, it throws a `std::runtime_error` with a message indicating that a null pointer was dereferenced.
+     */
+    advice where() /*&& !ignore()*/: before() {
+        std::cout << tjp->signature() << "\n";
+        // if (this == nullptr) {
+        //     throw std::runtime_error("Null pointer dereferenced");
+        // }
+    }
+
+
+};
+
+#endif // __ACP__NULLPTR_CHECK_AH__

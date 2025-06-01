@@ -11,8 +11,9 @@ endif
 SHELL=/bin/bash
 DIFF=diff --strip-trailing-cr
 
-ACTESTS = HelloWorld StackTrace StackTraceExceptionChange StackTraceFallback StackTraceFileChange \
-		  ErrorCodeConverter
+
+ACTESTS = HelloWorld StackTrace StackTraceExceptionChange StackTraceFallback StackTraceFileChange\
+		  ErrorCodeConverter NullptrCheck
 
 
 ifeq ($(FRONTEND),Clang)
