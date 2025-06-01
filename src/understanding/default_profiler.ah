@@ -1,0 +1,19 @@
+#ifndef __ACP__DEFAULT_PROFILER_AH__
+#define __ACP__DEFAULT_PROFILER_AH__
+
+#include "profiler.ah"
+#include "../util/default_profiler_msg_builder.hh"
+#include "../util/cout_printer.hh"
+
+
+aspect DefaultProfiler : public Profiler {
+
+public:
+
+	DefaultProfiler() : Profiler(new acp::DefaultProfilerMsgBuilder(), new acp::CoutPrinter()) {}
+
+	virtual ~DefaultProfiler() {}
+
+};
+
+#endif // __ACP__DEFAULT_PROFILER_AH__

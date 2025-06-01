@@ -1,54 +1,42 @@
 #ifndef __ACP__PROFILER_AH__
 #define __ACP__PROFILER_AH__
 
-#include <iostream>
-#include <chrono>
-
-
-namespace acp {
-
-	struct ProfilerData {
-		static ProfilerData* &first () { static ProfilerData *data = 0; return data; }
-		struct ProfilerData* p_next;
-		unsigned int m_calls;
-		std::chrono::nanoseconds m_exec_time;
-		const char* m_signature;
-		ProfilerData (const char* n) : m_calls{0}, m_exec_time{0L}, m_signature{n} {
-			ProfilerData *head = first ();
-			first () = this;
-			p_next = head;
-		}
-	};
-
-}
+#include "../core/core_aspect.ah"
+#include "../util/printer.hh"
+#include "../util/profiler_data.hh"
+#include "../util/profiler_msg_builder.hh"
 
 namespace acp {
-
 	attribute profile();
-
 }
 
-aspect Profiler {
+aspect Profiler : public CoreAspect {
 
-protected:
-
-	std::ostream* _os;
+	static acp::ProfilerMsgBuilder* _builder_static;
+	static acp::Printer* _printer_static;
+	acp::ProfilerMsgBuilder* _builder;
+	acp::Printer* _printer;
 
 public:
 
-    pointcut dont_profile() = "% Profiler::...::%(...)" || "% acp::...::%(...)";
+    pointcut virtual ignore() = within("Profiler") || within("acp");
 
-    pointcut virtual where() = acp::profile();
+    pointcut virtual default_where() = acp::profile();
 
-    pointcut base_where() = acp::profile();
 
-    Profiler(): Profiler(std::cout) {}
+    Profiler(): Profiler(nullptr,nullptr) {}
 
-    Profiler(std::ostream& os): _os(&os){
+    Profiler(acp::ProfilerMsgBuilder* builder , acp::Printer* printer): _builder(builder), _printer(printer) {
+		_builder_static = _builder;
+		_printer_static = _printer;
+	}
 
-    }
+	virtual ~Profiler() {
+		delete _builder;
+		delete _printer;
+	}
 
-    advice execution(where() && !dont_profile()) : around() {
+    advice execution(where()) && !ignore(): around() {
     	static acp::ProfilerData data (JoinPoint::signature());
 		const auto start = std::chrono::high_resolution_clock::now();
 		tjp->proceed();
@@ -59,21 +47,24 @@ public:
 
     static void simple_stat () {
 		for (acp::ProfilerData *curr = acp::ProfilerData::first (); curr; curr = curr->p_next) {
-			std::cout << curr->m_signature << ": called "
-					  << curr->m_calls << " times within "
-					  << curr->m_exec_time.count() << " nanosec.\n";
+			std::string output;
+			_builder_static->build(*curr, output);
+			_printer_static->print(output);
 		}
-    	std::cout << "\n\n";
       }
 
     virtual void (*summary())() {
         return &simple_stat;
       }
 
-    advice execution ("% main(...)") : after () {
+    advice execution (main_func()) : after () {
         atexit (summary());
-      }
+    }
 
 };
+
+acp::ProfilerMsgBuilder* Profiler::_builder_static = nullptr;
+acp::Printer* Profiler::_printer_static = nullptr;
+
 
 #endif // __ACP__PROFILER_AH__

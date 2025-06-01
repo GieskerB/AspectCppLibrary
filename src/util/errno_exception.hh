@@ -1,5 +1,5 @@
-#ifndef __ACP__INTERFACE_ERRNO_EXCEPTION_HH__
-#define __ACP__INTERFACE_ERRNO_EXCEPTION_HH__
+#ifndef __ACP__ERRNO_EXCEPTION_HH__
+#define __ACP__ERRNO_EXCEPTION_HH__
 #include <string>
 #include <cerrno>
 #include <cstring>
@@ -59,4 +59,4 @@ namespace acp {
 	};
 }
 
-#endif // __ACP__INTERFACE_ERRNO_EXCEPTION_HH__
+#endif // __ACP__ERRNO_EXCEPTION_HH__

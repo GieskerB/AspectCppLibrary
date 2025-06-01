@@ -12,7 +12,7 @@ SHELL=/bin/bash
 DIFF=diff --strip-trailing-cr
 
 ACTESTS = HelloWorld StackTrace StackTraceExceptionChange StackTraceFallback StackTraceFileChange \
-		  ErrorCodeConverter
+		  ErrorCodeConverter Profiler
 
 
 ifeq ($(FRONTEND),Clang)
