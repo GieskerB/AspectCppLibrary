@@ -16,7 +16,7 @@ I'll keep a list of all my implemented aspects per category.
 
 ## Understanding
 
-- **Profiler**
+- **(Profiler)**
 
 ## Functions
 

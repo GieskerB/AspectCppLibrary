@@ -54,7 +54,7 @@ public:
 	 *
 	 */
 	advice call(where())  && !ignore(): after() {
-		// Errno is thread-local, so we can safely access it here
+		// Errno is thread-local, so it can be safely accessed here
 		if (errno != 0) {
 			acp::ErrnoException exception(errno);
 			// Reset errno after capturing it otherwise it will throw the same exception again
