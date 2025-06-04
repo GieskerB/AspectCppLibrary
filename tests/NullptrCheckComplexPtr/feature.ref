@@ -1,0 +1,7 @@
+NullptrCheck Test: Testing null pointer dereference handling
+====================================================================================================
+
+
+Uncaught exception Null pointer dereference in function: std::vector<std::basic_string<char,std::char_traits<char>,std::allocator<char>>,std::allocator<std::basic_string<char,std::char_traits<char>,std::allocator<char>>>> &operator *(std::vector<std::basic_string<char,std::char_traits<char>,std::allocator<char>>,std::allocator<std::basic_string<char,std::char_traits<char>,std::allocator<char>>>> *) at line: 10.:
+	at int main() in (main.cc:6)
+

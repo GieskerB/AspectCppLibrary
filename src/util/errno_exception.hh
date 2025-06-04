@@ -36,7 +36,7 @@ namespace acp {
          *
          * \param err is the error number that was set by a std-lib function.
          */
-		ErrnoException(unsigned int err): std::runtime_error(strerror(err)),_errno(err) {
+		ErrnoException(unsigned int err): std::runtime_error(std::strerror(err)), _errno(err) {
 			create_message();
 		}
 
