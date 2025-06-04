@@ -1,6 +1,4 @@
-ACFLAGS += -a ../../src/error_handling/default_stack_trace.ah \
-		   -a ../../src/error_handling/stack_trace.ah \
-		   -a ../../src/core/core_aspect.ah
+ACFLAGS += -p ../../src -a ../../src/error_handling/default_stack_trace.ah
 
 
 include ../Makefile.generic

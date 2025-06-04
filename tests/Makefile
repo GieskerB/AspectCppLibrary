@@ -12,9 +12,8 @@ SHELL=/bin/bash
 DIFF=diff --strip-trailing-cr
 
 
-#ACTESTS = HelloWorld StackTrace StackTraceExc'eptionChange StackTraceFallback StackTraceFileChange\
-		  ErrorCodeConverter NullptrCheck
-ACTESTS = NullptrCheck
+ACTESTS = HelloWorld StackTrace StackTraceExceptionChange StackTraceFallback StackTraceFileChange\
+		  ErrorCodeConverter NullptrCheck NullptrCheckComplexPtr
 
 ifeq ($(FRONTEND),Clang)
 ifneq ($(shell uname -s),Darwin)

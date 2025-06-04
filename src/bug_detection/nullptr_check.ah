@@ -8,6 +8,16 @@ namespace acp {
     attribute null_check();
 }
 
+/**
+ * \aspect NullptrCheck
+ * \file /src/bug_detection/nullptr_check.ah
+ * \brief Aspect that checks for null pointer dereferences.
+ *
+ * This aspect provides an advice to check if a pointer is null before dereferencing it.
+ * Unfortunately, it does not work with the -> operator, due to limitations in the AspectC++
+ * language and the way the builtin -> operator is defined.
+ *
+ */
 aspect NullptrCheck : public CoreAspect {
 
 public:
@@ -31,11 +41,12 @@ public:
      * \advice nullptr_check
      * \brief Advice checks if a pointer is null before dereferencing it.
      *
-     * If the pointer is null, it throws a `std::runtime_error` with a message indicating that a null pointer was dereferenced.
+     * If the pointer is null, it throws a `acp::NullptrException` with a message indicating that
+     * a null pointer was dereferenced.
      */
-    advice within(where()) && builtin("%& operator *(%*)") /*&& !ignore()*/: before() {
+    advice within(where()) && builtin("%& operator *(%*)") && !ignore(): before() {
         if (*((int *)tjp->arg(0)) == 0) {
-            throw acp::NullptrException();
+            throw acp::NullptrException(tjp->signature(), tjp->line());
         }
     }
 

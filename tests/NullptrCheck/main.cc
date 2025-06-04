@@ -1,31 +1,24 @@
 #include "../prettier_tests.hh"
 
-[[acp::null_check]]int main() {
+[[acp::null_check]]void with_null_check() {
+	acp::test::print_pretty_separator("With Null Check:");
+	int *ptr = nullptr;
+	int value = *ptr;
+}
 
-	double *a = new double(3.14);
-	int *b = new int(69);
-	std::string *c = new std::string("HI THERE");
+void without_null_check() {
+	acp::test::print_pretty_separator("Without Null Check");
+	int *ptr = nullptr;
+	int value = *ptr;
+}
 
-	std::cout << "---\n";
 
-	std::cout << "a: " << *a << "\n";
-	std::cout << "b: " << *b << "\n";
-	std::cout << "c: " << *c << "\n";
+int main() {
 
-	std::cout << "---\n";
-
-	int d = *b+2;
-	double e = *a*2.5;
-
-	char* f = nullptr;
-
-	char g = *f;
-
-	std::cout << "---\n";
-
-	delete a;
-	delete b;
-	delete c;
+	acp::test::print_pretty_start("NullptrCheck Test", "Testing null pointer dereference handling");
+	// without_null_check(); // Would result in segmentation fault ()
+	with_null_check();
+	acp::test::print_pretty_end();
 
 	return 0;
 }

@@ -29,3 +29,5 @@ Welcome to AspectC++ Library's documentation!
     generated_docs/core_aspect_ah.rst
     generated_docs/errno_exception_hh.rst
     generated_docs/error_code_converter_ah.rst
+    generated_docs/nullptr_check_ah.rst
+    generated_docs/nullptr_exception_hh.rst
