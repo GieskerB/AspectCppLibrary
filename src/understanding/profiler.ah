@@ -5,6 +5,7 @@
 #include "../util/printer.hh"
 #include "../util/profiler_data.hh"
 #include "../util/profiler_msg_builder.hh"
+#include "../util/thread_controller.hh"
 
 namespace acp {
 	attribute profile();
@@ -16,6 +17,7 @@ aspect Profiler : public CoreAspect {
 	static acp::Printer* _printer_static;
 	acp::ProfilerMsgBuilder* _builder;
 	acp::Printer* _printer;
+	acp::ThreadController* _thread;
 
 public:
 
@@ -24,9 +26,9 @@ public:
     pointcut virtual default_where() = acp::profile();
 
 
-    Profiler(): Profiler(nullptr,nullptr) {}
+    Profiler(): Profiler(nullptr,nullptr,nullptr) {}
 
-    Profiler(acp::ProfilerMsgBuilder* builder , acp::Printer* printer): _builder(builder), _printer(printer) {
+    Profiler(acp::ProfilerMsgBuilder* builder , acp::Printer* printer, acp::ThreadController* thread): _builder(builder), _printer(printer), _thread(thread) {
 		_builder_static = _builder;
 		_printer_static = _printer;
 	}
@@ -34,15 +36,20 @@ public:
 	virtual ~Profiler() {
 		delete _builder;
 		delete _printer;
+		delete _thread;
 	}
 
     advice execution(where()) && !ignore(): around() {
+		_thread->acquire_lock();
     	static acp::ProfilerData data (JoinPoint::signature());
+		_thread->release_lock();
 		const auto start = std::chrono::high_resolution_clock::now();
 		tjp->proceed();
 		const auto end = std::chrono::high_resolution_clock::now();
+		_thread->acquire_lock();
 		data.m_calls++;
 		data.m_exec_time += end - start;
+		_thread->release_lock();
     }
 
     static void simple_stat () {

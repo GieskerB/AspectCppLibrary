@@ -31,3 +31,5 @@ Welcome to AspectC++ Library's documentation!
     generated_docs/error_code_converter_ah.rst
     generated_docs/nullptr_check_ah.rst
     generated_docs/nullptr_exception_hh.rst
+    generated_docs/default_profiler_msg_builder_hh.rst
+    generated_docs/profiler_msg_builder_hh.rst

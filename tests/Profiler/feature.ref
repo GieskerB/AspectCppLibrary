@@ -1,0 +1,2 @@
+int test1(): called 1000000 times within 61341107 nanoseconds.
+int test2(): called 1 times within 367518609 nanoseconds.

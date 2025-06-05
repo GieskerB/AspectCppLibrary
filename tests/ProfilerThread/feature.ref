@@ -1,0 +1,3 @@
+int load_test(): called 200000 times within 211652195 nanoseconds.
+void thread_worker(): called 2 times within 432068601 nanoseconds.
+int main(): called 1 times within 219429011 nanoseconds.

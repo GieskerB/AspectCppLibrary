@@ -4,13 +4,14 @@
 #include "profiler.ah"
 #include "../util/default_profiler_msg_builder.hh"
 #include "../util/cout_printer.hh"
+#include "../util/std_thread_controller.hh"
 
 
 aspect DefaultProfiler : public Profiler {
 
 public:
 
-	DefaultProfiler() : Profiler(new acp::DefaultProfilerMsgBuilder(), new acp::CoutPrinter()) {}
+	DefaultProfiler() : Profiler(new acp::DefaultProfilerMsgBuilder(), new acp::CoutPrinter(), new acp::StdThreadController()) {}
 
 	virtual ~DefaultProfiler() {}
 
