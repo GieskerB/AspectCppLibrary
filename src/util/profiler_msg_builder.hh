@@ -10,15 +10,15 @@ namespace acp {
 
         ProfilerMsgBuilder(){};
         virtual ~ProfilerMsgBuilder() = default;
-        
+
         /**
-         * \function build
+         * \function build_msg
          * \brief Builds a profiling message.
          *
-         * \param data ...
+         * \param data the profiling data to be used for building the message.
          * \param output reference to a string which will contain the output in the end.
          */
-        virtual void build(const acp::ProfilerData& data, std::string& output) const = 0;
+        virtual void build_msg(const acp::ProfilerData& data, std::string& output) const = 0;
     };
 
 }

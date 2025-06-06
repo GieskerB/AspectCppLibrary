@@ -33,3 +33,9 @@ Welcome to AspectC++ Library's documentation!
     generated_docs/nullptr_exception_hh.rst
     generated_docs/default_profiler_msg_builder_hh.rst
     generated_docs/profiler_msg_builder_hh.rst
+    generated_docs/profiler_ah.rst
+    generated_docs/std_thread_controller_hh.rst
+    generated_docs/p_thread_controller_hh.rst
+    generated_docs/profiler_data_hh.rst
+    generated_docs/default_profiler_ah.rst
+    generated_docs/thread_controller_hh.rst

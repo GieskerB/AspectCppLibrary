@@ -1,13 +1,19 @@
-default_profiler_msg_builder.hh Documentation
-============================================
+``DefaultProfilerMsgBuilder`` (Class)
+=====================================
 
-All documented entities found in ``default_profiler_msg_builder.hh``:
+**Brief Description:** Default implementation of the ProfilerMsgBuilder interface.
 
-.. _default_profiler_msg_builder_hh_build:
+**Detailed Description:**
 
-``build`` (Function)
---------------------
+    This class implements the ProfilerMsgBuilder interface to provide
+    a default way of building profiling messages.
 
-**Brief Description:** Builds a profiling message.
+*In file* ``src/util/default_profiler_msg_builder.hh``
 
+.. _default_profiler_msg_builder_hh_build_msg:
+
+``build_msg`` (Advice)
+----------------------
+
+*See:* :ref:`ProfilerMsgBuilder::build_msg <profiler_msg_builder_hh_build_msg>`
 

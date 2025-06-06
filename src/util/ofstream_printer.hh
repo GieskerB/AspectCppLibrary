@@ -36,7 +36,6 @@ public:
 	/**
 	 * \destructor Destructor
 	 * \brief Destroy the Ofstream Printer object and close the output file stream.
-	 *
 	 */
 	virtual ~OfstreamPrinter() {
 		if (_os.is_open()) {

@@ -4,6 +4,14 @@
 
 namespace acp {
 
+    /**
+     * \class DefaultProfilerMsgBuilder
+     * \file src/util/default_profiler_msg_builder.hh
+     * \brief Default implementation of the ProfilerMsgBuilder interface.
+     *
+     * This class implements the ProfilerMsgBuilder interface to provide
+     * a default way of building profiling messages.
+     */
     class DefaultProfilerMsgBuilder : public ProfilerMsgBuilder {
     public:
 
@@ -11,13 +19,10 @@ namespace acp {
         virtual ~DefaultProfilerMsgBuilder() = default;
 
         /**
-         * \function build
-         * \brief Builds a profiling message.
-         *
-         * \param data
-         * \param output reference to a string which will contain the output in the end.
+         * \advice build_msg
+         * \see :ref:`ProfilerMsgBuilder::build_msg <profiler_msg_builder_hh_build_msg>`
          */
-        virtual void build(const acp::ProfilerData& data, std::string& output) const override {
+        virtual void build_msg(const acp::ProfilerData& data, std::string& output) const override {
             output.clear();
             output.append(data.m_signature);
             output.append(": called ");

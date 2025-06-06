@@ -8,9 +8,21 @@
 #include "../util/thread_controller.hh"
 
 namespace acp {
+	/**
+	 * \attribute profile
+	 * \brief This attribute is used to mark functions, classes or namespaces that should be profiled.
+	 */
 	attribute profile();
 }
 
+/**
+ * \aspect Profiler
+ * \brief This aspect is used to profile the execution time and call amount of functions and methods.
+ *
+ * It uses a instance of acp::ProfilerMsgBuilder to build the profiling messages
+ * and a instance of acp::Printer to print those messages.
+ * In addition, this aspect is thread-safe, by using an instance of acp::ThreadController to manage thread locks.
+ */
 aspect Profiler : public CoreAspect {
 
 	static acp::ProfilerMsgBuilder* _builder_static;
@@ -20,14 +32,29 @@ aspect Profiler : public CoreAspect {
 	acp::ThreadController* _thread;
 
 public:
-
+/**
+	 * \pointcut ignore
+	 * \see :ref:`CoreAspect::ignore <core_aspect_ah_ignore>`
+	 */
     pointcut virtual ignore() = within("Profiler") || within("acp");
 
+	/**
+	 * \pointcut default_where
+	 * \see :ref:`CoreAspect::default_where <core_aspect_ah_default_where>`
+	 */
     pointcut virtual default_where() = acp::profile();
 
 
     Profiler(): Profiler(nullptr,nullptr,nullptr) {}
 
+	/**
+	 * \constructor Constructor
+	 * \brief This constructor initializes the profiler with a builder, printer and thread controller.
+	 *
+	 * @param builder is a pointer to an acp::ProfilerMsgBuilder instance used to build profiling messages.
+	 * @param printer is a pointer to an acp::Printer instance used to print profiling messages.
+	 * @param thread is a pointer to an acp::ThreadController instance used to manage thread locks.
+	 */
     Profiler(acp::ProfilerMsgBuilder* builder , acp::Printer* printer, acp::ThreadController* thread): _builder(builder), _printer(printer), _thread(thread) {
 		_builder_static = _builder;
 		_printer_static = _printer;
@@ -39,6 +66,14 @@ public:
 		delete _thread;
 	}
 
+	/**
+	 * \advice profile-advice
+	 * \brief This advice is executed around the execution of functions or methods marked with the profile attribute.
+	 *
+	 * It measures the execution time and call count of the function or method.
+	 * It uses a static instance of acp::ProfilerData to store the profiling data.
+	 * The profiling data is updated in a thread-safe manner using the ThreadController.
+	 */
     advice execution(where()) && !ignore(): around() {
 		_thread->acquire_lock();
     	static acp::ProfilerData data (JoinPoint::signature());
@@ -52,18 +87,39 @@ public:
 		_thread->release_lock();
     }
 
+	/**
+	 * \function simple_stat
+	 * \brief This function prints the profiling data of all profiled functions and methods.
+	 */
     static void simple_stat () {
 		for (acp::ProfilerData *curr = acp::ProfilerData::first (); curr; curr = curr->p_next) {
 			std::string output;
-			_builder_static->build(*curr, output);
+			_builder_static->build_msg(*curr, output);
 			_printer_static->print(output);
 		}
       }
 
+	  /**
+	   * \function summary
+	   * \brief This function returns a pointer to the simple_stat function.
+	   *
+	   * This function is virtual and can therefore be overridden by derived classes.
+	   * It is used to provide the register-advice with a function pointer to be called at exit.
+	   * \return (In this case) A pointer to the simple_stat function, which prints the profiling data.
+	   */
     virtual void (*summary())() {
         return &simple_stat;
       }
 
+	/**
+	 * \advice register-advice
+	 * \brief This advice is executed after the main function has finished executing and registers the
+	 * summary function to be called at exit.
+	 *
+	 * Atexit will receive the result of the \see summary() function. it expects a function pointer to
+	 * a function that returns void and takes no arguments and is not class bound. Using the atexit()
+	 * function, the most amount of information can be gathered about the program before it exits.
+	 */
     advice execution (main_func()) : after () {
         atexit (summary());
     }

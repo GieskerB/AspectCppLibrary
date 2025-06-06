@@ -12,12 +12,16 @@ I'll keep a list of all my implemented aspects per category.
 
 ## Bug Detection / Functional Safety
 
-
+- **Nullptr Check**
 
 ## Understanding
 
-- **(Profiler)**
+- **Profiler**
 
 ## Functions
 
+- **(Logging)**
+
 ## Design Patterns
+
+- **(...)**
