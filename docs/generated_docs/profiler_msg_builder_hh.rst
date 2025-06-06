@@ -1,7 +1,9 @@
-profiler_msg_builder.hh Documentation
-====================================
+``ProfilerMsgBuilder`` (Interface)
+==================================
 
-All documented entities found in ``profiler_msg_builder.hh``:
+**Brief Description:** Interface for building profiling messages.
+
+*In file* ``src/util/profiler_msg_builder.hh``
 
 .. _profiler_msg_builder_hh_build_msg:
 

@@ -5,6 +5,11 @@
 
 namespace acp {
 
+    /**
+     * \interface ProfilerMsgBuilder
+     * \file src/util/profiler_msg_builder.hh
+     * \brief Interface for building profiling messages.
+     */
     class ProfilerMsgBuilder {
     public:
 
