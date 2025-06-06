@@ -5,11 +5,23 @@
 
 namespace acp {
 
+    /**
+     * \class DefaultLoggingMsgBuilder
+     * \file src/util/default_logging_msg_builder.hh
+     * \brief This class is a default implementation of the `LoggingMsgBuilder` interface.
+     *
+     * It provides a simple way to build log messages with a specific format.
+     *
+     */
     class DefaultLoggingMsgBuilder : public LoggingMsgBuilder {
     public:
         DefaultLoggingMsgBuilder() {};
         virtual ~DefaultLoggingMsgBuilder() = default;
 
+        /**
+         * \function build_msg
+         * \see :ref:`LoggingMsgBuilder::build_msg <logging_msg_builder_hh_build_msg>`
+         */
         virtual void build_msg(const std::string& log_type, const std::string& msg, std::string& output) const {
                 output.clear();
             if (log_type.empty()) {
@@ -26,12 +38,20 @@ namespace acp {
             }
         }
 
+        /**
+         * \function build_before_msg
+         * \see :ref:`LoggingMsgBuilder::build_before_msg <logging_msg_builder_hh_build_before_msg>`
+         */
         virtual void build_before_msg(const char* signature, std::string& output) const {
             output.clear();
             output.append("[Entering]");
             output.append(signature);
         }
 
+        /**
+         * \function build_after_msg
+         * \see :ref:`LoggingMsgBuilder::build_after_msg <logging_msg_builder_hh_build_after_msg>`
+         */
         virtual void build_after_msg(const char* signature, std::string& output) const {
             output.clear();
             output.append("[Leaving]");

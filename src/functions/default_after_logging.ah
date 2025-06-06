@@ -5,6 +5,14 @@
 #include "../util/default_logging_msg_builder.hh"
 #include "../util/cout_printer.hh"
 
+/**
+ * \aspect DefaultAfterLogging
+ * \file src/functions/default_after_logging.ah
+ * \brief This aspect is a default implementation of the `AfterLogging` aspect.
+ *
+ * It uses the `DefaultLoggingMsgBuilder` to build the log messages and the `CoutPrinter` to print them to the standard output.
+ *
+ */
 aspect DefaultAfterLogging : public AfterLogging {
     public:
         DefaultAfterLogging() : AfterLogging(new acp::DefaultLoggingMsgBuilder(), new acp::CoutPrinter()) {}

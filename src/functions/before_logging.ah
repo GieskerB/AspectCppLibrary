@@ -6,9 +6,22 @@
 #include "../util/logging_msg_builder.hh"
 
 namespace acp {
+    /**
+     * \attribute before_logging
+     * \brief Functions with this attribute will be logged before their execution.
+     */
     attribute before_logging();
 }
 
+/**
+ * \aspect BeforeLogging
+ * \file src/functions/before_logging.ah
+ * \brief This aspect is used to log the execution of a function before it will execute.
+ *
+ * Similar to the `AfterLogging` aspect, this aspect logs the function signature - but only - before the function will execute.
+ *
+ */
+aspe
 aspect BeforeLogging : public CoreAspect {
 
     acp::LoggingMsgBuilder* _msg_builder;
@@ -16,18 +29,31 @@ aspect BeforeLogging : public CoreAspect {
 
 public:
 
+     /**
+	 * \pointcut ignore
+	 * \see :ref:`CoreAspect::ignore <core_aspect_ah_ignore>`
+	 */
     pointcut virtual ignore() = within("BeforeLogging") || within ("acp");
 
+    /**
+	 * \pointcut default_where
+	 * \see :ref:`CoreAspect::default_where <core_aspect_ah_default_where>`
+	 */
     pointcut virtual default_where() = acp::before_logging();
 
     BeforeLogging(): BeforeLogging(nullptr, nullptr) {}
     BeforeLogging(acp::LoggingMsgBuilder* msg_builder, acp::Printer* printer)
         : _msg_builder(msg_builder), _printer(printer) {}
+
     virtual ~BeforeLogging() {
         delete _msg_builder;
         delete _printer;
     }
 
+    /**
+     * \advice logging-advice
+     * \brief This advice handles the logging behavior before the function executes.
+     */
     advice execution(where()) && !ignore() : before() {
         std::string msg;
         _msg_builder->build_before_msg(tjp->signature(), msg);

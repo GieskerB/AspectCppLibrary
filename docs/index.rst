@@ -39,3 +39,9 @@ Welcome to AspectC++ Library's documentation!
     generated_docs/profiler_data_hh.rst
     generated_docs/default_profiler_ah.rst
     generated_docs/thread_controller_hh.rst
+    generated_docs/default_logging_msg_builder_hh.rst
+    generated_docs/default_after_logging_ah.rst
+    generated_docs/before_logging_ah.rst
+    generated_docs/logging_msg_builder_hh.rst
+    generated_docs/default_before_logging_ah.rst
+    generated_docs/after_logging_ah.rst

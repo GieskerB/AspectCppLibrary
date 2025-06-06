@@ -6,9 +6,21 @@
 #include "../util/logging_msg_builder.hh"
 
 namespace acp {
+    /**
+     * \attribute after_logging
+     * \brief Functions with this attribute will be logged after their execution.
+     */
     attribute after_logging();
 }
 
+/**
+ * \aspect AfterLogging
+ * \file src/functions/after_logging.ah
+ * \brief This aspect is used to log the execution of a function after it has completed.
+ *
+ * Similar to the `BeforeLogging` aspect, this aspect logs the function signature - but only - after the function has executed.
+ *
+ */
 aspect AfterLogging : public CoreAspect {
 
     acp::LoggingMsgBuilder* _msg_builder;
@@ -16,18 +28,30 @@ aspect AfterLogging : public CoreAspect {
 
 public:
 
+    /**
+	 * \pointcut ignore
+	 * \see :ref:`CoreAspect::ignore <core_aspect_ah_ignore>`
+	 */
     pointcut virtual ignore() = within("AfterLogging") || within ("acp");
 
+    /**
+	 * \pointcut default_where
+	 * \see :ref:`CoreAspect::default_where <core_aspect_ah_default_where>`
+	 */
     pointcut virtual default_where() = acp::after_logging();
 
     AfterLogging() : AfterLogging(nullptr, nullptr) {}
-    AfterLogging(acp::LoggingMsgBuilder* msg_builder, acp::Printer* printer)
-        : _msg_builder(msg_builder), _printer(printer) {}
+    AfterLogging(acp::LoggingMsgBuilder* msg_builder, acp::Printer* printer) : _msg_builder(msg_builder), _printer(printer) {}
+
     virtual ~AfterLogging() {
         delete _msg_builder;
         delete _printer;
     }
 
+    /**
+     * \advice logging-advice
+     * \brief This advice handles the logging behavior after the function execution.
+     */
     advice execution(where()) && !ignore() : after() {
         std::string msg;
         _msg_builder->build_after_msg(tjp->signature(), msg);
