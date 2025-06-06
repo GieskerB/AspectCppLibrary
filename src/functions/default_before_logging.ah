@@ -1,0 +1,15 @@
+#ifndef __ACP__DEFAULT_BEFORE_LOGGING_AH__
+#define __ACP__DEFAULT_BEFORE_LOGGING_AH__
+
+#include "before_logging.ah"
+#include "../util/default_logging_msg_builder.hh"
+#include "../util/cout_printer.hh"
+
+aspect DefaultBeforeLogging : public BeforeLogging {
+    public:
+        DefaultBeforeLogging() : BeforeLogging(new acp::DefaultLoggingMsgBuilder(), new acp::CoutPrinter()) {}
+
+        virtual ~DefaultBeforeLogging() = default;
+};
+
+#endif // __ACP__DEFAULT_BEFORE_LOGGING_AH__

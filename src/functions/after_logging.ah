@@ -1,0 +1,40 @@
+#ifndef __ACP__AFTER_LOGGING_AH__
+#define __ACP__AFTER_LOGGING_AH__
+
+#include "../core/core_aspect.ah"
+#include "../util/printer.hh"
+#include "../util/logging_msg_builder.hh"
+
+namespace acp {
+    attribute after_logging();
+}
+
+aspect AfterLogging : public CoreAspect {
+
+    acp::LoggingMsgBuilder* _msg_builder;
+    acp::Printer* _printer;
+
+public:
+
+    pointcut virtual ignore() = within("AfterLogging") || within ("acp");
+
+    pointcut virtual default_where() = acp::after_logging();
+
+    AfterLogging() : AfterLogging(nullptr, nullptr) {}
+    AfterLogging(acp::LoggingMsgBuilder* msg_builder, acp::Printer* printer)
+        : _msg_builder(msg_builder), _printer(printer) {}
+    virtual ~AfterLogging() {
+        delete _msg_builder;
+        delete _printer;
+    }
+
+    advice execution(where()) && !ignore() : after() {
+        std::string msg;
+        _msg_builder->build_after_msg(tjp->signature(), msg);
+        _printer->print(msg);
+        _printer->print('\n');
+    }
+
+};
+
+#endif // __ACP__AFTER_LOGGING_AH__

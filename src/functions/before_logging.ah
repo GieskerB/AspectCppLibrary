@@ -1,0 +1,40 @@
+#ifndef __ACP__BEFORE_LOGGING_AH__
+#define __ACP__BEFORE_LOGGING_AH__
+
+#include "../core/core_aspect.ah"
+#include "../util/printer.hh"
+#include "../util/logging_msg_builder.hh"
+
+namespace acp {
+    attribute before_logging();
+}
+
+aspect BeforeLogging : public CoreAspect {
+
+    acp::LoggingMsgBuilder* _msg_builder;
+    acp::Printer* _printer;
+
+public:
+
+    pointcut virtual ignore() = within("BeforeLogging") || within ("acp");
+
+    pointcut virtual default_where() = acp::before_logging();
+
+    BeforeLogging(): BeforeLogging(nullptr, nullptr) {}
+    BeforeLogging(acp::LoggingMsgBuilder* msg_builder, acp::Printer* printer)
+        : _msg_builder(msg_builder), _printer(printer) {}
+    virtual ~BeforeLogging() {
+        delete _msg_builder;
+        delete _printer;
+    }
+
+    advice execution(where()) && !ignore() : before() {
+        std::string msg;
+        _msg_builder->build_before_msg(tjp->signature(), msg);
+        _printer->print(msg);
+        _printer->print('\n');
+    }
+
+};
+
+#endif // __ACP__BEFORE_LOGGING_AH__

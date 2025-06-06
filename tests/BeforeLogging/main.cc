@@ -1,0 +1,38 @@
+#include "../prettier_tests.hh"
+
+[[acp::before_logging]] void foo() {
+	std::cout << "FOO\n";
+}
+
+void bar() {
+	std::cout << "BAR\n";
+}
+
+[[acp::before_logging]] void foobar() {
+	std::cout << "FOOBAR\n";
+}
+
+void baz() {
+	std::cout << "BAZ\n";
+}
+
+[[acp::before_logging]] void qux() {
+	std::cout << "QUX\n";
+}
+
+
+int main() {
+	acp::test::print_pretty_start("AfterLogging Test", "Testing the after_logging attribute");
+	acp::test::print_pretty_separator("Function foo");
+	foo();
+	acp::test::print_pretty_separator("Function bar");
+	bar();
+	acp::test::print_pretty_separator("Function foobar");
+	foobar();
+	acp::test::print_pretty_separator("Function baz");
+	baz();
+	acp::test::print_pretty_separator("Function qux");
+	qux();
+	acp::test::print_pretty_end();
+	return 0;
+}
