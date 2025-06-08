@@ -1,0 +1,76 @@
+#ifndef __ACP__SINGLETON_AH__
+#define __ACP__SINGLETON_AH__
+
+#include "../core/core_aspect.ah"
+
+namespace acp {
+    attribute singleton();
+}
+
+slice class Counter {
+public:
+    static unsigned int acp_singleton_instance_counter;
+    static void* acp_singleton_instance;
+
+    template<typename ACP_T>
+    static ACP_T* get_instance() {
+        return static_cast<ACP_T*>(acp_singleton_instance);
+    }
+
+    template<typename ACP_T>
+    static void set_instance(ACP_T* instance) {
+        acp_singleton_instance = static_cast<void*>(instance);
+    }
+
+};
+
+slice unsigned int Counter::acp_singleton_instance_counter = 0;
+slice void* Counter::acp_singleton_instance = nullptr;
+
+aspect Singleton {
+
+    public:
+
+     /**
+     * \pointcut default_where
+     * \see :ref:`CoreAspect::default_where <core_aspect_ah_default_where>`
+     */
+    pointcut virtual default_where() = acp::singleton();
+
+    /**
+     * \pointcut ignore
+     * \see :ref:`CoreAspect::ignore <core_aspect_ah_ignore>`
+     */
+    pointcut virtual ignore() = within("Singleton") || within("acp");
+
+    Singleton() {}
+    virtual ~Singleton() = default;
+
+    advice acp::singleton() : slice Counter;
+
+    advice construction(acp::singleton()) : around() {
+        JoinPoint::That* instance = JoinPoint::That::template get_instance<JoinPoint::That>();
+
+        if (!instance) {
+            tjp->proceed();
+            JoinPoint::That::template set_instance<JoinPoint::That>(tjp->that());
+        } else {
+            *tjp->that() = *instance;
+            std::cout << instance << " is a singleton, using existing instance." << " <<<->>> " << tjp->signature() << std::endl;
+        }
+        ++instance->acp_singleton_instance_counter;
+    }
+
+    advice destruction(acp::singleton()) : around() {
+        JoinPoint::That* instance = JoinPoint::That::template get_instance<JoinPoint::That>();
+
+        --instance->acp_singleton_instance_counter;
+
+        // if (instance->acp_singleton_instance_counter <= 0) {
+        //     tjp->proceed();
+        // }
+    }
+
+};
+
+#endif // __ACP__SINGLETON_AH__
