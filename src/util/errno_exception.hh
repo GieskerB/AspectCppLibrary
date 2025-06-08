@@ -4,6 +4,8 @@
 #include <cerrno>
 #include <cstring>
 
+#include "custom_to_string.hh"
+
 namespace acp {
 
     /**
@@ -18,11 +20,14 @@ namespace acp {
 		const unsigned int _errno;
 
 		void create_message() {
-			_msg = "A function call set errno to a non zero value:";
-			_msg += std::to_string(_errno);
-			_msg += " which means: <";
-			_msg += std::runtime_error::what();
-			_msg += ">";
+            char buffer[12];
+            acp::to_string(buffer, _errno, sizeof(buffer));
+            _msg.clear();
+			_msg.append("A function call set errno to a non zero value:");
+			_msg.append(buffer);
+			_msg.append(" which means: <");
+			_msg.append(std::runtime_error::what());
+			_msg.append(">");
 		}
 
 	public:

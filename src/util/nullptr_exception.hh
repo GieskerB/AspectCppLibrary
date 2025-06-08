@@ -2,6 +2,8 @@
 #define __ACP__INTERFACE_NULLPTR_EXCEPTION_HH__
 
 #include <stdexcept>
+
+#include "custom_to_string.hh"
 namespace acp {
     /**
      * \exception NullptrException
@@ -15,11 +17,14 @@ namespace acp {
         std::string _msg;
 
         void create_message(const char* sig, unsigned int line) {
-            _msg = "Null pointer dereference in function: ";
-            _msg += sig;
-            _msg += " at line: ";
-            _msg += std::to_string(line);
-            _msg += ".";
+            char buffer[12];
+            acp::to_string(buffer, line, sizeof(buffer));
+            _msg.clear();
+            _msg.append("Null pointer dereference in function: ");
+            _msg.append(sig);
+            _msg.append(" at line: ");
+            _msg.append(buffer);
+            _msg.append(".");
 		}
 
     public:

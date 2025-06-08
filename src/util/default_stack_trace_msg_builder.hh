@@ -7,6 +7,7 @@
 #include <cstdio>
 
 #include "stack_trace_msg_builder.hh"
+#include "custom_to_string.hh"
 
 namespace acp {
 
@@ -30,13 +31,15 @@ namespace acp {
          */
         virtual void build_msg(const char* signature, const char* file,
                                     int line, std::string& result) const override {
+            char buffer[12];
+            acp::to_string(buffer, line, sizeof(buffer));
             result.clear();
             result.append("at ");
             result.append(signature);
             result.append(" in (");
             result.append(file);
             result.append(":");
-            result.append(std::to_string(line));
+            result.append(buffer);
             result.append(")\n");
         }
 

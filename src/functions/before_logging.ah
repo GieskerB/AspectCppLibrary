@@ -21,7 +21,6 @@ namespace acp {
  * Similar to the `AfterLogging` aspect, this aspect logs the function signature - but only - before the function will execute.
  *
  */
-aspe
 aspect BeforeLogging : public CoreAspect {
 
     acp::LoggingMsgBuilder* _msg_builder;
