@@ -2,32 +2,33 @@
 #define __ACP__SINGLETON_AH__
 
 #include "../core/core_aspect.ah"
+#include "../util/thread_controller.hh"
 
 namespace acp {
     attribute singleton();
+
+    slice class ACP_Singleton_Slice {
+
+        static bool acp_singleton_allow_construction;
+
+    public:
+        static JoinPoint::That* get_instance() {
+            static JoinPoint::That* instance = nullptr;
+            if (instance == nullptr) {
+                acp_singleton_allow_construction = true;
+                instance = new JoinPoint::That();
+                acp_singleton_allow_construction = false;
+            }
+            return instance;
+        }
+    };
+
+    slice bool ACP_Singleton_Slice::acp_singleton_allow_construction = false;
 }
 
-slice class Counter {
-public:
-    static unsigned int acp_singleton_instance_counter;
-    static void* acp_singleton_instance;
-
-    template<typename ACP_T>
-    static ACP_T* get_instance() {
-        return static_cast<ACP_T*>(acp_singleton_instance);
-    }
-
-    template<typename ACP_T>
-    static void set_instance(ACP_T* instance) {
-        acp_singleton_instance = static_cast<void*>(instance);
-    }
-
-};
-
-slice unsigned int Counter::acp_singleton_instance_counter = 0;
-slice void* Counter::acp_singleton_instance = nullptr;
-
 aspect Singleton {
+
+    acp::ThreadController* _thread;
 
     public:
 
@@ -43,34 +44,22 @@ aspect Singleton {
      */
     pointcut virtual ignore() = within("Singleton") || within("acp");
 
-    Singleton() {}
+    Singleton(): Singleton(nullptr) {}
+    Singleton(acp::ThreadController* thread): _thread(thread) {}
     virtual ~Singleton() = default;
 
-    advice acp::singleton() : slice Counter;
+    advice acp::singleton() : slice acp::ACP_Singleton_Slice;
 
     advice construction(acp::singleton()) : around() {
-        JoinPoint::That* instance = JoinPoint::That::template get_instance<JoinPoint::That>();
-
-        if (!instance) {
+        _thread->acquire_lock();
+        if(JoinPoint::That::acp_singleton_allow_construction) {
             tjp->proceed();
-            JoinPoint::That::template set_instance<JoinPoint::That>(tjp->that());
+            _thread->release_lock();
         } else {
-            *tjp->that() = *instance;
-            std::cout << instance << " is a singleton, using existing instance." << " <<<->>> " << tjp->signature() << std::endl;
+            _thread->release_lock();
+            throw std::runtime_error("Singleton construction is not allowed. Use get_instance() instead.");
         }
-        ++instance->acp_singleton_instance_counter;
     }
-
-    advice destruction(acp::singleton()) : around() {
-        JoinPoint::That* instance = JoinPoint::That::template get_instance<JoinPoint::That>();
-
-        --instance->acp_singleton_instance_counter;
-
-        // if (instance->acp_singleton_instance_counter <= 0) {
-        //     tjp->proceed();
-        // }
-    }
-
 };
 
 #endif // __ACP__SINGLETON_AH__

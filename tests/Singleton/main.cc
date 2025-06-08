@@ -50,44 +50,13 @@ public:
 	}
 };
 
-
-void AAA() {
-	A a1{};
-	A a2{};
-	B b1{'c', 3.14};
-	B b2{};
-	// C c1{};
-	// C c2{};
-
-	B b3 = b1;
-
-	A *a3 = new A();
-
-	std::cout << "a1.a: " << a1.a << std::endl;
-	std::cout << "a2.a: " << a2.a << std::endl;
-
-	std::cout << "b1.b: " << b1.b << std::endl;
-	std::cout << "b2.b: " << b2.b << std::endl;
-
-	delete a3;
-}
-
 int main() {
 
-	AAA();
+	A* a1 = A::get_instance();
+	A* a2 = A::get_instance();
 
-	std::cout << "Global variable: " << global_var << std::endl;
-
-	// A a1{};
-	// A a2{};
-
-	// std::cout << "a1.a: " << a1.a << std::endl;
-	// std::cout << "a2.a: " << a2.a << std::endl;
-	B b1{};
-	B b2{};
-
-	std::cout << "b1.b: " << b1.b << std::endl;
-	std::cout << "b2.b: " << b2.b << std::endl;
+	std::cout << "a1->a: " << a1->a << std::endl;
+	std::cout << "a2->a: " << a2->a << std::endl;
 
 	return 0;
 }
