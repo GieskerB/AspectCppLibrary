@@ -3,7 +3,7 @@ import re
 
 # Define folder paths
 GENERATED_DOCS_PATH = 'generated_docs/'
-SPHINX_SOURCE_PATH = '.' # Assuming this script runs in the same directory as content.rst
+SPHINX_SOURCE_PATH = '.' # Assuming this script runs in the same directory as index
 
 # Define category files and their headings
 CATEGORY_FILES = {
@@ -86,7 +86,7 @@ def update_category_rst_files():
                 f.write('   *No entries found for this category.*\n')
                 print(f"  - No entries for {category_name}, {output_filename} created empty.")
 
-    print("\nCategory RST files updated. Remember to include them in your content.rst toctree.")
+    print("\nCategory RST files updated. Remember to include them in your index toctree.")
 
 # --- Main execution ---
 if __name__ == '__main__':
@@ -96,14 +96,14 @@ if __name__ == '__main__':
     else:
         update_category_rst_files()
 
-    # # --- Instructions for content.rst ---
+    # # --- Instructions for index ---
     # print("\n--- Next Steps ---")
-    # print(f"1. Open '{os.path.join(SPHINX_SOURCE_PATH, 'content.rst')}'")
+    # print(f"1. Open '{os.path.join(SPHINX_SOURCE_PATH, 'index')}'")
     # print("2. Remove all direct inclusions of files from 'generated_docs/'.")
-    # print("3. Add the following lines to your main 'toctree' in content.rst:")
+    # print("3. Add the following lines to your main 'toctree' in index:")
     # for category_info in CATEGORY_FILES.values():
     #     print(f"   {category_info['filename']}")
-    # print("\nExample content.rst structure:")
+    # print("\nExample index structure:")
     # print("```rst")
     # print("Welcome to My Docs!")
     # print("===================\n")
