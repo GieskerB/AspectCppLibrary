@@ -20,7 +20,7 @@ I'll keep a list of all my implemented aspects per category.
 
 ## Functions
 
-- **(Logging)**
+- **Logging**
 
 ## Design Patterns
 
