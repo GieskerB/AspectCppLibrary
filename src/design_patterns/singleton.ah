@@ -5,6 +5,10 @@
 #include "../util/thread_controller.hh"
 
 namespace acp {
+    /**
+     * \attribute singleton
+     * \brief This attribute is used to mark classes as singletons.
+     */
     attribute singleton();
 
     slice class ACP_Singleton_Slice {
@@ -26,6 +30,19 @@ namespace acp {
     slice bool ACP_Singleton_Slice::acp_singleton_allow_construction = false;
 }
 
+/**
+ * \aspect Singleton
+ * \file src/design_patterns/singleton.ah
+ * \brief This aspect implements the Singleton design pattern.
+ *
+ * This aspect ensures that any class annotated with this specific attribute can have only
+ * one instance and provides a global access point to that instance. A static get_instance()
+ * method is provided to retrieve the instance, and construction of the singleton instance.
+ *
+ * When calling any constructor of a class annotated with this aspect, a runtime error will
+ * be thrown.
+ *
+ */
 aspect Singleton {
 
     acp::ThreadController* _thread;
@@ -48,8 +65,17 @@ aspect Singleton {
     Singleton(acp::ThreadController* thread): _thread(thread) {}
     virtual ~Singleton() = default;
 
+    /**
+     * \advice singleton-slice
+     * \brief This advice provides a class with all necessary methods and members
+     * to implement the Singleton design pattern.
+     */
     advice acp::singleton() : slice acp::ACP_Singleton_Slice;
 
+    /**
+     * \advice construction-prevention
+     * \brief This advice prevents the construction of a singleton class directly.
+     */
     advice construction(acp::singleton()) : around() {
         _thread->acquire_lock();
         if(JoinPoint::That::acp_singleton_allow_construction) {

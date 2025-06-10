@@ -4,6 +4,15 @@
 #include "singleton.ah"
 #include "../util/std_thread_controller.hh"
 
+/**
+ * \aspect DefaultSingleton
+ * \file src/design_patterns/default_singleton.ah
+ * \brief This aspect implements a default singleton using the standard thread controller.
+ *
+ * This aspect extends the Singleton aspect to provide a default implementation using the
+ * acp::StdThreadController.
+ *
+ */
 aspect DefaultSingleton : public Singleton {
 
 public:
