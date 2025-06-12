@@ -16,13 +16,11 @@ namespace acp {
         static bool acp_singleton_allow_construction;
 
     public:
-        static JoinPoint::That* get_instance() {
-            static JoinPoint::That* instance = nullptr;
-            if (instance == nullptr) {
-                acp_singleton_allow_construction = true;
-                instance = new JoinPoint::That();
-                acp_singleton_allow_construction = false;
-            }
+        static JoinPoint::That& get_instance() {
+            // This part can not be done 100% thread-safe, but it is sufficient for most use cases.
+            acp_singleton_allow_construction = true;
+            static JoinPoint::That instance{};
+            acp_singleton_allow_construction = false;
             return instance;
         }
     };
@@ -63,7 +61,9 @@ aspect Singleton {
 
     Singleton(): Singleton(nullptr) {}
     Singleton(acp::ThreadController* thread): _thread(thread) {}
-    virtual ~Singleton() = default;
+    virtual ~Singleton() {
+        delete _thread;
+    };
 
     /**
      * \advice singleton-slice
