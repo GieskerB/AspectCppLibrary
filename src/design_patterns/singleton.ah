@@ -4,8 +4,6 @@
 #include "../core/core_aspect.ah"
 #include "../util/thread_controller.hh"
 
-#include <vector>
-
 namespace acp {
     /**
      * \attribute singleton
@@ -16,29 +14,18 @@ namespace acp {
     slice class ACP_Singleton_Slice {
 
         static bool acp_singleton_allow_construction;
-        static void* acp_singleton_instance;
-
-        static void acp_singleton_destroy_instance() {
-            if (acp_singleton_instance != nullptr) {
-                delete static_cast<JoinPoint::That*>(acp_singleton_instance);
-                acp_singleton_instance = nullptr;
-            }
-        }
 
     public:
         static JoinPoint::That& get_instance() {
-            if (acp_singleton_instance == nullptr) {
-                acp_singleton_allow_construction = true;
-                acp_singleton_instance = new JoinPoint::That();
-                std::atexit(&acp_singleton_destroy_instance);
-                acp_singleton_allow_construction = false;
-            }
-            return *static_cast<JoinPoint::That*>(acp_singleton_instance);
+            // This part can not be done 100% thread-safe, but it is sufficient for most use cases.
+            acp_singleton_allow_construction = true;
+            static JoinPoint::That instance{};
+            acp_singleton_allow_construction = false;
+            return instance;
         }
     };
 
     slice bool ACP_Singleton_Slice::acp_singleton_allow_construction = false;
-    slice void* ACP_Singleton_Slice::acp_singleton_instance = nullptr;
 }
 
 /**
@@ -57,7 +44,6 @@ namespace acp {
 aspect Singleton {
 
     acp::ThreadController* _thread;
-    std::vector<void**> _singleton_instances;
 
     public:
 
@@ -76,17 +62,8 @@ aspect Singleton {
     Singleton(): Singleton(nullptr) {}
     Singleton(acp::ThreadController* thread): _thread(thread) {}
     virtual ~Singleton() {
-        // if (_thread) {
-        //     _thread->acquire_lock();
-        //     for (auto& instance : _singleton_instances) {
-        //         if (*instance != nullptr) {
-        //             (*instance)->acp_singleton_destroy_instance();
-        //         }
-        //     }
-        //     _singleton_instances.clear();
-        //     _thread->release_lock();
-        // }
-    }
+        delete _thread;
+    };
 
     /**
      * \advice singleton-slice
@@ -103,22 +80,11 @@ aspect Singleton {
         _thread->acquire_lock();
         if(JoinPoint::That::acp_singleton_allow_construction) {
             tjp->proceed();
-            _singleton_instances.push_back(&JoinPoint::That::acp_singleton_instance);
             _thread->release_lock();
         } else {
             _thread->release_lock();
             throw std::runtime_error("Singleton construction is not allowed. Use get_instance() instead.");
         }
-    }
-
-    advice destruction(acp::singleton()) : after() {
-        _thread->acquire_lock();
-        if(JoinPoint::That::acp_singleton_instance != nullptr) {
-            delete static_cast<JoinPoint::That*>(JoinPoint::That::acp_singleton_instance);
-            JoinPoint::That::acp_singleton_instance = nullptr;
-        }
-        _thread->release_lock();
-        std::cout << "Singleton instance destroyed." << std::endl;
     }
 };
 
