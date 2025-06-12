@@ -30,6 +30,7 @@ namespace acp {
             if (acp_singleton_instance == nullptr) {
                 acp_singleton_allow_construction = true;
                 acp_singleton_instance = new JoinPoint::That();
+                std::atexit(&acp_singleton_destroy_instance);
                 acp_singleton_allow_construction = false;
             }
             return *static_cast<JoinPoint::That*>(acp_singleton_instance);
@@ -75,16 +76,16 @@ aspect Singleton {
     Singleton(): Singleton(nullptr) {}
     Singleton(acp::ThreadController* thread): _thread(thread) {}
     virtual ~Singleton() {
-        if (_thread) {
-            _thread->acquire_lock();
-            for (auto& instance : _singleton_instances) {
-                if (*instance != nullptr) {
-                    (*instance)->acp_singleton_destroy_instance();
-                }
-            }
-            _singleton_instances.clear();
-            _thread->release_lock();
-        }
+        // if (_thread) {
+        //     _thread->acquire_lock();
+        //     for (auto& instance : _singleton_instances) {
+        //         if (*instance != nullptr) {
+        //             (*instance)->acp_singleton_destroy_instance();
+        //         }
+        //     }
+        //     _singleton_instances.clear();
+        //     _thread->release_lock();
+        // }
     }
 
     /**
