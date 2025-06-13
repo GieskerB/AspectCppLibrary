@@ -2,7 +2,6 @@
 #define __ACP__INTERFACE__DEFAULT_LOGGING_MSG_BUILDER_HH__
 
 #include "logging_msg_builder.hh"
-#include "../core/core_aspect.ah"
 
 /**
  * \aspect DefaultLoggingMsgBuilder
@@ -12,7 +11,7 @@
  * It provides a simple way to build log messages with a specific format.
  *
  */
-aspect DefaultLoggingMsgBuilder : public CoreAspect {
+aspect DefaultLoggingMsgBuilder {
 public:
     DefaultLoggingMsgBuilder() {};
     virtual ~DefaultLoggingMsgBuilder() = default;

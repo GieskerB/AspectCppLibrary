@@ -8,7 +8,6 @@
 
 #include "stack_trace_msg_builder.hh"
 #include "custom_to_string.hh"
-#include "../core/core_aspect.ah"
 
 /**
  * \aspect DefaultStackTraceMsgBuilder
@@ -18,7 +17,7 @@
  * This class provides a method to build a formatted message for the stack trace.
  *
  */
-aspect DefaultStackTraceMsgBuilder : public CoreAspect {
+aspect DefaultStackTraceMsgBuilder{
 public:
 
     DefaultStackTraceMsgBuilder() = default;
@@ -28,7 +27,7 @@ public:
      * \advice build_msg
      * \see :ref:`acp::stack_trace_msg_builder::build_msg <stack_trace_msg_builder_hh_build_msg>`
      */
-    advice execution("void acp::stack_trace_msg_builder::build_msg(const char*, const char*, int, std::string&)")  : around(){
+    advice execution("void acp::stack_trace_msg_builder::build_msg(...)")  : around(){
 
         const char* signature = *static_cast<char**>(tjp->arg(0));
         const char* file = *static_cast<char**>(tjp->arg(1));

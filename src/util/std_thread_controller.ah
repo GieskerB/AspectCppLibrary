@@ -4,7 +4,6 @@
 #include <mutex>
 #include <thread>
 #include "thread_controller.hh"
-#include "../core/core_aspect.ah"
 
 /**
  * \aspect StdThreadController
@@ -14,7 +13,7 @@
  * This class implements the ThreadController interface using std::mutex for thread safety.
  * It provides methods to acquire and release locks, and to get the unique identifier of the current thread.
  */
-aspect StdThreadController: public CoreAspect {
+aspect StdThreadController{
 
     mutable std::mutex _mutex;
 
@@ -45,7 +44,7 @@ public:
     */
     advice execution("int acp::thread_controller::get_id()"): around() {
         std::hash<std::thread::id> hasher;
-        tjp->result() = static_cast<int>(hasher(std::this_thread::get_id()));
+        *tjp->result() = static_cast<int>(hasher(std::this_thread::get_id()));
     }
 };
 

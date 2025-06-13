@@ -3,7 +3,6 @@
 
 #include "profiler_msg_builder.hh"
 #include "custom_to_string.hh"
-#include "../core/core_aspect.ah"
 
 /**
  * \aspect DefaultProfilerMsgBuilder
@@ -13,7 +12,7 @@
  * This class implements the ProfilerMsgBuilder interface to provide
  * a default way of building profiling messages.
  */
-aspect DefaultProfilerMsgBuilder : public CoreAspect {
+aspect DefaultProfilerMsgBuilder {
 public:
 
     DefaultProfilerMsgBuilder(){};

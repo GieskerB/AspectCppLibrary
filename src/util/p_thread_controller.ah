@@ -4,7 +4,6 @@
 #include <pthread.h>
 #include <stdexcept>
 #include "thread_controller.hh"
-#include "../core/core_aspect.ah"
 
 /**
  * \aspect PThreadController
@@ -14,7 +13,7 @@
  * This class implements the ThreadController interface using pthread mutexes for thread safety.
  * It provides methods to acquire and release locks, and to get the unique identifier of the current thread.
  */
-aspect PThreadController: public CoreAspect {
+aspect PThreadController {
 
     mutable pthread_mutex_t _mutex;
 
@@ -33,7 +32,7 @@ public:
     * \advice acquire_lock
     * \see :ref:`acp::thread_controller::acquire_lock <thread_controller_hh_acquire_lock>`
     */
-    advice execution("void acp::thread_controller::acquire_lock"): around() {
+    advice execution("void acp::thread_controller::acquire_lock()"): around() {
         pthread_mutex_lock(&_mutex);
     }
 
@@ -41,7 +40,7 @@ public:
     * \advice release_lock
     * \see :ref:`acp::thread_controller::release_lock <thread_controller_hh_release_lock>`
     */
-    advice execution("void acp::thread_controller::release_lock"): around() {
+    advice execution("void acp::thread_controller::release_lock()"): around() {
         pthread_mutex_unlock(&_mutex);
     }
 
@@ -49,7 +48,7 @@ public:
     * \advice get_id
     * \see :ref:`acp::thread_controller::get_id <thread_controller_hh_get_id>`
     */
-    advice execution("int acp::thread_controller::get_id"): around() {
+    advice execution("int acp::thread_controller::get_id()"): around() {
         // Convert pthread_t to int safely (platform-specific)
         auto id = pthread_self();
         return static_cast<int>(reinterpret_cast<uintptr_t>(id));
