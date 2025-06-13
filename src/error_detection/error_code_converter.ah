@@ -34,10 +34,10 @@ public:
 	~ErrorCodeConverter() = default;
 
 	/**
-	 * \pointcut default_where
-	 * \see :ref:`CoreAspect::default_where <core_aspect_ah_default_where>`
+	 * \pointcut where
+	 * \see :ref:`CoreAspect::where <core_aspect_ah_where>`
 	 */
-	pointcut virtual default_where() = everywhere();
+	pointcut virtual where() = within(acp::err_code());
 
 	/**
 	 * \pointcut ignore
@@ -53,7 +53,7 @@ public:
 	 * It is recommended to use this advice in conjunction with the StackTrace aspect to get a full stack trace.
 	 *
 	 */
-	advice call(where())  && !ignore(): after() {
+	advice where() && !ignore(): after() {
 		// Errno is thread-local, so it can be safely accessed here
 		if (errno != 0) {
 			acp::ErrnoException exception(errno);

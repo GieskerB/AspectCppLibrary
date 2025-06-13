@@ -2,9 +2,7 @@
 #define __ACP__DEFAULT_PROFILER_AH__
 
 #include "profiler.ah"
-#include "../util/default_profiler_msg_builder.hh"
 #include "../util/cout_printer.hh"
-#include "../util/std_thread_controller.hh"
 
 /**
  * \aspect DefaultProfiler
@@ -20,7 +18,7 @@ aspect DefaultProfiler : public Profiler {
 
 public:
 
-	DefaultProfiler() : Profiler(new acp::DefaultProfilerMsgBuilder(), new acp::CoutPrinter(), new acp::StdThreadController()) {}
+	DefaultProfiler() : Profiler(new acp::CoutPrinter()) {}
 
 	virtual ~DefaultProfiler() {}
 

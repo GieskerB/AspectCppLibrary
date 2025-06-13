@@ -8,15 +8,14 @@ namespace acp {
      * \file src/util/thread_controller.hh
      * \brief Interface for thread control mechanisms.
      *
-     * This interface defines the basic operations for thread control. Aspects can
-     * use this interface to manage ensure thread safety and synchronization.
+     * This interface provides methods for thread safety, including acquiring and releasing locks,
+     * and getting the unique identifier for the current thread.
+     *
+     * To statically configure the thread controller at runtime, use an aspect that implements this interface.
+     * Example being the `acp::std_thread_controller`.
      *
      */
-    class ThreadController {
-    public:
-        ThreadController() {};
-        virtual ~ThreadController() = default;
-
+    namespace thread_controller {
         /**
          * \function acquire_lock
          * \brief Acquire a lock for thread safety.
@@ -24,7 +23,7 @@ namespace acp {
          * This method should be called before accessing shared resources to ensure
          * that no other thread can modify them concurrently.
          */
-        virtual inline void acquire_lock() = 0;
+        inline void acquire_lock() {}
 
         /**
          * \function release_lock
@@ -33,7 +32,7 @@ namespace acp {
          * This method should be called after finishing access to shared resources
          * to allow other threads to acquire the lock.
          */
-        virtual inline void release_lock() = 0;
+        inline void release_lock(){}
 
         /**
          * \function get_id
@@ -44,7 +43,7 @@ namespace acp {
          *
          * \return An integer representing the thread ID.
          */
-        virtual int get_id() const = 0;
+        inline int get_id(){return 0;}
 
     };
 }

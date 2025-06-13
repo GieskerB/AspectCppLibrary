@@ -24,13 +24,6 @@
     @param thread is a pointer to an acp::ThreadController instance used to manage thread locks.
 
 
-.. _profiler_ah_default_where:
-
-``default_where`` (Pointcut)
-----------------------------
-
-*See:* :ref:`CoreAspect::default_where <core_aspect_ah_default_where>`
-
 .. _profiler_ah_ignore:
 
 ``ignore`` (Pointcut)
@@ -95,4 +88,11 @@
     This function is virtual and can therefore be overridden by derived classes.
     It is used to provide the register-advice with a function pointer to be called at exit.
 
+
+.. _profiler_ah_where:
+
+``where`` (Pointcut)
+--------------------
+
+*See:* :ref:`CoreAspect::where <core_aspect_ah_where>`
 

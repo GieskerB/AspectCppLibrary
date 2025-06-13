@@ -17,13 +17,6 @@
 **Brief Description:** Functions with this attribute will be logged after their execution.
 
 
-.. _after_logging_ah_default_where:
-
-``default_where`` (Pointcut)
-----------------------------
-
-*See:* :ref:`CoreAspect::default_where <core_aspect_ah_default_where>`
-
 .. _after_logging_ah_ignore:
 
 ``ignore`` (Pointcut)
@@ -38,4 +31,11 @@
 
 **Brief Description:** This advice handles the logging behavior after the function execution.
 
+
+.. _after_logging_ah_where:
+
+``where`` (Pointcut)
+--------------------
+
+*See:* :ref:`CoreAspect::where <core_aspect_ah_where>`
 

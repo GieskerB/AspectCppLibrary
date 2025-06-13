@@ -13,12 +13,7 @@ namespace acp {
  * This interface defines the method for creating a messages for the StackTrace-Aspect.
  *
  */
-class StackTraceMsgBuilder {
-
-public:
-
-	StackTraceMsgBuilder() = default;
-	virtual ~StackTraceMsgBuilder() {}
+namespace stack_trace_msg_builder {
 
 	/**
 	 * \function build_msg
@@ -29,7 +24,9 @@ public:
 	 * \param line is the line number where the function was called.
 	 * \param result is a reference to a string where the formatted message will be stored.
 	 */
-	virtual void build_msg(const char* sign, const char* file, int line, std::string& result) const = 0;
+	inline void build_msg(const char* sign, const char* file, int line, std::string& result) {
+		// #warning "build_msg is not implemented in StackTraceMsgBuilder interface. Please implement with the use of an aspect"
+	}
 
 };
 

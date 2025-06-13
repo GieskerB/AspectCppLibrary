@@ -11,13 +11,6 @@
 
 *In file* ``/src/bug_detection/nullptr_check.ah``
 
-.. _nullptr_check_ah_default_where:
-
-``default_where`` (Pointcut)
-----------------------------
-
-*See:* :ref:`CoreAspect::default_where <core_aspect_ah_default_where>`
-
 .. _nullptr_check_ah_ignore:
 
 ``ignore`` (Pointcut)
@@ -37,4 +30,11 @@
     If the pointer is null, it throws a `acp::NullptrException` with a message indicating that
     a null pointer was dereferenced.
 
+
+.. _nullptr_check_ah_where:
+
+``where`` (Pointcut)
+--------------------
+
+*See:* :ref:`CoreAspect::where <core_aspect_ah_where>`
 

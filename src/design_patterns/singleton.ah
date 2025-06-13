@@ -43,15 +43,13 @@ namespace acp {
  */
 aspect Singleton {
 
-    acp::ThreadController* _thread;
-
     public:
 
      /**
-     * \pointcut default_where
-     * \see :ref:`CoreAspect::default_where <core_aspect_ah_default_where>`
+     * \pointcut where
+     * \see :ref:`CoreAspect::where <core_aspect_ah_where>`
      */
-    pointcut virtual default_where() = acp::singleton();
+    pointcut virtual where() = acp::singleton();
 
     /**
      * \pointcut ignore
@@ -59,30 +57,27 @@ aspect Singleton {
      */
     pointcut virtual ignore() = within("Singleton") || within("acp");
 
-    Singleton(): Singleton(nullptr) {}
-    Singleton(acp::ThreadController* thread): _thread(thread) {}
-    virtual ~Singleton() {
-        delete _thread;
-    };
+    Singleton() {}
+    virtual ~Singleton() = default;
 
     /**
      * \advice singleton-slice
      * \brief This advice provides a class with all necessary methods and members
      * to implement the Singleton design pattern.
      */
-    advice acp::singleton() : slice acp::ACP_Singleton_Slice;
+    advice where() : slice acp::ACP_Singleton_Slice;
 
     /**
      * \advice construction-prevention
      * \brief This advice prevents the construction of a singleton class directly.
      */
-    advice construction(acp::singleton()) : around() {
-        _thread->acquire_lock();
+    advice construction(where()) : around() {
+        acp::thread_controller::acquire_lock();
         if(JoinPoint::That::acp_singleton_allow_construction) {
             tjp->proceed();
-            _thread->release_lock();
+            acp::thread_controller::release_lock();
         } else {
-            _thread->release_lock();
+            acp::thread_controller::release_lock();
             throw std::runtime_error("Singleton construction is not allowed. Use get_instance() instead.");
         }
     }

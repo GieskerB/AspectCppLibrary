@@ -10,12 +10,7 @@ namespace acp {
      * \file src/util/profiler_msg_builder.hh
      * \brief Interface for building profiling messages.
      */
-    class ProfilerMsgBuilder {
-    public:
-
-        ProfilerMsgBuilder(){};
-        virtual ~ProfilerMsgBuilder() = default;
-
+    namespace profiler_msg_builder {
         /**
          * \function build_msg
          * \brief Builds a profiling message.
@@ -23,7 +18,9 @@ namespace acp {
          * \param data the profiling data to be used for building the message.
          * \param output reference to a string which will contain the output in the end.
          */
-        virtual void build_msg(const acp::ProfilerData& data, std::string& output) const = 0;
+        inline void build_msg(const acp::ProfilerData& data, std::string& output){
+            // #warning "build_msg is not implemented in ProfilerMsgBuilder interface. Please implement with the use of an aspect"
+        }
     };
 
 }

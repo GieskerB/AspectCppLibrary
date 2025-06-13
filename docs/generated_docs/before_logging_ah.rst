@@ -17,13 +17,6 @@
 **Brief Description:** Functions with this attribute will be logged before their execution.
 
 
-.. _before_logging_ah_default_where:
-
-``default_where`` (Pointcut)
-----------------------------
-
-*See:* :ref:`CoreAspect::default_where <core_aspect_ah_default_where>`
-
 .. _before_logging_ah_ignore:
 
 ``ignore`` (Pointcut)
@@ -38,4 +31,11 @@
 
 **Brief Description:** This advice handles the logging behavior before the function executes.
 
+
+.. _before_logging_ah_where:
+
+``where`` (Pointcut)
+--------------------
+
+*See:* :ref:`CoreAspect::where <core_aspect_ah_where>`
 

@@ -26,10 +26,10 @@ public:
     virtual ~NullptrCheck() = default;
 
     /**
-     * \pointcut default_where
-     * \see :ref:`CoreAspect::default_where <core_aspect_ah_default_where>`
+     * \pointcut where
+     * \see :ref:`CoreAspect::where <core_aspect_ah_where>`
      */
-    pointcut virtual default_where() = acp::null_check();
+    pointcut virtual where() = acp::null_check();
 
     /**
      * \pointcut ignore

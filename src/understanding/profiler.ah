@@ -25,11 +25,8 @@ namespace acp {
  */
 aspect Profiler : public CoreAspect {
 
-	static acp::ProfilerMsgBuilder* _builder_static;
 	static acp::Printer* _printer_static;
-	acp::ProfilerMsgBuilder* _builder;
 	acp::Printer* _printer;
-	acp::ThreadController* _thread;
 
 public:
 /**
@@ -39,31 +36,24 @@ public:
     pointcut virtual ignore() = within("Profiler") || within("acp");
 
 	/**
-	 * \pointcut default_where
-	 * \see :ref:`CoreAspect::default_where <core_aspect_ah_default_where>`
+	 * \pointcut where
+	 * \see :ref:`CoreAspect::where <core_aspect_ah_where>`
 	 */
-    pointcut virtual default_where() = acp::profile();
+    pointcut virtual where() = acp::profile();
 
 
-    Profiler(): Profiler(nullptr,nullptr,nullptr) {}
+    Profiler(): Profiler(nullptr) {}
 
 	/**
 	 * \constructor Constructor
 	 * \brief This constructor initializes the profiler with a builder, printer and thread controller.
-	 *
-	 * @param builder is a pointer to an acp::ProfilerMsgBuilder instance used to build profiling messages.
-	 * @param printer is a pointer to an acp::Printer instance used to print profiling messages.
-	 * @param thread is a pointer to an acp::ThreadController instance used to manage thread locks.
 	 */
-    Profiler(acp::ProfilerMsgBuilder* builder , acp::Printer* printer, acp::ThreadController* thread): _builder(builder), _printer(printer), _thread(thread) {
-		_builder_static = _builder;
+    Profiler(acp::Printer* printer): _printer(printer) {
 		_printer_static = _printer;
 	}
 
 	virtual ~Profiler() {
-		delete _builder;
 		delete _printer;
-		delete _thread;
 	}
 
 	/**
@@ -75,16 +65,16 @@ public:
 	 * The profiling data is updated in a thread-safe manner using the ThreadController.
 	 */
     advice execution(where()) && !ignore(): around() {
-		_thread->acquire_lock();
+		acp::thread_controller::acquire_lock();
     	static acp::ProfilerData data (JoinPoint::signature());
-		_thread->release_lock();
+		acp::thread_controller::release_lock();
 		const auto start = std::chrono::high_resolution_clock::now();
 		tjp->proceed();
 		const auto end = std::chrono::high_resolution_clock::now();
-		_thread->acquire_lock();
+		acp::thread_controller::acquire_lock();
 		data.m_calls++;
 		data.m_exec_time += end - start;
-		_thread->release_lock();
+		acp::thread_controller::release_lock();
     }
 
 	/**
@@ -94,7 +84,7 @@ public:
     static void simple_stat () {
 		for (acp::ProfilerData *curr = acp::ProfilerData::first (); curr; curr = curr->p_next) {
 			std::string output;
-			_builder_static->build_msg(*curr, output);
+			acp::profiler_msg_builder::build_msg(*curr, output);
 			_printer_static->print(output);
 		}
       }
@@ -120,13 +110,12 @@ public:
 	 * a function that returns void and takes no arguments and is not class bound. Using the atexit()
 	 * function, the most amount of information can be gathered about the program before it exits.
 	 */
-    advice execution (main_func()) : after () {
+    advice execution (acp::main_func()) : after () {
         atexit (summary());
     }
 
 };
 
-acp::ProfilerMsgBuilder* Profiler::_builder_static = nullptr;
 acp::Printer* Profiler::_printer_static = nullptr;
 
 

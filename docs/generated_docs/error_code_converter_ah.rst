@@ -22,13 +22,6 @@
     Due to some implementations restrictions with the AspectC++ compiler, this attribute is not used.
 
 
-.. _error_code_converter_ah_default_where:
-
-``default_where`` (Pointcut)
-----------------------------
-
-*See:* :ref:`CoreAspect::default_where <core_aspect_ah_default_where>`
-
 .. _error_code_converter_ah_errno_check:
 
 ``errno_check`` (Advice)
@@ -48,4 +41,11 @@
 ---------------------
 
 *See:* :ref:`CoreAspect::ignore <core_aspect_ah_ignore>`
+
+.. _error_code_converter_ah_where:
+
+``where`` (Pointcut)
+--------------------
+
+*See:* :ref:`CoreAspect::where <core_aspect_ah_where>`
 

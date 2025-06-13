@@ -1,0 +1,77 @@
+#ifndef __ACP__PREDEFINED_POINTCUTS_AH__
+#define __ACP__PREDEFINED_POINTCUTS_AH__
+
+namespace acp {
+	/**
+	 * \pointcut all_func
+	 * \brief Matches all functions in the whole project.
+	 */
+	pointcut all_func() = "% ...::%(...)";
+
+	/**
+	 * \pointcut free_func
+	 * \brief Matches all free functions in the whole project.
+	 *
+	 * Free functions are functions that are not part of a class or namespace.
+	 *
+	 */
+    pointcut free_func() = "% %(...)";
+
+	/**
+	 * \pointcut static_func
+	 * \brief Matches all static functions in the whole project.
+	 */
+    pointcut static_func() = "static % ...::%(...)";
+
+	/**
+	 * \pointcut returns_primitive
+	 * \brief Matches all functions that return a primitive data type.
+	 */
+    pointcut returns_primitive() = "int ...::%(...)" || "long ...::%(...)" || "short ...::%(...)" || "char ...::%(...)" || "float ...::%(...)" || "double ...::%(...)" || "bool ...::%(...)";
+
+	/**
+	 * \pointcut returns_void
+	 * \brief Matches all functions that return void.
+	 */
+    pointcut returns_void() = "void ...::%(...)";
+
+	/**
+	 * \pointcut returns_pointer
+	 * \brief Matches all functions that return a pointer.
+	 */
+    pointcut returns_pointer() = "%* ...::%(...)";
+
+	/**
+	 * \pointcut returns_reference
+	 * \brief Matches all functions that return a reference.
+	 */
+    pointcut returns_reference() = "%& ...::%(...)";
+
+	/**
+	 * \pointcut returns_const
+	 * \brief Matches all functions that return a const value.
+	 */
+    pointcut returns_const() = "const % ...::%(...)";
+
+    /**
+	 * \pointcut main_func
+	 * \brief Matches every possible argument variant of the c++ main function.
+	 */
+	pointcut main_function() = "int main(...)";
+
+	/**
+	 * \pointcut setters
+	 * \brief Matches all setter functions in the whole project.
+	 */
+    pointcut setters() = "void set%(...)";
+
+    /**
+	 * \pointcut getters
+	 * \brief Matches all getter functions in the whole project.
+	 */
+    pointcut getters() = "% get%(...)";
+
+
+}
+
+#endif // __ACP__PREDEFINED_POINTCUTS_AH__

@@ -1,12 +1,14 @@
 #ifndef __ACP__CORE_ASPECT_AH__
 #define __ACP__CORE_ASPECT_AH__
 
+#include "predefined_pointcuts.ah"
+
 /**
  * \aspect CoreAspect
  * \file src/core/core_aspect.ah
  * \brief CoreAspect is the base aspect for all aspects in this ACP library.
  *
- * CoreAspect defines various pointcuts that are used throught this library.
+ * CoreAspect defines various pointcuts that are used throughout this library.
  * Some of them are virtual and can be overridden by derived aspects to structure the
  * implementation of the aspects. The others are meant to be useful pointcuts for a
  * more user oriented usage of the ACP library.
@@ -14,34 +16,6 @@
 aspect CoreAspect {
 
 public:
-
-	/**
-	 * \pointcut everywhere
-	 * \brief Matches all functions in the whole project.
-	 *
-	 * This pointcut matches all functions. It is ment be used with causion as it
-	 * describes literally every functions and therefore can lead to performance issues.
-	 */
-	pointcut everywhere() = "% ...::%(...)";
-
-	/**
-	 * \pointcut main_func
-	 * \brief Matches every possible agrument variant of the c++ main function.
-	 */
-	pointcut main_func() = "int main(...)";
-
-	/**
-	 * \pointcut operators
-	 * \brief Mathes every operator or conversion function in the whole project.
-	 */
-	pointcut operators() = "% operator %";
-	// pointcut in_user_space() = call(everywhere());
-
-	/**
-	 * \pointcut default_where
-	 * \brief A virtual placeholder for the default pointcut implementation of each aspect
-	 */
-	pointcut virtual default_where() = 0;
 
 	/**
 	 * \pointcut where
@@ -52,11 +26,11 @@ public:
 	 * form the default implementation.
 	 * The default implementation is the default_where() pointcut.
 	 */
-	pointcut virtual where() = default_where();
+	pointcut virtual where() = 0;
 
 	/**
 	 * \pointcut ignore
-	 * \brief A virtual placeholder for the pointcut that descibes which join points
+	 * \brief A virtual placeholder for the pointcut that describes which join points
 	 * should be ignored by the aspect.
 	 *
 	 * It is recommended to use and extend a pointcut definition like with:

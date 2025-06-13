@@ -48,7 +48,6 @@ private:
 
 	static thread_local std::vector<std::string> _call_chain;
 
-	acp::StackTraceMsgBuilder* _builder;
 	acp::Printer* _printer;
 
 	void check_reset() {
@@ -91,13 +90,13 @@ public:
 	 * \pointcut ignore
 	 * \see :ref:`CoreAspect::ignore <core_aspect_ah_ignore>`
 	 */
-	pointcut virtual ignore() = "% StackTrace::...::%(...)" || "% acp::...::%(...)";
+	pointcut virtual ignore() = within("StackTrace") || within("acp");
 
 	/**
-	 * \pointcut default_where
-	 * \see :ref:`CoreAspect::default_where <core_aspect_ah_default_where>`
+	 * \pointcut where
+	 * \see :ref:`CoreAspect::where <core_aspect_ah_where>`
 	 */
-	pointcut virtual default_where() = everywhere();
+	pointcut virtual where() = acp::all_func();
 
 	/**
 	 * \pointcut fallback_func
@@ -107,15 +106,14 @@ public:
 	 * be printed if an uncaught exception leaves the function.
 	 *
 	 */
-	pointcut virtual fallback_func() = acp::fallback();
+	pointcut virtual fallback_func() = acp::fallback() || acp::main_function();
 
 
-	StackTrace() : StackTrace(nullptr,nullptr) {}
+	StackTrace() : StackTrace(nullptr) {}
 
-	StackTrace(acp::StackTraceMsgBuilder* builder, acp::Printer* printer) : _builder(builder), _printer(printer) {}
+	StackTrace( acp::Printer* printer) : _printer(printer) {}
 
 	virtual ~StackTrace() {
-		delete _builder;
 		delete _printer;
 	}
 
@@ -123,7 +121,7 @@ public:
 	 * \advice fallback-advice
 	 * \brief Advice handles the StackTrace printing when an uncaught exception leaves the function of the pointcut.
 	 */
-	advice execution(fallback_func() || main_func()) : around() {
+	advice execution(fallback_func()) && !ignore() : around() {
 
 		check_reset();
 		try {
@@ -131,7 +129,7 @@ public:
 		} catch (const std::exception& e) {
 			_editing_stack_trace = true;
 			std::string msg;
-			_builder->build_msg(tjp->signature(),tjp->filename(),tjp->line(),msg);
+			acp::stack_trace_msg_builder::build_msg(tjp->signature(), tjp->filename(), tjp->line(), msg);
 			_call_chain.push_back(msg);
 			// Print Stack Trace
 			print_stack_trace(_call_chain, e.what());
@@ -147,7 +145,7 @@ public:
 	 * \advice stack-trace-builder-advice
 	 * \brief Advice handles the StackTrace building, in case of an thrown exception.
 	 */
-	advice execution(where() && !(ignore() || fallback_func() || main_func())) : around(){
+	advice execution(where() && !fallback_func()) && !(ignore()) : around(){
 
 		check_reset();
 		try {
@@ -157,19 +155,19 @@ public:
 			if (_last_thrown == nullptr) {
 				// Just thrown
 				std::string msg;
-				_builder->build_msg(tjp->signature(),tjp->filename(),tjp->line(),msg);
+				acp::stack_trace_msg_builder::build_msg(tjp->signature(),tjp->filename(),tjp->line(),msg);
 				_call_chain.push_back(msg);
 				_last_thrown = &e;
 			} else if (typeid(*_last_thrown) == typeid(e) and std::string(_last_thrown->what()) == std::string(e.what())) {
 				// Exception is still the same
 				std::string msg;
-				_builder->build_msg(tjp->signature(),tjp->filename(),tjp->line(),msg);
+				acp::stack_trace_msg_builder::build_msg(tjp->signature(),tjp->filename(),tjp->line(),msg);
 				_call_chain.push_back(msg);
 			} else {
 				// Exception changed
 				_call_chain.clear();
 				std::string msg;
-				_builder->build_msg(tjp->signature(),tjp->filename(),tjp->line(),msg);
+				acp::stack_trace_msg_builder::build_msg(tjp->signature(),tjp->filename(),tjp->line(),msg);
 				_call_chain.push_back(msg);
 				_last_thrown = &e;
 			}

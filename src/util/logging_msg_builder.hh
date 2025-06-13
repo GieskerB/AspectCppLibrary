@@ -12,11 +12,7 @@ namespace acp {
      *
      * It is used by the logging aspects to create log messages before and after function execution.
      */
-    class LoggingMsgBuilder {
-    public:
-
-        LoggingMsgBuilder() {};
-        virtual ~LoggingMsgBuilder() = default;
+    namespace logging_msg_builder {
 
         /**
          * \function build_msg
@@ -26,7 +22,9 @@ namespace acp {
          * @param msg The message to log.
          * @param output The output string where the built message will be stored.
          */
-        virtual void build_msg(const std::string& log_type, const std::string& msg, std::string& output) const = 0;
+        inline void build_msg(const std::string& log_type, const std::string& msg, std::string& output) {
+            // #warning "build_msg is not implemented in LoggingMsgBuilder interface. Please implement with the use of an aspect"
+        };
 
         /**
          * \function build_before_msg
@@ -35,7 +33,9 @@ namespace acp {
          * @param signature The signature of the function being logged.
          * @param output The output string where the built message will be stored.
          */
-        virtual void build_before_msg(const char* signature, std::string& output) const = 0;
+        inline void build_before_msg(const char* signature, std::string& output) {
+            // #warning "build_before_msg is not implemented in LoggingMsgBuilder interface. Please implement with the use of an aspect"
+        }
 
         /**
          * \function build_after_msg
@@ -44,7 +44,9 @@ namespace acp {
          * @param signature The signature of the function being logged.
          * @param output The output string where the built message will be stored.
          */
-        virtual void build_after_msg(const char* signature, std::string& output) const = 0;
+        inline void build_after_msg(const char* signature, std::string& output) {
+            // #warning "build_after_msg is not implemented in LoggingMsgBuilder interface. Please implement with the use of an aspect"
+        }
 
     };
 }

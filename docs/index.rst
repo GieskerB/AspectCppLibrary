@@ -13,3 +13,4 @@ Library Overview
    interfaces.rst
    classes.rst
    exceptions.rst
+   others.rst

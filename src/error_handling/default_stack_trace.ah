@@ -2,7 +2,6 @@
 #define __ACP__DEFAULT_STACK_TRACE_AH__
 
 #include "../util/cerr_printer.hh"
-#include "../util/default_stack_trace_msg_builder.hh"
 #include "stack_trace.ah"
 
 /**
@@ -19,7 +18,7 @@ aspect DefaultStackTrace : public StackTrace {
 
 public:
 
-	DefaultStackTrace() : StackTrace(new acp::DefaultStackTraceMsgBuilder(), new acp::CerrPrinter()) {}
+	DefaultStackTrace() : StackTrace(new acp::CerrPrinter()) {}
 
 	virtual ~DefaultStackTrace() {}
 

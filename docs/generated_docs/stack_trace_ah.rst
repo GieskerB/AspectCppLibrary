@@ -37,13 +37,6 @@
     Then they have to disable the global pointcut first.
 
 
-.. _stack_trace_ah_default_where:
-
-``default_where`` (Pointcut)
-----------------------------
-
-*See:* :ref:`CoreAspect::default_where <core_aspect_ah_default_where>`
-
 .. _stack_trace_ah_fallback-advice:
 
 ``fallback-advice`` (Advice)
@@ -94,4 +87,11 @@
 
 **Brief Description:** Advice handles the StackTrace building, in case of an thrown exception.
 
+
+.. _stack_trace_ah_where:
+
+``where`` (Pointcut)
+--------------------
+
+*See:* :ref:`CoreAspect::where <core_aspect_ah_where>`
 

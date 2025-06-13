@@ -2,7 +2,6 @@
 #define __ACP__DEFAULT_AFTER_LOGGING_AH__
 
 #include "after_logging.ah"
-#include "../util/default_logging_msg_builder.hh"
 #include "../util/cout_printer.hh"
 
 /**
@@ -15,7 +14,7 @@
  */
 aspect DefaultAfterLogging : public AfterLogging {
     public:
-        DefaultAfterLogging() : AfterLogging(new acp::DefaultLoggingMsgBuilder(), new acp::CoutPrinter()) {}
+        DefaultAfterLogging() : AfterLogging(new acp::CoutPrinter()) {}
 
         virtual ~DefaultAfterLogging() = default;
 };

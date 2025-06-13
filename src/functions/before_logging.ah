@@ -23,7 +23,6 @@ namespace acp {
  */
 aspect BeforeLogging : public CoreAspect {
 
-    acp::LoggingMsgBuilder* _msg_builder;
     acp::Printer* _printer;
 
 public:
@@ -35,17 +34,16 @@ public:
     pointcut virtual ignore() = within("BeforeLogging") || within ("acp");
 
     /**
-	 * \pointcut default_where
-	 * \see :ref:`CoreAspect::default_where <core_aspect_ah_default_where>`
+	 * \pointcut where
+	 * \see :ref:`CoreAspect::where <core_aspect_ah_where>`
 	 */
-    pointcut virtual default_where() = acp::before_logging();
+    pointcut virtual where() = acp::before_logging();
 
-    BeforeLogging(): BeforeLogging(nullptr, nullptr) {}
-    BeforeLogging(acp::LoggingMsgBuilder* msg_builder, acp::Printer* printer)
-        : _msg_builder(msg_builder), _printer(printer) {}
+    BeforeLogging(): BeforeLogging(nullptr) {}
+    BeforeLogging(acp::Printer* printer)
+        : _printer(printer) {}
 
     virtual ~BeforeLogging() {
-        delete _msg_builder;
         delete _printer;
     }
 
@@ -55,7 +53,7 @@ public:
      */
     advice execution(where()) && !ignore() : before() {
         std::string msg;
-        _msg_builder->build_before_msg(tjp->signature(), msg);
+        acp::logging_msg_builder::build_before_msg(tjp->signature(), msg);
         _printer->print(msg);
         _printer->print('\n');
     }
