@@ -33,11 +33,11 @@
 ``singleton-slice`` (Advice)
 ----------------------------
 
-**Brief Description:** This advice provides a class with all necessary methods and members
+**Brief Description:** This advice provides a class slice with all necessary methods and
 
 **Detailed Description:**
 
-    to implement the Singleton design pattern.
+    members to implement the Singleton design pattern.
 
 
 .. _singleton_ah_singleton:

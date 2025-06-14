@@ -5,10 +5,11 @@
 
 **Detailed Description:**
 
-    CoreAspect defines various pointcuts that are used throughout this library.
-    Some of them are virtual and can be overridden by derived aspects to structure the
-    implementation of the aspects. The others are meant to be useful pointcuts for a
-    more user oriented usage of the ACP library.
+    CoreAspect defines base for all main aspects of this library. It ensures that all aspects
+    have a where pointcut and an ignore pointcut.
+    The where pointcut is used in the main advice of each aspect. It denotes on which join
+    points (where the aspect should be applied).
+    The ignore pointcut is used to define which join points should be ignored by the aspect.
 
 *In file* ``src/core/core_aspect.ah``
 

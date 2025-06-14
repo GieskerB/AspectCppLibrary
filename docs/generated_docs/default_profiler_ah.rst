@@ -5,9 +5,9 @@
 
 **Detailed Description:**
 
-    It uses the DefaultProfilerMsgBuilder and the CoutPrinter to create and print the messages.
-    If the developer wants to use a different ProfilerMsgBuilder or Printer, they can create their own aspect that
-    extends the original Profiler aspect.
+    In conjunction with this aspect use an aspect that provides a implementation for the
+    acp::profiler_msg_builder::build_msg() method.
+    It uses the `CoutPrinter` to print the log message to the standard output.
 
 *In file* ``src/understanding/default_profiler.ah``
 

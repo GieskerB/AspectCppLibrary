@@ -25,7 +25,7 @@ namespace stack_trace_msg_builder {
 	 * \param result is a reference to a string where the formatted message will be stored.
 	 */
 	inline void build_msg(const char* sign, const char* file, int line, std::string& result) {
-		// #warning "build_msg is not implemented in StackTraceMsgBuilder interface. Please implement with the use of an aspect"
+		#warning "build_msg is not implemented in StackTraceMsgBuilder interface. Please implement with the use of an aspect"
 	}
 
 };

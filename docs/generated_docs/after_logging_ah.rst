@@ -5,6 +5,8 @@
 
 **Detailed Description:**
 
+    In conjunction with this aspect use an aspect that provides a implementation for the
+    acp::logging_msg_builder::build_after_msg() method.
     Similar to the `BeforeLogging` aspect, this aspect logs the function signature - but only - after the function has executed.
 
 *In file* ``src/functions/after_logging.ah``

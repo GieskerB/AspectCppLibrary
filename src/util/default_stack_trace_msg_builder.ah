@@ -1,5 +1,5 @@
-#ifndef __ACP__INTERFACE_DEFAULT_STACK_TRACE_MSG_BUILDER_HH__
-#define __ACP__INTERFACE_DEFAULT_STACK_TRACE_MSG_BUILDER_HH__
+#ifndef __ACP__INTERFACE_DEFAULT_STACK_TRACE_MSG_BUILDER_AH__
+#define __ACP__INTERFACE_DEFAULT_STACK_TRACE_MSG_BUILDER_AH__
 
 #include <iostream>
 #include <sstream>
@@ -11,10 +11,10 @@
 
 /**
  * \aspect DefaultStackTraceMsgBuilder
- * \file src/util/default_stack_trace_msg_builder.hh
+ * \file src/util/default_stack_trace_msg_builder.ah
  * \brief DefaultStackTraceMsgBuilder is the default implementation of the StackTraceMsgBuilder interface.
  *
- * This class provides a method to build a formatted message for the stack trace.
+ * It provides a method to build a formatted message for the stack trace.
  *
  */
 aspect DefaultStackTraceMsgBuilder{
@@ -49,4 +49,4 @@ public:
 };
 
 
-#endif  // __ACP__INTERFACE_DEFAULT_STACK_TRACE_MSG_BUILDER_HH__
+#endif  // __ACP__INTERFACE_DEFAULT_STACK_TRACE_MSG_BUILDER_AH__

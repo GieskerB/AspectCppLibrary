@@ -19,7 +19,7 @@ namespace acp {
          * \param output reference to a string which will contain the output in the end.
          */
         inline void build_msg(const acp::ProfilerData& data, std::string& output){
-            // #warning "build_msg is not implemented in ProfilerMsgBuilder interface. Please implement with the use of an aspect"
+            #warning "build_msg is not implemented in ProfilerMsgBuilder interface. Please implement with the use of an aspect"
         }
     };
 

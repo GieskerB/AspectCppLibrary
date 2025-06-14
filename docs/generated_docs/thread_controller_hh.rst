@@ -5,8 +5,10 @@
 
 **Detailed Description:**
 
-    This interface defines the basic operations for thread control. Aspects can
-    use this interface to manage ensure thread safety and synchronization.
+    This interface provides methods for thread safety, including acquiring and releasing locks,
+    and getting the unique identifier for the current thread.
+    To statically configure the thread controller at runtime, use an aspect that implements this interface.
+    Example being the `acp::std_thread_controller`.
 
 *In file* ``src/util/thread_controller.hh``
 

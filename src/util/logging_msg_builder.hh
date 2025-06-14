@@ -23,7 +23,7 @@ namespace acp {
          * @param output The output string where the built message will be stored.
          */
         inline void build_msg(const std::string& log_type, const std::string& msg, std::string& output) {
-            // #warning "build_msg is not implemented in LoggingMsgBuilder interface. Please implement with the use of an aspect"
+            #warning "build_msg is not implemented in LoggingMsgBuilder interface. Please implement with the use of an aspect"
         };
 
         /**
@@ -34,7 +34,7 @@ namespace acp {
          * @param output The output string where the built message will be stored.
          */
         inline void build_before_msg(const char* signature, std::string& output) {
-            // #warning "build_before_msg is not implemented in LoggingMsgBuilder interface. Please implement with the use of an aspect"
+            #warning "build_before_msg is not implemented in LoggingMsgBuilder interface. Please implement with the use of an aspect"
         }
 
         /**
@@ -45,7 +45,7 @@ namespace acp {
          * @param output The output string where the built message will be stored.
          */
         inline void build_after_msg(const char* signature, std::string& output) {
-            // #warning "build_after_msg is not implemented in LoggingMsgBuilder interface. Please implement with the use of an aspect"
+            #warning "build_after_msg is not implemented in LoggingMsgBuilder interface. Please implement with the use of an aspect"
         }
 
     };

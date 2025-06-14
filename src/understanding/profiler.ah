@@ -19,9 +19,11 @@ namespace acp {
  * \aspect Profiler
  * \brief This aspect is used to profile the execution time and call amount of functions and methods.
  *
- * It uses a instance of acp::ProfilerMsgBuilder to build the profiling messages
- * and a instance of acp::Printer to print those messages.
- * In addition, this aspect is thread-safe, by using an instance of acp::ThreadController to manage thread locks.
+ * In conjunction with this aspect use an aspect that provides a implementation for the
+ * acp::profiler_msg_builder::build_msg() method.
+ *
+ * 
+ *
  */
 aspect Profiler : public CoreAspect {
 

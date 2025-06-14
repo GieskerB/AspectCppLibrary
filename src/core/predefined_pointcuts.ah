@@ -1,6 +1,16 @@
 #ifndef __ACP__PREDEFINED_POINTCUTS_AH__
 #define __ACP__PREDEFINED_POINTCUTS_AH__
 
+/**
+ * \pointcuts PredefinedPointcuts
+ * \file src/core/predefined_pointcuts.ah
+ * \brief This file contains predefined pointcuts that can be used in aspects.
+ *
+ * These pointcuts are designed to match various types of functions in a C++ project.
+ * Its purpose is to provide a set of commonly used pointcuts that can be reused across
+ * different aspects. Further increasing the userfriendliness of this library in the case
+ * a user wants to create their own aspects.
+ */
 namespace acp {
 	/**
 	 * \pointcut all_func

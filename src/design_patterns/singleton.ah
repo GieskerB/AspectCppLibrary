@@ -62,8 +62,8 @@ aspect Singleton {
 
     /**
      * \advice singleton-slice
-     * \brief This advice provides a class with all necessary methods and members
-     * to implement the Singleton design pattern.
+     * \brief This advice provides a class slice with all necessary methods and
+     * members to implement the Singleton design pattern.
      */
     advice where() : slice acp::ACP_Singleton_Slice;
 

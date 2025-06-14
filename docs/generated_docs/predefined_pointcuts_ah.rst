@@ -3,6 +3,22 @@ predefined_pointcuts.ah Documentation
 
 All documented entities found in ``predefined_pointcuts.ah``:
 
+.. _predefined_pointcuts_ah_PredefinedPointcuts:
+
+``PredefinedPointcuts`` (Pointcuts)
+-----------------------------------
+
+**Brief Description:** This file contains predefined pointcuts that can be used in aspects.
+
+**Detailed Description:**
+
+    These pointcuts are designed to match various types of functions in a C++ project.
+    Its purpose is to provide a set of commonly used pointcuts that can be reused across
+    different aspects. Further increasing the userfriendliness of this library in the case
+    a user wants to create their own aspects.
+
+*In file* ``src/core/predefined_pointcuts.ah``
+
 .. _predefined_pointcuts_ah_all_func:
 
 ``all_func`` (Pointcut)

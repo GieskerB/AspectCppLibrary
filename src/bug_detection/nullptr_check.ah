@@ -45,6 +45,7 @@ public:
      * a null pointer was dereferenced.
      */
     advice within(where()) && builtin("%& operator *(%*)") && !ignore(): before() {
+        // Just casting to int* to check if the pointer is null.
         if (*((int *)tjp->arg(0)) == 0) {
             throw acp::NullptrException(tjp->signature(), tjp->line());
         }

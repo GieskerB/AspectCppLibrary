@@ -5,9 +5,8 @@
 
 **Detailed Description:**
 
-    It uses a instance of acp::ProfilerMsgBuilder to build the profiling messages
-    and a instance of acp::Printer to print those messages.
-    In addition, this aspect is thread-safe, by using an instance of acp::ThreadController to manage thread locks.
+    In conjunction with this aspect use an aspect that provides a implementation for the
+    acp::profiler_msg_builder::build_msg() method.
 
 
 .. _profiler_ah_Constructor:
@@ -16,12 +15,6 @@
 -----------------------------
 
 **Brief Description:** This constructor initializes the profiler with a builder, printer and thread controller.
-
-**Detailed Description:**
-
-    @param builder is a pointer to an acp::ProfilerMsgBuilder instance used to build profiling messages.
-    @param printer is a pointer to an acp::Printer instance used to print profiling messages.
-    @param thread is a pointer to an acp::ThreadController instance used to manage thread locks.
 
 
 .. _profiler_ah_ignore:
