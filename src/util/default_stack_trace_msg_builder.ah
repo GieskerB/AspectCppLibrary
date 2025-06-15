@@ -6,7 +6,6 @@
 #include <cstring>
 #include <cstdio>
 
-#include "stack_trace_msg_builder.hh"
 #include "custom_to_string.hh"
 
 /**

@@ -6,7 +6,7 @@
 
 /**
  * \aspect DefaultAfterLogging
- * \file src/functions/default_after_logging.ah
+ * \file src/functionality/default_after_logging.ah
  * \brief This aspect is a default implementation of the `AfterLogging` aspect.
  *
  * In conjunction with this aspect use an aspect that provides a implementation for the

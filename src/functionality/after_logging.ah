@@ -15,7 +15,7 @@ namespace acp {
 
 /**
  * \aspect AfterLogging
- * \file src/functions/after_logging.ah
+ * \file src/functionality/after_logging.ah
  * \brief This aspect is used to log the execution of a function after it has completed.
  *
  * In conjunction with this aspect use an aspect that provides a implementation for the
