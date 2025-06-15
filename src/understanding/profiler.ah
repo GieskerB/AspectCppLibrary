@@ -3,8 +3,8 @@
 
 #include "../core/core_aspect.ah"
 #include "../util/printer.hh"
-#include "../util/profiler_data.hh"
-#include "../util/profiler_msg_builder.hh"
+#include "profiler_data.hh"
+#include "util/profiler_msg_builder.hh"
 #include "../util/thread_controller.hh"
 
 namespace acp {
@@ -22,7 +22,7 @@ namespace acp {
  * In conjunction with this aspect use an aspect that provides a implementation for the
  * acp::profiler_msg_builder::build_msg() method.
  *
- * 
+ *
  *
  */
 aspect Profiler : public CoreAspect {

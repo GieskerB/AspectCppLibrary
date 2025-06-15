@@ -1,6 +1,8 @@
 #ifndef __ACP__INTERFACE_PROFILER_MSG_BUILDER_HH__
 #define __ACP__INTERFACE_PROFILER_MSG_BUILDER_HH__
 
+#include "profiler_data.hh"
+
 #include <string>
 
 namespace acp {

@@ -3,7 +3,7 @@
 
 #include "../core/core_aspect.ah"
 #include "../util/printer.hh"
-#include "../util/logging_msg_builder.hh"
+#include "logging_msg_builder.hh"
 
 namespace acp {
     /**

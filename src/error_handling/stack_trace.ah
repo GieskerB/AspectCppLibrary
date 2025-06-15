@@ -7,7 +7,7 @@
 #include <cstdlib>
 
 #include "../util/printer.hh"
-#include "../util/stack_trace_msg_builder.hh"
+#include "stack_trace_msg_builder.hh"
 #include "../core/core_aspect.ah"
 
 namespace acp {
