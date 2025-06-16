@@ -72,12 +72,12 @@ aspect Singleton {
      * \brief This advice prevents the construction of a singleton class directly.
      */
     advice construction(where()) : around() {
-        acp::thread_controller::acquire_lock();
+        acp::thread_controller::acquire_global_lock();
         if(JoinPoint::That::acp_singleton_allow_construction) {
             tjp->proceed();
-            acp::thread_controller::release_lock();
+            acp::thread_controller::release_global_lock();
         } else {
-            acp::thread_controller::release_lock();
+            acp::thread_controller::release_global_lock();
             throw std::runtime_error("Singleton construction is not allowed. Use get_instance() instead.");
         }
     }

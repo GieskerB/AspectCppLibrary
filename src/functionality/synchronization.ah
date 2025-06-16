@@ -1,0 +1,42 @@
+#ifndef __ACP__SYNCHRONIZATION_AH__
+#define __ACP__SYNCHRONIZATION_AH__
+
+#include "../core/core_aspect.ah"
+#include "../util/thread_controller.hh"
+
+#include <functional>
+
+namespace acp {
+    attribute synchronized();
+}
+
+aspect Synchronization : public CoreAspect {
+
+public:
+    Synchronization() {}
+    virtual ~Synchronization() = default;
+
+     /**
+	 * \pointcut ignore
+	 * \see :ref:`CoreAspect::ignore <core_aspect_ah_ignore>`
+	 */
+    pointcut virtual ignore() = within("AfterLogging") || within ("acp");
+
+    /**
+	 * \pointcut where
+	 * \see :ref:`CoreAspect::where <core_aspect_ah_where>`
+	 */
+    pointcut virtual where() = acp::synchronized();
+
+    advice execution(where()) && !ignore() : around() {
+        auto proceed_function = [&tjp]() {
+            tjp->proceed();
+        };
+
+        acp::thread_controller::synchronized_function_call(proceed_function);
+
+    }
+
+};
+
+#endif // __ACP__SYNCHRONIZATION_AH__

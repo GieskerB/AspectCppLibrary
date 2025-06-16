@@ -67,16 +67,16 @@ public:
 	 * The profiling data is updated in a thread-safe manner using the ThreadController.
 	 */
     advice execution(where()) && !ignore(): around() {
-		acp::thread_controller::acquire_lock();
+		acp::thread_controller::acquire_global_lock();
     	static acp::ProfilerData data (JoinPoint::signature());
-		acp::thread_controller::release_lock();
+		acp::thread_controller::release_global_lock();
 		const auto start = std::chrono::high_resolution_clock::now();
 		tjp->proceed();
 		const auto end = std::chrono::high_resolution_clock::now();
-		acp::thread_controller::acquire_lock();
+		acp::thread_controller::acquire_global_lock();
 		data.m_calls++;
 		data.m_exec_time += end - start;
-		acp::thread_controller::release_lock();
+		acp::thread_controller::release_global_lock();
     }
 
 	/**

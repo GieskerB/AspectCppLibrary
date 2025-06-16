@@ -1,6 +1,8 @@
 #ifndef __ACP__INTERFACE_THREAD_CONTROLLER_HH__
 #define __ACP__INTERFACE_THREAD_CONTROLLER_HH__
 
+#include <functional>
+
 namespace acp {
 
     /**
@@ -23,7 +25,7 @@ namespace acp {
          * This method should be called before accessing shared resources to ensure
          * that no other thread can modify them concurrently.
          */
-        inline void acquire_lock() {}
+        inline void acquire_global_lock() {}
 
         /**
          * \function release_lock
@@ -32,7 +34,11 @@ namespace acp {
          * This method should be called after finishing access to shared resources
          * to allow other threads to acquire the lock.
          */
-        inline void release_lock(){}
+        inline void release_global_lock(){}
+
+        inline void synchronized_function_call(const std::function<void()>& func) {
+            func();
+        }
 
         /**
          * \function get_id
