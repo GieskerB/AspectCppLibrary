@@ -1,12 +1,10 @@
 #ifndef __ACP__INTERFACE_DEFAULT_STACK_TRACE_MSG_BUILDER_AH__
 #define __ACP__INTERFACE_DEFAULT_STACK_TRACE_MSG_BUILDER_AH__
 
-#include <iostream>
-#include <sstream>
-#include <cstring>
-#include <cstdio>
+#include <string>
 
 #include "../util/custom_to_string.hh"
+#include "stack_trace_msg_builder.hh"
 
 /**
  * \aspect DefaultStackTraceMsgBuilder
@@ -26,7 +24,7 @@ public:
      * \advice build_msg
      * \see :ref:`acp::stack_trace_msg_builder::build_msg <stack_trace_msg_builder_hh_build_msg>`
      */
-    advice execution("void acp::stack_trace_msg_builder::build_msg(...)")  : around(){
+    advice execution("void acp::stack_trace_msg_builder::build_msg(...)") : around(){
 
         const char* signature = *static_cast<char**>(tjp->arg(0));
         const char* file = *static_cast<char**>(tjp->arg(1));

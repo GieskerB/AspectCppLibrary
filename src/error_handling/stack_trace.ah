@@ -9,6 +9,7 @@
 #include "../util/printer.hh"
 #include "stack_trace_msg_builder.hh"
 #include "../core/core_aspect.ah"
+#include "../core/predefined_pointcuts.ah"
 
 namespace acp {
 	/**

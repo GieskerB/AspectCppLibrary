@@ -9,7 +9,7 @@ int counter = 0;  // gemeinsame Variable, keine Synchronisation
 const int NUM_THREADS = 10;
 const int INCREMENTS_PER_THREAD = 100000;
 
-[[acp::synchronized]]void* thread_func(void* arg) {
+[[acp::synchronized]] void* thread_func(void* arg) {
     for (int i = 0; i < INCREMENTS_PER_THREAD; ++i) {
 		// Extra possibilities for errors!
         int value = counter;
