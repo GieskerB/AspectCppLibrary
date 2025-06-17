@@ -12,5 +12,7 @@ bin/
 **/*.acc
 **/*.acp
 **/parser.conf
+**/a.out
+tests/std*.txt
 tests/ErrorCodeConverter/temp_file_for_badf.txt
 tests/ErrorCodeConverter/temp_file_for_eexist.txt
