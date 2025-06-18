@@ -4,7 +4,7 @@
 #include <iostream>
 #include <unistd.h>
 
-int counter = 0;  // gemeinsame Variable, keine Synchronisation
+int counter = 0;
 
 const int NUM_THREADS = 10;
 const int INCREMENTS_PER_THREAD = 100000;
@@ -20,6 +20,9 @@ const int INCREMENTS_PER_THREAD = 100000;
 }
 
 int main() {
+
+	acp::test::print_pretty_start("Synchronization","Tests the syncronization via mutex for a function");
+
     pthread_t threads[NUM_THREADS];
 
     for (int i = 0; i < NUM_THREADS; ++i) {
@@ -30,14 +33,9 @@ int main() {
         pthread_join(threads[i], nullptr);
     }
 
-    std::cout << "Endwert des Counters: " << counter << std::endl;
-    std::cout << "Erwarteter Wert: " << NUM_THREADS * INCREMENTS_PER_THREAD << std::endl;
+    std::cout << "Total count: " << counter << '\n';
 
-    if (counter != NUM_THREADS * INCREMENTS_PER_THREAD) {
-        std::cout << "Race Condition erkannt! Synchronisation fehlt." << std::endl;
-    } else {
-        std::cout << "Kein Race Condition erkannt. Synchronisation scheint zu funktionieren." << std::endl;
-    }
+	acp::test::print_pretty_end();
 
     return 0;
 }

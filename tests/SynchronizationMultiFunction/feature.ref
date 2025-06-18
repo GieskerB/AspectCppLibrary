@@ -1,4 +1,4 @@
-Synchronization: Tests the syncronization via mutex for a function
+SynchronizationMultiFunction: Tests if mutex is exclusive per function or global
 ====================================================================================================
-Total count: 1000000
+Does not work
 ====================================================================================================

@@ -13,9 +13,8 @@ DIFF=diff --strip-trailing-cr
 
 ACTESTS = HelloWorld StackTrace StackTraceExceptionChange StackTraceFallback StackTraceFileChange\
 		  ErrorCodeConverter NullptrCheck NullptrCheckComplexPtr BeforeLogging AfterLogging BothLogging\
-		  Singleton Synchronization
+		  Singleton Synchronization SynchronizationMultiFunction
 
-ACTESTS = Synchronization
 
 # This test will always fail, since the timing output of the profiler is not stable.
 #ACTESTS += Profiler ProfilerThread

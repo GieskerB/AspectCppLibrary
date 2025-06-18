@@ -3,7 +3,6 @@
 
 #include <pthread.h>
 #include <stdexcept>
-#include <cstdint>
 #include "thread_controller.hh"
 
 /**
@@ -48,8 +47,7 @@ public:
     advice execution("void acp::thread_controller::synchronized_function_call(...)") : around() {
         static pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
         pthread_mutex_lock(&mutex);
-        std::cout << "Mutex in " <<tjp->signature()<<'\n';
-        (reinterpret_cast<void(*)()>(reinterpret_cast<uintptr_t>(tjp->arg(0))))();
+        tjp->proceed();
         pthread_mutex_unlock(&mutex);
     }
 
@@ -60,7 +58,7 @@ public:
     advice execution("int acp::thread_controller::get_id()"): around() {
         // Convert pthread_t to int safely (platform-specific)
         auto id = pthread_self();
-        *tjp->result() = static_cast<int>(reinterpret_cast<uintptr_t>(id));
+        *tjp->result() = static_cast<int>(id);
     }
 
 };

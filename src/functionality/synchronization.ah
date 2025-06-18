@@ -12,13 +12,9 @@ namespace acp {
 
 aspect Synchronization : public CoreAspect {
 
-    int counter = 0;
-
 public:
     Synchronization() {}
-    virtual ~Synchronization(){
-        std::cout << "COUNTER: " << counter <<'\n';
-    };
+    virtual ~Synchronization() = default;
 
      /**
 	 * \pointcut ignore
@@ -36,10 +32,8 @@ public:
         auto proceed_function = [&tjp]() {
             tjp->proceed();
         };
-        ++counter;
 
         acp::thread_controller::synchronized_function_call(proceed_function);
-
     }
 
 };

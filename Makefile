@@ -9,7 +9,7 @@ export AG := ag++
 
 MAKE ?= make
 
-ACFLAGS := -k -v 9
+ACFLAGS := -k -v9 #--keep_woven
 
 test: testall
 
