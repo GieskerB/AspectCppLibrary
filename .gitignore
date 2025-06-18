@@ -1,23 +1,9 @@
-# Documentation files
-docs/_build/
-
 # Hidden Foldern
-.tracecompass/
 .vscode/
-.svn/
 
 # General Project Folder
-ACModel/
 bin/
-config/
-Debug/
-DepFiles/
-ObjFiles/
-tools/
 
-# Hidden Files
-.cproject
-.project
 
 # Tests and Results
 **/feature
@@ -26,5 +12,7 @@ tools/
 **/*.acc
 **/*.acp
 **/parser.conf
+**/a.out
+tests/std*.txt
 tests/ErrorCodeConverter/temp_file_for_badf.txt
 tests/ErrorCodeConverter/temp_file_for_eexist.txt
