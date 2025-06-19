@@ -9,9 +9,9 @@
 
 int main() {
 
-	std::cout << cache_me_if_you_can(3,4);
-	std::cout << cache_me_if_you_can(3,4);
-	std::cout << cache_me_if_you_can(5,5);
+	std::cout << cache_me_if_you_can(3,4) << '\n';
+	std::cout << cache_me_if_you_can(3,4) << '\n';
+	std::cout << cache_me_if_you_can(5,5) << '\n';
 
 
 	return 0;

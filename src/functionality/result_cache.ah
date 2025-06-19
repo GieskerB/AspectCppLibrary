@@ -3,6 +3,8 @@
 
 #include "../core/core_aspect.ah"
 
+#include <any>
+
 namespace acp {
     attribute cache();
 }
@@ -27,7 +29,19 @@ aspect ResultCache : public CoreAspect{
     pointcut virtual where() = acp::cache();
 
     advice execution(where()) && !ignore() : around() {
-        static JoinPoint::That* last_result;
+        static std::any last_result;
+
+        // Get the result from tjp
+
+        // Only store the result if last_result is empty
+        if (last_result.has_value() == false) {
+            tjp->proceed();
+            JoinPoint::That* result_ptr = tjp->result();
+            last_result = result_ptr;
+        } else {
+            *tjp->result() = static_cast<JoinPoint::That*>(std::any_cast<int*>(last_result));
+        }
+
     }
 
 };
