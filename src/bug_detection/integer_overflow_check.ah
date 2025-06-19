@@ -1,5 +1,5 @@
-#ifndef __ACP__OVERFLOW_CHECK_AH__
-#define __ACP__OVERFLOW_CHECK_AH__
+#ifndef __ACP__INTEGER_OVERFLOW_CHECK_AH__
+#define __ACP__INTEGER_OVERFLOW_CHECK_AH__
 
 #include "../core/core_aspect.ah"
 #include "../util/overflow_exception.hh"
@@ -22,21 +22,23 @@ namespace acp {
  * language and the way the builtin -> operator is defined.
  *
  */
-aspect OverflowCheck : public CoreAspect {
+aspect IntegerOverflowCheck : public CoreAspect {
 
     static constexpr int INT_MAX = std::numeric_limits<int>::max();
     static constexpr int INT_MIN = std::numeric_limits<int>::min();
 
     pointcut int_add_binary() = builtin("int& operator +=(int&,int)" || "int operator +(int,int)");
-
     pointcut int_add_unary_inc() = builtin("int operator ++(int&,int)" || "int& operator ++(int&)");
-
     pointcut int_add_unary() = builtin("int operator +(int)");
+
+    pointcut int_sub_binary() = builtin("int& operator -=(int&,int)" || "int operator -(int,int)");
+    pointcut int_sub_unary_inc() = builtin("int operator --(int&,int)" || "int& operator --(int&)");
+    pointcut int_sub_unary() = builtin("int operator -(int)");
 
 public:
 
-    OverflowCheck() {}
-    virtual ~OverflowCheck() = default;
+    IntegerOverflowCheck() {}
+    virtual ~IntegerOverflowCheck() = default;
 
     /**
      * \pointcut where
@@ -50,7 +52,7 @@ public:
      */
     pointcut virtual ignore() = within("OverflowCheck") || within("acp");
 
-  
+
     advice within(where()) && int_add_binary() && !ignore(): before() {
         const int lhs = *static_cast<int*>(tjp->arg(0));
         const int rhs = *static_cast<int*>(tjp->arg(1));
@@ -73,7 +75,26 @@ public:
         }
     }
 
+    advice within(where()) && int_sub_binary() && !ignore(): before() {
+        const int lhs = *static_cast<int*>(tjp->arg(0));
+        const int rhs = *static_cast<int*>(tjp->arg(1));
+        if(lhs < INT_MAX + rhs) {
+            throw acp::OverflowException(tjp->signature(), tjp->line(), "int", false);
+        }
+    }
+
+    advice within(where()) && int_sub_unary_inc() && !ignore(): before() {
+        const int val = *static_cast<int*>(tjp->arg(0));
+        if(val == INT_MIN) {
+            throw acp::OverflowException(tjp->signature(), tjp->line(), "int", false);
+        }
+    }
+
+    advice within(where()) && int_sub_unary() && !ignore(): before() {
+        // On unary - operator no underflow can happen, since for every positive signed
+        // int value is exactly one negative.
+    }
 
 };
 
-#endif // __ACP__OVERFLOW_CHECK_AH__
+#endif // __ACP__INTEGER_OVERFLOW_CHECK_AH__

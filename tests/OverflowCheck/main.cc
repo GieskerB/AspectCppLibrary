@@ -39,6 +39,28 @@
 	} catch (acp::OverflowException& e) {
 		std::cout << e.what() << '\n';
 	}
+	acp::test::print_pretty_separator("Binary Underflow");
+	try {
+		int c = min - a;
+		std::cout << "No error found.\n";
+	} catch (acp::OverflowException& e) {
+		std::cout << e.what() << '\n';
+	}
+	acp::test::print_pretty_separator("Unary Increment Underflow");
+	try {
+
+		int c = min--;
+		std::cout << "No error found.\n";
+	} catch (acp::OverflowException& e) {
+		std::cout << e.what() << '\n';
+	}
+	acp::test::print_pretty_separator("Unary Underflow");
+	try {
+		int c = -max;
+		std::cout << "No error found.\n";
+	} catch (acp::OverflowException& e) {
+		std::cout << e.what() << '\n';
+	}
 	acp::test::print_pretty_end();
 
 	return 0;

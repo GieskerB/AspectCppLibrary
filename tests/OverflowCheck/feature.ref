@@ -8,4 +8,10 @@ int overflowed in function: int operator +(int,int) at line: 22.
 int overflowed in function: int operator ++(int &,int) at line: 30.
 -Unary Overflow-------------------------------------------------------------------------------------
 int overflowed in function: int operator +(int) at line: 37.
+-Binary Underflow-----------------------------------------------------------------------------------
+int underflowed in function: int operator -(int,int) at line: 44.
+-Unary Increment Underflow--------------------------------------------------------------------------
+int underflowed in function: int operator --(int &,int) at line: 52.
+-Unary Underflow------------------------------------------------------------------------------------
+No error found.
 ====================================================================================================
