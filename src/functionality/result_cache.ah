@@ -1,0 +1,35 @@
+#ifndef __ACP__RESULT_CACHE_AH__
+#define __ACP__RESULT_CACHE_AH__
+
+#include "../core/core_aspect.ah"
+
+namespace acp {
+    attribute cache();
+}
+
+aspect ResultCache : public CoreAspect{
+
+    public:
+
+    ResultCache() {}
+    virtual ~ResultCache() = default;
+
+    /**
+	 * \pointcut ignore
+	 * \see :ref:`CoreAspect::ignore <core_aspect_ah_ignore>`
+	 */
+    pointcut virtual ignore() = within("AfterLogging") || within ("acp");
+
+    /**
+	 * \pointcut where
+	 * \see :ref:`CoreAspect::where <core_aspect_ah_where>`
+	 */
+    pointcut virtual where() = acp::cache();
+
+    advice execution(where()) && !ignore() : around() {
+        
+    }
+
+}
+
+#endif // __ACP__RESULT_CACHE_AH__
