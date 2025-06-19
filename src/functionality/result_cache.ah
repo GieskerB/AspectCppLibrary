@@ -27,9 +27,9 @@ aspect ResultCache : public CoreAspect{
     pointcut virtual where() = acp::cache();
 
     advice execution(where()) && !ignore() : around() {
-        
+        static JoinPoint::That* last_result;
     }
 
-}
+};
 
 #endif // __ACP__RESULT_CACHE_AH__
