@@ -16,12 +16,12 @@ namespace acp {
 
         std::string _msg;
 
-        void create_message(const char* sig, unsigned int line,const std:string & type, bool overflow) {
+        void create_message(const char* sig, unsigned int line,const std::string & type, bool overflow) {
             char buffer[12];
             acp::to_string(buffer, line, sizeof(buffer));
             _msg.clear();
             _msg.append(type);
-            _msg.append(overflows ? " overflowed " : " underflowed ");
+            _msg.append(overflow ? " overflowed " : " underflowed ");
             _msg.append("in function: ");
             _msg.append(sig);
             _msg.append(" at line: ");
@@ -36,7 +36,7 @@ namespace acp {
          * \param sig is a c-string that indicates the signature of the function where the error occurred.
          * \param line is the line number where the error occurred.
          */
-        OverflowException(const char* sig, unsigned int line, const std:string & type, bool overflow):std::runtime_error("Over or Underflow"), _msg("") {
+        OverflowException(const char* sig, unsigned int line, const std::string & type, bool overflow):std::runtime_error("Over or Underflow"), _msg("") {
             create_message(sig, line,type,overflow);
         }
 

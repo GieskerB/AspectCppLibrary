@@ -1,9 +1,11 @@
 NullptrCheck Test: Testing null pointer dereference handling
 ====================================================================================================
--With Null Check:-----------------------------------------------------------------------------------
-
-
-Uncaught exception Null pointer dereference in function: int &operator *(int *) at line: 6.:
-	at void with_null_check() in (main.cc:3)
-	at int main() in (main.cc:16)
-
+-None problematic additions-------------------------------------------------------------------------
+A: 3036860, B: 6073720
+-Binary Overflow------------------------------------------------------------------------------------
+int overflowed in function: int operator +(int,int) at line: 22.
+-Unary Increment Overflow---------------------------------------------------------------------------
+int overflowed in function: int operator ++(int &,int) at line: 30.
+-Unary Overflow-------------------------------------------------------------------------------------
+int overflowed in function: int operator +(int) at line: 37.
+====================================================================================================

@@ -2,6 +2,9 @@
 #define __ACP__OVERFLOW_CHECK_AH__
 
 #include "../core/core_aspect.ah"
+#include "../util/overflow_exception.hh"
+
+#include <limits>
 
 namespace acp {
     attribute overflow_check();
@@ -21,7 +24,14 @@ namespace acp {
  */
 aspect OverflowCheck : public CoreAspect {
 
-    pointcut int_add() = builtin("int operator ++(int&,int)" || "int& operator ++(int&)" || "int& operator +=(int&,int)" || "int operator +(int,int)");
+    static constexpr int INT_MAX = std::numeric_limits<int>::max();
+    static constexpr int INT_MIN = std::numeric_limits<int>::min();
+
+    pointcut int_add_binary() = builtin("int& operator +=(int&,int)" || "int operator +(int,int)");
+
+    pointcut int_add_unary_inc() = builtin("int operator ++(int&,int)" || "int& operator ++(int&)");
+
+    pointcut int_add_unary() = builtin("int operator +(int)");
 
 public:
 
@@ -40,16 +50,27 @@ public:
      */
     pointcut virtual ignore() = within("OverflowCheck") || within("acp");
 
-    /**
-     * \advice overflow_check
-     * \brief Advice checks if a pointer is null before dereferencing it.
-     *
-     * If the pointer is null, it throws a `acp::OverflowException` with a message indicating that
-     * a null pointer was dereferenced.
-     */
-    advice within(where()) && int_add() && !ignore(): before() { // && builtin("%& operator *(%*)")
+  
+    advice within(where()) && int_add_binary() && !ignore(): before() {
+        const int lhs = *static_cast<int*>(tjp->arg(0));
+        const int rhs = *static_cast<int*>(tjp->arg(1));
+        if(lhs > INT_MAX - rhs) {
+            throw acp::OverflowException(tjp->signature(), tjp->line(), "int", true);
+        }
+    }
 
-        std::cout << tjp->signature()<< '\n';
+    advice within(where()) && int_add_unary_inc() && !ignore(): before() {
+        const int val = *static_cast<int*>(tjp->arg(0));
+        if(val == INT_MAX) {
+            throw acp::OverflowException(tjp->signature(), tjp->line(), "int", true);
+        }
+    }
+
+    advice within(where()) && int_add_unary() && !ignore(): before() {
+        const int val = *static_cast<int*>(tjp->arg(0));
+        if(val == INT_MIN) {
+            throw acp::OverflowException(tjp->signature(), tjp->line(), "int", true);
+        }
     }
 
 
