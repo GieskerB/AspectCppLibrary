@@ -7,9 +7,25 @@
 #include <functional>
 
 namespace acp {
+    /**
+     * \attribute synchronized
+     * \brief Any function with this attribute can only have one thread at a time executing it
+     */
     attribute synchronized();
 }
 
+/**
+ * \aspect Synchronization
+ * \file src/functionality/synchronization.ah
+ * \brief This aspect implements a thread execution for selected functions.
+ *
+ * By using an aspect which implements the thread controller interface, an thread exclusive execution
+ * per function is guaranteed. With the use of a mutex any thread will wait until the previous one
+ * finished executing the function.
+ *
+ * There will be no performance loss, if the thread interface is not implemented, but this aspect sill used.
+ *
+ */
 aspect Synchronization : public CoreAspect {
 
 public:
@@ -28,6 +44,11 @@ public:
 	 */
     pointcut virtual where() = acp::synchronized();
 
+    /**
+     * \aspect threadsafe_execution
+     * \brief Wrapping the intended function execution in a mutex lock.
+     *
+     */
     advice execution(where()) && !ignore() : around() {
         auto proceed_function = [&tjp]() {
             tjp->proceed();

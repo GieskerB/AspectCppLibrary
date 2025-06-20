@@ -3,7 +3,7 @@
 
 **Brief Description:** Interface for building profiling messages.
 
-*In file* ``src/util/profiler_msg_builder.hh``
+*In file* ``src/understanding/profiler_msg_builder.hh``
 
 .. _profiler_msg_builder_hh_build_msg:
 

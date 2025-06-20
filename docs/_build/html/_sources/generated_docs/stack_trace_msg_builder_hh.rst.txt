@@ -7,7 +7,7 @@
 
     This interface defines the method for creating a messages for the StackTrace-Aspect.
 
-*In file* ``src/util/stack_trace_msg_builder.hh``
+*In file* ``src/error_handling/stack_trace_msg_builder.hh``
 
 .. _stack_trace_msg_builder_hh_build_msg:
 

@@ -68,8 +68,8 @@ protected:
 	 * In case a developer wants to change the way the stack trace is printed from the ground up,
 	 * they can write an around advice for this function to replace its countent.
 	 *
-	 * @param call_chain is a std::vector of strings that contains the call chain of the stack trace.
-	 * @param exception_msg is the message of the exception that was thrown.
+	 * \param call_chain is a std::vector of strings that contains the call chain of the stack trace.
+	 * \param exception_msg is the message of the exception that was thrown.
 	 */
 	void print_stack_trace(const std::vector<std::string>& call_chain, const char* exception_msg) {
 		_printer->print("\n\nUncaught exception ");

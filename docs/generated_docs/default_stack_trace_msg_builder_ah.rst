@@ -5,9 +5,9 @@
 
 **Detailed Description:**
 
-    It provides a method to build a formatted message for the stack trace.
+    This aspect staticly configures the implementation of the function form the interface during compilation.
 
-*In file* ``src/util/default_stack_trace_msg_builder.ah``
+*In file* ``src/error_handling/default_stack_trace_msg_builder.ah``
 
 .. _default_stack_trace_msg_builder_ah_build_msg:
 

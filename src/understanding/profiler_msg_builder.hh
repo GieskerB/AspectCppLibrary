@@ -9,7 +9,7 @@ namespace acp {
 
     /**
      * \interface ProfilerMsgBuilder
-     * \file src/util/profiler_msg_builder.hh
+     * \file src/understanding/profiler_msg_builder.hh
      * \brief Interface for building profiling messages.
      */
     namespace profiler_msg_builder {

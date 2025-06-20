@@ -31,3 +31,10 @@
 
 *See:* :ref:`acp::thread_controller::release_lock <thread_controller_hh_release_lock>`
 
+.. _p_thread_controller_ah_synchronized_advice:
+
+``synchronized_advice`` (Advice)
+--------------------------------
+
+*See:* :ref:`acp::thread_controller::synchronized_function_call <thread_controller_hh_synchronized_function_call>`
+

@@ -16,14 +16,16 @@ namespace acp {
      *
      */
     class ProfilerData {
-
     public:
-
-        static ProfilerData* &first () { static ProfilerData *data = 0; return data; }
         class ProfilerData* p_next;
         unsigned int m_calls;
         std::chrono::nanoseconds m_exec_time;
         const char* m_signature;
+
+        static ProfilerData* &first () {
+             static ProfilerData *data = 0; return data;
+        }
+
         ProfilerData (const char* n) : m_calls{0}, m_exec_time{0L}, m_signature{n} {
             ProfilerData *head = first ();
             first () = this;

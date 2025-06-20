@@ -121,12 +121,14 @@
 <li class="toctree-l2"><a class="reference internal" href="default_stack_trace_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultStackTrace</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_stack_trace_msg_builder_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultStackTraceMsgBuilder</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="error_code_converter_ah.html"><code class="docutils literal notranslate"><span class="pre">ErrorCodeConverter</span></code> (Aspect)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integer_overflow_check_ah.html"><code class="docutils literal notranslate"><span class="pre">IntegerOverflowCheck</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nullptr_check_ah.html"><code class="docutils literal notranslate"><span class="pre">NullptrCheck</span></code> (Aspect)</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">PThreadController</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="profiler_ah.html"><code class="docutils literal notranslate"><span class="pre">Profiler</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="singleton_ah.html"><code class="docutils literal notranslate"><span class="pre">Singleton</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stack_trace_ah.html"><code class="docutils literal notranslate"><span class="pre">StackTrace</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="std_thread_controller_ah.html"><code class="docutils literal notranslate"><span class="pre">StdThreadController</span></code> (Aspect)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="synchronization_ah.html"><code class="docutils literal notranslate"><span class="pre">Synchronization</span></code> (Aspect)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../interfaces.html">Interfaces</a><ul>
@@ -152,6 +154,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../exceptions.html">Exceptions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="errno_exception_hh.html"><code class="docutils literal notranslate"><span class="pre">ErrnoException</span></code> (Exception)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nullptr_exception_hh.html"><code class="docutils literal notranslate"><span class="pre">NullptrException</span></code> (Exception)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overflow_exception_hh.html"><code class="docutils literal notranslate"><span class="pre">OverflowException</span></code> (Exception)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../others.html">Other Entities</a><ul>
@@ -188,6 +191,10 @@ It provides methods to acquire and release locks, and to get the unique identifi
 <section id="release-lock-advice">
 <span id="p-thread-controller-ah-release-lock"></span><h2><code class="docutils literal notranslate"><span class="pre">release_lock</span></code> (Advice)<a class="headerlink" href="#release-lock-advice" title="Link to this heading">¶</a></h2>
 <p><em>See:</em> <a class="reference internal" href="thread_controller_hh.html#thread-controller-hh-release-lock"><span class="std std-ref">acp::thread_controller::release_lock</span></a></p>
+</section>
+<section id="synchronized-advice-advice">
+<span id="p-thread-controller-ah-synchronized-advice"></span><h2><code class="docutils literal notranslate"><span class="pre">synchronized_advice</span></code> (Advice)<a class="headerlink" href="#synchronized-advice-advice" title="Link to this heading">¶</a></h2>
+<p><em>See:</em> <a class="reference internal" href="thread_controller_hh.html#thread-controller-hh-synchronized-function-call"><span class="std std-ref">acp::thread_controller::synchronized_function_call</span></a></p>
 </section>
 </section>
 

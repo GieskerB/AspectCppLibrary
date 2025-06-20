@@ -5,6 +5,12 @@
 #include "../util/nullptr_exception.hh"
 
 namespace acp {
+    /**
+     * \attribute null_check()
+     * \brief For all pointer dereferencing within any function / class / namespace
+     * annotated with this attribute an nullptr check will be performed. In case this
+     * happens, an exception will be thrown.
+     */
     attribute null_check();
 }
 
@@ -19,6 +25,8 @@ namespace acp {
  *
  */
 aspect NullptrCheck : public CoreAspect {
+
+    pointcut dereferencing_pointer() = builtin("%& operator *(%*)");
 
 public:
 
@@ -44,7 +52,7 @@ public:
      * If the pointer is null, it throws a `acp::NullptrException` with a message indicating that
      * a null pointer was dereferenced.
      */
-    advice within(where()) && builtin("%& operator *(%*)") && !ignore(): before() {
+    advice within(where()) && dereferencing_pointer() && !ignore(): before() {
         // Just casting to int* to check if the pointer is null.
         if (*((int *)tjp->arg(0)) == 0) {
             throw acp::NullptrException(tjp->signature(), tjp->line());

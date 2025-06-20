@@ -120,12 +120,14 @@
 <li class="toctree-l2"><a class="reference internal" href="default_stack_trace_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultStackTrace</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_stack_trace_msg_builder_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultStackTraceMsgBuilder</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="error_code_converter_ah.html"><code class="docutils literal notranslate"><span class="pre">ErrorCodeConverter</span></code> (Aspect)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integer_overflow_check_ah.html"><code class="docutils literal notranslate"><span class="pre">IntegerOverflowCheck</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nullptr_check_ah.html"><code class="docutils literal notranslate"><span class="pre">NullptrCheck</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="p_thread_controller_ah.html"><code class="docutils literal notranslate"><span class="pre">PThreadController</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="profiler_ah.html"><code class="docutils literal notranslate"><span class="pre">Profiler</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="singleton_ah.html"><code class="docutils literal notranslate"><span class="pre">Singleton</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stack_trace_ah.html"><code class="docutils literal notranslate"><span class="pre">StackTrace</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="std_thread_controller_ah.html"><code class="docutils literal notranslate"><span class="pre">StdThreadController</span></code> (Aspect)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="synchronization_ah.html"><code class="docutils literal notranslate"><span class="pre">Synchronization</span></code> (Aspect)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../interfaces.html">Interfaces</a><ul>
@@ -151,6 +153,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../exceptions.html">Exceptions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="errno_exception_hh.html"><code class="docutils literal notranslate"><span class="pre">ErrnoException</span></code> (Exception)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nullptr_exception_hh.html"><code class="docutils literal notranslate"><span class="pre">NullptrException</span></code> (Exception)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overflow_exception_hh.html"><code class="docutils literal notranslate"><span class="pre">OverflowException</span></code> (Exception)</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="../others.html">Other Entities</a><ul class="current">
@@ -177,7 +180,7 @@
 <blockquote>
 <div><p>These pointcuts are designed to match various types of functions in a C++ project.
 Its purpose is to provide a set of commonly used pointcuts that can be reused across
-different aspects. Further increasing the userfriendliness of this library in the case
+different aspects. Further increasing the user friendliness of this library in the case
 a user wants to create their own aspects.</p>
 </div></blockquote>
 <p><em>In file</em> <code class="docutils literal notranslate"><span class="pre">src/core/predefined_pointcuts.ah</span></code></p>

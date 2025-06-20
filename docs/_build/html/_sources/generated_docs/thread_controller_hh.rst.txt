@@ -51,3 +51,11 @@
     to allow other threads to acquire the lock.
 
 
+.. _thread_controller_hh_synchronized_function_call:
+
+``synchronized_function_call`` (Function)
+-----------------------------------------
+
+**Brief Description:** Calls the argument given by the first argument with mutex exclusion.
+
+

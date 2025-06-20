@@ -1,11 +1,12 @@
 ``DefaultLoggingMsgBuilder`` (Aspect)
 =====================================
 
-**Brief Description:** This class is a default implementation of the `LoggingMsgBuilder` interface.
+**Brief Description:** This aspect is a default implementation of the `LoggingMsgBuilder` interface.
 
 **Detailed Description:**
 
-    It provides a simple way to build log messages with a specific format.
+    It provides the library's default way to build log messages in a specific format.
+    Staticly configuring the implementation project wide at compile time.
 
 *In file* ``src/util/default_logging_msg_builder.ah``
 

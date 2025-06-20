@@ -8,10 +8,10 @@
 
 /**
  * \aspect DefaultStackTraceMsgBuilder
- * \file src/util/default_stack_trace_msg_builder.ah
+ * \file src/error_handling/default_stack_trace_msg_builder.ah
  * \brief DefaultStackTraceMsgBuilder is the default implementation of the StackTraceMsgBuilder interface.
  *
- * It provides a method to build a formatted message for the stack trace.
+ * This aspect staticly configures the implementation of the function form the interface during compilation.
  *
  */
 aspect DefaultStackTraceMsgBuilder{

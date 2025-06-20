@@ -4,9 +4,10 @@
 /**
  * \aspect DefaultLoggingMsgBuilder
  * \file src/util/default_logging_msg_builder.ah
- * \brief This class is a default implementation of the `LoggingMsgBuilder` interface.
+ * \brief This aspect is a default implementation of the `LoggingMsgBuilder` interface.
  *
- * It provides a simple way to build log messages with a specific format.
+ * It provides the library's default way to build log messages in a specific format.
+ * Staticly configuring the implementation project wide at compile time.
  *
  */
 aspect DefaultLoggingMsgBuilder {

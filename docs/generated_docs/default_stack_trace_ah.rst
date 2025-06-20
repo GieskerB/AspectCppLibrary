@@ -1,13 +1,13 @@
 ``DefaultStackTrace`` (Aspect)
 ==============================
 
-**Brief Description:** DefaultStackTrace is the default aspect for stack traces in this ACP library.
+**Brief Description:** DefaultStackTrace is the default aspect for stack traces in this library.
 
 **Detailed Description:**
 
-    It uses the default implementation of the StackTraceMsgBuilder and the CerrPrinter to create and print any messages
-    If the developer wants to use a different StackTraceMsgBuilder or Printer, they can create their own aspect that
-    extends the original StackTrace aspect.
+    The remaining non project wide configuration of the StackTrace aspect is the
+    implementation of the printer interface. This aspect provides it with the
+    std::cerr printer interface implementation.
 
 *In file* ``src/error_handling/default_stack_trace.ah``
 

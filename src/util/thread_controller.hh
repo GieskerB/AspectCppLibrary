@@ -36,6 +36,12 @@ namespace acp {
          */
         inline void release_global_lock(){}
 
+        /**
+         * \function synchronized_function_call
+         * \brief Calls the argument given by the first argument with mutex exclusion.
+         *
+         * \param func and std::function which should be called.
+         */
         inline void synchronized_function_call(const std::function<void()>& func) {
             func();
         }

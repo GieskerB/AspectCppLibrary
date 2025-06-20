@@ -9,7 +9,7 @@
     acp::logging_msg_builder::build_after_msg() method.
     Similar to the `AfterLogging` aspect, this aspect logs the function signature - but only - before the function will execute.
 
-*In file* ``src/functions/before_logging.ah``
+*In file* ``src/functionality/before_logging.ah``
 
 .. _before_logging_ah_before_logging:
 
