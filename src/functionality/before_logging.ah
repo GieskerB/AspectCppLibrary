@@ -2,7 +2,7 @@
 #define __ACP__BEFORE_LOGGING_AH__
 
 #include "../core/core_aspect.ah"
-#include "../util/printer.hh"
+#include "../core/printer.hh"
 #include "logging_msg_builder.hh"
 
 namespace acp {

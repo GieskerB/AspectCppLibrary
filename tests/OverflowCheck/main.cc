@@ -1,6 +1,6 @@
 #include "../prettier_tests.hh"
 
-#include "../../src/util/overflow_exception.hh"
+#include "../../src/bug_detection/overflow_exception.hh"
 
 #include <limits>
 

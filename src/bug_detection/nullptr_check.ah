@@ -2,7 +2,7 @@
 #define __ACP__NULLPTR_CHECK_AH__
 
 #include "../core/core_aspect.ah"
-#include "../util/nullptr_exception.hh"
+#include "nullptr_exception.hh"
 
 namespace acp {
     /**

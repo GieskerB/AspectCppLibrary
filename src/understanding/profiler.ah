@@ -2,10 +2,10 @@
 #define __ACP__PROFILER_AH__
 
 #include "../core/core_aspect.ah"
-#include "../util/printer.hh"
+#include "../core/printer.hh"
+#include "../core/thread_controller.hh"
 #include "profiler_data.hh"
-#include "util/profiler_msg_builder.hh"
-#include "../util/thread_controller.hh"
+#include "profiler_msg_builder.hh"
 
 namespace acp {
 	/**

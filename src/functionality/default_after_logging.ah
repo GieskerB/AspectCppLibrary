@@ -2,7 +2,7 @@
 #define __ACP__DEFAULT_AFTER_LOGGING_AH__
 
 #include "after_logging.ah"
-#include "../util/cout_printer.hh"
+#include "../core/cout_printer.hh"
 
 /**
  * \aspect DefaultAfterLogging

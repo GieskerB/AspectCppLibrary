@@ -1,7 +1,7 @@
 #ifndef __ACP__INTERFACE_DEFAULT_PROFILER_MSG_BUILDER_AH__
 #define __ACP__INTERFACE_DEFAULT_PROFILER_MSG_BUILDER_AH__
 
-#include "custom_to_string.hh"
+#include "../core/custom_to_string.hh"
 
 /**
  * \aspect DefaultProfilerMsgBuilder

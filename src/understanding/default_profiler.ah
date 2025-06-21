@@ -2,7 +2,7 @@
 #define __ACP__DEFAULT_PROFILER_AH__
 
 #include "profiler.ah"
-#include "../util/cout_printer.hh"
+#include "../core/cout_printer.hh"
 
 /**
  * \aspect DefaultProfiler

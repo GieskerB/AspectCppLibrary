@@ -6,10 +6,11 @@
 #include <vector>
 #include <cstdlib>
 
-#include "../util/printer.hh"
-#include "stack_trace_msg_builder.hh"
+#include "../core/printer.hh"
 #include "../core/core_aspect.ah"
 #include "../core/predefined_pointcuts.ah"
+
+#include "stack_trace_msg_builder.hh"
 
 namespace acp {
 	/**

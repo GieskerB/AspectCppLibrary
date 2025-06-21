@@ -2,7 +2,7 @@
 #define __ACP__DEFAULT_BEFORE_LOGGING_AH__
 
 #include "before_logging.ah"
-#include "../util/cout_printer.hh"
+#include "../core/cout_printer.hh"
 
 /**
  * \aspect DefaultBeforeLogging

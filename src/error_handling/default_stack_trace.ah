@@ -1,7 +1,7 @@
 #ifndef __ACP__DEFAULT_STACK_TRACE_AH__
 #define __ACP__DEFAULT_STACK_TRACE_AH__
 
-#include "../util/cerr_printer.hh"
+#include "../core/cerr_printer.hh"
 #include "stack_trace.ah"
 
 /**
