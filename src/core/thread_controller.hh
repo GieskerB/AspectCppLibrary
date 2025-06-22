@@ -7,7 +7,7 @@ namespace acp {
 
     /**
      * \interface ThreadController
-     * \file src/util/thread_controller.hh
+     * \file src/core/thread_controller.hh
      * \brief Interface for thread control mechanisms.
      *
      * This interface provides methods for thread safety, including acquiring and releasing locks,

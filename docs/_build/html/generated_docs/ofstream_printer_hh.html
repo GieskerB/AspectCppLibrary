@@ -30,8 +30,8 @@
   <link rel="stylesheet" href="../_static/css/theme.min.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="PThreadController (Class)" href="p_thread_controller_hh.html" />
-    <link rel="prev" title="DefaultStackTraceMsgBuilder (Class)" href="default_stack_trace_msg_builder_hh.html" /> 
+    <link rel="next" title="ProfilerData (Class)" href="profiler_data_hh.html" />
+    <link rel="prev" title="CoutPrinter (Class)" href="cout_printer_hh.html" /> 
 
 </head>
 
@@ -117,7 +117,6 @@
 <li class="toctree-l2"><a class="reference internal" href="default_logging_msg_builder_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultLoggingMsgBuilder</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_profiler_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultProfiler</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_profiler_msg_builder_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultProfilerMsgBuilder</span></code> (Aspect)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="default_singleton_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultSingleton</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_stack_trace_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultStackTrace</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_stack_trace_msg_builder_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultStackTraceMsgBuilder</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="error_code_converter_ah.html"><code class="docutils literal notranslate"><span class="pre">ErrorCodeConverter</span></code> (Aspect)</a></li>
@@ -142,13 +141,8 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../classes.html">Classes</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="cerr_printer_hh.html"><code class="docutils literal notranslate"><span class="pre">CerrPrinter</span></code> (Class)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cout_printer_hh.html"><code class="docutils literal notranslate"><span class="pre">CoutPrinter</span></code> (Class)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="default_logging_msg_builder_hh.html"><code class="docutils literal notranslate"><span class="pre">DefaultLoggingMsgBuilder</span></code> (Class)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="default_profiler_msg_builder_hh.html"><code class="docutils literal notranslate"><span class="pre">DefaultProfilerMsgBuilder</span></code> (Class)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="default_stack_trace_msg_builder_hh.html"><code class="docutils literal notranslate"><span class="pre">DefaultStackTraceMsgBuilder</span></code> (Class)</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">OfstreamPrinter</span></code> (Class)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="p_thread_controller_hh.html"><code class="docutils literal notranslate"><span class="pre">PThreadController</span></code> (Class)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="profiler_data_hh.html"><code class="docutils literal notranslate"><span class="pre">ProfilerData</span></code> (Class)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="std_thread_controller_hh.html"><code class="docutils literal notranslate"><span class="pre">StdThreadController</span></code> (Class)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../exceptions.html">Exceptions</a><ul>
@@ -179,10 +173,16 @@
 <div><p>This class implements the Printer interface and provides methods to print messages
 to a specified output file stream (std::ofstream).</p>
 </div></blockquote>
-<p><em>In file</em> <code class="docutils literal notranslate"><span class="pre">src/util/ofstream_printer.hh</span></code></p>
+<p><em>In file</em> <code class="docutils literal notranslate"><span class="pre">src/core/ofstream_printer.hh</span></code></p>
 <section id="constructor-constructor">
 <span id="ofstream-printer-hh-constructor"></span><h2><code class="docutils literal notranslate"><span class="pre">Constructor</span></code> (Constructor)<a class="headerlink" href="#constructor-constructor" title="Link to this heading">¶</a></h2>
 <p><strong>Brief Description:</strong> Construct a new OfstreamPrinter object and open the output file stream.</p>
+<p><strong>Parameters:</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">filename</span></code>: is the name of the file to which messages will be printed.</p></li>
+</ul>
+</div></blockquote>
 </section>
 <section id="destructor-destructor">
 <span id="ofstream-printer-hh-destructor"></span><h2><code class="docutils literal notranslate"><span class="pre">Destructor</span></code> (Destructor)<a class="headerlink" href="#destructor-destructor" title="Link to this heading">¶</a></h2>

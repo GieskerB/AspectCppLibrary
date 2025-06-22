@@ -8,7 +8,7 @@
     This class implements the ThreadController interface using std::mutex for thread safety.
     It provides methods to acquire and release locks, and to get the unique identifier of the current thread.
 
-*In file* ``src/util/std_thread_controller.hh``
+*In file* ``src/core/std_thread_controller.hh``
 
 .. _std_thread_controller_ah_acquire_lock:
 

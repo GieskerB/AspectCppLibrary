@@ -7,7 +7,7 @@
 
 /**
  * \aspect PThreadController
- * \file src/util/p_thread_controller.hh
+ * \file src/core/p_thread_controller.hh
  * \brief Thread controller using pthreads for synchronization.
  *
  * This class implements the ThreadController interface using pthread mutexes for thread safety.

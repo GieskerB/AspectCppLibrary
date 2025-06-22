@@ -3,7 +3,7 @@
 
 /**
  * \aspect DefaultLoggingMsgBuilder
- * \file src/util/default_logging_msg_builder.ah
+ * \file src/functionality/default_logging_msg_builder.ah
  * \brief This aspect is a default implementation of the `LoggingMsgBuilder` interface.
  *
  * It provides the library's default way to build log messages in a specific format.

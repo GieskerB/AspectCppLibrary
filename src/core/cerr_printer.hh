@@ -8,7 +8,7 @@ namespace acp {
 
 /**
  * \class CerrPrinter
- * \file src/util/cerr_printer.hh
+ * \file src/core/cerr_printer.hh
  * \brief CerrPrinter is a Printer implementation that prints messages to std::cerr.
  *
  * This class implements the Printer interface and provides methods to print messages

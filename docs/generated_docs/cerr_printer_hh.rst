@@ -8,7 +8,7 @@
     This class implements the Printer interface and provides methods to print messages
     to the standard error output stream (std::cerr).
 
-*In file* ``src/util/cerr_printer.hh``
+*In file* ``src/core/cerr_printer.hh``
 
 .. _cerr_printer_hh_printc-string:
 

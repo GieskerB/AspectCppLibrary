@@ -117,7 +117,6 @@
 <li class="toctree-l2"><a class="reference internal" href="default_logging_msg_builder_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultLoggingMsgBuilder</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_profiler_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultProfiler</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_profiler_msg_builder_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultProfilerMsgBuilder</span></code> (Aspect)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="default_singleton_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultSingleton</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_stack_trace_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultStackTrace</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_stack_trace_msg_builder_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultStackTraceMsgBuilder</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="error_code_converter_ah.html"><code class="docutils literal notranslate"><span class="pre">ErrorCodeConverter</span></code> (Aspect)</a></li>
@@ -142,13 +141,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../classes.html">Classes</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="cerr_printer_hh.html"><code class="docutils literal notranslate"><span class="pre">CerrPrinter</span></code> (Class)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cout_printer_hh.html"><code class="docutils literal notranslate"><span class="pre">CoutPrinter</span></code> (Class)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="default_logging_msg_builder_hh.html"><code class="docutils literal notranslate"><span class="pre">DefaultLoggingMsgBuilder</span></code> (Class)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="default_profiler_msg_builder_hh.html"><code class="docutils literal notranslate"><span class="pre">DefaultProfilerMsgBuilder</span></code> (Class)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="default_stack_trace_msg_builder_hh.html"><code class="docutils literal notranslate"><span class="pre">DefaultStackTraceMsgBuilder</span></code> (Class)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ofstream_printer_hh.html"><code class="docutils literal notranslate"><span class="pre">OfstreamPrinter</span></code> (Class)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="p_thread_controller_hh.html"><code class="docutils literal notranslate"><span class="pre">PThreadController</span></code> (Class)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="profiler_data_hh.html"><code class="docutils literal notranslate"><span class="pre">ProfilerData</span></code> (Class)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="std_thread_controller_hh.html"><code class="docutils literal notranslate"><span class="pre">StdThreadController</span></code> (Class)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../exceptions.html">Exceptions</a><ul>
@@ -178,18 +172,40 @@
 <blockquote>
 <div><p>It is used by the logging aspects to create log messages before and after function execution.</p>
 </div></blockquote>
-<p><em>In file</em> <code class="docutils literal notranslate"><span class="pre">src/error_handling/logging_msg_builder.hh</span></code></p>
+<p><em>In file</em> <code class="docutils literal notranslate"><span class="pre">src/functionality/logging_msg_builder.hh</span></code></p>
 <section id="build-after-msg-function">
 <span id="logging-msg-builder-hh-build-after-msg"></span><h2><code class="docutils literal notranslate"><span class="pre">build_after_msg</span></code> (Function)<a class="headerlink" href="#build-after-msg-function" title="Link to this heading">¶</a></h2>
 <p><strong>Brief Description:</strong> A function to build a log message specifically for the AfterLoggingAspect.</p>
+<p><strong>Parameters:</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">signature</span></code>: The signature of the function being logged.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output</span></code>: The output string where the built message will be stored.</p></li>
+</ul>
+</div></blockquote>
 </section>
 <section id="build-before-msg-function">
 <span id="logging-msg-builder-hh-build-before-msg"></span><h2><code class="docutils literal notranslate"><span class="pre">build_before_msg</span></code> (Function)<a class="headerlink" href="#build-before-msg-function" title="Link to this heading">¶</a></h2>
 <p><strong>Brief Description:</strong> A function to build a log message specifically for the BeforeLoggingAspect.</p>
+<p><strong>Parameters:</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">signature</span></code>: The signature of the function being logged.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output</span></code>: The output string where the built message will be stored.</p></li>
+</ul>
+</div></blockquote>
 </section>
 <section id="build-msg-function">
 <span id="logging-msg-builder-hh-build-msg"></span><h2><code class="docutils literal notranslate"><span class="pre">build_msg</span></code> (Function)<a class="headerlink" href="#build-msg-function" title="Link to this heading">¶</a></h2>
 <p><strong>Brief Description:</strong> A function to build a general log message.</p>
+<p><strong>Parameters:</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">log_type</span></code>: The type of log message (e.g., “INFO”, “ERROR”, etc.).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">msg</span></code>: The message to log.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output</span></code>: The output string where the built message will be stored.</p></li>
+</ul>
+</div></blockquote>
 </section>
 </section>
 

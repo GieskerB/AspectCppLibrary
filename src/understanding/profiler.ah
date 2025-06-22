@@ -17,6 +17,7 @@ namespace acp {
 
 /**
  * \aspect Profiler
+ * \file src/understanding/profiler.ah
  * \brief This aspect is used to profile the execution time and call amount of functions and methods.
  *
  * In conjunction with this aspect use an aspect that provides a implementation for the

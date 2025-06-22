@@ -12,7 +12,6 @@ Aspects
    generated_docs/default_logging_msg_builder_ah.rst
    generated_docs/default_profiler_ah.rst
    generated_docs/default_profiler_msg_builder_ah.rst
-   generated_docs/default_singleton_ah.rst
    generated_docs/default_stack_trace_ah.rst
    generated_docs/default_stack_trace_msg_builder_ah.rst
    generated_docs/error_code_converter_ah.rst

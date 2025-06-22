@@ -8,7 +8,7 @@ namespace acp {
     /**
      * \exception NullptrException
      * \brief Exception class for handling null pointer dereference errors.
-     * \file /src/util/nullptr_exception.hh
+     * \file /src/bug_detection/nullptr_exception.hh
      *
      * This class inherits from `std::runtime_error` and is used to indicate that a null pointer was dereferenced.
      */

@@ -5,7 +5,6 @@
 
 **Detailed Description:**
 
-    *
     The remaining non project wide configuration of the BeforeLogging aspect is the
     implementation of the printer interface. This aspect provides it with the
     std::cout printer interface implementation.

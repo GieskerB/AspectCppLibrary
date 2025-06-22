@@ -7,7 +7,7 @@ namespace acp {
 
     /**
      * \interface LoggingMsgBuilder
-     * \file src/error_handling/logging_msg_builder.hh
+     * \file src/functionality/logging_msg_builder.hh
      * \brief This interface defines the methods for building log messages.
      *
      * It is used by the logging aspects to create log messages before and after function execution.

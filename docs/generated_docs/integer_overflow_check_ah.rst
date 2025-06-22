@@ -50,10 +50,10 @@
 **Brief Description:** checks for an underflow in the 'int -= int' and 'int - int' operator.
 
 
-.. _integer_overflow_check_ah_int_sub_binary_check:
+.. _integer_overflow_check_ah_int_sub_unary_check:
 
-``int_sub_binary_check`` (Advice)
----------------------------------
+``int_sub_unary_check`` (Advice)
+--------------------------------
 
 **Brief Description:** checks for an underflow in the '--int' operator (spoiler: it cant happen :D).
 

@@ -117,7 +117,6 @@
 <li class="toctree-l2"><a class="reference internal" href="default_logging_msg_builder_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultLoggingMsgBuilder</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_profiler_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultProfiler</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_profiler_msg_builder_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultProfilerMsgBuilder</span></code> (Aspect)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="default_singleton_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultSingleton</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_stack_trace_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultStackTrace</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_stack_trace_msg_builder_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultStackTraceMsgBuilder</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="error_code_converter_ah.html"><code class="docutils literal notranslate"><span class="pre">ErrorCodeConverter</span></code> (Aspect)</a></li>
@@ -142,13 +141,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../classes.html">Classes</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="cerr_printer_hh.html"><code class="docutils literal notranslate"><span class="pre">CerrPrinter</span></code> (Class)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cout_printer_hh.html"><code class="docutils literal notranslate"><span class="pre">CoutPrinter</span></code> (Class)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="default_logging_msg_builder_hh.html"><code class="docutils literal notranslate"><span class="pre">DefaultLoggingMsgBuilder</span></code> (Class)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="default_profiler_msg_builder_hh.html"><code class="docutils literal notranslate"><span class="pre">DefaultProfilerMsgBuilder</span></code> (Class)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="default_stack_trace_msg_builder_hh.html"><code class="docutils literal notranslate"><span class="pre">DefaultStackTraceMsgBuilder</span></code> (Class)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ofstream_printer_hh.html"><code class="docutils literal notranslate"><span class="pre">OfstreamPrinter</span></code> (Class)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="p_thread_controller_hh.html"><code class="docutils literal notranslate"><span class="pre">PThreadController</span></code> (Class)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="profiler_data_hh.html"><code class="docutils literal notranslate"><span class="pre">ProfilerData</span></code> (Class)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="std_thread_controller_hh.html"><code class="docutils literal notranslate"><span class="pre">StdThreadController</span></code> (Class)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../exceptions.html">Exceptions</a><ul>
@@ -223,6 +217,13 @@ be printed if an uncaught exception leaves the function.</p>
 <blockquote>
 <div><p>In case a developer wants to change the way the stack trace is printed from the ground up,
 they can write an around advice for this function to replace its countent.</p>
+</div></blockquote>
+<p><strong>Parameters:</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">call_chain</span></code>: is a std::vector of strings that contains the call chain of the stack trace.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exception_msg</span></code>: is the message of the exception that was thrown.</p></li>
+</ul>
 </div></blockquote>
 </section>
 <section id="stack-trace-builder-advice-advice">

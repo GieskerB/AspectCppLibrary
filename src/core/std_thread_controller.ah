@@ -7,7 +7,7 @@
 
 /**
  * \aspect StdThreadController
- * \file src/util/std_thread_controller.hh
+ * \file src/core/std_thread_controller.hh
  * \brief Standard thread controller using std::mutex.
  *
  * This class implements the ThreadController interface using std::mutex for thread safety.

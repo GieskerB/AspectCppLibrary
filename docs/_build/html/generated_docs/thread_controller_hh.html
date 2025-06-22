@@ -117,7 +117,6 @@
 <li class="toctree-l2"><a class="reference internal" href="default_logging_msg_builder_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultLoggingMsgBuilder</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_profiler_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultProfiler</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_profiler_msg_builder_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultProfilerMsgBuilder</span></code> (Aspect)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="default_singleton_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultSingleton</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_stack_trace_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultStackTrace</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_stack_trace_msg_builder_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultStackTraceMsgBuilder</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="error_code_converter_ah.html"><code class="docutils literal notranslate"><span class="pre">ErrorCodeConverter</span></code> (Aspect)</a></li>
@@ -142,13 +141,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../classes.html">Classes</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="cerr_printer_hh.html"><code class="docutils literal notranslate"><span class="pre">CerrPrinter</span></code> (Class)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cout_printer_hh.html"><code class="docutils literal notranslate"><span class="pre">CoutPrinter</span></code> (Class)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="default_logging_msg_builder_hh.html"><code class="docutils literal notranslate"><span class="pre">DefaultLoggingMsgBuilder</span></code> (Class)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="default_profiler_msg_builder_hh.html"><code class="docutils literal notranslate"><span class="pre">DefaultProfilerMsgBuilder</span></code> (Class)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="default_stack_trace_msg_builder_hh.html"><code class="docutils literal notranslate"><span class="pre">DefaultStackTraceMsgBuilder</span></code> (Class)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ofstream_printer_hh.html"><code class="docutils literal notranslate"><span class="pre">OfstreamPrinter</span></code> (Class)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="p_thread_controller_hh.html"><code class="docutils literal notranslate"><span class="pre">PThreadController</span></code> (Class)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="profiler_data_hh.html"><code class="docutils literal notranslate"><span class="pre">ProfilerData</span></code> (Class)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="std_thread_controller_hh.html"><code class="docutils literal notranslate"><span class="pre">StdThreadController</span></code> (Class)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../exceptions.html">Exceptions</a><ul>
@@ -181,7 +175,7 @@ and getting the unique identifier for the current thread.
 To statically configure the thread controller at runtime, use an aspect that implements this interface.
 Example being the <cite>acp::std_thread_controller</cite>.</p>
 </div></blockquote>
-<p><em>In file</em> <code class="docutils literal notranslate"><span class="pre">src/util/thread_controller.hh</span></code></p>
+<p><em>In file</em> <code class="docutils literal notranslate"><span class="pre">src/core/thread_controller.hh</span></code></p>
 <section id="acquire-lock-function">
 <span id="thread-controller-hh-acquire-lock"></span><h2><code class="docutils literal notranslate"><span class="pre">acquire_lock</span></code> (Function)<a class="headerlink" href="#acquire-lock-function" title="Link to this heading">¶</a></h2>
 <p><strong>Brief Description:</strong> Acquire a lock for thread safety.</p>
@@ -199,6 +193,12 @@ that no other thread can modify them concurrently.</p>
 <div><p>This method returns a unique identifier for the current thread, which can
 be used for logging or debugging purposes.</p>
 </div></blockquote>
+<p><strong>Returns:</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>An integer representing the thread ID.</p></li>
+</ul>
+</div></blockquote>
 </section>
 <section id="release-lock-function">
 <span id="thread-controller-hh-release-lock"></span><h2><code class="docutils literal notranslate"><span class="pre">release_lock</span></code> (Function)<a class="headerlink" href="#release-lock-function" title="Link to this heading">¶</a></h2>
@@ -212,6 +212,12 @@ to allow other threads to acquire the lock.</p>
 <section id="synchronized-function-call-function">
 <span id="thread-controller-hh-synchronized-function-call"></span><h2><code class="docutils literal notranslate"><span class="pre">synchronized_function_call</span></code> (Function)<a class="headerlink" href="#synchronized-function-call-function" title="Link to this heading">¶</a></h2>
 <p><strong>Brief Description:</strong> Calls the argument given by the first argument with mutex exclusion.</p>
+<p><strong>Parameters:</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">func</span></code>: and std::function which should be called.</p></li>
+</ul>
+</div></blockquote>
 </section>
 </section>
 

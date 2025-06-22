@@ -12,7 +12,7 @@ namespace acp {
      * \exception ErrnoException
      * \brief ErrnoException is an exception that is thrown within the ErrorCodeConverterAspect when
      * a function call sets errno to a non-zero value.
-     * \file /src/util/errno_exception.hh
+     * \file /src/error_detection/errno_exception.hh
      */
 	class ErrnoException : public std::runtime_error {
 

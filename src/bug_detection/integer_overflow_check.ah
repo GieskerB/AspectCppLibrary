@@ -117,7 +117,7 @@ public:
     }
 
     /**
-     * \advice int_sub_binary_check
+     * \advice int_sub_unary_check
      * \brief checks for an underflow in the '--int' operator (spoiler: it cant happen :D).
      */
     advice within(where()) && int_sub_unary() && !ignore(): before() {

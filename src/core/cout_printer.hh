@@ -8,7 +8,7 @@ namespace acp {
 
 /**
  * \class CoutPrinter
- * \file src/util/cout_printer.hh
+ * \file src/core/cout_printer.hh
  * \brief CoutPrinter is a Printer implementation that prints messages to std::cout.
  *
  * This class implements the Printer interface and provides methods to print messages

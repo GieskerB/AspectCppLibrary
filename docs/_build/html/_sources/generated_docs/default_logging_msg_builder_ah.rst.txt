@@ -8,7 +8,7 @@
     It provides the library's default way to build log messages in a specific format.
     Staticly configuring the implementation project wide at compile time.
 
-*In file* ``src/util/default_logging_msg_builder.ah``
+*In file* ``src/functionality/default_logging_msg_builder.ah``
 
 .. _default_logging_msg_builder_ah_build_after_msg:
 

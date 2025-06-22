@@ -8,7 +8,7 @@ namespace acp {
     /**
      * \exception OverflowException
      * \brief Exception class for handling null pointer dereference errors.
-     * \file /src/util/overflow_exception.hh
+     * \file /src/bug_detection/overflow_exception.hh
      *
      * This class inherits from `std::runtime_error` and is used to indicate that a null pointer was dereferenced.
      */

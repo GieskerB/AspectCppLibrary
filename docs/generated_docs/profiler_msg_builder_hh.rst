@@ -12,4 +12,9 @@
 
 **Brief Description:** Builds a profiling message.
 
+**Parameters:**
+
+    * ``data``: the profiling data to be used for building the message.
+    * ``output``: reference to a string which will contain the output in the end.
+
 

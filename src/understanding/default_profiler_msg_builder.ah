@@ -5,7 +5,7 @@
 
 /**
  * \aspect DefaultProfilerMsgBuilder
- * \file src/util/default_profiler_msg_builder.ah
+ * \file src/understanding/default_profiler_msg_builder.ah
  * \brief Default implementation of the ProfilerMsgBuilder interface.
  *
  * It implements the ProfilerMsgBuilder interface to provide

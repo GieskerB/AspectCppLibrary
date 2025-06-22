@@ -7,7 +7,7 @@ namespace acp {
 
     /**
      * \class ProfilerData
-     * \file src/util/profiler_data.hh
+     * \file src/understanding/profiler_data.hh
      * \brief This class is used to store profiling data for functions.
      *
      * It keeps track of the number of calls and the total execution time.

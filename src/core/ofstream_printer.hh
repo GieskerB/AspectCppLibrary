@@ -8,7 +8,7 @@ namespace acp {
 
 /**
  * \class OfstreamPrinter
- * \file src/util/ofstream_printer.hh
+ * \file src/core/ofstream_printer.hh
  * \brief OfstreamPrinter is a Printer implementation that prints messages to a std::ofstream.
  *
  * This class implements the Printer interface and provides methods to print messages

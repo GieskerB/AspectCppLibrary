@@ -77,6 +77,11 @@
     In case a developer wants to change the way the stack trace is printed from the ground up,
     they can write an around advice for this function to replace its countent.
 
+**Parameters:**
+
+    * ``call_chain``: is a std::vector of strings that contains the call chain of the stack trace.
+    * ``exception_msg``: is the message of the exception that was thrown.
+
 
 .. _stack_trace_ah_stack-trace-builder-advice:
 
