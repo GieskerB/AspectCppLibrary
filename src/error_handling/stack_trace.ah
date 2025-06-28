@@ -9,8 +9,7 @@
 #include "../core/printer.hh"
 #include "../core/core_aspect.ah"
 #include "../core/predefined_pointcuts.ah"
-
-#include "stack_trace_msg_builder.hh"
+#include "../core/custom_to_string.hh"
 
 namespace acp {
 	/**
@@ -86,6 +85,28 @@ protected:
 		_editing_stack_trace = false;
 	}
 
+	/**
+	 * \function build_msg
+	 * \brief build_msg is a pure virtual function that builds a message for the stack trace.
+	 *
+	 * \param sign is the signature of the function that was called.
+	 * \param file is the name of the file where the function was called.
+	 * \param line is the line number where the function was called.
+	 * \param result is a reference to a string where the formatted message will be stored.
+	 */
+	inline static void build_msg(const char* sign, const char* file, int line, std::string& result) {
+        char buffer[12];
+        acp::to_string(buffer, line, sizeof(buffer));
+        result.clear();
+        result.append("at ");
+        result.append(sign);
+        result.append(" in (");
+        result.append(file);
+        result.append(":");
+        result.append(buffer);
+        result.append(")\n");
+	}
+
 public:
 
 	/**
@@ -131,7 +152,7 @@ public:
 		} catch (const std::exception& e) {
 			_editing_stack_trace = true;
 			std::string msg;
-			acp::stack_trace_msg_builder::build_msg(tjp->signature(), tjp->filename(), tjp->line(), msg);
+			build_msg(tjp->signature(), tjp->filename(), tjp->line(), msg);
 			_call_chain.push_back(msg);
 			// Print Stack Trace
 			print_stack_trace(_call_chain, e.what());
@@ -157,19 +178,19 @@ public:
 			if (_last_thrown == nullptr) {
 				// Just thrown
 				std::string msg;
-				acp::stack_trace_msg_builder::build_msg(tjp->signature(),tjp->filename(),tjp->line(),msg);
+				build_msg(tjp->signature(),tjp->filename(),tjp->line(),msg);
 				_call_chain.push_back(msg);
 				_last_thrown = &e;
 			} else if (typeid(*_last_thrown) == typeid(e) and std::string(_last_thrown->what()) == std::string(e.what())) {
 				// Exception is still the same
 				std::string msg;
-				acp::stack_trace_msg_builder::build_msg(tjp->signature(),tjp->filename(),tjp->line(),msg);
+				build_msg(tjp->signature(),tjp->filename(),tjp->line(),msg);
 				_call_chain.push_back(msg);
 			} else {
 				// Exception changed
 				_call_chain.clear();
 				std::string msg;
-				acp::stack_trace_msg_builder::build_msg(tjp->signature(),tjp->filename(),tjp->line(),msg);
+				build_msg(tjp->signature(),tjp->filename(),tjp->line(),msg);
 				_call_chain.push_back(msg);
 				_last_thrown = &e;
 			}

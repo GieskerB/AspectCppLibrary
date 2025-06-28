@@ -1,22 +1,22 @@
 #include "../prettier_tests.hh"
 
-[[acp::before_logging]] void foo() {
+void foo() {
 	std::cout << "FOO\n";
 }
 
-void bar() {
+[[acp::after_logging]] void bar(){
 	std::cout << "BAR\n";
 }
 
-[[acp::before_logging]] void foobar() {
+void foobar() {
 	std::cout << "FOOBAR\n";
 }
 
-void baz() {
+[[acp::before_logging]] void baz() {
 	std::cout << "BAZ\n";
 }
 
-[[acp::before_logging]] void qux() {
+[[acp::around_logging]]void qux() {
 	std::cout << "QUX\n";
 }
 
