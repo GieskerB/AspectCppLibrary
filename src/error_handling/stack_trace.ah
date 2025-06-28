@@ -87,7 +87,10 @@ protected:
 
 	/**
 	 * \function build_msg
-	 * \brief build_msg is a pure virtual function that builds a message for the stack trace.
+	 * \brief This methods is responsible for creating a well formatted stack trace message
+	 *
+	 * In case you want to change this, write an aspect which replaces this function with your
+	 * own implementation. Use a around advice for that.
 	 *
 	 * \param sign is the signature of the function that was called.
 	 * \param file is the name of the file where the function was called.

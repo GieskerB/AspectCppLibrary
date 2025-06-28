@@ -44,7 +44,10 @@ protected:
 
     /**
      * \function build_msg
-     * \brief A function to build a general log message.
+     * \brief This function is responsible for creating a well formatted general logging message.
+     *
+     * In case you want to change this, write an aspect which replaces this function with your
+	 * own implementation. Use a around advice for that.
      *
      * \param log_type The type of log message (e.g., "INFO", "ERROR", etc.).
      * \param msg The message to log.
@@ -68,7 +71,10 @@ protected:
 
     /**
      * \function build_before_msg
-     * \brief A function to build a log message specifically for the LoggingAspect.
+     * \brief This function is responsible for creating a well formatted entering logging message.
+     *
+     * In case you want to change this, write an aspect which replaces this function with your
+	 * own implementation. Use a around advice for that.
      *
      * \param signature The signature of the function being logged.
      * \param output The output string where the built message will be stored.
@@ -81,7 +87,10 @@ protected:
 
     /**
      * \function build_after_msg
-     * \brief A function to build a log message specifically for the AfterLoggingAspect.
+     * \brief This function is responsible for creating a well formatted leaving logging message.
+     *
+     * In case you want to change this, write an aspect which replaces this function with your
+	 * own implementation. Use a around advice for that.
      *
      * \param signature The signature of the function being logged.
      * \param output The output string where the built message will be stored.
