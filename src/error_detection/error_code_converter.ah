@@ -2,7 +2,7 @@
 #define __ACP__ERROR_CODE_CONVERTER_AH__
 
 #include "../core/core_aspect.ah"
-#include "../util/errno_exception.hh"
+#include "errno_exception.hh"
 
 #include <stdexcept>
 #include <cerrno>

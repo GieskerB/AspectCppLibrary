@@ -7,7 +7,7 @@ namespace acp {
 
     /**
      * \class ProfilerData
-     * \file src/util/profiler_data.hh
+     * \file src/understanding/profiler_data.hh
      * \brief This class is used to store profiling data for functions.
      *
      * It keeps track of the number of calls and the total execution time.
@@ -16,14 +16,16 @@ namespace acp {
      *
      */
     class ProfilerData {
-
     public:
-
-        static ProfilerData* &first () { static ProfilerData *data = 0; return data; }
         class ProfilerData* p_next;
         unsigned int m_calls;
         std::chrono::nanoseconds m_exec_time;
         const char* m_signature;
+
+        static ProfilerData* &first () {
+             static ProfilerData *data = 0; return data;
+        }
+
         ProfilerData (const char* n) : m_calls{0}, m_exec_time{0L}, m_signature{n} {
             ProfilerData *head = first ();
             first () = this;

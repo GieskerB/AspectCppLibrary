@@ -8,6 +8,7 @@
     In conjunction with this aspect use an aspect that provides a implementation for the
     acp::profiler_msg_builder::build_msg() method.
 
+*In file* ``src/understanding/profiler.ah``
 
 .. _profiler_ah_Constructor:
 
@@ -80,6 +81,10 @@
 
     This function is virtual and can therefore be overridden by derived classes.
     It is used to provide the register-advice with a function pointer to be called at exit.
+
+**Returns:**
+
+    * (In this case) A pointer to the simple_stat function, which prints the profiling data.
 
 
 .. _profiler_ah_where:

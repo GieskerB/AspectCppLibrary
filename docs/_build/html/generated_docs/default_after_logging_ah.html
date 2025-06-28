@@ -117,16 +117,17 @@
 <li class="toctree-l2"><a class="reference internal" href="default_logging_msg_builder_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultLoggingMsgBuilder</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_profiler_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultProfiler</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_profiler_msg_builder_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultProfilerMsgBuilder</span></code> (Aspect)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="default_singleton_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultSingleton</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_stack_trace_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultStackTrace</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_stack_trace_msg_builder_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultStackTraceMsgBuilder</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="error_code_converter_ah.html"><code class="docutils literal notranslate"><span class="pre">ErrorCodeConverter</span></code> (Aspect)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integer_overflow_check_ah.html"><code class="docutils literal notranslate"><span class="pre">IntegerOverflowCheck</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nullptr_check_ah.html"><code class="docutils literal notranslate"><span class="pre">NullptrCheck</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="p_thread_controller_ah.html"><code class="docutils literal notranslate"><span class="pre">PThreadController</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="profiler_ah.html"><code class="docutils literal notranslate"><span class="pre">Profiler</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="singleton_ah.html"><code class="docutils literal notranslate"><span class="pre">Singleton</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stack_trace_ah.html"><code class="docutils literal notranslate"><span class="pre">StackTrace</span></code> (Aspect)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="std_thread_controller_ah.html"><code class="docutils literal notranslate"><span class="pre">StdThreadController</span></code> (Aspect)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="synchronization_ah.html"><code class="docutils literal notranslate"><span class="pre">Synchronization</span></code> (Aspect)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../interfaces.html">Interfaces</a><ul>
@@ -140,18 +141,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../classes.html">Classes</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="cerr_printer_hh.html"><code class="docutils literal notranslate"><span class="pre">CerrPrinter</span></code> (Class)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cout_printer_hh.html"><code class="docutils literal notranslate"><span class="pre">CoutPrinter</span></code> (Class)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="default_logging_msg_builder_hh.html"><code class="docutils literal notranslate"><span class="pre">DefaultLoggingMsgBuilder</span></code> (Class)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="default_profiler_msg_builder_hh.html"><code class="docutils literal notranslate"><span class="pre">DefaultProfilerMsgBuilder</span></code> (Class)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="default_stack_trace_msg_builder_hh.html"><code class="docutils literal notranslate"><span class="pre">DefaultStackTraceMsgBuilder</span></code> (Class)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ofstream_printer_hh.html"><code class="docutils literal notranslate"><span class="pre">OfstreamPrinter</span></code> (Class)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="p_thread_controller_hh.html"><code class="docutils literal notranslate"><span class="pre">PThreadController</span></code> (Class)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="profiler_data_hh.html"><code class="docutils literal notranslate"><span class="pre">ProfilerData</span></code> (Class)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="std_thread_controller_hh.html"><code class="docutils literal notranslate"><span class="pre">StdThreadController</span></code> (Class)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../exceptions.html">Exceptions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="errno_exception_hh.html"><code class="docutils literal notranslate"><span class="pre">ErrnoException</span></code> (Exception)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nullptr_exception_hh.html"><code class="docutils literal notranslate"><span class="pre">NullptrException</span></code> (Exception)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overflow_exception_hh.html"><code class="docutils literal notranslate"><span class="pre">OverflowException</span></code> (Exception)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../others.html">Other Entities</a><ul>
@@ -173,11 +170,11 @@
 <p><strong>Brief Description:</strong> This aspect is a default implementation of the <cite>AfterLogging</cite> aspect.</p>
 <p><strong>Detailed Description:</strong></p>
 <blockquote>
-<div><p>In conjunction with this aspect use an aspect that provides a implementation for the
-acp::logging_msg_builder::build_after_msg() method.
-It uses the <cite>CoutPrinter</cite> to print the log message to the standard output.</p>
+<div><p>The remaining non project wide configuration of the AfterLogging aspect is the
+implementation of the printer interface. This aspect provides it with the
+std::cout printer interface implementation.</p>
 </div></blockquote>
-<p><em>In file</em> <code class="docutils literal notranslate"><span class="pre">src/functions/default_after_logging.ah</span></code></p>
+<p><em>In file</em> <code class="docutils literal notranslate"><span class="pre">src/functionality/default_after_logging.ah</span></code></p>
 </section>
 
 

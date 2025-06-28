@@ -6,10 +6,10 @@
 #include <vector>
 #include <cstdlib>
 
-#include "../util/printer.hh"
-#include "stack_trace_msg_builder.hh"
+#include "../core/printer.hh"
 #include "../core/core_aspect.ah"
 #include "../core/predefined_pointcuts.ah"
+#include "../core/custom_to_string.hh"
 
 namespace acp {
 	/**
@@ -68,8 +68,8 @@ protected:
 	 * In case a developer wants to change the way the stack trace is printed from the ground up,
 	 * they can write an around advice for this function to replace its countent.
 	 *
-	 * @param call_chain is a std::vector of strings that contains the call chain of the stack trace.
-	 * @param exception_msg is the message of the exception that was thrown.
+	 * \param call_chain is a std::vector of strings that contains the call chain of the stack trace.
+	 * \param exception_msg is the message of the exception that was thrown.
 	 */
 	void print_stack_trace(const std::vector<std::string>& call_chain, const char* exception_msg) {
 		_printer->print("\n\nUncaught exception ");
@@ -83,6 +83,31 @@ protected:
 		_last_thrown = nullptr;
 		_printer->print("\n");
 		_editing_stack_trace = false;
+	}
+
+	/**
+	 * \function build_msg
+	 * \brief This methods is responsible for creating a well formatted stack trace message
+	 *
+	 * In case you want to change this, write an aspect which replaces this function with your
+	 * own implementation. Use a around advice for that.
+	 *
+	 * \param sign is the signature of the function that was called.
+	 * \param file is the name of the file where the function was called.
+	 * \param line is the line number where the function was called.
+	 * \param result is a reference to a string where the formatted message will be stored.
+	 */
+	inline static void build_msg(const char* sign, const char* file, int line, std::string& result) {
+        char buffer[12];
+        acp::to_string(buffer, line, sizeof(buffer));
+        result.clear();
+        result.append("at ");
+        result.append(sign);
+        result.append(" in (");
+        result.append(file);
+        result.append(":");
+        result.append(buffer);
+        result.append(")\n");
 	}
 
 public:
@@ -130,7 +155,7 @@ public:
 		} catch (const std::exception& e) {
 			_editing_stack_trace = true;
 			std::string msg;
-			acp::stack_trace_msg_builder::build_msg(tjp->signature(), tjp->filename(), tjp->line(), msg);
+			build_msg(tjp->signature(), tjp->filename(), tjp->line(), msg);
 			_call_chain.push_back(msg);
 			// Print Stack Trace
 			print_stack_trace(_call_chain, e.what());
@@ -156,19 +181,19 @@ public:
 			if (_last_thrown == nullptr) {
 				// Just thrown
 				std::string msg;
-				acp::stack_trace_msg_builder::build_msg(tjp->signature(),tjp->filename(),tjp->line(),msg);
+				build_msg(tjp->signature(),tjp->filename(),tjp->line(),msg);
 				_call_chain.push_back(msg);
 				_last_thrown = &e;
 			} else if (typeid(*_last_thrown) == typeid(e) and std::string(_last_thrown->what()) == std::string(e.what())) {
 				// Exception is still the same
 				std::string msg;
-				acp::stack_trace_msg_builder::build_msg(tjp->signature(),tjp->filename(),tjp->line(),msg);
+				build_msg(tjp->signature(),tjp->filename(),tjp->line(),msg);
 				_call_chain.push_back(msg);
 			} else {
 				// Exception changed
 				_call_chain.clear();
 				std::string msg;
-				acp::stack_trace_msg_builder::build_msg(tjp->signature(),tjp->filename(),tjp->line(),msg);
+				build_msg(tjp->signature(),tjp->filename(),tjp->line(),msg);
 				_call_chain.push_back(msg);
 				_last_thrown = &e;
 			}

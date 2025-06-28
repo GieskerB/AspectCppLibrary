@@ -3,7 +3,7 @@ import re
 
 class DocEntry:
     """Represents a single documented item (e.g., aspect, pointcut, attribute)."""
-    def __init__(self, doc_type, name, brief="", description=None, source_file="", line_num=-1, see_also=None, file_tag=""):
+    def __init__(self, doc_type, name, brief="", description=None, source_file="", line_num=-1, see_also=None, file_tag="", params = [], returns = []):
         self.doc_type = doc_type # e.g., 'aspect', 'pointcut', 'attribute'
         self.name = name
         self.brief = brief
@@ -11,7 +11,9 @@ class DocEntry:
         self.source_file = source_file # Original file name (e.g., core_aspect.ah)
         self.line_num = line_num # Starting line number of the comment
         self.see_also = see_also if see_also is not None else [] # For \see, can be multiple entries
-        self.file_tag = file_tag # For \file
+        self.params = params
+        self.returns = returns
+        self.file_tag = file_tag
 
     def _format_see_link(self, see_item_text):
         """
@@ -51,6 +53,23 @@ class DocEntry:
                     rst_content.append(f'    {line}\n')
             rst_content.append('\n')
 
+        # Add \param information
+        if self.params:
+            rst_content.append('**Parameters:**\n\n')
+            for param_name, param_desc in self.params:
+                rst_content.append(f'    * ``{param_name}``: {param_desc}\n')
+            rst_content.append('\n')
+
+        # Add \return information
+        if self.returns:
+            rst_content.append('**Returns:**\n\n')
+            for return_desc in self.returns:
+                # If the description spans multiple lines, ensure proper indentation
+                return_lines = return_desc.splitlines()
+                rst_content.append(f'    * {return_lines[0]}\n')
+                for rl in return_lines[1:]: rst_content.append(f'      {rl}\n') # Indent subsequent lines
+            rst_content.append('\n')
+
         # Add \file information if present
         if self.file_tag:
             rst_content.append(f'*In file* ``{self.file_tag}``\n')
@@ -80,7 +99,9 @@ def parse_comment_block(comment_lines_raw):
         'brief': '',
         'description': [],
         'file_tag': '', # For \file
-        'see_also': []  # For \see
+        'see_also': [],  # For \see
+        'params': [],    # New: For \param
+        'returns': []    # New: For \return
     }
 
     # Clean lines from comment markers first
@@ -127,6 +148,12 @@ def parse_comment_block(comment_lines_raw):
                 doc_info['file_tag'] = value
             elif keyword == 'see': # Handle \see keyword
                 doc_info['see_also'].append(value)
+            elif keyword == 'param': # Handle \param keyword
+                param_match = re.match(r'(\S+)\s*(.*)', value)
+                if param_match:
+                    doc_info['params'].append((param_match.group(1), param_match.group(2).strip()))
+            elif keyword == 'return': # Handle \return keyword
+                doc_info['returns'].append(value)
             # Add more specific keyword handling if needed, otherwise it's just general description
         else:
             doc_info['description'].append(line)
@@ -170,7 +197,9 @@ def extract_all_doc_entries_from_file(filepath):
                     source_file=filepath,
                     line_num=comment_start_line,
                     see_also=parsed_info['see_also'], # Pass see_also
-                    file_tag=parsed_info['file_tag']  # Pass file_tag
+                    file_tag=parsed_info['file_tag'],  # Pass file_tag
+                    params=parsed_info['params'],      # New: Pass params
+                    returns=parsed_info['returns']     # New: Pass returns
                 ))
             current_comment_lines = [] # Reset for next comment
         elif in_block_comment:
@@ -222,6 +251,22 @@ def process_project_directory(root_dir, output_rst_dir):
                                 for line in main_heading_entity.description:
                                     if line.strip():
                                         f.write(f'    {line}\n')
+                                f.write('\n')
+
+                            # Add \param information for main entity
+                            if main_heading_entity.params:
+                                f.write('**Parameters:**\n\n')
+                                for param_name, param_desc in main_heading_entity.params:
+                                    f.write(f'    * ``{param_name}``: {param_desc}\n')
+                                f.write('\n')
+
+                            # Add \return information for main entity
+                            if main_heading_entity.returns:
+                                f.write('**Returns:**\n\n')
+                                for return_desc in main_heading_entity.returns:
+                                    return_lines = return_desc.splitlines()
+                                    f.write(f'    * {return_lines[0]}\n')
+                                    for rl in return_lines[1:]: f.write(f'      {rl}\n')
                                 f.write('\n')
 
                             # Source File and Line Number for the main heading entity

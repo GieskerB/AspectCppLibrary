@@ -8,7 +8,7 @@
     This class implements the ThreadController interface using pthread mutexes for thread safety.
     It provides methods to acquire and release locks, and to get the unique identifier of the current thread.
 
-*In file* ``src/util/p_thread_controller.hh``
+*In file* ``src/core/p_thread_controller.hh``
 
 .. _p_thread_controller_ah_acquire_lock:
 
@@ -30,4 +30,11 @@
 -------------------------
 
 *See:* :ref:`acp::thread_controller::release_lock <thread_controller_hh_release_lock>`
+
+.. _p_thread_controller_ah_synchronized_advice:
+
+``synchronized_advice`` (Advice)
+--------------------------------
+
+*See:* :ref:`acp::thread_controller::synchronized_function_call <thread_controller_hh_synchronized_function_call>`
 

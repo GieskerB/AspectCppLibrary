@@ -41,4 +41,5 @@
     form the default implementation.
     The default implementation is the default_where() pointcut.
 
+*In file* ``src/core/core_aspect.hh``
 

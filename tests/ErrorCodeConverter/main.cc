@@ -1,5 +1,6 @@
 #include "../prettier_tests.hh"
-#include "../../src/util/errno_exception.hh"
+#include "../../src/error_detection/errno_exception.hh"
+
 #include <iostream>
 #include <cstring>
 #include <cstdio>
