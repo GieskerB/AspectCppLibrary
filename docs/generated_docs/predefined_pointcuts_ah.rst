@@ -1,12 +1,7 @@
-predefined_pointcuts.ah Documentation
+``PredefinedPointcuts``
 ====================================
-
-All documented entities found in ``predefined_pointcuts.ah``:
-
-.. _predefined_pointcuts_ah_PredefinedPointcuts:
-
-``PredefinedPointcuts`` (Pointcuts)
------------------------------------
+..
+	(Collection)
 
 **Brief Description:** This file contains predefined pointcuts that can be used in aspects.
 

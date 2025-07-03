@@ -1,5 +1,7 @@
-``ErrorCodeConverter`` (Aspect)
+``ErrorCodeConverter``
 ===============================
+..
+	(Aspect)
 
 **Brief Description:** This aspect is used to convert error codes from standard library functions into exceptions.
 

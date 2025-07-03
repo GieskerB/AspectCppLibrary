@@ -1,5 +1,7 @@
-``Synchronization`` (Aspect)
+``Synchronization``
 ============================
+..
+	(Aspect)
 
 **Brief Description:** This aspect implements a thread execution for selected functions.
 

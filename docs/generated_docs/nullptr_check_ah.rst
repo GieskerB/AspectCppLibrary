@@ -1,5 +1,7 @@
-``NullptrCheck`` (Aspect)
+``NullptrCheck``
 =========================
+..
+	(Aspect)
 
 **Brief Description:** Aspect that checks for null pointer dereferences.
 

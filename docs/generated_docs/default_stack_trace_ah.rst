@@ -1,5 +1,7 @@
-``DefaultStackTrace`` (Aspect)
+``DefaultStackTrace``
 ==============================
+..
+	(Aspect)
 
 **Brief Description:** DefaultStackTrace is the default aspect for stack traces in this library.
 

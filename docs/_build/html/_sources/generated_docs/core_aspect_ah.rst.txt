@@ -1,5 +1,7 @@
-``CoreAspect`` (Aspect)
+``CoreAspect``
 =======================
+..
+	(Aspect)
 
 **Brief Description:** CoreAspect is the base aspect for all aspects in this ACP library.
 

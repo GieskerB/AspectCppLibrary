@@ -1,5 +1,7 @@
-``PThreadController`` (Aspect)
+``PThreadController``
 ==============================
+..
+	(Aspect)
 
 **Brief Description:** Thread controller using pthreads for synchronization.
 

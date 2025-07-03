@@ -1,5 +1,7 @@
-``ErrnoException`` (Exception)
+``ErrnoException``
 ==============================
+..
+	(Exception)
 
 **Brief Description:** ErrnoException is an exception that is thrown within the ErrorCodeConverterAspect when
 

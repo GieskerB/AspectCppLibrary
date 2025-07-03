@@ -1,5 +1,7 @@
-``Printer`` (Interface)
+``Printer``
 =======================
+..
+	(Interface)
 
 **Brief Description:** Printer is an interface for printing messages.
 

@@ -27,7 +27,7 @@ def categorize_rst_file(filepath):
                 if i > 5: # Don't read too many lines, heading should be near the top
                     break
                 # Look for patterns like "Name (Type)"
-                match = re.search(r'\((Aspect|Class|Interface|Exception|Enum|Struct|Function)\)', line, re.IGNORECASE)
+                match = re.search(r'\((Aspect|Class|Interface|Exception|Function)\)', line, re.IGNORECASE)
                 if match:
                     # Return the lowercased type
                     return match.group(1).lower()

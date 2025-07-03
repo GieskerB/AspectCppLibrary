@@ -1,5 +1,7 @@
-``OverflowException`` (Exception)
+``OverflowException``
 =================================
+..
+	(Exception)
 
 **Brief Description:** Exception class for handling null pointer dereference errors.
 

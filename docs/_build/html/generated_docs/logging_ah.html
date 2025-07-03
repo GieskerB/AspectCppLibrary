@@ -7,7 +7,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>CoreAspect &mdash; AspectC++ Library 0.1.0 documentation</title>
+  <title>Logging &mdash; AspectC++ Library 0.1.0 documentation</title>
   
 
   
@@ -30,8 +30,8 @@
   <link rel="stylesheet" href="../_static/css/theme.min.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="DefaultLogging" href="default_logging_ah.html" />
-    <link rel="prev" title="Aspects" href="../aspects.html" /> 
+    <link rel="next" title="NullptrCheck" href="nullptr_check_ah.html" />
+    <link rel="prev" title="IntegerOverflowCheck" href="integer_overflow_check_ah.html" /> 
 
 </head>
 
@@ -72,13 +72,13 @@
         
           <li><a href="../aspects.html">Aspects</a></li>
         
-      <li><code class="docutils literal notranslate"><span class="pre">CoreAspect</span></code></li>
+      <li><code class="docutils literal notranslate"><span class="pre">Logging</span></code></li>
     
     
       <li class="breadcrumbs-aside">
         
             
-            <a href="../_sources/generated_docs/core_aspect_ah.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/generated_docs/logging_ah.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -109,13 +109,13 @@
                             
                                 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../aspects.html">Aspects</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">CoreAspect</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_aspect_ah.html"><code class="docutils literal notranslate"><span class="pre">CoreAspect</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_logging_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultLogging</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_profiler_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultProfiler</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_stack_trace_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultStackTrace</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="error_code_converter_ah.html"><code class="docutils literal notranslate"><span class="pre">ErrorCodeConverter</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="integer_overflow_check_ah.html"><code class="docutils literal notranslate"><span class="pre">IntegerOverflowCheck</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="logging_ah.html"><code class="docutils literal notranslate"><span class="pre">Logging</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">Logging</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="nullptr_check_ah.html"><code class="docutils literal notranslate"><span class="pre">NullptrCheck</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="p_thread_controller_ah.html"><code class="docutils literal notranslate"><span class="pre">PThreadController</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="profiler_ah.html"><code class="docutils literal notranslate"><span class="pre">Profiler</span></code></a></li>
@@ -157,39 +157,102 @@
                     <div class="document">
                         
                             
-  <section id="coreaspect">
-<h1><code class="docutils literal notranslate"><span class="pre">CoreAspect</span></code><a class="headerlink" href="#coreaspect" title="Link to this heading">¶</a></h1>
-<p><strong>Brief Description:</strong> CoreAspect is the base aspect for all aspects in this ACP library.</p>
+  <section id="logging">
+<h1><code class="docutils literal notranslate"><span class="pre">Logging</span></code><a class="headerlink" href="#logging" title="Link to this heading">¶</a></h1>
+<p><strong>Brief Description:</strong> This aspect is used to log the execution of a function.</p>
 <p><strong>Detailed Description:</strong></p>
 <blockquote>
-<div><p>CoreAspect defines base for all main aspects of this library. It ensures that all aspects
-have a where pointcut and an ignore pointcut.
-The where pointcut is used in the main advice of each aspect. It denotes on which join
-points (where the aspect should be applied).
-The ignore pointcut is used to define which join points should be ignored by the aspect.</p>
+<div><p>This aspect supports three different attributes: acp::after_logging, acp::around_logging and acp::before_logging.
+Depending on the choosen attribute the logging happens at the expected point relative to the execution
+Similar to the <cite>AfterLogging</cite> aspect, this aspect logs the function signature - but only - before the function will execute.</p>
 </div></blockquote>
-<p><em>In file</em> <code class="docutils literal notranslate"><span class="pre">src/core/core_aspect.ah</span></code></p>
-<section id="ignore-pointcut">
-<span id="core-aspect-ah-ignore"></span><h2><code class="docutils literal notranslate"><span class="pre">ignore</span></code> (Pointcut)<a class="headerlink" href="#ignore-pointcut" title="Link to this heading">¶</a></h2>
-<p><strong>Brief Description:</strong> A virtual placeholder for the pointcut that describes which join points</p>
+<p><em>In file</em> <code class="docutils literal notranslate"><span class="pre">src/functionality/logging.ah</span></code></p>
+<section id="after-logging-attribute">
+<span id="logging-ah-after-logging"></span><h2><code class="docutils literal notranslate"><span class="pre">after_logging</span></code> (Attribute)<a class="headerlink" href="#after-logging-attribute" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> Functions with this attribute will be logged after their execution.</p>
+</section>
+<section id="around-logging-attribute">
+<span id="logging-ah-around-logging"></span><h2><code class="docutils literal notranslate"><span class="pre">around_logging</span></code> (Attribute)<a class="headerlink" href="#around-logging-attribute" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> Functions with this attribute will be logged before and after their execution.</p>
+</section>
+<section id="before-logging-attribute">
+<span id="logging-ah-before-logging"></span><h2><code class="docutils literal notranslate"><span class="pre">before_logging</span></code> (Attribute)<a class="headerlink" href="#before-logging-attribute" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> Functions with this attribute will be logged before their execution.</p>
+</section>
+<section id="build-after-msg-function">
+<span id="logging-ah-build-after-msg"></span><h2><code class="docutils literal notranslate"><span class="pre">build_after_msg</span></code> (Function)<a class="headerlink" href="#build-after-msg-function" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> This function is responsible for creating a well formatted leaving logging message.</p>
 <p><strong>Detailed Description:</strong></p>
 <blockquote>
-<div><p>should be ignored by the aspect.
-It is recommended to use and extend a pointcut definition like with:
-“% &lt;AspectName&gt;::…::%(…)” || “% acp::…::%(…)”</p>
+<div><p>In case you want to change this, write an aspect which replaces this function with your
+own implementation. Use a around advice for that.</p>
+</div></blockquote>
+<p><strong>Parameters:</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">signature</span></code>: The signature of the function being logged.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output</span></code>: The output string where the built message will be stored.</p></li>
+</ul>
 </div></blockquote>
 </section>
-<section id="where-pointcut">
-<span id="core-aspect-ah-where"></span><h2><code class="docutils literal notranslate"><span class="pre">where</span></code> (Pointcut)<a class="headerlink" href="#where-pointcut" title="Link to this heading">¶</a></h2>
-<p><strong>Brief Description:</strong> A virtual placeholder for the pointcut that is used used in the main</p>
+<section id="build-before-msg-function">
+<span id="logging-ah-build-before-msg"></span><h2><code class="docutils literal notranslate"><span class="pre">build_before_msg</span></code> (Function)<a class="headerlink" href="#build-before-msg-function" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> This function is responsible for creating a well formatted entering logging message.</p>
 <p><strong>Detailed Description:</strong></p>
 <blockquote>
-<div><p>advice of each aspect.
-This pointcut is can be overridden by derived aspects if they want to change it
-form the default implementation.
-The default implementation is the default_where() pointcut.</p>
+<div><p>In case you want to change this, write an aspect which replaces this function with your
+own implementation. Use a around advice for that.</p>
 </div></blockquote>
-<p><em>In file</em> <code class="docutils literal notranslate"><span class="pre">src/core/core_aspect.hh</span></code></p>
+<p><strong>Parameters:</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">signature</span></code>: The signature of the function being logged.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output</span></code>: The output string where the built message will be stored.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="build-msg-function">
+<span id="logging-ah-build-msg"></span><h2><code class="docutils literal notranslate"><span class="pre">build_msg</span></code> (Function)<a class="headerlink" href="#build-msg-function" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> This function is responsible for creating a well formatted general logging message.</p>
+<p><strong>Detailed Description:</strong></p>
+<blockquote>
+<div><p>In case you want to change this, write an aspect which replaces this function with your
+own implementation. Use a around advice for that.</p>
+</div></blockquote>
+<p><strong>Parameters:</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">log_type</span></code>: The type of log message (e.g., “INFO”, “ERROR”, etc.).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">msg</span></code>: The message to log.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output</span></code>: The output string where the built message will be stored.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="ignore-pointcut">
+<span id="logging-ah-ignore"></span><h2><code class="docutils literal notranslate"><span class="pre">ignore</span></code> (Pointcut)<a class="headerlink" href="#ignore-pointcut" title="Link to this heading">¶</a></h2>
+<p><em>See:</em> <a class="reference internal" href="core_aspect_ah.html#core-aspect-ah-ignore"><span class="std std-ref">CoreAspect::ignore</span></a></p>
+</section>
+<section id="logging-advice-after-advice">
+<span id="logging-ah-logging-adviceafter"></span><h2><code class="docutils literal notranslate"><span class="pre">logging-advice[after]</span></code> (Advice)<a class="headerlink" href="#logging-advice-after-advice" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> This advice handles the logging behavior after the function executes.</p>
+</section>
+<section id="logging-advice-around-advice">
+<span id="logging-ah-logging-advicearound"></span><h2><code class="docutils literal notranslate"><span class="pre">logging-advice[around]</span></code> (Advice)<a class="headerlink" href="#logging-advice-around-advice" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> This advice handles the logging behavior before and after the function executes.</p>
+</section>
+<section id="logging-advice-before-advice">
+<span id="logging-ah-logging-advicebefore"></span><h2><code class="docutils literal notranslate"><span class="pre">logging-advice[before]</span></code> (Advice)<a class="headerlink" href="#logging-advice-before-advice" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> This advice handles the logging behavior before the function executes.</p>
+</section>
+<section id="where-pointcut">
+<span id="logging-ah-where"></span><h2><code class="docutils literal notranslate"><span class="pre">where</span></code> (Pointcut)<a class="headerlink" href="#where-pointcut" title="Link to this heading">¶</a></h2>
+<p><strong>Detailed Description:</strong></p>
+<blockquote>
+<div><p>A little bonus for this aspect is that there are 3 attributes [after, around, before]
+Since, where can no be every attribute at once, the around_logging is the default
+implementation. However, separate advices for the remaining attributes is provided anyways.</p>
+</div></blockquote>
+<p><em>See:</em> <a class="reference internal" href="core_aspect_ah.html#core-aspect-ah-where"><span class="std std-ref">CoreAspect::where</span></a></p>
 </section>
 </section>
 

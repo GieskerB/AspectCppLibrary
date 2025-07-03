@@ -1,5 +1,7 @@
-``Profiler`` (Aspect)
+``Profiler``
 =====================
+..
+	(Aspect)
 
 **Brief Description:** This aspect is used to profile the execution time and call amount of functions and methods.
 
@@ -16,6 +18,24 @@
 -----------------------------
 
 **Brief Description:** This constructor initializes the profiler with a builder, printer and thread controller.
+
+
+.. _profiler_ah_build_msg:
+
+``build_msg`` (Function)
+------------------------
+
+**Brief Description:** This function is responsible for creating a well formatted profiler message.
+
+**Detailed Description:**
+
+    In case you want to change this, write an aspect which replaces this function with your
+    own implementation. Use a around advice for that.
+
+**Parameters:**
+
+    * ``data``: the profiling data to be used for building the message.
+    * ``output``: reference to a string which will contain the output in the end.
 
 
 .. _profiler_ah_ignore:

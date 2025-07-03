@@ -2,7 +2,7 @@
 #define __ACP__PREDEFINED_POINTCUTS_AH__
 
 /**
- * \pointcuts PredefinedPointcuts
+ * \collection PredefinedPointcuts
  * \file src/core/predefined_pointcuts.ah
  * \brief This file contains predefined pointcuts that can be used in aspects.
  *

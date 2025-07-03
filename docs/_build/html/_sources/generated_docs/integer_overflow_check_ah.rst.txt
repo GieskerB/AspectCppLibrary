@@ -1,5 +1,7 @@
-``IntegerOverflowCheck`` (Aspect)
+``IntegerOverflowCheck``
 =================================
+..
+	(Aspect)
 
 **Brief Description:** Aspect that checks for null pointer dereferences.
 

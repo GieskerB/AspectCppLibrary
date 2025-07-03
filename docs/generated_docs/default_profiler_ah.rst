@@ -1,5 +1,7 @@
-``DefaultProfiler`` (Aspect)
+``DefaultProfiler``
 ============================
+..
+	(Aspect)
 
 **Brief Description:** DefaultProfiler is the default aspect for profiling in this ACP library.
 

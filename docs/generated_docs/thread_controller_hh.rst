@@ -1,5 +1,7 @@
-``ThreadController`` (Interface)
+``ThreadController``
 ================================
+..
+	(Interface)
 
 **Brief Description:** Interface for thread control mechanisms.
 

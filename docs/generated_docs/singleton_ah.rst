@@ -1,5 +1,7 @@
-``Singleton`` (Aspect)
+``Singleton``
 ======================
+..
+	(Aspect)
 
 **Brief Description:** This aspect implements the Singleton design pattern.
 

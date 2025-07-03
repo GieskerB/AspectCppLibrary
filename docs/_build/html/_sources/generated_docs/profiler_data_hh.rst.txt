@@ -1,5 +1,7 @@
-``ProfilerData`` (Class)
+``ProfilerData``
 ========================
+..
+	(Class)
 
 **Brief Description:** This class is used to store profiling data for functions.
 

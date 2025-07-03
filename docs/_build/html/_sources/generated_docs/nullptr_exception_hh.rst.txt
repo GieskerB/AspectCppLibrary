@@ -1,5 +1,7 @@
-``NullptrException`` (Exception)
+``NullptrException``
 ================================
+..
+	(Exception)
 
 **Brief Description:** Exception class for handling null pointer dereference errors.
 

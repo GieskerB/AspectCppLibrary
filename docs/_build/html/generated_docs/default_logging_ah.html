@@ -7,7 +7,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ProfilerData &mdash; AspectC++ Library 0.1.0 documentation</title>
+  <title>DefaultLogging &mdash; AspectC++ Library 0.1.0 documentation</title>
   
 
   
@@ -30,8 +30,8 @@
   <link rel="stylesheet" href="../_static/css/theme.min.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Exceptions" href="../exceptions.html" />
-    <link rel="prev" title="OfstreamPrinter" href="ofstream_printer_hh.html" /> 
+    <link rel="next" title="DefaultProfiler" href="default_profiler_ah.html" />
+    <link rel="prev" title="CoreAspect" href="core_aspect_ah.html" /> 
 
 </head>
 
@@ -70,15 +70,15 @@
     
       <li><a href="../index.html">Docs</a></li>
         
-          <li><a href="../classes.html">Classes</a></li>
+          <li><a href="../aspects.html">Aspects</a></li>
         
-      <li><code class="docutils literal notranslate"><span class="pre">ProfilerData</span></code></li>
+      <li><code class="docutils literal notranslate"><span class="pre">DefaultLogging</span></code></li>
     
     
       <li class="breadcrumbs-aside">
         
             
-            <a href="../_sources/generated_docs/profiler_data_hh.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/generated_docs/default_logging_ah.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -108,9 +108,9 @@
                             
                             
                                 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../aspects.html">Aspects</a><ul>
+<li class="toctree-l1 current"><a class="reference internal" href="../aspects.html">Aspects</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="core_aspect_ah.html"><code class="docutils literal notranslate"><span class="pre">CoreAspect</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="default_logging_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultLogging</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">DefaultLogging</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_profiler_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultProfiler</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_stack_trace_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultStackTrace</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="error_code_converter_ah.html"><code class="docutils literal notranslate"><span class="pre">ErrorCodeConverter</span></code></a></li>
@@ -130,11 +130,11 @@
 <li class="toctree-l2"><a class="reference internal" href="thread_controller_hh.html"><code class="docutils literal notranslate"><span class="pre">ThreadController</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="reference internal" href="../classes.html">Classes</a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../classes.html">Classes</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="cerr_printer_hh.html"><code class="docutils literal notranslate"><span class="pre">CerrPrinter</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="cout_printer_hh.html"><code class="docutils literal notranslate"><span class="pre">CoutPrinter</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="ofstream_printer_hh.html"><code class="docutils literal notranslate"><span class="pre">OfstreamPrinter</span></code></a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">ProfilerData</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiler_data_hh.html"><code class="docutils literal notranslate"><span class="pre">ProfilerData</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../exceptions.html">Exceptions</a><ul>
@@ -157,16 +157,16 @@
                     <div class="document">
                         
                             
-  <section id="profilerdata">
-<h1><code class="docutils literal notranslate"><span class="pre">ProfilerData</span></code><a class="headerlink" href="#profilerdata" title="Link to this heading">¶</a></h1>
-<p><strong>Brief Description:</strong> This class is used to store profiling data for functions.</p>
+  <section id="defaultlogging">
+<h1><code class="docutils literal notranslate"><span class="pre">DefaultLogging</span></code><a class="headerlink" href="#defaultlogging" title="Link to this heading">¶</a></h1>
+<p><strong>Brief Description:</strong> This aspect is a default implementation of the <cite>Logging</cite> aspect.</p>
 <p><strong>Detailed Description:</strong></p>
 <blockquote>
-<div><p>It keeps track of the number of calls and the total execution time.
-By using a linked list, it allows for easy accumulation of profiling
-data across multiple function calls.</p>
+<div><p>The remaining non project wide configuration of the Logging aspect is the
+implementation of the printer interface. This aspect provides it with the
+std::cout printer interface implementation.</p>
 </div></blockquote>
-<p><em>In file</em> <code class="docutils literal notranslate"><span class="pre">src/understanding/profiler_data.hh</span></code></p>
+<p><em>In file</em> <code class="docutils literal notranslate"><span class="pre">src/functionality/default_logging.ah</span></code></p>
 </section>
 
 

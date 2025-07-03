@@ -43,16 +43,19 @@ aspect StackTrace : public CoreAspect {
 
 private:
 
+	// Useing this wrapper function to create static threadlocal header only variable in c++11
 	inline bool& editing_stack_trace_instance() {
 		static thread_local bool _editing_stack_trace = false;
 		return _editing_stack_trace;
 	}
 
+	// Useing this wrapper function to create static threadlocal header only variable in c++11
 	inline std::exception const*& last_thrown_instance() {
 		static thread_local std::exception const* _last_thrown = nullptr;
 		return _last_thrown;
 	}
 
+	// Useing this wrapper function to create static threadlocal header only variable in c++11
 	inline std::vector<std::string>& call_chain_instance() {
 		static thread_local std::vector<std::string> _call_chain{};
 		return _call_chain;

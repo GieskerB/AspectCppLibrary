@@ -1,5 +1,7 @@
-``CerrPrinter`` (Class)
+``CerrPrinter``
 =======================
+..
+	(Class)
 
 **Brief Description:** CerrPrinter is a Printer implementation that prints messages to std::cerr.
 

@@ -1,5 +1,7 @@
-``OfstreamPrinter`` (Class)
+``OfstreamPrinter``
 ===========================
+..
+	(Class)
 
 **Brief Description:** OfstreamPrinter is a Printer implementation that prints messages to a std::ofstream.
 

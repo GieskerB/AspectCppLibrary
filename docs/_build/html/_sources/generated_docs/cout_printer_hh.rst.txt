@@ -1,5 +1,7 @@
-``CoutPrinter`` (Class)
+``CoutPrinter``
 =======================
+..
+	(Class)
 
 **Brief Description:** CoutPrinter is a Printer implementation that prints messages to std::cout.
 

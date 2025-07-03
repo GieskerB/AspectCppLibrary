@@ -1,5 +1,7 @@
-``StdThreadController`` (Aspect)
+``StdThreadController``
 ================================
+..
+	(Aspect)
 
 **Brief Description:** Standard thread controller using std::mutex.
 
