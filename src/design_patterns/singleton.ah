@@ -2,6 +2,7 @@
 #define __ACP__SINGLETON_AH__
 
 #include "../core/core_aspect.ah"
+#include "../core/low_priority.ah"
 #include "../core/thread_controller.hh"
 
 namespace acp {
@@ -41,7 +42,7 @@ namespace acp {
  * be thrown.
  *
  */
-aspect Singleton {
+aspect Singleton : public CoreAspect, public LowPriority {
 
     public:
 

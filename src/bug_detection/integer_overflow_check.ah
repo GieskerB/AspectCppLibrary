@@ -2,6 +2,7 @@
 #define __ACP__INTEGER_OVERFLOW_CHECK_AH__
 
 #include "../core/core_aspect.ah"
+#include "../core/medium_priority.ah"
 #include "overflow_exception.hh"
 
 #include <limits>
@@ -25,7 +26,7 @@ namespace acp {
  * addition or subtraction on integers. At the moment this check is performed for every standard int
  * addition and subtraction operator (all 5 binary and all 5 unary).
  */
-aspect IntegerOverflowCheck : public CoreAspect {
+aspect IntegerOverflowCheck : public CoreAspect, public MediumPriority {
 
     // This design is very expandable. simple copy the current version used for integers and expand
     // it with other types like short, long or char.

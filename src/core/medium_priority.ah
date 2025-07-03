@@ -1,0 +1,10 @@
+#ifndef __ACP__MEDIUM_PRIORITY_AH__
+#define __ACP__MEDIUM_PRIORITY_AH__
+
+aspect MediumPriority {
+public:
+    MediumPriority() {};
+    virtual ~MediumPriority() = default;
+};
+
+#endif // __ACP__MEDIUM_PRIORITY_AH__

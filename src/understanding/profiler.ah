@@ -2,6 +2,7 @@
 #define __ACP__PROFILER_AH__
 
 #include "../core/core_aspect.ah"
+#include "../core/low_priority.ah"
 #include "../core/predefined_pointcuts.ah"
 #include "../core/printer.hh"
 #include "../core/thread_controller.hh"
@@ -25,7 +26,7 @@ namespace acp {
  * acp::profiler_msg_builder::build_msg() method.
  *
  */
-aspect Profiler : public CoreAspect {
+aspect Profiler : public CoreAspect, LowPriority{
 
 	static acp::Printer* _printer_static;
 	acp::Printer* _printer;

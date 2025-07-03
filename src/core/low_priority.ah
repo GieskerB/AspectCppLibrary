@@ -1,0 +1,10 @@
+#ifndef __ACP__LOW_PRIORITY_AH__
+#define __ACP__LOW_PRIORITY_AH__
+
+aspect LowPriority {
+public:
+    LowPriority() {};
+    virtual ~LowPriority() = default;
+};
+
+#endif // __ACP__LOW_PRIORITY_AH__

@@ -8,6 +8,7 @@
 
 #include "../core/printer.hh"
 #include "../core/core_aspect.ah"
+#include "../core/high_priority.ah"
 #include "../core/predefined_pointcuts.ah"
 #include "../core/custom_to_string.hh"
 
@@ -39,7 +40,7 @@ namespace acp {
  * acp::printer to print them.
  * By default this aspect will always trigger when an uncaught exception would leave the main function.
  */
-aspect StackTrace : public CoreAspect {
+aspect StackTrace : public CoreAspect, public HighPriority {
 
 private:
 

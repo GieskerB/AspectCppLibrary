@@ -2,6 +2,7 @@
 #define __ACP__NULLPTR_CHECK_AH__
 
 #include "../core/core_aspect.ah"
+#include "../core/medium_priority.ah"
 #include "nullptr_exception.hh"
 
 namespace acp {
@@ -24,7 +25,7 @@ namespace acp {
  * language and the way the builtin -> operator is defined.
  *
  */
-aspect NullptrCheck : public CoreAspect {
+aspect NullptrCheck : public CoreAspect, public MediumPriority {
 
     pointcut dereferencing_pointer() = builtin("%& operator *(%*)");
 

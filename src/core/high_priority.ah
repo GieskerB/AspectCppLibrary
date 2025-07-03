@@ -1,0 +1,10 @@
+#ifndef __ACP__HIGH_PRIORITY_AH__
+#define __ACP__HIGH_PRIORITY_AH__
+
+aspect HighPriority {
+public:
+    HighPriority() {};
+    virtual ~HighPriority() = default;
+};
+
+#endif // __ACP__HIGH_PRIORITY_AH__

@@ -3,6 +3,7 @@
 
 
 #include "../core/core_aspect.ah"
+#include "../core/low_priority.ah"
 #include "../core/printer.hh"
 
 namespace acp {
@@ -36,7 +37,7 @@ namespace acp {
  * Similar to the `AfterLogging` aspect, this aspect logs the function signature - but only - before the function will execute.
  *
  */
-aspect Logging : public CoreAspect {
+aspect Logging : public CoreAspect, public LowPriority {
 
     acp::Printer* _printer;
 
