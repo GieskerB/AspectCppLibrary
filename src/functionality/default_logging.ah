@@ -16,7 +16,7 @@
  */
 aspect DefaultLogging : public Logging {
     public:
-        DefaultLogging() : Logging(new acp::CoutPrinter()) {}
+    DefaultLogging() : Logging(new acp::CoutPrinter()) {}
 
         virtual ~DefaultLogging() = default;
 };

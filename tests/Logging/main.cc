@@ -16,7 +16,7 @@ void foobar() {
 	std::cout << "BAZ\n";
 }
 
-[[acp::around_logging]]void qux() {
+[[acp::around_logging]] void qux() {
 	std::cout << "QUX\n";
 }
 

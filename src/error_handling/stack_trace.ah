@@ -43,19 +43,28 @@ aspect StackTrace : public CoreAspect {
 
 private:
 
-	static thread_local bool _editing_stack_trace;
+	inline bool& editing_stack_trace_instance() {
+		static thread_local bool _editing_stack_trace = false;
+		return _editing_stack_trace;
+	}
 
-	static thread_local std::exception const* _last_thrown;
+	inline std::exception const*& last_thrown_instance() {
+		static thread_local std::exception const* _last_thrown = nullptr;
+		return _last_thrown;
+	}
 
-	static thread_local std::vector<std::string> _call_chain;
+	inline std::vector<std::string>& call_chain_instance() {
+		static thread_local std::vector<std::string> _call_chain{};
+		return _call_chain;
+	}
 
 	acp::Printer* _printer;
 
 	void check_reset() {
 		// When calling a function, the exception must have been resolved
-		if (_last_thrown != nullptr and !_editing_stack_trace) {
-			_last_thrown = nullptr;
-			_call_chain.clear();
+		if (last_thrown_instance() != nullptr and !editing_stack_trace_instance()) {
+			last_thrown_instance() = nullptr;
+			call_chain_instance().clear();
 		}
 	}
 
@@ -75,14 +84,14 @@ protected:
 		_printer->print("\n\nUncaught exception ");
 		_printer->print(exception_msg);
 		_printer->print(":\n");
-		for (const auto& err_msg : _call_chain) {
+		for (const auto& err_msg : call_chain_instance()) {
 			_printer->print('\t');
 			_printer->print(err_msg);
 		}
 		// Reset values after printing.
-		_last_thrown = nullptr;
+		last_thrown_instance() = nullptr;
 		_printer->print("\n");
-		_editing_stack_trace = false;
+		editing_stack_trace_instance() = false;
 	}
 
 	/**
@@ -153,13 +162,13 @@ public:
 		try {
 			tjp->proceed();
 		} catch (const std::exception& e) {
-			_editing_stack_trace = true;
+			editing_stack_trace_instance() = true;
 			std::string msg;
 			build_msg(tjp->signature(), tjp->filename(), tjp->line(), msg);
-			_call_chain.push_back(msg);
+			call_chain_instance().push_back(msg);
 			// Print Stack Trace
-			print_stack_trace(_call_chain, e.what());
-			_editing_stack_trace = false;
+			print_stack_trace(call_chain_instance(), e.what());
+			editing_stack_trace_instance() = false;
 			// Exit the program with code 0. Should be something different, but tests otherwise fail.
 			std::exit(0);
 		} catch (...) {
@@ -177,39 +186,34 @@ public:
 		try {
 			tjp->proceed();
 		} catch (const std::exception& e) {
-			_editing_stack_trace = true;
-			if (_last_thrown == nullptr) {
+			editing_stack_trace_instance() = true;
+			// extra variable initialization, to supress warning in else-if condition
+			const auto& last_thrown = last_thrown_instance();
+			if (last_thrown == nullptr) {
 				// Just thrown
 				std::string msg;
 				build_msg(tjp->signature(),tjp->filename(),tjp->line(),msg);
-				_call_chain.push_back(msg);
-				_last_thrown = &e;
-			} else if (typeid(*_last_thrown) == typeid(e) and std::string(_last_thrown->what()) == std::string(e.what())) {
+				call_chain_instance().push_back(msg);
+				last_thrown_instance() = &e;
+			} else if (last_thrown != nullptr and typeid(*last_thrown) == typeid(e) and std::string(last_thrown_instance()->what()) == std::string(e.what())) {
 				// Exception is still the same
 				std::string msg;
 				build_msg(tjp->signature(),tjp->filename(),tjp->line(),msg);
-				_call_chain.push_back(msg);
+				call_chain_instance().push_back(msg);
 			} else {
 				// Exception changed
-				_call_chain.clear();
+				call_chain_instance().clear();
 				std::string msg;
 				build_msg(tjp->signature(),tjp->filename(),tjp->line(),msg);
-				_call_chain.push_back(msg);
-				_last_thrown = &e;
+				call_chain_instance().push_back(msg);
+				last_thrown_instance() = &e;
 			}
-			_editing_stack_trace = false;
+			editing_stack_trace_instance() = false;
 			throw;
 		} catch (...) {
 			// Not implemented yet.
 		}
 	}
 };
-
-
-thread_local bool StackTrace::_editing_stack_trace = false;
-
-thread_local std::exception const* StackTrace::_last_thrown = nullptr;
-
-thread_local std::vector<std::string> StackTrace::_call_chain{};
 
 #endif // __ACP__STACK_TRACE_AH__
