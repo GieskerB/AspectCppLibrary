@@ -3,7 +3,10 @@
 
 aspect MediumPriority {
 public:
-    MediumPriority() {};
+
+    pointcut prio() = "void MEDIUM_PRIORITY()";
+
+    MediumPriority() {}
     virtual ~MediumPriority() = default;
 };
 

@@ -3,7 +3,10 @@
 
 aspect HighPriority {
 public:
-    HighPriority() {};
+
+    pointcut prio() = "void HIGH_PRIORITY()";
+
+    HighPriority() {}
     virtual ~HighPriority() = default;
 };
 

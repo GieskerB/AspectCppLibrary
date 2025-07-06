@@ -180,6 +180,9 @@ public:
 		}
 	}
 
+	advice execution(fallback_func()) && !ignore() : order(derived("HighPriority"),derived("MediumPriority"),derived("LowPriority"));
+
+
 	/**
 	 * \advice stack-trace-builder-advice
 	 * \brief Advice handles the StackTrace building, in case of an thrown exception.

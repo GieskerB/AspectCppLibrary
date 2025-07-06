@@ -3,7 +3,10 @@
 
 aspect LowPriority {
 public:
-    LowPriority() {};
+
+    pointcut prio() = "void LOW_PRIORITY()";
+
+    LowPriority() {}
     virtual ~LowPriority() = default;
 };
 

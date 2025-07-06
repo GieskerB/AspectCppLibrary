@@ -1,0 +1,22 @@
+#ifndef __ACP__TEST_LAST_AH__
+#define __ACP__TEST_LAST_AH__
+
+#include "../../src/core/core_aspect.ah"
+#include "../../src/core/low_priority.ah"
+#include "../../src/core/medium_priority.ah"
+#include "../../src/core/high_priority.ah"
+
+#include <iostream>
+
+aspect Last : public CoreAspect, public HighPriority {
+
+    pointcut where() = "void foo()";
+    pointcut ignore() = "int main()";
+
+    advice execution(where()) : before() {
+        std::cout << "Last\n";
+    }
+
+};
+
+#endif // __ACP__TEST_LAST_AH__

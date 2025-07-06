@@ -1,0 +1,22 @@
+#ifndef __ACP__TEST_FIRST_AH__
+#define __ACP__TEST_FIRST_AH__
+
+#include "../../src/core/core_aspect.ah"
+#include "../../src/core/low_priority.ah"
+#include "../../src/core/medium_priority.ah"
+#include "../../src/core/high_priority.ah"
+
+#include <iostream>
+
+aspect First : public CoreAspect, public MediumPriority {
+
+    pointcut where() = "void foo()";
+    pointcut ignore() = "int main()";
+
+    advice execution(where()) : before() {
+        std::cout << "First\n";
+    }
+
+};
+
+#endif // __ACP__TEST_FIRST_AH__
