@@ -8,13 +8,13 @@
 
 #include <iostream>
 
-aspect First : public CoreAspect, public MediumPriority {
+aspect A1 : public CoreAspect, public MediumPriority {
 
     pointcut where() = "void foo()";
     pointcut ignore() = "int main()";
 
     advice execution(where()) : before() {
-        std::cout << "First\n";
+        std::cout << "A1\n";
     }
 
 };
