@@ -4,7 +4,7 @@ void foo() {}
 
 int main() {
 
-	acp::test::print_pretty_start("PriorityOrder","Testing the hircale order implementation with Low, Medium, High");
+	acp::test::print_pretty_start("PriorityOrder","Testing the hierarchical order implementation with Low, Medium, High");
 
 	foo();
 
