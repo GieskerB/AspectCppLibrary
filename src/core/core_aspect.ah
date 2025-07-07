@@ -36,16 +36,14 @@ public:
 	 * should be ignored by the aspect.
 	 *
 	 * It is recommended to use and extend a pointcut definition like with:
-	 * "% <AspectName>::...::%(...)" || "% acp::...::%(...)"
+	 * within("<AspectName>") || within("acp")
 	 */
 	pointcut virtual ignore() = 0;
 
 	CoreAspect() = default;
 	virtual ~CoreAspect() {}
 
-    advice execution(acp::all_func()) : order(derived("OuterLayer"),derived("MiddleLayer"),derived("InnerLayer"));
-    // advice execution(acp::all_func()) : order("OuterLayer","MiddleLayer","InnerLayer");
-    // advice execution(acp::all_func()) : order("Last","First");
+    advice execution(acp::all_func()) : order(derived("InnerLayer"),derived("MiddleLayer"),derived("OuterLayer"));
 
 };
 

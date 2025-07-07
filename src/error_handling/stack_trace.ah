@@ -8,7 +8,7 @@
 
 #include "../core/printer.hh"
 #include "../core/core_aspect.ah"
-#include "../core/high_priority.ah"
+#include "../core/outer_layer.ah"
 #include "../core/predefined_pointcuts.ah"
 #include "../core/custom_to_string.hh"
 
@@ -179,9 +179,6 @@ public:
 			// Not implemented yet.
 		}
 	}
-
-	advice execution(fallback_func()) && !ignore() : order(derived("OuterLayer"),derived("MiddleLayer"),derived("InnerLayer"));
-
 
 	/**
 	 * \advice stack-trace-builder-advice

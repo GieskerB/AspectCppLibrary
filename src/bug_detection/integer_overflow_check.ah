@@ -2,7 +2,7 @@
 #define __ACP__INTEGER_OVERFLOW_CHECK_AH__
 
 #include "../core/core_aspect.ah"
-#include "../core/medium_priority.ah"
+#include "../core/middle_layer.ah"
 #include "overflow_exception.hh"
 
 #include <limits>

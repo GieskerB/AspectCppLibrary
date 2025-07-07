@@ -8,7 +8,7 @@
 
 #include <iostream>
 
-aspect A2 : public CoreAspect, public OuterLayer {
+aspect A2 : public CoreAspect, public InnerLayer {
 
     pointcut where() = "void foo()";
     pointcut ignore() = "int main()";

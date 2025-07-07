@@ -2,7 +2,7 @@
 #define __ACP__SYNCHRONIZATION_AH__
 
 #include "../core/core_aspect.ah"
-#include "../core/low_priority.ah"
+#include "../core/inner_layer.ah"
 #include "../core/thread_controller.hh"
 
 #include <functional>

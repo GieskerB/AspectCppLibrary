@@ -2,7 +2,7 @@
 #define __ACP__ERROR_CODE_CONVERTER_AH__
 
 #include "../core/core_aspect.ah"
-#include "../core/medium_priority.ah"
+#include "../core/middle_layer.ah"
 #include "errno_exception.hh"
 
 #include <stdexcept>
