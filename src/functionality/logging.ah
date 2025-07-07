@@ -37,7 +37,7 @@ namespace acp {
  * Similar to the `AfterLogging` aspect, this aspect logs the function signature - but only - before the function will execute.
  *
  */
-aspect Logging : public CoreAspect, public LowPriority {
+aspect Logging : public CoreAspect, public InnerLayer {
 
     acp::Printer* _printer;
 

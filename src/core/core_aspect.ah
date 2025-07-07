@@ -43,8 +43,8 @@ public:
 	CoreAspect() = default;
 	virtual ~CoreAspect() {}
 
-    advice execution(acp::all_func()) : order(derived("HighPriority"),derived("MediumPriority"),derived("LowPriority"));
-    // advice execution(acp::all_func()) : order("HighPriority","MediumPriority","LowPriority");
+    advice execution(acp::all_func()) : order(derived("OuterLayer"),derived("MiddleLayer"),derived("InnerLayer"));
+    // advice execution(acp::all_func()) : order("OuterLayer","MiddleLayer","InnerLayer");
     // advice execution(acp::all_func()) : order("Last","First");
 
 };

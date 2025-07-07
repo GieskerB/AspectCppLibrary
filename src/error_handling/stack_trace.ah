@@ -40,7 +40,7 @@ namespace acp {
  * acp::printer to print them.
  * By default this aspect will always trigger when an uncaught exception would leave the main function.
  */
-aspect StackTrace : public CoreAspect, public HighPriority {
+aspect StackTrace : public CoreAspect, public OuterLayer {
 
 private:
 
@@ -180,7 +180,7 @@ public:
 		}
 	}
 
-	advice execution(fallback_func()) && !ignore() : order(derived("HighPriority"),derived("MediumPriority"),derived("LowPriority"));
+	advice execution(fallback_func()) && !ignore() : order(derived("OuterLayer"),derived("MiddleLayer"),derived("InnerLayer"));
 
 
 	/**

@@ -7,7 +7,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>NullptrCheck &mdash; AspectC++ Library 0.1.0 documentation</title>
+  <title>MiddleLayer &mdash; AspectC++ Library 0.1.0 documentation</title>
   
 
   
@@ -30,8 +30,8 @@
   <link rel="stylesheet" href="../_static/css/theme.min.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="PThreadController" href="p_thread_controller_ah.html" />
-    <link rel="prev" title="MiddleLayer" href="middle_layer_ah.html" /> 
+    <link rel="next" title="NullptrCheck" href="nullptr_check_ah.html" />
+    <link rel="prev" title="Logging" href="logging_ah.html" /> 
 
 </head>
 
@@ -72,13 +72,13 @@
         
           <li><a href="../aspects.html">Aspects</a></li>
         
-      <li><code class="docutils literal notranslate"><span class="pre">NullptrCheck</span></code></li>
+      <li><code class="docutils literal notranslate"><span class="pre">MiddleLayer</span></code></li>
     
     
       <li class="breadcrumbs-aside">
         
             
-            <a href="../_sources/generated_docs/nullptr_check_ah.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/generated_docs/middle_layer_ah.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -117,8 +117,8 @@
 <li class="toctree-l2"><a class="reference internal" href="inner_layer_ah.html"><code class="docutils literal notranslate"><span class="pre">InnerLayer</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="integer_overflow_check_ah.html"><code class="docutils literal notranslate"><span class="pre">IntegerOverflowCheck</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="logging_ah.html"><code class="docutils literal notranslate"><span class="pre">Logging</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="middle_layer_ah.html"><code class="docutils literal notranslate"><span class="pre">MiddleLayer</span></code></a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">NullptrCheck</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">MiddleLayer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nullptr_check_ah.html"><code class="docutils literal notranslate"><span class="pre">NullptrCheck</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="p_thread_controller_ah.html"><code class="docutils literal notranslate"><span class="pre">PThreadController</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="profiler_ah.html"><code class="docutils literal notranslate"><span class="pre">Profiler</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="singleton_ah.html"><code class="docutils literal notranslate"><span class="pre">Singleton</span></code></a></li>
@@ -160,43 +160,18 @@
                     <div class="document">
                         
                             
-  <section id="nullptrcheck">
-<h1><code class="docutils literal notranslate"><span class="pre">NullptrCheck</span></code><a class="headerlink" href="#nullptrcheck" title="Link to this heading">¶</a></h1>
-<p><strong>Brief Description:</strong> Aspect that checks for null pointer dereferences.</p>
+  <section id="middlelayer">
+<h1><code class="docutils literal notranslate"><span class="pre">MiddleLayer</span></code><a class="headerlink" href="#middlelayer" title="Link to this heading">¶</a></h1>
+<p><strong>Brief Description:</strong> This aspect defines a middle layer pointcut for this library.</p>
 <p><strong>Detailed Description:</strong></p>
 <blockquote>
-<div><p>This aspect provides an advice to check if a pointer is null before dereferencing it.
-Unfortunately, it does not work with the -&gt; operator, due to limitations in the AspectC++
-language and the way the builtin -&gt; operator is defined.</p>
+<div><p>Alongside the two other classes outer- and inner layer these classes provide
+a simple way of ordering aspect in the weaving process. Imagine the “core” to
+be the original function and then all aspects inheriting from MiddleLayer are
+weaved between OuterLayer and InnerLayer. Within all aspects from the same
+layer is no further order.</p>
 </div></blockquote>
-<p><em>In file</em> <code class="docutils literal notranslate"><span class="pre">/src/bug_detection/nullptr_check.ah</span></code></p>
-<section id="ignore-pointcut">
-<span id="nullptr-check-ah-ignore"></span><h2><code class="docutils literal notranslate"><span class="pre">ignore</span></code> (Pointcut)<a class="headerlink" href="#ignore-pointcut" title="Link to this heading">¶</a></h2>
-<p><em>See:</em> <a class="reference internal" href="core_aspect_ah.html#core-aspect-ah-ignore"><span class="std std-ref">CoreAspect::ignore</span></a></p>
-</section>
-<section id="null-check-attribute">
-<span id="nullptr-check-ah-null-check"></span><h2><code class="docutils literal notranslate"><span class="pre">null_check</span></code> (Attribute)<a class="headerlink" href="#null-check-attribute" title="Link to this heading">¶</a></h2>
-<p><strong>Brief Description:</strong> For all pointer dereferencing within any function / class / namespace</p>
-<p><strong>Detailed Description:</strong></p>
-<blockquote>
-<div><p>()
-annotated with this attribute an nullptr check will be performed. In case this
-happens, an exception will be thrown.</p>
-</div></blockquote>
-</section>
-<section id="nullptr-check-advice">
-<span id="nullptr-check-ah-nullptr-check"></span><h2><code class="docutils literal notranslate"><span class="pre">nullptr_check</span></code> (Advice)<a class="headerlink" href="#nullptr-check-advice" title="Link to this heading">¶</a></h2>
-<p><strong>Brief Description:</strong> Advice checks if a pointer is null before dereferencing it.</p>
-<p><strong>Detailed Description:</strong></p>
-<blockquote>
-<div><p>If the pointer is null, it throws a <cite>acp::NullptrException</cite> with a message indicating that
-a null pointer was dereferenced.</p>
-</div></blockquote>
-</section>
-<section id="where-pointcut">
-<span id="nullptr-check-ah-where"></span><h2><code class="docutils literal notranslate"><span class="pre">where</span></code> (Pointcut)<a class="headerlink" href="#where-pointcut" title="Link to this heading">¶</a></h2>
-<p><em>See:</em> <a class="reference internal" href="core_aspect_ah.html#core-aspect-ah-where"><span class="std std-ref">CoreAspect::where</span></a></p>
-</section>
+<p><em>In file</em> <code class="docutils literal notranslate"><span class="pre">src/core/middle_layer.ah</span></code></p>
 </section>
 
 

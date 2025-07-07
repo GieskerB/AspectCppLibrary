@@ -42,7 +42,7 @@ namespace acp {
  * be thrown.
  *
  */
-aspect Singleton : public CoreAspect, public LowPriority {
+aspect Singleton : public CoreAspect, public InnerLayer {
 
     public:
 

@@ -25,7 +25,7 @@ namespace acp {
  * language and the way the builtin -> operator is defined.
  *
  */
-aspect NullptrCheck : public CoreAspect, public MediumPriority {
+aspect NullptrCheck : public CoreAspect, public MiddleLayer {
 
     pointcut dereferencing_pointer() = builtin("%& operator *(%*)");
 

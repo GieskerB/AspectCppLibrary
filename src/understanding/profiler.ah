@@ -26,7 +26,7 @@ namespace acp {
  * acp::profiler_msg_builder::build_msg() method.
  *
  */
-aspect Profiler : public CoreAspect, LowPriority{
+aspect Profiler : public CoreAspect, InnerLayer{
 
 	static acp::Printer* _printer_static;
 	acp::Printer* _printer;
