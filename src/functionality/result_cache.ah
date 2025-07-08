@@ -31,16 +31,20 @@ aspect ResultCache : public CoreAspect{
     advice execution(where()) && !ignore() : around() {
         static std::any last_result;
 
-        // Get the result from tjp
+        std::cout << "RetType: " << tjp->type() << '\n';
+
+        for(int i = 0; i< tjp->args();++i) {
+            std::cout << "Arg " << i << ": " << *tjp->arg(i) << '\n';
+        }
 
         // Only store the result if last_result is empty
-        if (last_result.has_value() == false) {
-            tjp->proceed();
-            JoinPoint::That* result_ptr = tjp->result();
-            last_result = result_ptr;
-        } else {
-            *tjp->result() = static_cast<JoinPoint::That*>(std::any_cast<int*>(last_result));
-        }
+        // if (last_result.has_value() == false) {
+        //     tjp->proceed();
+        //     JoinPoint::That* result_ptr = tjp->result();
+        //     last_result = result_ptr;
+        // } else {
+        //     *tjp->result() = static_cast<JoinPoint::That*>(std::any_cast<int*>(last_result));
+        // }
 
     }
 
