@@ -81,6 +81,11 @@ namespace acp {
 	 */
     pointcut getters() = "% get%(...)";
 
+	/**
+	 * \pointcut none
+	 * \brief Matches no join points.
+	 */
+	pointcut none() = "void crifmpamoolnisklrqmx()";
 
 }
 
