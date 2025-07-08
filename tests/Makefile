@@ -12,13 +12,13 @@ SHELL=/bin/bash
 DIFF=diff --strip-trailing-cr
 
 ACTESTS = HelloWorld StackTrace StackTraceExceptionChange StackTraceFallback StackTraceFileChange\
-		  ErrorCodeConverter NullptrCheck NullptrCheckComplexPtr BeforeLogging AfterLogging BothLogging\
-		  Singleton Synchronization SynchronizationMultiFunction OverflowCheck
-
+		  ErrorCodeConverter NullptrCheck NullptrCheckComplexPtr Logging\
+		  Singleton Synchronization SynchronizationMultiFunction OverflowCheck PriorityOrder\
+		  PriorityOrderReversed
 ACTESTS = ResultCache
 
 # This test will always fail, since the timing output of the profiler is not stable.
-#ACTESTS += Profiler ProfilerThread
+# ACTESTS += Profiler ProfilerThread
 
 ifeq ($(FRONTEND),Clang)
 ifneq ($(shell uname -s),Darwin)

@@ -1,0 +1,297 @@
+
+
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Logging &mdash; AspectC++ Library 0.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.min.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="MiddleLayer" href="middle_layer_ah.html" />
+    <link rel="prev" title="IntegerOverflowCheck" href="integer_overflow_check_ah.html" /> 
+
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <a class="site-nav-toggle hidden-lg-up"><i class="icon-menu"></i></a>
+            <a class="site-title" href="../index.html">
+                AspectC++ Library
+            </a>
+        </div>
+    </header>
+
+
+<div class="breadcrumbs-outer hidden-xs-down">
+    <div class="container">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a></li>
+        
+          <li><a href="../aspects.html">Aspects</a></li>
+        
+      <li><code class="docutils literal notranslate"><span class="pre">Logging</span></code></li>
+    
+    
+      <li class="breadcrumbs-aside">
+        
+            
+            <a href="../_sources/generated_docs/logging_ah.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+</div>
+    </div>
+</div>
+    <div class="main-outer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-3 site-nav">
+                    
+<div role="search">
+    <form class="search" action="../search.html" method="get">
+        <div class="icon-input">
+            <input type="text" name="q" placeholder="Search" />
+            <span class="icon-search"></span>
+        </div>
+        <input type="submit" value="Go" class="d-hidden" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+                    <div class="site-nav-tree">
+                        
+                            
+                            
+                                <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../aspects.html">Aspects</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="core_aspect_ah.html"><code class="docutils literal notranslate"><span class="pre">CoreAspect</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="default_logging_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultLogging</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="default_profiler_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultProfiler</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="default_stack_trace_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultStackTrace</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="error_code_converter_ah.html"><code class="docutils literal notranslate"><span class="pre">ErrorCodeConverter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="inner_layer_ah.html"><code class="docutils literal notranslate"><span class="pre">InnerLayer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="integer_overflow_check_ah.html"><code class="docutils literal notranslate"><span class="pre">IntegerOverflowCheck</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">Logging</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="middle_layer_ah.html"><code class="docutils literal notranslate"><span class="pre">MiddleLayer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nullptr_check_ah.html"><code class="docutils literal notranslate"><span class="pre">NullptrCheck</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="p_thread_controller_ah.html"><code class="docutils literal notranslate"><span class="pre">PThreadController</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiler_ah.html"><code class="docutils literal notranslate"><span class="pre">Profiler</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="singleton_ah.html"><code class="docutils literal notranslate"><span class="pre">Singleton</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="stack_trace_ah.html"><code class="docutils literal notranslate"><span class="pre">StackTrace</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="std_thread_controller_ah.html"><code class="docutils literal notranslate"><span class="pre">StdThreadController</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="synchronization_ah.html"><code class="docutils literal notranslate"><span class="pre">Synchronization</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../interfaces.html">Interfaces</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="printer_hh.html"><code class="docutils literal notranslate"><span class="pre">Printer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="thread_controller_hh.html"><code class="docutils literal notranslate"><span class="pre">ThreadController</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../classes.html">Classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cerr_printer_hh.html"><code class="docutils literal notranslate"><span class="pre">CerrPrinter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cout_printer_hh.html"><code class="docutils literal notranslate"><span class="pre">CoutPrinter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ofstream_printer_hh.html"><code class="docutils literal notranslate"><span class="pre">OfstreamPrinter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="outer_layer_ah.html"><code class="docutils literal notranslate"><span class="pre">OuterLayer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiler_data_hh.html"><code class="docutils literal notranslate"><span class="pre">ProfilerData</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../exceptions.html">Exceptions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="errno_exception_hh.html"><code class="docutils literal notranslate"><span class="pre">ErrnoException</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nullptr_exception_hh.html"><code class="docutils literal notranslate"><span class="pre">NullptrException</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="overflow_exception_hh.html"><code class="docutils literal notranslate"><span class="pre">OverflowException</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../others.html">Other Entities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="predefined_pointcuts_ah.html"><code class="docutils literal notranslate"><span class="pre">PredefinedPointcuts</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+                            
+                        
+                    </div>
+                </div>
+                <div class="col-12 col-lg-9">
+                    <div class="document">
+                        
+                            
+  <section id="logging">
+<h1><code class="docutils literal notranslate"><span class="pre">Logging</span></code><a class="headerlink" href="#logging" title="Link to this heading">¶</a></h1>
+<p><strong>Brief Description:</strong> This aspect is used to log the execution of a function.</p>
+<p><strong>Detailed Description:</strong></p>
+<blockquote>
+<div><p>This aspect supports three different attributes: acp::after_logging, acp::around_logging and acp::before_logging.
+Depending on the choosen attribute the logging happens at the expected point relative to the execution
+Similar to the <cite>AfterLogging</cite> aspect, this aspect logs the function signature - but only - before the function will execute.</p>
+</div></blockquote>
+<p><em>In file</em> <code class="docutils literal notranslate"><span class="pre">src/functionality/logging.ah</span></code></p>
+<section id="after-logging-attribute">
+<span id="logging-ah-after-logging"></span><h2><code class="docutils literal notranslate"><span class="pre">after_logging</span></code> (Attribute)<a class="headerlink" href="#after-logging-attribute" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> Functions with this attribute will be logged after their execution.</p>
+</section>
+<section id="around-logging-attribute">
+<span id="logging-ah-around-logging"></span><h2><code class="docutils literal notranslate"><span class="pre">around_logging</span></code> (Attribute)<a class="headerlink" href="#around-logging-attribute" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> Functions with this attribute will be logged before and after their execution.</p>
+</section>
+<section id="before-logging-attribute">
+<span id="logging-ah-before-logging"></span><h2><code class="docutils literal notranslate"><span class="pre">before_logging</span></code> (Attribute)<a class="headerlink" href="#before-logging-attribute" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> Functions with this attribute will be logged before their execution.</p>
+</section>
+<section id="build-after-msg-function">
+<span id="logging-ah-build-after-msg"></span><h2><code class="docutils literal notranslate"><span class="pre">build_after_msg</span></code> (Function)<a class="headerlink" href="#build-after-msg-function" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> This function is responsible for creating a well formatted leaving logging message.</p>
+<p><strong>Detailed Description:</strong></p>
+<blockquote>
+<div><p>In case you want to change this, write an aspect which replaces this function with your
+own implementation. Use a around advice for that.</p>
+</div></blockquote>
+<p><strong>Parameters:</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">signature</span></code>: The signature of the function being logged.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output</span></code>: The output string where the built message will be stored.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="build-before-msg-function">
+<span id="logging-ah-build-before-msg"></span><h2><code class="docutils literal notranslate"><span class="pre">build_before_msg</span></code> (Function)<a class="headerlink" href="#build-before-msg-function" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> This function is responsible for creating a well formatted entering logging message.</p>
+<p><strong>Detailed Description:</strong></p>
+<blockquote>
+<div><p>In case you want to change this, write an aspect which replaces this function with your
+own implementation. Use a around advice for that.</p>
+</div></blockquote>
+<p><strong>Parameters:</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">signature</span></code>: The signature of the function being logged.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output</span></code>: The output string where the built message will be stored.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="build-msg-function">
+<span id="logging-ah-build-msg"></span><h2><code class="docutils literal notranslate"><span class="pre">build_msg</span></code> (Function)<a class="headerlink" href="#build-msg-function" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> This function is responsible for creating a well formatted general logging message.</p>
+<p><strong>Detailed Description:</strong></p>
+<blockquote>
+<div><p>In case you want to change this, write an aspect which replaces this function with your
+own implementation. Use a around advice for that.</p>
+</div></blockquote>
+<p><strong>Parameters:</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">log_type</span></code>: The type of log message (e.g., “INFO”, “ERROR”, etc.).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">msg</span></code>: The message to log.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output</span></code>: The output string where the built message will be stored.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="ignore-pointcut">
+<span id="logging-ah-ignore"></span><h2><code class="docutils literal notranslate"><span class="pre">ignore</span></code> (Pointcut)<a class="headerlink" href="#ignore-pointcut" title="Link to this heading">¶</a></h2>
+<p><em>See:</em> <a class="reference internal" href="core_aspect_ah.html#core-aspect-ah-ignore"><span class="std std-ref">CoreAspect::ignore</span></a></p>
+</section>
+<section id="logging-advice-after-advice">
+<span id="logging-ah-logging-adviceafter"></span><h2><code class="docutils literal notranslate"><span class="pre">logging-advice[after]</span></code> (Advice)<a class="headerlink" href="#logging-advice-after-advice" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> This advice handles the logging behavior after the function executes.</p>
+</section>
+<section id="logging-advice-around-advice">
+<span id="logging-ah-logging-advicearound"></span><h2><code class="docutils literal notranslate"><span class="pre">logging-advice[around]</span></code> (Advice)<a class="headerlink" href="#logging-advice-around-advice" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> This advice handles the logging behavior before and after the function executes.</p>
+</section>
+<section id="logging-advice-before-advice">
+<span id="logging-ah-logging-advicebefore"></span><h2><code class="docutils literal notranslate"><span class="pre">logging-advice[before]</span></code> (Advice)<a class="headerlink" href="#logging-advice-before-advice" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> This advice handles the logging behavior before the function executes.</p>
+</section>
+<section id="where-pointcut">
+<span id="logging-ah-where"></span><h2><code class="docutils literal notranslate"><span class="pre">where</span></code> (Pointcut)<a class="headerlink" href="#where-pointcut" title="Link to this heading">¶</a></h2>
+<p><strong>Detailed Description:</strong></p>
+<blockquote>
+<div><p>A little bonus for this aspect is that there are 3 attributes [after, around, before]
+Since, where can no be every attribute at once, the around_logging is the default
+implementation. However, separate advices for the remaining attributes is provided anyways.</p>
+</div></blockquote>
+<p><em>See:</em> <a class="reference internal" href="core_aspect_ah.html#core-aspect-ah-where"><span class="std std-ref">CoreAspect::where</span></a></p>
+</section>
+</section>
+
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.1.0',
+            LANGUAGE:'en',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/sphinx_highlight.js"></script>
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+    <div class="footer" role="contentinfo">
+        <div class="container">
+            &#169; Copyright 2025, Bjarne Giesker.
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 7.2.6.
+        </div>
+    </div>  
+
+</body>
+</html>

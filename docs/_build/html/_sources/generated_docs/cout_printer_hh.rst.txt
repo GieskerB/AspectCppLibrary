@@ -1,5 +1,7 @@
-``CoutPrinter`` (Class)
+``CoutPrinter``
 =======================
+..
+	(Class)
 
 **Brief Description:** CoutPrinter is a Printer implementation that prints messages to std::cout.
 
@@ -8,7 +10,7 @@
     This class implements the Printer interface and provides methods to print messages
     to the standard error output stream (std::cout).
 
-*In file* ``src/util/cout_printer.hh``
+*In file* ``src/core/cout_printer.hh``
 
 .. _cout_printer_hh_printc-string:
 

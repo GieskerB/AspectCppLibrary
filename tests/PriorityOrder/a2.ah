@@ -1,0 +1,22 @@
+#ifndef __ACP__TEST_LAST_AH__
+#define __ACP__TEST_LAST_AH__
+
+#include "../../src/core/core_aspect.ah"
+#include "../../src/core/inner_layer.ah"
+#include "../../src/core/middle_layer.ah"
+#include "../../src/core/outer_layer.ah"
+
+#include <iostream>
+
+aspect A2 : public CoreAspect, public OuterLayer {
+
+    pointcut where() = "void foo()";
+    pointcut ignore() = "int main()";
+
+    advice execution(where()) : before() {
+        std::cout << "A2\n";
+    }
+
+};
+
+#endif // __ACP__TEST_LAST_AH__

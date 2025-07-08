@@ -1,13 +1,15 @@
-``DefaultProfiler`` (Aspect)
+``DefaultProfiler``
 ============================
+..
+	(Aspect)
 
 **Brief Description:** DefaultProfiler is the default aspect for profiling in this ACP library.
 
 **Detailed Description:**
 
-    In conjunction with this aspect use an aspect that provides a implementation for the
-    acp::profiler_msg_builder::build_msg() method.
-    It uses the `CoutPrinter` to print the log message to the standard output.
+    The remaining non project wide configuration of the StackTrace aspect is the
+    implementation of the printer interface. This aspect provides it with the
+    std::cout printer interface implementation.
 
 *In file* ``src/understanding/default_profiler.ah``
 

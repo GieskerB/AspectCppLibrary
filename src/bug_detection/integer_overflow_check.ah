@@ -2,27 +2,34 @@
 #define __ACP__INTEGER_OVERFLOW_CHECK_AH__
 
 #include "../core/core_aspect.ah"
-#include "../util/overflow_exception.hh"
+#include "../core/middle_layer.ah"
+#include "overflow_exception.hh"
 
 #include <limits>
 
 namespace acp {
+    /**
+     * \attribute overflow_check
+     * \brief For all integer addition and subtraction within any function / class / namespace
+     * annotated with this attribute an over- or underflow check will be performed. In case this
+     * happens, an exception will be thrown.
+     */
     attribute overflow_check();
 }
 
-// TODO DOES NOT WORK WITH UNARY OPERATOR
-
 /**
- * \aspect OverflowCheck
- * \file /src/bug_detection/overflow_check.ah
+ * \aspect IntegerOverflowCheck
+ * \file /src/bug_detection/integer_overflow_check.ah
  * \brief Aspect that checks for null pointer dereferences.
  *
- * This aspect provides an advice to check if a pointer is null before dereferencing it.
- * Unfortunately, it does not work with the -> operator, due to limitations in the AspectC++
- * language and the way the builtin -> operator is defined.
- *
+ * This aspect provides advices to check if an over- or underflow would occur, when performing
+ * addition or subtraction on integers. At the moment this check is performed for every standard int
+ * addition and subtraction operator (all 5 binary and all 5 unary).
  */
-aspect IntegerOverflowCheck : public CoreAspect {
+aspect IntegerOverflowCheck : public CoreAspect, public MiddleLayer {
+
+    // This design is very expandable. simple copy the current version used for integers and expand
+    // it with other types like short, long or char.
 
     static constexpr int INT_MAX = std::numeric_limits<int>::max();
     static constexpr int INT_MIN = std::numeric_limits<int>::min();
@@ -53,6 +60,10 @@ public:
     pointcut virtual ignore() = within("OverflowCheck") || within("acp");
 
 
+    /**
+     * \advice int_add_binary_check
+     * \brief checks for an overflow in the 'int += int' and 'int + int' operator.
+     */
     advice within(where()) && int_add_binary() && !ignore(): before() {
         const int lhs = *static_cast<int*>(tjp->arg(0));
         const int rhs = *static_cast<int*>(tjp->arg(1));
@@ -61,6 +72,10 @@ public:
         }
     }
 
+    /**
+     * \advice int_add_unary_inc_check
+     * \brief checks for an overflow in the '++int' and 'int++' operator.
+     */
     advice within(where()) && int_add_unary_inc() && !ignore(): before() {
         const int val = *static_cast<int*>(tjp->arg(0));
         if(val == INT_MAX) {
@@ -68,6 +83,10 @@ public:
         }
     }
 
+    /**
+     * \advice int_add_unary_check
+     * \brief checks for an overflow in the '+int' operator.
+     */
     advice within(where()) && int_add_unary() && !ignore(): before() {
         const int val = *static_cast<int*>(tjp->arg(0));
         if(val == INT_MIN) {
@@ -75,6 +94,10 @@ public:
         }
     }
 
+    /**
+     * \advice int_sub_binary_check
+     * \brief checks for an underflow in the 'int -= int' and 'int - int' operator.
+     */
     advice within(where()) && int_sub_binary() && !ignore(): before() {
         const int lhs = *static_cast<int*>(tjp->arg(0));
         const int rhs = *static_cast<int*>(tjp->arg(1));
@@ -83,6 +106,10 @@ public:
         }
     }
 
+    /**
+     * \advice int_sub_unary_inc_check
+     * \brief checks for an underflow in the '--int' and 'int--' operator.
+     */
     advice within(where()) && int_sub_unary_inc() && !ignore(): before() {
         const int val = *static_cast<int*>(tjp->arg(0));
         if(val == INT_MIN) {
@@ -90,6 +117,10 @@ public:
         }
     }
 
+    /**
+     * \advice int_sub_unary_check
+     * \brief checks for an underflow in the '--int' operator (spoiler: it cant happen :D).
+     */
     advice within(where()) && int_sub_unary() && !ignore(): before() {
         // On unary - operator no underflow can happen, since for every positive signed
         // int value is exactly one negative.

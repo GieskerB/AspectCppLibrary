@@ -1,5 +1,7 @@
-``NullptrException`` (Exception)
+``NullptrException``
 ================================
+..
+	(Exception)
 
 **Brief Description:** Exception class for handling null pointer dereference errors.
 
@@ -7,7 +9,7 @@
 
     This class inherits from `std::runtime_error` and is used to indicate that a null pointer was dereferenced.
 
-*In file* ``/src/util/nullptr_exception.hh``
+*In file* ``/src/bug_detection/nullptr_exception.hh``
 
 .. _nullptr_exception_hh_Constructor:
 
@@ -15,6 +17,11 @@
 -----------------------------
 
 **Brief Description:** Construct a new NullptrException object with a message indicating location of the error.
+
+**Parameters:**
+
+    * ``sig``: is a c-string that indicates the signature of the function where the error occurred.
+    * ``line``: is the line number where the error occurred.
 
 
 .. _nullptr_exception_hh_what:

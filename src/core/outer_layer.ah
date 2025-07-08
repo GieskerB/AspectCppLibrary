@@ -1,0 +1,22 @@
+#ifndef __ACP__OUTER_LAYER_AH__
+#define __ACP__OUTER_LAYER_AH__
+
+/**
+ * \class OuterLayer
+ * \file src/core/outer_layer.ah
+ * \brief This class defines an outer layer "priority" for this library.
+ *
+ * Alongside the two other classes middle- and inner layer these classes provide
+ * a simple way of ordering aspect in the weaving process. Imagine the "core" to
+ * be the original function and then all aspects inheriting from OuterLayer are
+ * weaved at the very last. Within all aspects from the same layer is no further
+ * order.
+ */
+class OuterLayer {
+public:
+
+    OuterLayer() {}
+    virtual ~OuterLayer() = default;
+};
+
+#endif // __ACP__OUTER_LAYER_AH__

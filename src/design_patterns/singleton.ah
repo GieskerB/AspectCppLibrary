@@ -2,7 +2,8 @@
 #define __ACP__SINGLETON_AH__
 
 #include "../core/core_aspect.ah"
-#include "../util/thread_controller.hh"
+#include "../core/inner_layer.ah"
+#include "../core/thread_controller.hh"
 
 namespace acp {
     /**
@@ -41,7 +42,7 @@ namespace acp {
  * be thrown.
  *
  */
-aspect Singleton {
+aspect Singleton : public CoreAspect, public InnerLayer {
 
     public:
 

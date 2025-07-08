@@ -1,0 +1,70 @@
+#ifndef __ACP__INTERFACE_P_THREAD_CONTROLLER_HH__
+#define __ACP__INTERFACE_P_THREAD_CONTROLLER_HH__
+
+#include <pthread.h>
+#include <stdexcept>
+#include "thread_controller.hh"
+
+/**
+ * \aspect PThreadController
+ * \file src/core/p_thread_controller.hh
+ * \brief Thread controller using pthreads for synchronization.
+ *
+ * This class implements the ThreadController interface using pthread mutexes for thread safety.
+ * It provides methods to acquire and release locks, and to get the unique identifier of the current thread.
+ */
+aspect PThreadController {
+
+    mutable pthread_mutex_t _mutex;
+
+public:
+
+    PThreadController() {
+        if (pthread_mutex_init(&_mutex, nullptr) != 0) {
+            throw std::runtime_error("Failed to initialize pthread mutex");
+        }
+    }
+
+    virtual ~PThreadController() {
+        pthread_mutex_destroy(&_mutex);
+    }
+    /**
+    * \advice acquire_lock
+    * \see :ref:`acp::thread_controller::acquire_lock <thread_controller_hh_acquire_lock>`
+    */
+    advice execution("void acp::thread_controller::acquire_global_lock()"): around() {
+        pthread_mutex_lock(&_mutex);
+    }
+
+    /**
+    * \advice release_lock
+    * \see :ref:`acp::thread_controller::release_lock <thread_controller_hh_release_lock>`
+    */
+    advice execution("void acp::thread_controller::release_global_lock()"): around() {
+        pthread_mutex_unlock(&_mutex);
+    }
+
+    /**
+     * \advice synchronized_advice
+     * \see :ref:`acp::thread_controller::synchronized_function_call <thread_controller_hh_synchronized_function_call>`
+     */
+    advice execution("void acp::thread_controller::synchronized_function_call(...)") : around() {
+        static pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+        pthread_mutex_lock(&mutex);
+        tjp->proceed();
+        pthread_mutex_unlock(&mutex);
+    }
+
+    /**
+    * \advice get_id
+    * \see :ref:`acp::thread_controller::get_id <thread_controller_hh_get_id>`
+    */
+    advice execution("int acp::thread_controller::get_id()"): around() {
+        // Convert pthread_t to int safely (platform-specific)
+        auto id = pthread_self();
+        *tjp->result() = static_cast<int>(id);
+    }
+
+};
+
+#endif // __ACP__INTERFACE_P_THREAD_CONTROLLER_HH__

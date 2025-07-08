@@ -1,5 +1,7 @@
-``OfstreamPrinter`` (Class)
+``OfstreamPrinter``
 ===========================
+..
+	(Class)
 
 **Brief Description:** OfstreamPrinter is a Printer implementation that prints messages to a std::ofstream.
 
@@ -8,7 +10,7 @@
     This class implements the Printer interface and provides methods to print messages
     to a specified output file stream (std::ofstream).
 
-*In file* ``src/util/ofstream_printer.hh``
+*In file* ``src/core/ofstream_printer.hh``
 
 .. _ofstream_printer_hh_Constructor:
 
@@ -16,6 +18,10 @@
 -----------------------------
 
 **Brief Description:** Construct a new OfstreamPrinter object and open the output file stream.
+
+**Parameters:**
+
+    * ``filename``: is the name of the file to which messages will be printed.
 
 
 .. _ofstream_printer_hh_Destructor:

@@ -2,10 +2,12 @@
 #define __ACP__PROFILER_AH__
 
 #include "../core/core_aspect.ah"
-#include "../util/printer.hh"
+#include "../core/inner_layer.ah"
+#include "../core/predefined_pointcuts.ah"
+#include "../core/printer.hh"
+#include "../core/thread_controller.hh"
+#include "../core/custom_to_string.hh"
 #include "profiler_data.hh"
-#include "util/profiler_msg_builder.hh"
-#include "../util/thread_controller.hh"
 
 namespace acp {
 	/**
@@ -17,21 +19,45 @@ namespace acp {
 
 /**
  * \aspect Profiler
+ * \file src/understanding/profiler.ah
  * \brief This aspect is used to profile the execution time and call amount of functions and methods.
  *
  * In conjunction with this aspect use an aspect that provides a implementation for the
  * acp::profiler_msg_builder::build_msg() method.
  *
- *
- *
  */
-aspect Profiler : public CoreAspect {
+aspect Profiler : public CoreAspect, InnerLayer{
 
 	static acp::Printer* _printer_static;
 	acp::Printer* _printer;
 
+protected:
+
+	/**
+	 * \function build_msg
+     * \brief This function is responsible for creating a well formatted profiler message.
+     *
+     * In case you want to change this, write an aspect which replaces this function with your
+	 * own implementation. Use a around advice for that.
+     *
+	 * \param data the profiling data to be used for building the message.
+	 * \param output reference to a string which will contain the output in the end.
+	 */
+	inline static void build_msg(const acp::ProfilerData& data, std::string& output){
+		char buffer1[12], buffer2[12];
+        acp::to_string(buffer1, data.m_calls, sizeof(buffer1));
+        acp::to_string(buffer2, data.m_exec_time.count(), sizeof(buffer2));
+        output.clear();
+        output.append(data.m_signature);
+        output.append(": called ");
+        output.append(buffer1);
+        output.append(" times within ");
+        output.append(buffer2);
+        output.append(" nanoseconds.\n");
+	}
+
 public:
-/**
+	/**
 	 * \pointcut ignore
 	 * \see :ref:`CoreAspect::ignore <core_aspect_ah_ignore>`
 	 */
@@ -86,7 +112,7 @@ public:
     static void simple_stat () {
 		for (acp::ProfilerData *curr = acp::ProfilerData::first (); curr; curr = curr->p_next) {
 			std::string output;
-			acp::profiler_msg_builder::build_msg(*curr, output);
+			build_msg(*curr, output);
 			_printer_static->print(output);
 		}
       }
@@ -112,7 +138,7 @@ public:
 	 * a function that returns void and takes no arguments and is not class bound. Using the atexit()
 	 * function, the most amount of information can be gathered about the program before it exits.
 	 */
-    advice execution (acp::main_func()) : after () {
+    advice execution (acp::main_function()) : after () {
         atexit (summary());
     }
 

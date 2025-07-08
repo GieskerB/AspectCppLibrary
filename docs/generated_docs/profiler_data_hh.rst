@@ -1,5 +1,7 @@
-``ProfilerData`` (Class)
+``ProfilerData``
 ========================
+..
+	(Class)
 
 **Brief Description:** This class is used to store profiling data for functions.
 
@@ -9,5 +11,5 @@
     By using a linked list, it allows for easy accumulation of profiling
     data across multiple function calls.
 
-*In file* ``src/util/profiler_data.hh``
+*In file* ``src/understanding/profiler_data.hh``
 

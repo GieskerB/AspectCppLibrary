@@ -1,5 +1,7 @@
-``NullptrCheck`` (Aspect)
+``NullptrCheck``
 =========================
+..
+	(Aspect)
 
 **Brief Description:** Aspect that checks for null pointer dereferences.
 
@@ -17,6 +19,20 @@
 ---------------------
 
 *See:* :ref:`CoreAspect::ignore <core_aspect_ah_ignore>`
+
+.. _nullptr_check_ah_null_check:
+
+``null_check`` (Attribute)
+--------------------------
+
+**Brief Description:** For all pointer dereferencing within any function / class / namespace
+
+**Detailed Description:**
+
+    ()
+    annotated with this attribute an nullptr check will be performed. In case this
+    happens, an exception will be thrown.
+
 
 .. _nullptr_check_ah_nullptr_check:
 

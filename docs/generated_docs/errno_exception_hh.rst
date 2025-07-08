@@ -1,5 +1,7 @@
-``ErrnoException`` (Exception)
+``ErrnoException``
 ==============================
+..
+	(Exception)
 
 **Brief Description:** ErrnoException is an exception that is thrown within the ErrorCodeConverterAspect when
 
@@ -7,7 +9,7 @@
 
     a function call sets errno to a non-zero value.
 
-*In file* ``/src/util/errno_exception.hh``
+*In file* ``/src/error_detection/errno_exception.hh``
 
 .. _errno_exception_hh_Constructor:
 
@@ -19,6 +21,10 @@
 **Detailed Description:**
 
     It will create a message based on the error number using std::strerror.
+
+**Parameters:**
+
+    * ``err``: is the error number that was set by a std-lib function.
 
 
 .. _errno_exception_hh_get_errno:

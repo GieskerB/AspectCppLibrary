@@ -20,6 +20,7 @@ public:
 
 	/**
 	 * \pointcut where
+	 * \file src/core/core_aspect.hh
 	 * \brief A virtual placeholder for the pointcut that is used used in the main
 	 * advice of each aspect.
 	 *
@@ -35,12 +36,14 @@ public:
 	 * should be ignored by the aspect.
 	 *
 	 * It is recommended to use and extend a pointcut definition like with:
-	 * "% <AspectName>::...::%(...)" || "% acp::...::%(...)"
+	 * within("<AspectName>") || within("acp")
 	 */
 	pointcut virtual ignore() = 0;
 
 	CoreAspect() = default;
 	virtual ~CoreAspect() {}
+
+    advice execution(acp::all_func()) : order(derived("InnerLayer"),derived("MiddleLayer"),derived("OuterLayer"));
 
 };
 

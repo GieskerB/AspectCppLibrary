@@ -1,5 +1,7 @@
-``ThreadController`` (Interface)
+``ThreadController``
 ================================
+..
+	(Interface)
 
 **Brief Description:** Interface for thread control mechanisms.
 
@@ -10,7 +12,7 @@
     To statically configure the thread controller at runtime, use an aspect that implements this interface.
     Example being the `acp::std_thread_controller`.
 
-*In file* ``src/util/thread_controller.hh``
+*In file* ``src/core/thread_controller.hh``
 
 .. _thread_controller_hh_acquire_lock:
 
@@ -37,6 +39,10 @@
     This method returns a unique identifier for the current thread, which can
     be used for logging or debugging purposes.
 
+**Returns:**
+
+    * An integer representing the thread ID.
+
 
 .. _thread_controller_hh_release_lock:
 
@@ -49,5 +55,17 @@
 
     This method should be called after finishing access to shared resources
     to allow other threads to acquire the lock.
+
+
+.. _thread_controller_hh_synchronized_function_call:
+
+``synchronized_function_call`` (Function)
+-----------------------------------------
+
+**Brief Description:** Calls the argument given by the first argument with mutex exclusion.
+
+**Parameters:**
+
+    * ``func``: and std::function which should be called.
 
 

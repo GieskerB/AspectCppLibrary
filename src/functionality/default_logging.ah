@@ -1,0 +1,24 @@
+#ifndef __ACP__DEFAULT_LOGGING_AH__
+#define __ACP__DEFAULT_LOGGING_AH__
+
+#include "logging.ah"
+#include "../core/cout_printer.hh"
+
+/**
+ * \aspect DefaultLogging
+ * \file src/functionality/default_logging.ah
+ * \brief This aspect is a default implementation of the `Logging` aspect.
+ *
+ * The remaining non project wide configuration of the Logging aspect is the
+ * implementation of the printer interface. This aspect provides it with the
+ * std::cout printer interface implementation.
+ *
+ */
+aspect DefaultLogging : public Logging {
+    public:
+    DefaultLogging() : Logging(new acp::CoutPrinter()) {}
+
+        virtual ~DefaultLogging() = default;
+};
+
+#endif // __ACP__DEFAULT_LOGGING_AH__
