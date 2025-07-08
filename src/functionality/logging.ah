@@ -3,7 +3,6 @@
 
 
 #include "../core/core_aspect.ah"
-#include "../core/inner_layer.ah"
 #include "../core/printer.hh"
 
 namespace acp {
@@ -37,7 +36,7 @@ namespace acp {
  * Similar to the `AfterLogging` aspect, this aspect logs the function signature - but only - before the function will execute.
  *
  */
-aspect Logging : public CoreAspect, public InnerLayer {
+aspect [[acp::inner_layer]] Logging : public CoreAspect {
 
     acp::Printer* _printer;
 

@@ -2,13 +2,9 @@
 #define __ACP__TEST_FIRST_AH__
 
 #include "../../src/core/core_aspect.ah"
-#include "../../src/core/inner_layer.ah"
-#include "../../src/core/middle_layer.ah"
-#include "../../src/core/outer_layer.ah"
-
 #include <iostream>
 
-aspect A1 : public CoreAspect, public MiddleLayer {
+aspect [[acp::middle_layer]] A1 : public CoreAspect {
 
     pointcut where() = "void foo()";
     pointcut ignore() = "int main()";

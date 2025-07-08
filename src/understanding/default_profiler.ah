@@ -14,7 +14,7 @@
  * std::cout printer interface implementation.
  *
  */
-aspect DefaultProfiler : public Profiler {
+aspect [[acp::inner_layer]] DefaultProfiler : public Profiler {
 
 public:
 

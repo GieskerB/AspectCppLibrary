@@ -2,7 +2,6 @@
 #define __ACP__SYNCHRONIZATION_AH__
 
 #include "../core/core_aspect.ah"
-#include "../core/inner_layer.ah"
 #include "../core/thread_controller.hh"
 
 #include <functional>
@@ -27,7 +26,7 @@ namespace acp {
  * There will be no performance loss, if the thread interface is not implemented, but this aspect sill used.
  *
  */
-aspect Synchronization : public CoreAspect, public InnerLayer {
+aspect [[acp::inner_layer]] Synchronization : public CoreAspect {
 
 public:
     Synchronization() {}

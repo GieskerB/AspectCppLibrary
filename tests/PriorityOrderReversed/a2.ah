@@ -2,13 +2,10 @@
 #define __ACP__TEST_LAST_AH__
 
 #include "../../src/core/core_aspect.ah"
-#include "../../src/core/inner_layer.ah"
-#include "../../src/core/middle_layer.ah"
-#include "../../src/core/outer_layer.ah"
 
 #include <iostream>
 
-aspect A2 : public CoreAspect, public InnerLayer {
+aspect [[acp::inner_layer]] A2 : public CoreAspect {
 
     pointcut where() = "void foo()";
     pointcut ignore() = "int main()";
