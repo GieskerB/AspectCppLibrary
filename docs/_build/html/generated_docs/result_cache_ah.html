@@ -7,7 +7,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>DefaultProfiler &mdash; AspectC++ Library 0.1.0 documentation</title>
+  <title>ResultCache &mdash; AspectC++ Library 0.1.0 documentation</title>
   
 
   
@@ -30,8 +30,8 @@
   <link rel="stylesheet" href="../_static/css/theme.min.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="DefaultStackTrace" href="default_stack_trace_ah.html" />
-    <link rel="prev" title="DefaultLogging" href="default_logging_ah.html" /> 
+    <link rel="next" title="Singleton" href="singleton_ah.html" />
+    <link rel="prev" title="Profiler" href="profiler_ah.html" /> 
 
 </head>
 
@@ -72,13 +72,13 @@
         
           <li><a href="../aspects.html">Aspects</a></li>
         
-      <li><code class="docutils literal notranslate"><span class="pre">DefaultProfiler</span></code></li>
+      <li><code class="docutils literal notranslate"><span class="pre">ResultCache</span></code></li>
     
     
       <li class="breadcrumbs-aside">
         
             
-            <a href="../_sources/generated_docs/default_profiler_ah.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/generated_docs/result_cache_ah.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -111,7 +111,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../aspects.html">Aspects</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="core_aspect_ah.html"><code class="docutils literal notranslate"><span class="pre">CoreAspect</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_logging_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultLogging</span></code></a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">DefaultProfiler</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="default_profiler_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultProfiler</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_stack_trace_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultStackTrace</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="error_code_converter_ah.html"><code class="docutils literal notranslate"><span class="pre">ErrorCodeConverter</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="inner_layer_ah.html"><code class="docutils literal notranslate"><span class="pre">InnerLayer</span></code></a></li>
@@ -121,7 +121,7 @@
 <li class="toctree-l2"><a class="reference internal" href="nullptr_check_ah.html"><code class="docutils literal notranslate"><span class="pre">NullptrCheck</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="p_thread_controller_ah.html"><code class="docutils literal notranslate"><span class="pre">PThreadController</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="profiler_ah.html"><code class="docutils literal notranslate"><span class="pre">Profiler</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="result_cache_ah.html"><code class="docutils literal notranslate"><span class="pre">ResultCache</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">ResultCache</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="singleton_ah.html"><code class="docutils literal notranslate"><span class="pre">Singleton</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="stack_trace_ah.html"><code class="docutils literal notranslate"><span class="pre">StackTrace</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="std_thread_controller_ah.html"><code class="docutils literal notranslate"><span class="pre">StdThreadController</span></code></a></li>
@@ -161,16 +161,40 @@
                     <div class="document">
                         
                             
-  <section id="defaultprofiler">
-<h1><code class="docutils literal notranslate"><span class="pre">DefaultProfiler</span></code><a class="headerlink" href="#defaultprofiler" title="Link to this heading">¶</a></h1>
-<p><strong>Brief Description:</strong> DefaultProfiler is the default aspect for profiling in this ACP library.</p>
+  <section id="resultcache">
+<h1><code class="docutils literal notranslate"><span class="pre">ResultCache</span></code><a class="headerlink" href="#resultcache" title="Link to this heading">¶</a></h1>
+<p><strong>Brief Description:</strong> Caches the result of a function based on its arguments.</p>
 <p><strong>Detailed Description:</strong></p>
 <blockquote>
-<div><p>The remaining non project wide configuration of the StackTrace aspect is the
-implementation of the printer interface. This aspect provides it with the
-std::cout printer interface implementation.</p>
+<div><p>Possibly reducing the execution time of functions that are called multiple times with the
+same arguments.</p>
 </div></blockquote>
-<p><em>In file</em> <code class="docutils literal notranslate"><span class="pre">src/understanding/default_profiler.ah</span></code></p>
+<p><em>In file</em> <code class="docutils literal notranslate"><span class="pre">src/functionality/result_cache.ah</span></code></p>
+<section id="cache-attribute">
+<span id="result-cache-ah-cache"></span><h2><code class="docutils literal notranslate"><span class="pre">cache</span></code> (Attribute)<a class="headerlink" href="#cache-attribute" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> Functions annotated with this attribute will be cached based on their arguments.</p>
+<p><strong>Detailed Description:</strong></p>
+<blockquote>
+<div><p>Currently only primitive types and pointers to primitive types are supported.</p>
+</div></blockquote>
+</section>
+<section id="caching-advice-advice">
+<span id="result-cache-ah-caching-advice"></span><h2><code class="docutils literal notranslate"><span class="pre">caching-advice</span></code> (Advice)<a class="headerlink" href="#caching-advice-advice" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> Caches the result of a function based on its arguments.</p>
+<p><strong>Detailed Description:</strong></p>
+<blockquote>
+<div><p>This advice will only be applied to functions that are annotated with the
+acp::cache attribute.</p>
+</div></blockquote>
+</section>
+<section id="ignore-pointcut">
+<span id="result-cache-ah-ignore"></span><h2><code class="docutils literal notranslate"><span class="pre">ignore</span></code> (Pointcut)<a class="headerlink" href="#ignore-pointcut" title="Link to this heading">¶</a></h2>
+<p><em>See:</em> <a class="reference internal" href="core_aspect_ah.html#core-aspect-ah-ignore"><span class="std std-ref">CoreAspect::ignore</span></a></p>
+</section>
+<section id="where-pointcut">
+<span id="result-cache-ah-where"></span><h2><code class="docutils literal notranslate"><span class="pre">where</span></code> (Pointcut)<a class="headerlink" href="#where-pointcut" title="Link to this heading">¶</a></h2>
+<p><em>See:</em> <a class="reference internal" href="core_aspect_ah.html#core-aspect-ah-where"><span class="std std-ref">CoreAspect::where</span></a></p>
+</section>
 </section>
 
 
