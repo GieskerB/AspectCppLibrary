@@ -1,0 +1,7 @@
+ResultCache Test: Checks correct functionality of the ResultCache aspect
+====================================================================================================
+-Call function first time.--------------------------------------------------------------------------
+Result of all_primitive_types: 906437
+-Call function second time. Result should not change!-----------------------------------------------
+Altered result: 906437
+====================================================================================================

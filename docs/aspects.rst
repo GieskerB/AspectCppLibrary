@@ -16,6 +16,7 @@ Aspects
    generated_docs/nullptr_check_ah.rst
    generated_docs/p_thread_controller_ah.rst
    generated_docs/profiler_ah.rst
+   generated_docs/result_cache_ah.rst
    generated_docs/singleton_ah.rst
    generated_docs/stack_trace_ah.rst
    generated_docs/std_thread_controller_ah.rst

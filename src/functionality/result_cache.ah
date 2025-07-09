@@ -1,0 +1,171 @@
+#ifndef __ACP__RESULT_CACHE_AH__
+#define __ACP__RESULT_CACHE_AH__
+
+#include "../core/core_aspect.ah"
+#include "../core/inner_layer.ah"
+
+#include <unordered_map>
+
+namespace acp {
+
+    /**
+     * \attribute cache
+     * \brief Functions annotated with this attribute will be cached based on their arguments.
+     *
+     *  Currently only primitive types and pointers to primitive types are supported.
+     *
+     */
+    attribute cache();
+}
+
+/**
+ * \aspect ResultCache
+ * \file src/functionality/result_cache.ah
+ * \brief Caches the result of a function based on its arguments.
+ *
+ * Possibly reducing the execution time of functions that are called multiple times with the
+ * same arguments.
+ *
+ */
+aspect ResultCache : public CoreAspect, public InnerLayer{
+
+    constexpr static bool is_primitive(const char type) {
+        if(type == 'c' or // char
+           type == 'h' or // unsigend char
+           type == 'i' or // int
+           type == 'j' or // unsigned int
+           type == 's' or // short
+           type == 't' or // unsigend short
+           type == 'l' or // long
+           type == 'm' or // unsigend long long
+           type == 'x' or // long long
+           type == 'y' or // unsigned long long
+           type == 'f' or // float
+           type == 'd' or // double
+           type == 'b') {// bool
+            return true;
+        }
+        return false;
+    }
+
+    constexpr static size_t calc_hash(void* arg, const char type) {
+        if (type == 'c') {  // char
+            return std::hash<char>{}(*static_cast<char*>(arg));
+        } else if (type == 'h') {  // unsigned char
+            return std::hash<unsigned char>{}(*static_cast<unsigned char*>(arg));
+        } else if (type == 'i') {  // int
+            return std::hash<int>{}(*static_cast<int*>(arg));
+        } else if (type == 'j') {  // unsigned int
+            return std::hash<unsigned int>{}(*static_cast<unsigned int*>(arg));
+        } else if (type == 's') {  // short
+            return std::hash<short>{}(*static_cast<short*>(arg));
+        } else if (type == 't') {  // unsigned short
+            return std::hash<unsigned short>{}(*static_cast<unsigned short*>(arg));
+        } else if (type == 'l') {  // long
+            return std::hash<long>{}(*static_cast<long*>(arg));
+        } else if (type == 'm') {  // unsigned long
+            return std::hash<unsigned long>{}(*static_cast<unsigned long*>(arg));
+        } else if (type == 'x') {  // long long
+            return std::hash<long long>{}(*static_cast<long long*>(arg));
+        } else if (type == 'y') {  // unsigned long long
+            return std::hash<unsigned long long>{}(*static_cast<unsigned long long*>(arg));
+        } else if (type == 'f') {  // float
+            return std::hash<float>{}(*static_cast<float*>(arg));
+        } else if (type == 'd') {  // double
+            return std::hash<double>{}(*static_cast<double*>(arg));
+        } else if (type == 'b') {  // bool
+            return std::hash<bool>{}(*static_cast<bool*>(arg));
+        }
+        return 0;
+    }
+
+    constexpr static size_t calc_hash_ptr(void* arg, const char type) {
+        if (type == 'c') {  // char
+            return std::hash<char>{}(**static_cast<char**>(arg));
+        } else if (type == 'h') {  // unsigned char
+            return std::hash<unsigned char>{}(**static_cast<unsigned char**>(arg));
+        } else if (type == 'i') {  // int
+            return std::hash<int>{}(**static_cast<int**>(arg));
+        } else if (type == 'j') {  // unsigned int
+            return std::hash<unsigned int>{}(**static_cast<unsigned int**>(arg));
+        } else if (type == 's') {  // short
+            return std::hash<short>{}(**static_cast<short**>(arg));
+        } else if (type == 't') {  // unsigned short
+            return std::hash<unsigned short>{}(**static_cast<unsigned short**>(arg));
+        } else if (type == 'l') {  // long
+            return std::hash<long>{}(**static_cast<long**>(arg));
+        } else if (type == 'm') {  // unsigned long
+            return std::hash<unsigned long>{}(**static_cast<unsigned long**>(arg));
+        } else if (type == 'x') {  // long long
+            return std::hash<long long>{}(**static_cast<long long**>(arg));
+        } else if (type == 'y') {  // unsigned long long
+            return std::hash<unsigned long long>{}(**static_cast<unsigned long long**>(arg));
+        } else if (type == 'f') {  // float
+            return std::hash<float>{}(**static_cast<float**>(arg));
+        } else if (type == 'd') {  // double
+            return std::hash<double>{}(**static_cast<double**>(arg));
+        } else if (type == 'b') {  // bool
+            return std::hash<bool>{}(**static_cast<bool**>(arg));
+        }
+        return 0;
+    }
+
+    public:
+
+    ResultCache() {}
+    virtual ~ResultCache() = default;
+
+    /**
+	 * \pointcut ignore
+	 * \see :ref:`CoreAspect::ignore <core_aspect_ah_ignore>`
+	 */
+    pointcut virtual ignore() = within("AfterLogging") || within ("acp");
+
+    /**
+	 * \pointcut where
+	 * \see :ref:`CoreAspect::where <core_aspect_ah_where>`
+	 */
+    pointcut virtual where() = acp::cache();
+
+    /**
+     * \advice caching-advice
+     * \brief Caches the result of a function based on its arguments.
+     *
+     * This advice will only be applied to functions that are annotated with the
+     * acp::cache attribute.
+     */
+    advice execution(where()) && !ignore() : around() {
+        // static JoinPoint::Result result;
+        static std::unordered_map<std::size_t, JoinPoint::Result> cache;
+
+        bool all_primitive = tjp->args() > 0;
+        std::size_t hash = 0;
+        for(int i = 0; i< tjp->args();++i) {
+            std::string arg_type = tjp->argtype(i);
+            // Calculate hash based on the argument type
+            if(arg_type.size() == 1 && is_primitive(arg_type[0])) {
+                hash += calc_hash(tjp->arg(i), arg_type[0]);
+            } else if (arg_type.size() == 2 and arg_type[0] == 'P' and is_primitive(arg_type[1])) {
+                hash += calc_hash_ptr(tjp->arg(i), arg_type[1]);
+            } else {
+                all_primitive = false;
+                break;
+            }
+
+        }
+
+        if(all_primitive and cache.find(hash) != cache.end()) {
+            // Cache hit
+            *tjp->result() = cache[hash];
+        } else {
+            // Cache miss
+            tjp->proceed();
+            if(all_primitive) {
+                cache[hash] = *static_cast<JoinPoint::Result*>(tjp->result());
+            }
+        }
+    }
+
+};
+
+#endif // __ACP__RESULT_CACHE_AH__

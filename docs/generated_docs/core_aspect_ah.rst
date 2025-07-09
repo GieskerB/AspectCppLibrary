@@ -26,7 +26,7 @@
 
     should be ignored by the aspect.
     It is recommended to use and extend a pointcut definition like with:
-    "% <AspectName>::...::%(...)" || "% acp::...::%(...)"
+    within("<AspectName>") || within("acp")
 
 
 .. _core_aspect_ah_where:
