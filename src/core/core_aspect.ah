@@ -83,8 +83,17 @@ public:
 	CoreAspect() = default;
 	virtual ~CoreAspect() {}
 
+	/**
+	 * \advice ordering
+	 * \brief This advice defines the order of the aspects in the weaving process.
+	 *
+	 * Naming of the layers is relative to the "distance" to the function which represents the core.
+	 * In case of before advices the outer layer is weaved first, then the middle layer and finally the inner layer.
+	 * For after advices this is the other way around and for around advice it is a capsulation with results in the
+	 * same order as for the before and after advices combined.
+	 */
+    advice execution(acp::all_func()) : order(derived(acp::inner_layer()), derived(acp::middle_layer()), derived(acp::outer_layer()));
     // advice execution(acp::all_func()) : order(derived("InnerLayer"),derived("MiddleLayer"),derived("OuterLayer"));
-    advice execution(acp::all_func()) : order(acp::inner_layer(),acp::middle_layer(),acp::outer_layer());
 
 };
 
