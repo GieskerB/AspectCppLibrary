@@ -3,6 +3,7 @@
 
 #include "../core/core_aspect.ah"
 #include "../core/inner_layer.ah"
+#include "../core/thread_controller.hh"
 
 #include <unordered_map>
 
@@ -154,14 +155,20 @@ aspect ResultCache : public CoreAspect, public InnerLayer{
 
         }
 
+        acp::thread_controller::acquire_global_lock();
+
         if(all_primitive and cache.find(hash) != cache.end()) {
             // Cache hit
             *tjp->result() = cache[hash];
+            acp::thread_controller::release_global_lock();
         } else {
             // Cache miss
+            acp::thread_controller::release_global_lock();
             tjp->proceed();
             if(all_primitive) {
+                acp::thread_controller::acquire_global_lock();
                 cache[hash] = *static_cast<JoinPoint::Result*>(tjp->result());
+                acp::thread_controller::release_global_lock();
             }
         }
     }
