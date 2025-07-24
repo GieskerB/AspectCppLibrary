@@ -2,7 +2,6 @@
 #define __ACP__RESULT_CACHE_AH__
 
 #include "../core/core_aspect.ah"
-#include "../core/inner_layer.ah"
 #include "../core/thread_controller.hh"
 
 #include <unordered_map>
@@ -28,7 +27,7 @@ namespace acp {
  * same arguments.
  *
  */
-aspect ResultCache : public CoreAspect, public InnerLayer{
+aspect [[acp::inner_layer]] ResultCache : public CoreAspect {
 
     constexpr static bool is_primitive(const char type) {
         if(type == 'c' or // char
