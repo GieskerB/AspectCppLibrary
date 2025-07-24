@@ -2,7 +2,6 @@
 #define __ACP__ERROR_CODE_CONVERTER_AH__
 
 #include "../core/core_aspect.ah"
-#include "../core/middle_layer.ah"
 #include "errno_exception.hh"
 
 #include <stdexcept>
@@ -27,7 +26,7 @@ namespace acp {
  * It checks if errno is set to a non-zero value after a function call and throws an `acp::ErrnoException` with the current value of errno.
  * It is recommended to use this aspect in conjunction with the StackTrace aspect to get a full stack trace.
  */
-aspect ErrorCodeConverter : public CoreAspect, public MiddleLayer {
+aspect [[acp::middle_layer]] ErrorCodeConverter : public CoreAspect {
 
 public:
 

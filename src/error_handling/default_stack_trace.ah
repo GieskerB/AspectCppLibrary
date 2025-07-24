@@ -14,7 +14,7 @@
  * std::cerr printer interface implementation.
  *
  */
-aspect DefaultStackTrace : public StackTrace {
+aspect [[acp::outer_layer]] DefaultStackTrace : public StackTrace {
 
 public:
 

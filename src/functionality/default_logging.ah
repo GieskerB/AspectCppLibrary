@@ -14,7 +14,7 @@
  * std::cout printer interface implementation.
  *
  */
-aspect DefaultLogging : public Logging {
+aspect [[acp::inner_layer]] DefaultLogging : public Logging {
     public:
     DefaultLogging() : Logging(new acp::CoutPrinter()) {}
 

@@ -3,6 +3,46 @@
 
 #include "predefined_pointcuts.ah"
 
+namespace acp {
+
+	/**
+	 * \attribute inner_layer
+	 * \brief This attributes defines a weaving order layer for aspects.
+	 *
+	 * Alongside the two other attributes outer- and middle_layer these attributes
+	 * provide a simple way of ordering aspect in the weaving process. Imagine the
+	 * "core" to be the original function and then all aspects annotated with
+	 * acp::inner_layer are weaved before the other two. Within all aspects from the
+	 * same layer is no further order.
+	 */
+	attribute inner_layer();
+
+	/**
+	 * \attribute middle_layer
+	 * \brief This attributes defines a weaving order layer for aspects.
+	 *
+	 * Alongside the two other attributes outer- and inner_layer these attributes
+	 * provide a simple way of ordering aspect in the weaving process. Imagine the
+	 * "core" to be the original function and then all aspects annotated with
+	 * acp::middle_layer are weaved between the other two. Within all aspects from the
+	 * same layer is no further order.
+	 */
+	attribute middle_layer();
+
+	/**
+	 * \attribute outer_layer
+	 * \brief This attributes defines a weaving order layer for aspects.
+	 *
+	 * Alongside the two other attributes middle- and inner_layer these attributes
+	 * provide a simple way of ordering aspect in the weaving process. Imagine the
+	 * "core" to be the original function and then all aspects annotated with
+	 * acp::outer_layer are weaved after the other two. Within all aspects from the
+	 * same layer is no further order.
+	 */
+	attribute outer_layer();
+
+}
+
 /**
  * \aspect CoreAspect
  * \file src/core/core_aspect.ah
@@ -43,7 +83,17 @@ public:
 	CoreAspect() = default;
 	virtual ~CoreAspect() {}
 
-    advice execution(acp::all_func()) : order(derived("InnerLayer"),derived("MiddleLayer"),derived("OuterLayer"));
+	/**
+	 * \advice ordering
+	 * \brief This advice defines the order of the aspects in the weaving process.
+	 *
+	 * Naming of the layers is relative to the "distance" to the function which represents the core.
+	 * In case of before advices the outer layer is weaved first, then the middle layer and finally the inner layer.
+	 * For after advices this is the other way around and for around advice it is a capsulation with results in the
+	 * same order as for the before and after advices combined.
+	 */
+    advice execution(acp::all_func()) : order(acp::inner_layer(), acp::middle_layer(), acp::outer_layer());
+    // advice execution(acp::all_func()) : order(derived("InnerLayer"),derived("MiddleLayer"),derived("OuterLayer"));
 
 };
 
