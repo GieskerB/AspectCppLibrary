@@ -2,7 +2,7 @@
 #define __ACP__INTERFACE_CERR_PRINTER_HH__
 
 #include "printer.hh"
-#include <ostream>
+#include <iostream>
 
 namespace acp {
 

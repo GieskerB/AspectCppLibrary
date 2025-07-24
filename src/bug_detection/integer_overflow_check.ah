@@ -31,8 +31,8 @@ aspect IntegerOverflowCheck : public CoreAspect, public MiddleLayer {
     // This design is very expandable. simple copy the current version used for integers and expand
     // it with other types like short, long or char.
 
-    static constexpr int INT_MAX = std::numeric_limits<int>::max();
-    static constexpr int INT_MIN = std::numeric_limits<int>::min();
+    static constexpr int max = std::numeric_limits<int>::max();
+    static constexpr int min = std::numeric_limits<int>::min();
 
     pointcut int_add_binary() = builtin("int& operator +=(int&,int)" || "int operator +(int,int)");
     pointcut int_add_unary_inc() = builtin("int operator ++(int&,int)" || "int& operator ++(int&)");
@@ -67,7 +67,7 @@ public:
     advice within(where()) && int_add_binary() && !ignore(): before() {
         const int lhs = *static_cast<int*>(tjp->arg(0));
         const int rhs = *static_cast<int*>(tjp->arg(1));
-        if(lhs > INT_MAX - rhs) {
+        if(lhs > max - rhs) {
             throw acp::OverflowException(tjp->signature(), tjp->line(), "int", true);
         }
     }
@@ -78,7 +78,7 @@ public:
      */
     advice within(where()) && int_add_unary_inc() && !ignore(): before() {
         const int val = *static_cast<int*>(tjp->arg(0));
-        if(val == INT_MAX) {
+        if(val == max) {
             throw acp::OverflowException(tjp->signature(), tjp->line(), "int", true);
         }
     }
@@ -89,7 +89,7 @@ public:
      */
     advice within(where()) && int_add_unary() && !ignore(): before() {
         const int val = *static_cast<int*>(tjp->arg(0));
-        if(val == INT_MIN) {
+        if(val == min) {
             throw acp::OverflowException(tjp->signature(), tjp->line(), "int", true);
         }
     }
@@ -101,7 +101,7 @@ public:
     advice within(where()) && int_sub_binary() && !ignore(): before() {
         const int lhs = *static_cast<int*>(tjp->arg(0));
         const int rhs = *static_cast<int*>(tjp->arg(1));
-        if(lhs < INT_MAX + rhs) {
+        if(lhs < max + rhs) {
             throw acp::OverflowException(tjp->signature(), tjp->line(), "int", false);
         }
     }
@@ -112,7 +112,7 @@ public:
      */
     advice within(where()) && int_sub_unary_inc() && !ignore(): before() {
         const int val = *static_cast<int*>(tjp->arg(0));
-        if(val == INT_MIN) {
+        if(val == min) {
             throw acp::OverflowException(tjp->signature(), tjp->line(), "int", false);
         }
     }

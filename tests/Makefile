@@ -16,7 +16,6 @@ ACTESTS = HelloWorld StackTrace StackTraceExceptionChange StackTraceFallback Sta
 		  Singleton Synchronization SynchronizationMultiFunction OverflowCheck ResultCache\
 		  PriorityOrder PriorityOrderReversed
 
-
 # This test will always fail, since the timing output of the profiler is not stable.
 # ACTESTS += Profiler ProfilerThread
 
