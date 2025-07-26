@@ -111,11 +111,10 @@
 <li class="toctree-l2"><a class="reference internal" href="generated_docs/default_logging_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultLogging</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated_docs/default_profiler_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultProfiler</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated_docs/default_stack_trace_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultStackTrace</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated_docs/default_tracer_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultTracer</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated_docs/error_code_converter_ah.html"><code class="docutils literal notranslate"><span class="pre">ErrorCodeConverter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated_docs/inner_layer_ah.html"><code class="docutils literal notranslate"><span class="pre">InnerLayer</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated_docs/integer_overflow_check_ah.html"><code class="docutils literal notranslate"><span class="pre">IntegerOverflowCheck</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated_docs/logging_ah.html"><code class="docutils literal notranslate"><span class="pre">Logging</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated_docs/middle_layer_ah.html"><code class="docutils literal notranslate"><span class="pre">MiddleLayer</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated_docs/nullptr_check_ah.html"><code class="docutils literal notranslate"><span class="pre">NullptrCheck</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated_docs/p_thread_controller_ah.html"><code class="docutils literal notranslate"><span class="pre">PThreadController</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated_docs/profiler_ah.html"><code class="docutils literal notranslate"><span class="pre">Profiler</span></code></a></li>
@@ -124,6 +123,7 @@
 <li class="toctree-l2"><a class="reference internal" href="generated_docs/stack_trace_ah.html"><code class="docutils literal notranslate"><span class="pre">StackTrace</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated_docs/std_thread_controller_ah.html"><code class="docutils literal notranslate"><span class="pre">StdThreadController</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated_docs/synchronization_ah.html"><code class="docutils literal notranslate"><span class="pre">Synchronization</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated_docs/tracer_ah.html"><code class="docutils literal notranslate"><span class="pre">Tracer</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="interfaces.html">Interfaces</a><ul>
@@ -135,8 +135,8 @@
 <li class="toctree-l2"><a class="reference internal" href="generated_docs/cerr_printer_hh.html"><code class="docutils literal notranslate"><span class="pre">CerrPrinter</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated_docs/cout_printer_hh.html"><code class="docutils literal notranslate"><span class="pre">CoutPrinter</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated_docs/ofstream_printer_hh.html"><code class="docutils literal notranslate"><span class="pre">OfstreamPrinter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated_docs/outer_layer_ah.html"><code class="docutils literal notranslate"><span class="pre">OuterLayer</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated_docs/profiler_data_hh.html"><code class="docutils literal notranslate"><span class="pre">ProfilerData</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated_docs/tracer_data_hh.html"><code class="docutils literal notranslate"><span class="pre">TracerData</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="exceptions.html">Exceptions</a><ul>
@@ -165,12 +165,17 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="generated_docs/core_aspect_ah.html"><code class="docutils literal notranslate"><span class="pre">CoreAspect</span></code></a><ul>
 <li class="toctree-l2"><a class="reference internal" href="generated_docs/core_aspect_ah.html#ignore-pointcut"><code class="docutils literal notranslate"><span class="pre">ignore</span></code> (Pointcut)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated_docs/core_aspect_ah.html#inner-layer-attribute"><code class="docutils literal notranslate"><span class="pre">inner_layer</span></code> (Attribute)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated_docs/core_aspect_ah.html#middle-layer-attribute"><code class="docutils literal notranslate"><span class="pre">middle_layer</span></code> (Attribute)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated_docs/core_aspect_ah.html#ordering-advice"><code class="docutils literal notranslate"><span class="pre">ordering</span></code> (Advice)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated_docs/core_aspect_ah.html#outer-layer-attribute"><code class="docutils literal notranslate"><span class="pre">outer_layer</span></code> (Attribute)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated_docs/core_aspect_ah.html#where-pointcut"><code class="docutils literal notranslate"><span class="pre">where</span></code> (Pointcut)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="generated_docs/default_logging_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultLogging</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="generated_docs/default_profiler_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultProfiler</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="generated_docs/default_stack_trace_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultStackTrace</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="generated_docs/default_tracer_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultTracer</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="generated_docs/error_code_converter_ah.html"><code class="docutils literal notranslate"><span class="pre">ErrorCodeConverter</span></code></a><ul>
 <li class="toctree-l2"><a class="reference internal" href="generated_docs/error_code_converter_ah.html#acp-err-code-attribute"><code class="docutils literal notranslate"><span class="pre">acp::err_code</span></code> (Attribute)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated_docs/error_code_converter_ah.html#errno-check-advice"><code class="docutils literal notranslate"><span class="pre">errno_check</span></code> (Advice)</a></li>
@@ -178,7 +183,6 @@
 <li class="toctree-l2"><a class="reference internal" href="generated_docs/error_code_converter_ah.html#where-pointcut"><code class="docutils literal notranslate"><span class="pre">where</span></code> (Pointcut)</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="generated_docs/inner_layer_ah.html"><code class="docutils literal notranslate"><span class="pre">InnerLayer</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="generated_docs/integer_overflow_check_ah.html"><code class="docutils literal notranslate"><span class="pre">IntegerOverflowCheck</span></code></a><ul>
 <li class="toctree-l2"><a class="reference internal" href="generated_docs/integer_overflow_check_ah.html#ignore-pointcut"><code class="docutils literal notranslate"><span class="pre">ignore</span></code> (Pointcut)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated_docs/integer_overflow_check_ah.html#int-add-binary-check-advice"><code class="docutils literal notranslate"><span class="pre">int_add_binary_check</span></code> (Advice)</a></li>
@@ -205,7 +209,6 @@
 <li class="toctree-l2"><a class="reference internal" href="generated_docs/logging_ah.html#where-pointcut"><code class="docutils literal notranslate"><span class="pre">where</span></code> (Pointcut)</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="generated_docs/middle_layer_ah.html"><code class="docutils literal notranslate"><span class="pre">MiddleLayer</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="generated_docs/nullptr_check_ah.html"><code class="docutils literal notranslate"><span class="pre">NullptrCheck</span></code></a><ul>
 <li class="toctree-l2"><a class="reference internal" href="generated_docs/nullptr_check_ah.html#ignore-pointcut"><code class="docutils literal notranslate"><span class="pre">ignore</span></code> (Pointcut)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated_docs/nullptr_check_ah.html#null-check-attribute"><code class="docutils literal notranslate"><span class="pre">null_check</span></code> (Attribute)</a></li>
@@ -271,6 +274,18 @@
 <li class="toctree-l2"><a class="reference internal" href="generated_docs/synchronization_ah.html#ignore-pointcut"><code class="docutils literal notranslate"><span class="pre">ignore</span></code> (Pointcut)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated_docs/synchronization_ah.html#synchronized-attribute"><code class="docutils literal notranslate"><span class="pre">synchronized</span></code> (Attribute)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated_docs/synchronization_ah.html#where-pointcut"><code class="docutils literal notranslate"><span class="pre">where</span></code> (Pointcut)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="generated_docs/tracer_ah.html"><code class="docutils literal notranslate"><span class="pre">Tracer</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="generated_docs/tracer_ah.html#constructor-constructor"><code class="docutils literal notranslate"><span class="pre">Constructor</span></code> (Constructor)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated_docs/tracer_ah.html#build-msg-function"><code class="docutils literal notranslate"><span class="pre">build_msg</span></code> (Function)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated_docs/tracer_ah.html#ignore-pointcut"><code class="docutils literal notranslate"><span class="pre">ignore</span></code> (Pointcut)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated_docs/tracer_ah.html#register-advice-advice"><code class="docutils literal notranslate"><span class="pre">register-advice</span></code> (Advice)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated_docs/tracer_ah.html#simple-stat-function"><code class="docutils literal notranslate"><span class="pre">simple_stat</span></code> (Function)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated_docs/tracer_ah.html#summary-function"><code class="docutils literal notranslate"><span class="pre">summary</span></code> (Function)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated_docs/tracer_ah.html#trace-advice-advice"><code class="docutils literal notranslate"><span class="pre">trace-advice</span></code> (Advice)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated_docs/tracer_ah.html#trace-attribute"><code class="docutils literal notranslate"><span class="pre">trace</span></code> (Attribute)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated_docs/tracer_ah.html#where-pointcut"><code class="docutils literal notranslate"><span class="pre">where</span></code> (Pointcut)</a></li>
 </ul>
 </li>
 </ul>

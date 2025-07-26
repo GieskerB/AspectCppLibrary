@@ -17,7 +17,7 @@ ACTESTS = HelloWorld StackTrace StackTraceExceptionChange StackTraceFallback Sta
 		  PriorityOrder PriorityOrderReversed
 
 # This test will always fail, since the timing output of the profiler is not stable.
-# ACTESTS += Profiler ProfilerThread
+# ACTESTS += Tracer Profiler ProfilerThread
 
 ifeq ($(FRONTEND),Clang)
 ifneq ($(shell uname -s),Darwin)

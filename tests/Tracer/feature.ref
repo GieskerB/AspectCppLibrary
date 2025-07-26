@@ -1,0 +1,24 @@
+Tracer Test: This test checks if the Tracer aspect works as expected.
+====================================================================================================
+-Calling Functions----------------------------------------------------------------------------------
+====================================================================================================
+void <unnamed>::bar(): traced at 62960 nanoseconds.
+void <unnamed>::barfoo(): traced at 63649 nanoseconds.
+void <unnamed>::bar(): traced at 64121 nanoseconds.
+void <unnamed>::barfoo(): traced at 64508 nanoseconds.
+void <unnamed>::foo(): traced at 64867 nanoseconds.
+void <unnamed>::bar(): traced at 65277 nanoseconds.
+void <unnamed>::foo(): traced at 65601 nanoseconds.
+void <unnamed>::bar(): traced at 65918 nanoseconds.
+void <unnamed>::foobar(): traced at 66269 nanoseconds.
+void <unnamed>::bar(): traced at 66649 nanoseconds.
+void <unnamed>::barfoo(): traced at 66894 nanoseconds.
+void <unnamed>::foo(): traced at 67154 nanoseconds.
+void <unnamed>::bar(): traced at 67415 nanoseconds.
+void <unnamed>::barfoo(): traced at 67660 nanoseconds.
+void <unnamed>::foo(): traced at 67913 nanoseconds.
+void <unnamed>::bar(): traced at 68160 nanoseconds.
+void <unnamed>::barfoo(): traced at 68492 nanoseconds.
+void <unnamed>::bar(): traced at 68739 nanoseconds.
+void <unnamed>::foo(): traced at 68992 nanoseconds.
+void <unnamed>::bar(): traced at 69242 nanoseconds.

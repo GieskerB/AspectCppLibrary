@@ -1,0 +1,27 @@
+#ifndef __ACP__DEFAULT_TRACER_AH__
+#define __ACP__DEFAULT_TRACER_AH__
+
+#include "tracer.ah"
+#include "../core/cout_printer.hh"
+
+/**
+ * \aspect DefaultTracer
+ * \file src/understanding/default_tracer.ah
+ * \brief DefaultTracer is the default aspect for tracing in this ACP library.
+ *
+ * The remaining non project wide configuration of the Tracer aspect is the
+ * implementation of the printer interface. This aspect provides it with the
+ * std::cout printer interface implementation.
+ *
+ */
+aspect [[acp::inner_layer]] DefaultTracer : public Tracer {
+
+public:
+
+	DefaultTracer() : Tracer(new acp::CoutPrinter()) {}
+
+	virtual ~DefaultTracer() {}
+
+};
+
+#endif // __ACP__DEFAULT_TRACER_AH__

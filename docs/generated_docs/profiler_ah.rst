@@ -7,8 +7,8 @@
 
 **Detailed Description:**
 
-    In conjunction with this aspect use an aspect that provides a implementation for the
-    acp::profiler_msg_builder::build_msg() method.
+    Creates a grouped list by signature name of all profiled functions and methods. The list is printed
+    after the execution of the main function.
 
 *In file* ``src/understanding/profiler.ah``
 

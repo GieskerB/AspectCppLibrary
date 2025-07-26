@@ -7,7 +7,7 @@
 
 **Detailed Description:**
 
-    The remaining non project wide configuration of the StackTrace aspect is the
+    The remaining non project wide configuration of the Profiler aspect is the
     implementation of the printer interface. This aspect provides it with the
     std::cout printer interface implementation.
 

@@ -50,6 +50,14 @@
 **Brief Description:** Matches every possible argument variant of the c++ main function.
 
 
+.. _predefined_pointcuts_ah_none:
+
+``none`` (Pointcut)
+-------------------
+
+**Brief Description:** Matches no join points.
+
+
 .. _predefined_pointcuts_ah_returns_const:
 
 ``returns_const`` (Pointcut)

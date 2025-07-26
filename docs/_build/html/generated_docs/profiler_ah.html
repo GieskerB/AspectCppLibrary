@@ -113,11 +113,10 @@
 <li class="toctree-l2"><a class="reference internal" href="default_logging_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultLogging</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_profiler_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultProfiler</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_stack_trace_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultStackTrace</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="default_tracer_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultTracer</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="error_code_converter_ah.html"><code class="docutils literal notranslate"><span class="pre">ErrorCodeConverter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="inner_layer_ah.html"><code class="docutils literal notranslate"><span class="pre">InnerLayer</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="integer_overflow_check_ah.html"><code class="docutils literal notranslate"><span class="pre">IntegerOverflowCheck</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="logging_ah.html"><code class="docutils literal notranslate"><span class="pre">Logging</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="middle_layer_ah.html"><code class="docutils literal notranslate"><span class="pre">MiddleLayer</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="nullptr_check_ah.html"><code class="docutils literal notranslate"><span class="pre">NullptrCheck</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="p_thread_controller_ah.html"><code class="docutils literal notranslate"><span class="pre">PThreadController</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">Profiler</span></code></a></li>
@@ -126,6 +125,7 @@
 <li class="toctree-l2"><a class="reference internal" href="stack_trace_ah.html"><code class="docutils literal notranslate"><span class="pre">StackTrace</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="std_thread_controller_ah.html"><code class="docutils literal notranslate"><span class="pre">StdThreadController</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="synchronization_ah.html"><code class="docutils literal notranslate"><span class="pre">Synchronization</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tracer_ah.html"><code class="docutils literal notranslate"><span class="pre">Tracer</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../interfaces.html">Interfaces</a><ul>
@@ -137,8 +137,8 @@
 <li class="toctree-l2"><a class="reference internal" href="cerr_printer_hh.html"><code class="docutils literal notranslate"><span class="pre">CerrPrinter</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="cout_printer_hh.html"><code class="docutils literal notranslate"><span class="pre">CoutPrinter</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="ofstream_printer_hh.html"><code class="docutils literal notranslate"><span class="pre">OfstreamPrinter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="outer_layer_ah.html"><code class="docutils literal notranslate"><span class="pre">OuterLayer</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="profiler_data_hh.html"><code class="docutils literal notranslate"><span class="pre">ProfilerData</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tracer_data_hh.html"><code class="docutils literal notranslate"><span class="pre">TracerData</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../exceptions.html">Exceptions</a><ul>
@@ -166,8 +166,8 @@
 <p><strong>Brief Description:</strong> This aspect is used to profile the execution time and call amount of functions and methods.</p>
 <p><strong>Detailed Description:</strong></p>
 <blockquote>
-<div><p>In conjunction with this aspect use an aspect that provides a implementation for the
-acp::profiler_msg_builder::build_msg() method.</p>
+<div><p>Creates a grouped list by signature name of all profiled functions and methods. The list is printed
+after the execution of the main function.</p>
 </div></blockquote>
 <p><em>In file</em> <code class="docutils literal notranslate"><span class="pre">src/understanding/profiler.ah</span></code></p>
 <section id="constructor-constructor">

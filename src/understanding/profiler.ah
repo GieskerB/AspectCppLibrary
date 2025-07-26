@@ -2,7 +2,6 @@
 #define __ACP__PROFILER_AH__
 
 #include "../core/core_aspect.ah"
-#include "../core/inner_layer.ah"
 #include "../core/predefined_pointcuts.ah"
 #include "../core/printer.hh"
 #include "../core/thread_controller.hh"
@@ -22,8 +21,8 @@ namespace acp {
  * \file src/understanding/profiler.ah
  * \brief This aspect is used to profile the execution time and call amount of functions and methods.
  *
- * In conjunction with this aspect use an aspect that provides a implementation for the
- * acp::profiler_msg_builder::build_msg() method.
+ * Creates a grouped list by signature name of all profiled functions and methods. The list is printed
+ * after the execution of the main function.
  *
  */
 aspect [[acp::inner_layer]] Profiler : public CoreAspect{
@@ -98,7 +97,7 @@ public:
 		acp::thread_controller::release_global_lock();
 		const auto start = std::chrono::high_resolution_clock::now();
 		tjp->proceed();
-		const auto end = std::chrono::high_resolution_clock::now();
+		const auto end = P aspect i;
 		acp::thread_controller::acquire_global_lock();
 		data.m_calls++;
 		data.m_exec_time += end - start;

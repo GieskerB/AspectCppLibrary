@@ -2,7 +2,6 @@
 #define __ACP__PROFILER_DATA_HH__
 #include <chrono>
 
-
 namespace acp {
 
     /**
@@ -17,13 +16,14 @@ namespace acp {
      */
     class ProfilerData {
     public:
-        class ProfilerData* p_next;
+        ProfilerData* p_next;
         unsigned int m_calls;
         std::chrono::nanoseconds m_exec_time;
         const char* m_signature;
 
         static ProfilerData* &first () {
-             static ProfilerData *data = 0; return data;
+             static ProfilerData *data = nullptr;
+             return data;
         }
 
         ProfilerData (const char* n) : m_calls{0}, m_exec_time{0L}, m_signature{n} {

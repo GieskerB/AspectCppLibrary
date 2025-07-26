@@ -7,7 +7,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>OuterLayer &mdash; AspectC++ Library 0.1.0 documentation</title>
+  <title>Tracer &mdash; AspectC++ Library 0.1.0 documentation</title>
   
 
   
@@ -30,8 +30,8 @@
   <link rel="stylesheet" href="../_static/css/theme.min.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="ProfilerData" href="profiler_data_hh.html" />
-    <link rel="prev" title="OfstreamPrinter" href="ofstream_printer_hh.html" /> 
+    <link rel="next" title="Interfaces" href="../interfaces.html" />
+    <link rel="prev" title="Synchronization" href="synchronization_ah.html" /> 
 
 </head>
 
@@ -70,15 +70,15 @@
     
       <li><a href="../index.html">Docs</a></li>
         
-          <li><a href="../classes.html">Classes</a></li>
+          <li><a href="../aspects.html">Aspects</a></li>
         
-      <li><code class="docutils literal notranslate"><span class="pre">OuterLayer</span></code></li>
+      <li><code class="docutils literal notranslate"><span class="pre">Tracer</span></code></li>
     
     
       <li class="breadcrumbs-aside">
         
             
-            <a href="../_sources/generated_docs/outer_layer_ah.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/generated_docs/tracer_ah.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -108,16 +108,15 @@
                             
                             
                                 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../aspects.html">Aspects</a><ul>
+<li class="toctree-l1 current"><a class="reference internal" href="../aspects.html">Aspects</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="core_aspect_ah.html"><code class="docutils literal notranslate"><span class="pre">CoreAspect</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_logging_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultLogging</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_profiler_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultProfiler</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_stack_trace_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultStackTrace</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="default_tracer_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultTracer</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="error_code_converter_ah.html"><code class="docutils literal notranslate"><span class="pre">ErrorCodeConverter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="inner_layer_ah.html"><code class="docutils literal notranslate"><span class="pre">InnerLayer</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="integer_overflow_check_ah.html"><code class="docutils literal notranslate"><span class="pre">IntegerOverflowCheck</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="logging_ah.html"><code class="docutils literal notranslate"><span class="pre">Logging</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="middle_layer_ah.html"><code class="docutils literal notranslate"><span class="pre">MiddleLayer</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="nullptr_check_ah.html"><code class="docutils literal notranslate"><span class="pre">NullptrCheck</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="p_thread_controller_ah.html"><code class="docutils literal notranslate"><span class="pre">PThreadController</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="profiler_ah.html"><code class="docutils literal notranslate"><span class="pre">Profiler</span></code></a></li>
@@ -126,6 +125,7 @@
 <li class="toctree-l2"><a class="reference internal" href="stack_trace_ah.html"><code class="docutils literal notranslate"><span class="pre">StackTrace</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="std_thread_controller_ah.html"><code class="docutils literal notranslate"><span class="pre">StdThreadController</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="synchronization_ah.html"><code class="docutils literal notranslate"><span class="pre">Synchronization</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">Tracer</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../interfaces.html">Interfaces</a><ul>
@@ -133,12 +133,12 @@
 <li class="toctree-l2"><a class="reference internal" href="thread_controller_hh.html"><code class="docutils literal notranslate"><span class="pre">ThreadController</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="reference internal" href="../classes.html">Classes</a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../classes.html">Classes</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="cerr_printer_hh.html"><code class="docutils literal notranslate"><span class="pre">CerrPrinter</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="cout_printer_hh.html"><code class="docutils literal notranslate"><span class="pre">CoutPrinter</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="ofstream_printer_hh.html"><code class="docutils literal notranslate"><span class="pre">OfstreamPrinter</span></code></a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">OuterLayer</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="profiler_data_hh.html"><code class="docutils literal notranslate"><span class="pre">ProfilerData</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tracer_data_hh.html"><code class="docutils literal notranslate"><span class="pre">TracerData</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../exceptions.html">Exceptions</a><ul>
@@ -161,18 +161,87 @@
                     <div class="document">
                         
                             
-  <section id="outerlayer">
-<h1><code class="docutils literal notranslate"><span class="pre">OuterLayer</span></code><a class="headerlink" href="#outerlayer" title="Link to this heading">¶</a></h1>
-<p><strong>Brief Description:</strong> This class defines an outer layer “priority” for this library.</p>
+  <section id="tracer">
+<h1><code class="docutils literal notranslate"><span class="pre">Tracer</span></code><a class="headerlink" href="#tracer" title="Link to this heading">¶</a></h1>
+<p><strong>Brief Description:</strong> This aspect is used to trace the execution time and call amount of functions and methods.</p>
 <p><strong>Detailed Description:</strong></p>
 <blockquote>
-<div><p>Alongside the two other classes middle- and inner layer these classes provide
-a simple way of ordering aspect in the weaving process. Imagine the “core” to
-be the original function and then all aspects inheriting from OuterLayer are
-weaved at the very last. Within all aspects from the same layer is no further
-order.</p>
+<div><p>Creates a ordered list of all traced functions and methods. The list is printed after the
+execution of the main function.</p>
 </div></blockquote>
-<p><em>In file</em> <code class="docutils literal notranslate"><span class="pre">src/core/outer_layer.ah</span></code></p>
+<p><em>In file</em> <code class="docutils literal notranslate"><span class="pre">src/understanding/tracer.ah</span></code></p>
+<section id="constructor-constructor">
+<span id="tracer-ah-constructor"></span><h2><code class="docutils literal notranslate"><span class="pre">Constructor</span></code> (Constructor)<a class="headerlink" href="#constructor-constructor" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> This constructor initializes the tracer with a builder, printer and thread controller.</p>
+</section>
+<section id="build-msg-function">
+<span id="tracer-ah-build-msg"></span><h2><code class="docutils literal notranslate"><span class="pre">build_msg</span></code> (Function)<a class="headerlink" href="#build-msg-function" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> This function is responsible for creating a well formatted tracer message.</p>
+<p><strong>Detailed Description:</strong></p>
+<blockquote>
+<div><p>In case you want to change this, write an aspect which replaces this function with your
+own implementation. Use a around advice for that.</p>
+</div></blockquote>
+<p><strong>Parameters:</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">data</span></code>: the tracing data to be used for building the message.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output</span></code>: reference to a string which will contain the output in the end.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="ignore-pointcut">
+<span id="tracer-ah-ignore"></span><h2><code class="docutils literal notranslate"><span class="pre">ignore</span></code> (Pointcut)<a class="headerlink" href="#ignore-pointcut" title="Link to this heading">¶</a></h2>
+<p><em>See:</em> <a class="reference internal" href="core_aspect_ah.html#core-aspect-ah-ignore"><span class="std std-ref">CoreAspect::ignore</span></a></p>
+</section>
+<section id="register-advice-advice">
+<span id="tracer-ah-register-advice"></span><h2><code class="docutils literal notranslate"><span class="pre">register-advice</span></code> (Advice)<a class="headerlink" href="#register-advice-advice" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> This advice is executed after the main function has finished executing and registers the</p>
+<p><strong>Detailed Description:</strong></p>
+<blockquote>
+<div><p>summary function to be called at exit.
+Atexit will receive the result of the see summary() function. it expects a function pointer to
+a function that returns void and takes no arguments and is not class bound. Using the atexit()
+function, the most amount of information can be gathered about the program before it exits.</p>
+</div></blockquote>
+</section>
+<section id="simple-stat-function">
+<span id="tracer-ah-simple-stat"></span><h2><code class="docutils literal notranslate"><span class="pre">simple_stat</span></code> (Function)<a class="headerlink" href="#simple-stat-function" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> This function prints the tracing data of all traced functions and methods.</p>
+</section>
+<section id="summary-function">
+<span id="tracer-ah-summary"></span><h2><code class="docutils literal notranslate"><span class="pre">summary</span></code> (Function)<a class="headerlink" href="#summary-function" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> This function returns a pointer to the simple_stat function.</p>
+<p><strong>Detailed Description:</strong></p>
+<blockquote>
+<div><p>This function is virtual and can therefore be overridden by derived classes.
+It is used to provide the register-advice with a function pointer to be called at exit.</p>
+</div></blockquote>
+<p><strong>Returns:</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>(In this case) A pointer to the simple_stat function, which prints the tracing data.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="trace-advice-advice">
+<span id="tracer-ah-trace-advice"></span><h2><code class="docutils literal notranslate"><span class="pre">trace-advice</span></code> (Advice)<a class="headerlink" href="#trace-advice-advice" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> This advice is executed around the execution of functions or methods marked with the trace attribute.</p>
+<p><strong>Detailed Description:</strong></p>
+<blockquote>
+<div><p>It measures the execution timestamp of the function or method.
+It uses heap instances of acp::TracerData to store the tracing data.
+The tracing data is updated in a thread-safe manner using the ThreadController.</p>
+</div></blockquote>
+</section>
+<section id="trace-attribute">
+<span id="tracer-ah-trace"></span><h2><code class="docutils literal notranslate"><span class="pre">trace</span></code> (Attribute)<a class="headerlink" href="#trace-attribute" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> This attribute is used to mark functions, classes or namespaces that should be traced.</p>
+</section>
+<section id="where-pointcut">
+<span id="tracer-ah-where"></span><h2><code class="docutils literal notranslate"><span class="pre">where</span></code> (Pointcut)<a class="headerlink" href="#where-pointcut" title="Link to this heading">¶</a></h2>
+<p><em>See:</em> <a class="reference internal" href="core_aspect_ah.html#core-aspect-ah-where"><span class="std std-ref">CoreAspect::where</span></a></p>
+</section>
 </section>
 
 

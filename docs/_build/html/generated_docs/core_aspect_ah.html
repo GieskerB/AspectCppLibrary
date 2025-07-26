@@ -113,11 +113,10 @@
 <li class="toctree-l2"><a class="reference internal" href="default_logging_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultLogging</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_profiler_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultProfiler</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_stack_trace_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultStackTrace</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="default_tracer_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultTracer</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="error_code_converter_ah.html"><code class="docutils literal notranslate"><span class="pre">ErrorCodeConverter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="inner_layer_ah.html"><code class="docutils literal notranslate"><span class="pre">InnerLayer</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="integer_overflow_check_ah.html"><code class="docutils literal notranslate"><span class="pre">IntegerOverflowCheck</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="logging_ah.html"><code class="docutils literal notranslate"><span class="pre">Logging</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="middle_layer_ah.html"><code class="docutils literal notranslate"><span class="pre">MiddleLayer</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="nullptr_check_ah.html"><code class="docutils literal notranslate"><span class="pre">NullptrCheck</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="p_thread_controller_ah.html"><code class="docutils literal notranslate"><span class="pre">PThreadController</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="profiler_ah.html"><code class="docutils literal notranslate"><span class="pre">Profiler</span></code></a></li>
@@ -126,6 +125,7 @@
 <li class="toctree-l2"><a class="reference internal" href="stack_trace_ah.html"><code class="docutils literal notranslate"><span class="pre">StackTrace</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="std_thread_controller_ah.html"><code class="docutils literal notranslate"><span class="pre">StdThreadController</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="synchronization_ah.html"><code class="docutils literal notranslate"><span class="pre">Synchronization</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tracer_ah.html"><code class="docutils literal notranslate"><span class="pre">Tracer</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../interfaces.html">Interfaces</a><ul>
@@ -137,8 +137,8 @@
 <li class="toctree-l2"><a class="reference internal" href="cerr_printer_hh.html"><code class="docutils literal notranslate"><span class="pre">CerrPrinter</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="cout_printer_hh.html"><code class="docutils literal notranslate"><span class="pre">CoutPrinter</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="ofstream_printer_hh.html"><code class="docutils literal notranslate"><span class="pre">OfstreamPrinter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="outer_layer_ah.html"><code class="docutils literal notranslate"><span class="pre">OuterLayer</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="profiler_data_hh.html"><code class="docutils literal notranslate"><span class="pre">ProfilerData</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tracer_data_hh.html"><code class="docutils literal notranslate"><span class="pre">TracerData</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../exceptions.html">Exceptions</a><ul>
@@ -181,6 +181,53 @@ The ignore pointcut is used to define which join points should be ignored by the
 <div><p>should be ignored by the aspect.
 It is recommended to use and extend a pointcut definition like with:
 within(“&lt;AspectName&gt;”) || within(“acp”)</p>
+</div></blockquote>
+</section>
+<section id="inner-layer-attribute">
+<span id="core-aspect-ah-inner-layer"></span><h2><code class="docutils literal notranslate"><span class="pre">inner_layer</span></code> (Attribute)<a class="headerlink" href="#inner-layer-attribute" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> This attributes defines a weaving order layer for aspects.</p>
+<p><strong>Detailed Description:</strong></p>
+<blockquote>
+<div><p>Alongside the two other attributes outer- and middle_layer these attributes
+provide a simple way of ordering aspect in the weaving process. Imagine the
+“core” to be the original function and then all aspects annotated with
+acp::inner_layer are weaved before the other two. Within all aspects from the
+same layer is no further order.</p>
+</div></blockquote>
+</section>
+<section id="middle-layer-attribute">
+<span id="core-aspect-ah-middle-layer"></span><h2><code class="docutils literal notranslate"><span class="pre">middle_layer</span></code> (Attribute)<a class="headerlink" href="#middle-layer-attribute" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> This attributes defines a weaving order layer for aspects.</p>
+<p><strong>Detailed Description:</strong></p>
+<blockquote>
+<div><p>Alongside the two other attributes outer- and inner_layer these attributes
+provide a simple way of ordering aspect in the weaving process. Imagine the
+“core” to be the original function and then all aspects annotated with
+acp::middle_layer are weaved between the other two. Within all aspects from the
+same layer is no further order.</p>
+</div></blockquote>
+</section>
+<section id="ordering-advice">
+<span id="core-aspect-ah-ordering"></span><h2><code class="docutils literal notranslate"><span class="pre">ordering</span></code> (Advice)<a class="headerlink" href="#ordering-advice" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> This advice defines the order of the aspects in the weaving process.</p>
+<p><strong>Detailed Description:</strong></p>
+<blockquote>
+<div><p>Naming of the layers is relative to the “distance” to the function which represents the core.
+In case of before advices the outer layer is weaved first, then the middle layer and finally the inner layer.
+For after advices this is the other way around and for around advice it is a capsulation with results in the
+same order as for the before and after advices combined.</p>
+</div></blockquote>
+</section>
+<section id="outer-layer-attribute">
+<span id="core-aspect-ah-outer-layer"></span><h2><code class="docutils literal notranslate"><span class="pre">outer_layer</span></code> (Attribute)<a class="headerlink" href="#outer-layer-attribute" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> This attributes defines a weaving order layer for aspects.</p>
+<p><strong>Detailed Description:</strong></p>
+<blockquote>
+<div><p>Alongside the two other attributes middle- and inner_layer these attributes
+provide a simple way of ordering aspect in the weaving process. Imagine the
+“core” to be the original function and then all aspects annotated with
+acp::outer_layer are weaved after the other two. Within all aspects from the
+same layer is no further order.</p>
 </div></blockquote>
 </section>
 <section id="where-pointcut">
