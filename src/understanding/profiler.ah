@@ -27,8 +27,16 @@ namespace acp {
  */
 aspect [[acp::inner_layer]] Profiler : public CoreAspect{
 
-	static acp::Printer* _printer_static;
 	acp::Printer* _printer;
+
+	// Useing this wrapper function to create static header only variable in c++11
+	inline static acp::Printer* static_printer_instance(acp::Printer* instance = nullptr) {
+		static acp::Printer* _static_printer = nullptr;
+		if (instance) {
+			_static_printer = instance;
+		}
+		return _static_printer;
+	}
 
 protected:
 
@@ -76,7 +84,7 @@ public:
 	 * \brief This constructor initializes the profiler with a builder, printer and thread controller.
 	 */
     Profiler(acp::Printer* printer): _printer(printer) {
-		_printer_static = _printer;
+		Profiler::static_printer_instance(_printer);
 	}
 
 	virtual ~Profiler() {
@@ -97,7 +105,7 @@ public:
 		acp::thread_controller::release_global_lock();
 		const auto start = std::chrono::high_resolution_clock::now();
 		tjp->proceed();
-		const auto end = P aspect i;
+		const auto end = std::chrono::high_resolution_clock::now();
 		acp::thread_controller::acquire_global_lock();
 		data.m_calls++;
 		data.m_exec_time += end - start;
@@ -112,7 +120,7 @@ public:
 		for (acp::ProfilerData *curr = acp::ProfilerData::first (); curr; curr = curr->p_next) {
 			std::string output;
 			build_msg(*curr, output);
-			_printer_static->print(output);
+			Profiler::static_printer_instance()->print(output);
 		}
       }
 
@@ -142,8 +150,5 @@ public:
     }
 
 };
-
-acp::Printer* Profiler::_printer_static = nullptr;
-
 
 #endif // __ACP__PROFILER_AH__

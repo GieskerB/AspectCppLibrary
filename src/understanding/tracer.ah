@@ -26,9 +26,17 @@ namespace acp {
  *
  */
 aspect [[acp::inner_layer]]  Tracer : public CoreAspect {
-    static acp::Printer* _printer_static;
-    acp::Printer* _printer;
 
+	acp::Printer* _printer;
+
+	// Useing this wrapper function to create static header only variable in c++11
+	inline static acp::Printer* static_printer_instance(acp::Printer* instance = nullptr) {
+		static acp::Printer* _static_printer = nullptr;
+		if (instance) {
+			_static_printer = instance;
+		}
+		return _static_printer;
+	}
 protected:
 
     /**
@@ -73,7 +81,7 @@ public:
 	 * \brief This constructor initializes the tracer with a builder, printer and thread controller.
 	 */
     Tracer(acp::Printer* printer): _printer(printer) {
-		_printer_static = _printer;
+		Tracer::static_printer_instance(_printer);
 	}
 
 	virtual ~Tracer() {
@@ -108,7 +116,7 @@ public:
 		}
 
         for(int i = outputs.size() - 1; i >= 0; --i) {
-			_printer_static->print(outputs[i]);
+			Tracer::static_printer_instance()->print(outputs[i]);
         }
       }
 
@@ -141,5 +149,4 @@ public:
 
 };
 
-acp::Printer* Tracer::_printer_static = nullptr;
 #endif // __ACP__TRACER_AH__
