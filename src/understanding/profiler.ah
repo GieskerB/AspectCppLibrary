@@ -14,6 +14,12 @@ namespace acp {
 	 * \brief This attribute is used to mark functions, classes or namespaces that should be profiled.
 	 */
 	attribute profile();
+
+	/**
+	 * \attribute acp::ignore_profile()
+	 * \brief Ignores being profiled.
+	 */
+	attribute ignore_profile();
 }
 
 /**
@@ -68,7 +74,7 @@ public:
 	 * \pointcut ignore
 	 * \see :ref:`CoreAspect::ignore <core_aspect_ah_ignore>`
 	 */
-    pointcut virtual ignore() = within("Profiler") || within("acp");
+    pointcut virtual ignore() = within("Profiler") || within("acp") || within(acp::ignore_profile()) || within(acp::ignore_everything());
 
 	/**
 	 * \pointcut where

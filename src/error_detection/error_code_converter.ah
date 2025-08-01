@@ -11,11 +11,15 @@
 namespace acp {
 	/**
 	 * \attribute acp::err_code
-	 * \brief This attribute should be used to mark functions from which a function call is checked for errno.
-	 *
-	 * Due to some implementations restrictions with the AspectC++ compiler, this attribute is not used.
+	 * \brief Performs an error code convertion, if an std-c-lib error occurs within a pointcut annotated with this attribute.
 	 */
 	attribute err_code();
+
+	/**
+	 * \attribute acp::ignore_err_code
+	 * \brief This attribute can be used to exclude certain join points form being affected by this aspect.
+	 */
+	attribute ignore_err_code();
 }
 
 /**
@@ -43,7 +47,7 @@ public:
 	 * \pointcut ignore
 	 * \see :ref:`CoreAspect::ignore <core_aspect_ah_ignore>`
 	 */
-	pointcut virtual ignore() = within("ErrorCodeConverter") || within("acp");
+	pointcut virtual ignore() = within("ErrorCodeConverter") || within("acp") || within(acp::ignore_err_code()) || within(acp::ignore_everything());
 
 	/**
 	 * \advice errno_check

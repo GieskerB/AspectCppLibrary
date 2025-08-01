@@ -11,6 +11,13 @@ namespace acp {
      */
     attribute singleton();
 
+    /**
+     * \attribute ignore_singleton
+     * \brief This attribute can be used to ignore the singleton aspect for specific classes.
+     * This attribute may only be useful if an entire namespace is annotated with the singleton
+     * attribute, but you want to exclude a specific class from being a singleton.
+     */
+    attribute ignore_singleton();
     slice class ACP_Singleton_Slice {
 
         static bool acp_singleton_allow_construction;
@@ -55,7 +62,7 @@ aspect [[acp::inner_layer]] Singleton : public CoreAspect {
      * \pointcut ignore
      * \see :ref:`CoreAspect::ignore <core_aspect_ah_ignore>`
      */
-    pointcut virtual ignore() = within("Singleton") || within("acp");
+    pointcut virtual ignore() =  acp::ignore_singleton() || acp::ignore_everything();
 
     Singleton() {}
     virtual ~Singleton() = default;
@@ -65,13 +72,13 @@ aspect [[acp::inner_layer]] Singleton : public CoreAspect {
      * \brief This advice provides a class slice with all necessary methods and
      * members to implement the Singleton design pattern.
      */
-    advice where() : slice acp::ACP_Singleton_Slice;
+    advice where() && !ignore() : slice acp::ACP_Singleton_Slice;
 
     /**
      * \advice construction-prevention
      * \brief This advice prevents the construction of a singleton class directly.
      */
-    advice construction(where()) : around() {
+    advice construction(where() && !ignore()) : around() {
         acp::thread_controller::acquire_global_lock();
         if(JoinPoint::That::acp_singleton_allow_construction) {
             tjp->proceed();

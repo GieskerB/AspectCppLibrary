@@ -14,6 +14,12 @@ namespace acp {
 	 * \brief This attribute is used to mark functions, classes or namespaces that should be traced.
 	 */
 	attribute trace();
+
+	/**
+	 * \attribute acp::ignore_trace
+	 * \brief Ignores being traced
+	 */
+	attribute ignore_trace();
 }
 
 /**
@@ -65,7 +71,7 @@ public:
 	 * \pointcut ignore
 	 * \see :ref:`CoreAspect::ignore <core_aspect_ah_ignore>`
 	 */
-    pointcut virtual ignore() = within("Tracer") || within("acp");
+    pointcut virtual ignore() = within("Tracer") || within("acp") || within(acp::ignore_trace()) || within(acp::ignore_everything());
 
 	/**
 	 * \pointcut where

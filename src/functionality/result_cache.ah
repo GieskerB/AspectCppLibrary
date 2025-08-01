@@ -16,6 +16,12 @@ namespace acp {
      *
      */
     attribute cache();
+
+    /**
+     * \attribute acp::ignore_cache
+     * \brief Funcitons annoted with this attribute will not be cached based on their arguments.
+     */
+    attribute ignore_cache();
 }
 
 /**
@@ -119,7 +125,7 @@ aspect [[acp::inner_layer]] ResultCache : public CoreAspect {
 	 * \pointcut ignore
 	 * \see :ref:`CoreAspect::ignore <core_aspect_ah_ignore>`
 	 */
-    pointcut virtual ignore() = within("AfterLogging") || within ("acp");
+    pointcut virtual ignore() = within("AfterLogging") || within ("acp") || within(acp::ignore_cache()) || within(acp::ignore_everything());
 
     /**
 	 * \pointcut where

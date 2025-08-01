@@ -9,11 +9,20 @@
 namespace acp {
     /**
      * \attribute overflow_check
-     * \brief For all integer addition and subtraction within any function / class / namespace
+     * \brief Performs an integer over- /underflow check for all integer addition and subtraction
+     * For all integer addition and subtraction within any function / class / namespace
      * annotated with this attribute an over- or underflow check will be performed. In case this
      * happens, an exception will be thrown.
      */
     attribute overflow_check();
+
+    /**
+     * \attribute ignore_overflow_check
+     * \brief This attribute can be used to ignore the overflow check for a specific function,
+     * If a class or namespace is already annotated with the overflow_check attribute, this
+     * attribute can be used to individually exclude a function from the whole scope.
+     */
+    attribute ignore_overflow_check();
 }
 
 /**
@@ -56,7 +65,7 @@ public:
      * \pointcut ignore
      * \see :ref:`CoreAspect::ignore <core_aspect_ah_ignore>`
      */
-    pointcut virtual ignore() = within("OverflowCheck") || within("acp");
+    pointcut virtual ignore() = within("OverflowCheck") || within("acp") || within(acp::ignore_overflow_check()) || within(acp::ignore_everything());
 
 
     /**

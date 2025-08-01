@@ -23,6 +23,12 @@ namespace acp {
      * \brief Functions with this attribute will be logged before their execution.
      */
     attribute before_logging();
+
+    /**
+     * \attribute acp::ignore_logging
+     * \brief Functions annotated with this attribute will not be logged. Every if their scope is annotated with one of the other attributes.
+     */
+    attribute ignore_logging();
 }
 
 /**
@@ -108,7 +114,7 @@ public:
 	 * \pointcut ignore
 	 * \see :ref:`CoreAspect::ignore <core_aspect_ah_ignore>`
 	 */
-    pointcut virtual ignore() = within("Logging") || within ("acp");
+    pointcut virtual ignore() = within("Logging") || within ("acp") || within(acp::ignore_logging()) || within(acp::ignore_everything());
 
     /**
 	 * \pointcut where

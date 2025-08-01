@@ -24,10 +24,20 @@ namespace acp {
 
 	/**
 	 * \attribute acp::fallback
-	 * \brief This attribute is used to mark functions that should be used to trigger the stacktrace
-	 * in case this function does not catch an exception.
+	 * \brief This attribute is used to mark functions as a fallback where a stacktrace is trigger in case of an exception.
+	 *
 	 */
 	attribute fallback();
+
+	/**
+	 * \attribute acp::ignore_trace
+	 * \brief This attribute is used to remove certain join points from being traced in the event of an exception
+	 *
+	 * Using this attribute is not recommended since it interrupts the tracking of the call chain and can cause
+	 * inconsistencies within this aspect if used in the wrong places.
+	 *
+	 */
+	attribute ignore_trace();
 }
 
 /**
@@ -128,7 +138,7 @@ public:
 	 * \pointcut ignore
 	 * \see :ref:`CoreAspect::ignore <core_aspect_ah_ignore>`
 	 */
-	pointcut virtual ignore() = within("StackTrace") || within("acp");
+	pointcut virtual ignore() = within("StackTrace") || within("acp") || within(acp::ignore_trace()) || within(acp::ignore_everything());
 
 	/**
 	 * \pointcut where

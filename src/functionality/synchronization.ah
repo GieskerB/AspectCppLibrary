@@ -12,6 +12,12 @@ namespace acp {
      * \brief Any function with this attribute can only have one thread at a time executing it
      */
     attribute synchronized();
+
+    /**
+     * \attribute acp::ignore_synchronized
+     * \brief Ignores synchronization.
+     */
+    attribute ignore_synchronized();
 }
 
 /**
@@ -36,7 +42,7 @@ public:
 	 * \pointcut ignore
 	 * \see :ref:`CoreAspect::ignore <core_aspect_ah_ignore>`
 	 */
-    pointcut virtual ignore() = within("AfterLogging") || within ("acp");
+    pointcut virtual ignore() = within("AfterLogging") || within ("acp")|| within(acp::ignore_synchronized()) || within(acp::ignore_everything());
 
     /**
 	 * \pointcut where

@@ -6,12 +6,21 @@
 
 namespace acp {
     /**
-     * \attribute null_check()
-     * \brief For all pointer dereferencing within any function / class / namespace
-     * annotated with this attribute an nullptr check will be performed. In case this
-     * happens, an exception will be thrown.
+     * \attribute null_check
+     * \brief Performs a nullptr check for all pointer dereferencing.
+     * For all pointer dereferencing within any function / class / namespace annotated
+     * with this attribute a nullptr check will be performed. In case this happens, an
+     * exception will be thrown.
      */
     attribute null_check();
+
+    /**
+     * \attribute ignore_null_check
+     * \brief This attribute can be used to ignore the nullptr check for a specific function,
+     * If a class or namespace is already annotated with the null_check attribute, this
+     * attribute can be used to individually exclude a function from the whole scope.
+     */
+    attribute ignore_null_check();
 }
 
 /**
@@ -43,7 +52,7 @@ public:
      * \pointcut ignore
      * \see :ref:`CoreAspect::ignore <core_aspect_ah_ignore>`
      */
-    pointcut virtual ignore() = within("NullptrCheck") || within("acp");
+    pointcut virtual ignore() = within("NullptrCheck") || within("acp") || within(acp::ignore_null_check()) || within(acp::ignore_everything());
 
     /**
      * \advice nullptr_check

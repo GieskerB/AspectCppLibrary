@@ -41,6 +41,16 @@ namespace acp {
 	 */
 	attribute outer_layer();
 
+
+	/**
+	 * \attribute ignore_everything
+	 * \brief This attribute can be used to remove every aspect form a specific join point.
+	 * Many attributes can be used for an entire class or namespace. In case you want to
+	 * exclude only a few join points from the weaving process, you can use this attribute.
+	 *
+	 * Use this attribute with caution due to its huge impact on EVERY aspect from this library!
+	 */
+	attribute ignore_everything();
 }
 
 /**
