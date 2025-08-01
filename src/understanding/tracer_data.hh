@@ -15,11 +15,15 @@ namespace acp {
      *
      */
     class TracerData {
+
+        inline static auto static_start_time() {
+           static auto m_start_time = std::chrono::high_resolution_clock::now();
+           return m_start_time;
+        }
+
     public:
         TracerData* p_next;
         std::chrono::nanoseconds m_timestamp;
-        static std::chrono::time_point<std::chrono::high_resolution_clock>
-            m_start_time;
         const char* m_signature;
 
         static TracerData* &first () {
@@ -30,7 +34,7 @@ namespace acp {
         TracerData (const char* n) : m_signature{n}{
             TracerData *head = first ();
             first () = this;
-            m_timestamp = std::chrono::high_resolution_clock::now() - m_start_time;
+            m_timestamp = std::chrono::high_resolution_clock::now() - static_start_time();
             p_next = head;
         }
 
@@ -41,9 +45,6 @@ namespace acp {
             }
         }
     };
-
-    std::chrono::time_point<std::chrono::high_resolution_clock> TracerData::m_start_time =
-        std::chrono::high_resolution_clock::now();
 
 }
 
