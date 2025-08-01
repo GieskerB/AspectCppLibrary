@@ -1,0 +1,9 @@
+Ignore Attribute Test: Checks if join points are properly ignored
+====================================================================================================
+-First test within a namespace using ignore everything----------------------------------------------
+[Leaving]void test1::foo()
+[Leaving]void test1::foobar()
+-Second test within a class using ignore logging----------------------------------------------------
+[Leaving]void test2::foo()
+[Leaving]void test2::foobar()
+====================================================================================================
