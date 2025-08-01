@@ -59,7 +59,7 @@ public:
      * \pointcut where
      * \see :ref:`CoreAspect::where <core_aspect_ah_where>`
      */
-    pointcut virtual where() = acp::overflow_check();
+    pointcut virtual where() = within(acp::overflow_check());
 
     /**
      * \pointcut ignore
@@ -72,7 +72,7 @@ public:
      * \advice int_add_binary_check
      * \brief checks for an overflow in the 'int += int' and 'int + int' operator.
      */
-    advice within(where()) && int_add_binary() && !ignore(): before() {
+    advice where() && int_add_binary() && !ignore(): before() {
         const int lhs = *static_cast<int*>(tjp->arg(0));
         const int rhs = *static_cast<int*>(tjp->arg(1));
         if(lhs > max - rhs) {
@@ -84,7 +84,7 @@ public:
      * \advice int_add_unary_inc_check
      * \brief checks for an overflow in the '++int' and 'int++' operator.
      */
-    advice within(where()) && int_add_unary_inc() && !ignore(): before() {
+    advice where() && int_add_unary_inc() && !ignore(): before() {
         const int val = *static_cast<int*>(tjp->arg(0));
         if(val == max) {
             throw acp::OverflowException(tjp->signature(), tjp->line(), "int", true);
@@ -95,7 +95,7 @@ public:
      * \advice int_add_unary_check
      * \brief checks for an overflow in the '+int' operator.
      */
-    advice within(where()) && int_add_unary() && !ignore(): before() {
+    advice where() && int_add_unary() && !ignore(): before() {
         const int val = *static_cast<int*>(tjp->arg(0));
         if(val == min) {
             throw acp::OverflowException(tjp->signature(), tjp->line(), "int", true);
@@ -106,7 +106,7 @@ public:
      * \advice int_sub_binary_check
      * \brief checks for an underflow in the 'int -= int' and 'int - int' operator.
      */
-    advice within(where()) && int_sub_binary() && !ignore(): before() {
+    advice where() && int_sub_binary() && !ignore(): before() {
         const int lhs = *static_cast<int*>(tjp->arg(0));
         const int rhs = *static_cast<int*>(tjp->arg(1));
         if(lhs < max + rhs) {
@@ -118,7 +118,7 @@ public:
      * \advice int_sub_unary_inc_check
      * \brief checks for an underflow in the '--int' and 'int--' operator.
      */
-    advice within(where()) && int_sub_unary_inc() && !ignore(): before() {
+    advice where() && int_sub_unary_inc() && !ignore(): before() {
         const int val = *static_cast<int*>(tjp->arg(0));
         if(val == min) {
             throw acp::OverflowException(tjp->signature(), tjp->line(), "int", false);
@@ -129,7 +129,7 @@ public:
      * \advice int_sub_unary_check
      * \brief checks for an underflow in the '--int' operator (spoiler: it cant happen :D).
      */
-    advice within(where()) && int_sub_unary() && !ignore(): before() {
+    advice where() && int_sub_unary() && !ignore(): before() {
         // On unary - operator no underflow can happen, since for every positive signed
         // int value is exactly one negative.
     }

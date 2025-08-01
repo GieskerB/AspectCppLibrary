@@ -42,20 +42,20 @@ public:
 	 * \pointcut ignore
 	 * \see :ref:`CoreAspect::ignore <core_aspect_ah_ignore>`
 	 */
-    pointcut virtual ignore() = within("AfterLogging") || within ("acp")|| within(acp::ignore_synchronized()) || within(acp::ignore_everything());
+    pointcut virtual ignore() = within("AfterLogging") || within ("acp")|| execution(acp::ignore_synchronized()) || execution(acp::ignore_everything());
 
     /**
 	 * \pointcut where
 	 * \see :ref:`CoreAspect::where <core_aspect_ah_where>`
 	 */
-    pointcut virtual where() = acp::synchronized();
+    pointcut virtual where() = execution(acp::synchronized());
 
     /**
      * \aspect threadsafe_execution
      * \brief Wrapping the intended function execution in a mutex lock.
      *
      */
-    advice execution(where()) && !ignore() : around() {
+    advice where() && !ignore() : around() {
         auto proceed_function = [&tjp]() {
             tjp->proceed();
         };

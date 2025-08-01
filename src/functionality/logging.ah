@@ -114,7 +114,7 @@ public:
 	 * \pointcut ignore
 	 * \see :ref:`CoreAspect::ignore <core_aspect_ah_ignore>`
 	 */
-    pointcut virtual ignore() = within("Logging") || within ("acp") || within(acp::ignore_logging()) || within(acp::ignore_everything());
+    pointcut virtual ignore() = within("Logging") || within ("acp") || execution(acp::ignore_logging()) || execution(acp::ignore_everything());
 
     /**
 	 * \pointcut where
@@ -125,7 +125,7 @@ public:
      * implementation. However, separate advices for the remaining attributes is provided anyways.
      *
 	 */
-    pointcut virtual where() = acp::around_logging();
+    pointcut virtual where() = execution(acp::around_logging());
 
     Logging(): Logging(nullptr) {}
     Logging(acp::Printer* printer)
@@ -150,7 +150,7 @@ public:
      * \advice logging-advice[around]
      * \brief This advice handles the logging behavior before and after the function executes.
      */
-    advice execution(where()) && !ignore() : around() {
+    advice where() && !ignore() : around() {
         std::string msg;
         build_before_msg(tjp->signature(), msg);
         _printer->print(msg);

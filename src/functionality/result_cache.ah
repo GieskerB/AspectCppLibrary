@@ -125,13 +125,13 @@ aspect [[acp::inner_layer]] ResultCache : public CoreAspect {
 	 * \pointcut ignore
 	 * \see :ref:`CoreAspect::ignore <core_aspect_ah_ignore>`
 	 */
-    pointcut virtual ignore() = within("AfterLogging") || within ("acp") || within(acp::ignore_cache()) || within(acp::ignore_everything());
+    pointcut virtual ignore() = within("AfterLogging") || within ("acp") || execution(acp::ignore_cache()) || execution(acp::ignore_everything());
 
     /**
 	 * \pointcut where
 	 * \see :ref:`CoreAspect::where <core_aspect_ah_where>`
 	 */
-    pointcut virtual where() = acp::cache();
+    pointcut virtual where() = execution(acp::cache());
 
     /**
      * \advice caching-advice
@@ -140,7 +140,7 @@ aspect [[acp::inner_layer]] ResultCache : public CoreAspect {
      * This advice will only be applied to functions that are annotated with the
      * acp::cache attribute.
      */
-    advice execution(where()) && !ignore() : around() {
+    advice where() && !ignore() : around() {
         // static JoinPoint::Result result;
         static std::unordered_map<std::size_t, JoinPoint::Result> cache;
 

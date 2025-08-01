@@ -74,13 +74,13 @@ public:
 	 * \pointcut ignore
 	 * \see :ref:`CoreAspect::ignore <core_aspect_ah_ignore>`
 	 */
-    pointcut virtual ignore() = within("Profiler") || within("acp") || within(acp::ignore_profile()) || within(acp::ignore_everything());
+    pointcut virtual ignore() = within("Profiler") || within("acp") || execution(acp::ignore_profile()) || execution(acp::ignore_everything());
 
 	/**
 	 * \pointcut where
 	 * \see :ref:`CoreAspect::where <core_aspect_ah_where>`
 	 */
-    pointcut virtual where() = acp::profile();
+    pointcut virtual where() = execution(acp::profile());
 
 
     Profiler(): Profiler(nullptr) {}
@@ -105,7 +105,7 @@ public:
 	 * It uses a static instance of acp::ProfilerData to store the profiling data.
 	 * The profiling data is updated in a thread-safe manner using the ThreadController.
 	 */
-    advice execution(where()) && !ignore(): around() {
+    advice where() && !ignore(): around() {
 		acp::thread_controller::acquire_global_lock();
     	static acp::ProfilerData data (JoinPoint::signature());
 		acp::thread_controller::release_global_lock();
@@ -151,7 +151,7 @@ public:
 	 * a function that returns void and takes no arguments and is not class bound. Using the atexit()
 	 * function, the most amount of information can be gathered about the program before it exits.
 	 */
-    advice execution (acp::main_function()) : after () {
+    advice execution(acp::main_function()) : after () {
         atexit (summary());
     }
 

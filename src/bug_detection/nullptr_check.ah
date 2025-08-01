@@ -46,7 +46,7 @@ public:
      * \pointcut where
      * \see :ref:`CoreAspect::where <core_aspect_ah_where>`
      */
-    pointcut virtual where() = acp::null_check();
+    pointcut virtual where() = within(acp::null_check());
 
     /**
      * \pointcut ignore
@@ -61,7 +61,7 @@ public:
      * If the pointer is null, it throws a `acp::NullptrException` with a message indicating that
      * a null pointer was dereferenced.
      */
-    advice within(where()) && dereferencing_pointer() && !ignore(): before() {
+    advice where() && dereferencing_pointer() && !ignore(): before() {
         // Just casting to int* to check if the pointer is null.
         if (*((int *)tjp->arg(0)) == 0) {
             throw acp::NullptrException(tjp->signature(), tjp->line());
