@@ -5,20 +5,20 @@
 #include "nullptr_exception.hh"
 
 namespace acp {
-    /**
-     * \attribute null_check
-     * \brief Performs a nullptr check for all pointer dereferencing.
-     * For all pointer dereferencing within any function / class / namespace annotated
-     * with this attribute a nullptr check will be performed. In case this happens, an
-     * exception will be thrown.
+     /**
+     * \attribute acp::null_check
+     * \brief Triggers an nullptr check for all pointer dereferencing operators
+     *
+     * This attribute marks a join point, on which the Nullptrcheck aspect should be applied.
      */
     attribute null_check();
 
     /**
-     * \attribute ignore_null_check
-     * \brief This attribute can be used to ignore the nullptr check for a specific function,
-     * If a class or namespace is already annotated with the null_check attribute, this
-     * attribute can be used to individually exclude a function from the whole scope.
+     * \attribute acp::ignore_null_check
+     * \brief This attribute can be used to exclude certain join points form being affected by this aspect.
+     *
+     * If a scope already is annotated with this aspect's attribute, individual join points within can be
+     * excluded with this attribute.
      */
     attribute ignore_null_check();
 }
@@ -28,13 +28,21 @@ namespace acp {
  * \file /src/bug_detection/nullptr_check.ah
  * \brief Aspect that checks for null pointer dereferences.
  *
- * This aspect provides an advice to check if a pointer is null before dereferencing it.
+ * This aspect is used to detect an nullptr dereferencing, which would lead to a segfault.
+ * In the case that such an potential segfault an exception will be triggered and the
+ * dereferencing will not be performed.
  * Unfortunately, it does not work with the -> operator, due to limitations in the AspectC++
- * language and the way the builtin -> operator is defined.
+ * language and the way the builtin 'operator->' is defined.
+ *
+ * \see acp::NullptrException
  *
  */
 aspect [[acp::middle_layer]] NullptrCheck : public CoreAspect {
 
+    /**
+     * \pointcut dereferencing_pointer
+     * \brief The set of all builtin pointer dereferencing join points.
+     */
     pointcut dereferencing_pointer() = builtin("%& operator *(%*)");
 
 public:
@@ -56,10 +64,7 @@ public:
 
     /**
      * \advice nullptr_check
-     * \brief Advice checks if a pointer is null before dereferencing it.
-     *
-     * If the pointer is null, it throws a `acp::NullptrException` with a message indicating that
-     * a null pointer was dereferenced.
+     * \brief This Advice checks if a pointer is null before dereferencing it.
      */
     advice where() && dereferencing_pointer() && !ignore(): before() {
         // Just casting to int* to check if the pointer is null.

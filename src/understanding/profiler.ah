@@ -10,15 +10,18 @@
 
 namespace acp {
 	/**
-	 * \attribute profile
-	 * \brief This attribute is used to mark functions, classes or namespaces that should be profiled.
+	 * \attribute acp::profile
+	 * \brief This attribute is used to mark join points that should be profiled.
 	 */
 	attribute profile();
 
 	/**
 	 * \attribute acp::ignore_profile()
-	 * \brief Ignores being profiled.
-	 */
+     * \brief This attribute can be used to exclude certain join points form being affected by this aspect.
+     *
+     * If a scope already is annotated with this aspect's attribute, individual join points within can be
+     * excluded with this attribute.
+     */
 	attribute ignore_profile();
 }
 
@@ -29,7 +32,9 @@ namespace acp {
  *
  * Creates a grouped list by signature name of all profiled functions and methods. The list is printed
  * after the execution of the main function.
- *
+ * The list entries themself are shaped by the "build_msg()" function. You can replace its content
+ * easily by writing an aspect to replace it.
+ * The preferred printing device, which is provided to the constructor, is used to make an output.
  */
 aspect [[acp::inner_layer]] Profiler : public CoreAspect{
 
@@ -90,7 +95,7 @@ public:
 	 * \brief This constructor initializes the profiler with a builder, printer and thread controller.
 	 */
     Profiler(acp::Printer* printer): _printer(printer) {
-		Profiler::static_printer_instance(_printer);
+		Profiler::static_printer_instance(printer);
 	}
 
 	virtual ~Profiler() {
@@ -99,11 +104,13 @@ public:
 
 	/**
 	 * \advice profile-advice
-	 * \brief This advice is executed around the execution of functions or methods marked with the profile attribute.
+	 * \brief This advice collects relevant data and stores it for later use.
 	 *
 	 * It measures the execution time and call count of the function or method.
 	 * It uses a static instance of acp::ProfilerData to store the profiling data.
 	 * The profiling data is updated in a thread-safe manner using the ThreadController.
+	 *
+	 * \see acp::ProfilerData
 	 */
     advice where() && !ignore(): around() {
 		acp::thread_controller::acquire_global_lock();
@@ -144,10 +151,9 @@ public:
 
 	/**
 	 * \advice register-advice
-	 * \brief This advice is executed after the main function has finished executing and registers the
-	 * summary function to be called at exit.
+	 * \brief This advice registers the summary function to at_exit to delay the printing as much as possible.
 	 *
-	 * Atexit will receive the result of the \see summary() function. it expects a function pointer to
+	 * Atexit will receive the result of the function. it expects a function pointer to
 	 * a function that returns void and takes no arguments and is not class bound. Using the atexit()
 	 * function, the most amount of information can be gathered about the program before it exits.
 	 */

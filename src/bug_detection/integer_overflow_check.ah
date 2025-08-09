@@ -8,19 +8,19 @@
 
 namespace acp {
     /**
-     * \attribute overflow_check
-     * \brief Performs an integer over- /underflow check for all integer addition and subtraction
-     * For all integer addition and subtraction within any function / class / namespace
-     * annotated with this attribute an over- or underflow check will be performed. In case this
-     * happens, an exception will be thrown.
+     * \attribute acp::overflow_check
+     * \brief Triggers an integer over- /underflow check for all integer addition and subtraction
+     *
+     * This attribute marks a join point, on which the IntegerOverflowCheck aspect should be applied.
      */
     attribute overflow_check();
 
     /**
-     * \attribute ignore_overflow_check
-     * \brief This attribute can be used to ignore the overflow check for a specific function,
-     * If a class or namespace is already annotated with the overflow_check attribute, this
-     * attribute can be used to individually exclude a function from the whole scope.
+     * \attribute acp::ignore_overflow_check
+     * \brief This attribute can be used to exclude certain join points form being affected by this aspect.
+     *
+     * If a scope already is annotated with this aspect's attribute, individual join points within can be
+     * excluded with this attribute.
      */
     attribute ignore_overflow_check();
 }
@@ -30,9 +30,11 @@ namespace acp {
  * \file /src/bug_detection/integer_overflow_check.ah
  * \brief Aspect that checks for null pointer dereferences.
  *
- * This aspect provides advices to check if an over- or underflow would occur, when performing
- * addition or subtraction on integers. At the moment this check is performed for every standard int
- * addition and subtraction operator (all 5 binary and all 5 unary).
+ * This aspect is used to detect an over- od underflow within one of the 10 standard (5 binary and all
+ * 5 unary) integer addition and subtraction operators. In the case that such an over- or underflow will
+ * occur an exception will be triggered and the operation will not be performed.
+ *
+ * \see acp::OverflowException
  */
 aspect [[acp::middle_layer]] IntegerOverflowCheck : public CoreAspect {
 
@@ -42,12 +44,40 @@ aspect [[acp::middle_layer]] IntegerOverflowCheck : public CoreAspect {
     static constexpr int max = std::numeric_limits<int>::max();
     static constexpr int min = std::numeric_limits<int>::min();
 
+    /**
+     * \pointcut int_add_binary
+     * \brief The set of all builtin binary integer addition join points.
+     */
     pointcut int_add_binary() = builtin("int& operator +=(int&,int)" || "int operator +(int,int)");
+
+    /**
+     * \pointcut int_add_unary_inc
+     * \brief The set of all builtin integer increment join points.
+     */
     pointcut int_add_unary_inc() = builtin("int operator ++(int&,int)" || "int& operator ++(int&)");
+
+    /**
+     * \pointcut int_add_unary
+     * \brief The set of all builtin unary integer addition join points.
+     */
     pointcut int_add_unary() = builtin("int operator +(int)");
 
+    /**
+     * \pointcut int_sub_binary
+     * \brief The set of all builtin binary integer subtraction join points.
+     */
     pointcut int_sub_binary() = builtin("int& operator -=(int&,int)" || "int operator -(int,int)");
+
+    /**
+     * \pointcut int_sub_unary_inc
+     * \brief The set of all builtin integer decrement join points.
+     */
     pointcut int_sub_unary_inc() = builtin("int operator --(int&,int)" || "int& operator --(int&)");
+
+    /**
+     * \pointcut int_sub_unary
+     * \brief The set of all builtin unary integer subtraction join points.
+     */
     pointcut int_sub_unary() = builtin("int operator -(int)");
 
 public:
@@ -70,7 +100,7 @@ public:
 
     /**
      * \advice int_add_binary_check
-     * \brief checks for an overflow in the 'int += int' and 'int + int' operator.
+     * \brief This advice checks for an overflow in the 'int += int' and 'int + int' operator.
      */
     advice where() && int_add_binary() && !ignore(): before() {
         const int lhs = *static_cast<int*>(tjp->arg(0));
@@ -82,7 +112,7 @@ public:
 
     /**
      * \advice int_add_unary_inc_check
-     * \brief checks for an overflow in the '++int' and 'int++' operator.
+     * \brief This advice checks for an overflow in the '++int' and 'int++' operator.
      */
     advice where() && int_add_unary_inc() && !ignore(): before() {
         const int val = *static_cast<int*>(tjp->arg(0));
@@ -93,7 +123,7 @@ public:
 
     /**
      * \advice int_add_unary_check
-     * \brief checks for an overflow in the '+int' operator.
+     * \brief This advice checks for an overflow in the '+int' operator.
      */
     advice where() && int_add_unary() && !ignore(): before() {
         const int val = *static_cast<int*>(tjp->arg(0));
@@ -104,7 +134,7 @@ public:
 
     /**
      * \advice int_sub_binary_check
-     * \brief checks for an underflow in the 'int -= int' and 'int - int' operator.
+     * \brief This advice checks for an underflow in the 'int -= int' and 'int - int' operator.
      */
     advice where() && int_sub_binary() && !ignore(): before() {
         const int lhs = *static_cast<int*>(tjp->arg(0));
@@ -116,7 +146,7 @@ public:
 
     /**
      * \advice int_sub_unary_inc_check
-     * \brief checks for an underflow in the '--int' and 'int--' operator.
+     * \brief This advice checks for an underflow in the '--int' and 'int--' operator.
      */
     advice where() && int_sub_unary_inc() && !ignore(): before() {
         const int val = *static_cast<int*>(tjp->arg(0));
@@ -127,11 +157,10 @@ public:
 
     /**
      * \advice int_sub_unary_check
-     * \brief checks for an underflow in the '--int' operator (spoiler: it cant happen :D).
+     * \brief This advice checks for an underflow in the '--int' operator (spoiler: it cant happen :D).
      */
     advice where() && int_sub_unary() && !ignore(): before() {
-        // On unary - operator no underflow can happen, since for every positive signed
-        // int value is exactly one negative.
+        // Every positive number can be inverted to a negative, but not the over way around.
     }
 
 };

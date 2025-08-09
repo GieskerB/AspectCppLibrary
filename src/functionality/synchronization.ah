@@ -8,14 +8,17 @@
 
 namespace acp {
     /**
-     * \attribute synchronized
-     * \brief Any function with this attribute can only have one thread at a time executing it
+     * \attribute acp::synchronized
+	 * \brief Triggers an synchronized call to every marked join point.
      */
     attribute synchronized();
 
     /**
      * \attribute acp::ignore_synchronized
-     * \brief Ignores synchronization.
+     * \brief This attribute can be used to exclude certain join points form being affected by this aspect.
+     *
+     * If a scope already is annotated with this aspect's attribute, individual join points within can be
+     * excluded with this attribute.
      */
     attribute ignore_synchronized();
 }
@@ -26,11 +29,10 @@ namespace acp {
  * \brief This aspect implements a thread execution for selected functions.
  *
  * By using an aspect which implements the thread controller interface, an thread exclusive execution
- * per function is guaranteed. With the use of a mutex any thread will wait until the previous one
- * finished executing the function.
+ * per function is guaranteed. With the use of a mutex (at least for the two default thread controllers)
+ * any thread will wait until the previous one finished executing the function.
  *
  * There will be no performance loss, if the thread interface is not implemented, but this aspect sill used.
- *
  */
 aspect [[acp::inner_layer]] Synchronization : public CoreAspect {
 
@@ -52,8 +54,7 @@ public:
 
     /**
      * \aspect threadsafe_execution
-     * \brief Wrapping the intended function execution in a mutex lock.
-     *
+     * \brief This advice wraps the intended function execution in a mutex lock.
      */
     advice where() && !ignore() : around() {
         auto proceed_function = [&tjp]() {

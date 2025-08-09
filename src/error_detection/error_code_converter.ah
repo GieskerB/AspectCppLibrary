@@ -11,14 +11,20 @@
 namespace acp {
 	/**
 	 * \attribute acp::err_code
-	 * \brief Performs an error code convertion, if an std-c-lib error occurs within a pointcut annotated with this attribute.
+	 * \brief Triggers an errno check after function calls.
+	 *
+	 * This attribute makes every join points with the annotated, on which the
+	 * ErrorCodeConverter should be applied.
 	 */
 	attribute err_code();
 
 	/**
-	 * \attribute acp::ignore_err_code
-	 * \brief This attribute can be used to exclude certain join points form being affected by this aspect.
-	 */
+     * \attribute acp::ignore_err_code
+     * \brief This attribute can be used to exclude certain join points form being affected by this aspect.
+     *
+     * If a scope already is annotated with this aspect's attribute, individual join points within can be
+     * excluded with this attribute.
+     */
 	attribute ignore_err_code();
 }
 
@@ -27,8 +33,10 @@ namespace acp {
  * \file src/error_detection/error_code_converter.ah
  * \brief This aspect is used to convert error codes from standard library functions into exceptions.
  *
- * It checks if errno is set to a non-zero value after a function call and throws an `acp::ErrnoException` with the current value of errno.
- * It is recommended to use this aspect in conjunction with the StackTrace aspect to get a full stack trace.
+ * This advice checks if errno is set to a non-zero value after a function call and throws an
+ * exception with the current value of errno.
+ *
+ * \see ErrnoException
  */
 aspect [[acp::middle_layer]] ErrorCodeConverter : public CoreAspect {
 
@@ -51,11 +59,7 @@ public:
 
 	/**
 	 * \advice errno_check
-	 * \brief Advice checks if errno is set to a non-zero value after the function call.
-	 *
-	 * If this conditions is met, it throws an `acp::ErrnoException` with the current value of errno.
-	 * It is recommended to use this advice in conjunction with the StackTrace aspect to get a full stack trace.
-	 *
+	 * \brief This advice checks if errno is set to a non-zero value after the function call
 	 */
 	advice where() && !ignore(): after() {
 		// Errno is thread-local, so it can be safely accessed here

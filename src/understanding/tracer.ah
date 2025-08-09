@@ -10,15 +10,18 @@
 
 namespace acp {
 	/**
-	 * \attribute trace
-	 * \brief This attribute is used to mark functions, classes or namespaces that should be traced.
+	 * \attribute acp::trace
+	 * \brief This attribute is used to mark join points that should be traced.
 	 */
 	attribute trace();
 
 	/**
 	 * \attribute acp::ignore_trace
-	 * \brief Ignores being traced
-	 */
+     * \brief This attribute can be used to exclude certain join points form being affected by this aspect.
+     *
+     * If a scope already is annotated with this aspect's attribute, individual join points within can be
+     * excluded with this attribute.
+     */
 	attribute ignore_trace();
 }
 
@@ -29,7 +32,9 @@ namespace acp {
  *
  * Creates a ordered list of all traced functions and methods. The list is printed after the
  * execution of the main function.
- *
+ * The list entries themself are shaped by the "build_msg()" function. You can replace its content
+ * easily by writing an aspect to replace it.
+ * The preferred printing device, which is provided to the constructor, is used to make an output.
  */
 aspect [[acp::inner_layer]]  Tracer : public CoreAspect {
 
@@ -101,6 +106,8 @@ public:
 	 * It measures the execution timestamp of the function or method.
 	 * It uses heap instances of acp::TracerData to store the tracing data.
 	 * The tracing data is updated in a thread-safe manner using the ThreadController.
+	 *
+	 * \see acp::TracerData
 	 */
     advice where() && !ignore(): around() {
 		acp::thread_controller::acquire_global_lock();
@@ -120,8 +127,7 @@ public:
 			build_msg(*curr, output);
 			outputs.push_back(output);
 		}
-
-        for(int i = outputs.size() - 1; i >= 0; --i) {
+		for(int i = outputs.size() - 1; i >= 0; --i) {
 			Tracer::static_printer_instance()->print(outputs[i]);
         }
       }
@@ -140,10 +146,9 @@ public:
 
 	/**
 	 * \advice register-advice
-	 * \brief This advice is executed after the main function has finished executing and registers the
-	 * summary function to be called at exit.
+	 * \brief This advice registers the summary function to at_exit to delay the printing as much as possible.
 	 *
-	 * Atexit will receive the result of the \see summary() function. it expects a function pointer to
+	 * Atexit will receive the result of the summary() function. it expects a function pointer to
 	 * a function that returns void and takes no arguments and is not class bound. Using the atexit()
 	 * function, the most amount of information can be gathered about the program before it exits.
 	 */

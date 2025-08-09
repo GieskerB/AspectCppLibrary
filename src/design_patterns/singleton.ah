@@ -6,16 +6,19 @@
 
 namespace acp {
     /**
-     * \attribute singleton
-     * \brief This attribute is used to mark classes as singletons.
+     * \attribute acp::singleton
+     * \brief Changes all marked class join points into a singleton.
+     *
+     * This attribute marks a class join point, on which the Singleton aspect should be applied.
      */
     attribute singleton();
 
     /**
-     * \attribute ignore_singleton
-     * \brief This attribute can be used to ignore the singleton aspect for specific classes.
-     * This attribute may only be useful if an entire namespace is annotated with the singleton
-     * attribute, but you want to exclude a specific class from being a singleton.
+     * \attribute acp::ignore_singleton
+     * \brief This attribute can be used to exclude certain join points form being affected by this aspect.
+     *
+     * If a scope already is annotated with this aspect's attribute, individual join points within can be
+     * excluded with this attribute.
      */
     attribute ignore_singleton();
     slice class ACP_Singleton_Slice {
@@ -46,7 +49,6 @@ namespace acp {
  *
  * When calling any constructor of a class annotated with this aspect, a runtime error will
  * be thrown.
- *
  */
 aspect [[acp::inner_layer]] Singleton : public CoreAspect {
 
@@ -69,8 +71,7 @@ aspect [[acp::inner_layer]] Singleton : public CoreAspect {
 
     /**
      * \advice singleton-slice
-     * \brief This advice provides a class slice with all necessary methods and
-     * members to implement the Singleton design pattern.
+     * \brief This advice make the target class a singleton by adding the special slice.
      */
     advice where() && !ignore() : slice acp::ACP_Singleton_Slice;
 

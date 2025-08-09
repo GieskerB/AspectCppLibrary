@@ -14,28 +14,30 @@
 namespace acp {
 	/**
 	 * \attribute acp::trace
-	 * \brief This attribute is used to mark functions that should be traced for stack traces.
+	 * \brief Triggers the appearance of a join point in the case of an uncaught exception in the stacktrace.
 	 *
-	 * This attribute is not necessary by default, since the aspect acts globally from the beginning.
-	 * But it can be used, if the developer wants to limit the stack trace to specific functions.
-	 * Then they have to disable the global pointcut first.
+	 * Useless by default, since the aspect is applied to every join point by default.
 	 */
 	attribute trace();
 
 	/**
 	 * \attribute acp::fallback
-	 * \brief This attribute is used to mark functions as a fallback where a stacktrace is trigger in case of an exception.
+	 * \brief Triggers the printing of the stacktrace if a thrown exception leaves the scope of a join point.
 	 *
+	 * Specially recommended to use this attribute in multithreaded applications, because the standard fall-
+	 * back function "main()"" is never reached for all but one thread.
 	 */
 	attribute fallback();
 
 	/**
 	 * \attribute acp::ignore_trace
-	 * \brief This attribute is used to remove certain join points from being traced in the event of an exception
+	 * \brief This attribute can be used to exclude certain join points form being affected by this aspect.
+     *
+     * If a scope already is annotated with this aspect's attribute, individual join points within can be
+     * excluded with this attribute.
 	 *
-	 * Using this attribute is not recommended since it interrupts the tracking of the call chain and can cause
-	 * inconsistencies within this aspect if used in the wrong places.
-	 *
+	 * Not recommend to use this, because of the same reason that the trace attribute is currently unused:
+	 * By excluding join points from the stacktrace the resulting stacktrace will be incomplete.
 	 */
 	attribute ignore_trace();
 }
@@ -45,9 +47,13 @@ namespace acp {
  * \file src/error_handling/stack_trace.ah
  * \brief This aspect is used to handle stack traces and print them when an uncaught exception occurs.
  *
- * This aspect uses the acp::StackTraceMsgBuilder to build the messages for the stack trace and the
- * acp::printer to print them.
- * By default this aspect will always trigger when an uncaught exception would leave the main function.
+ * This aspect collects the recent call history in the event of a thrown exception. When the exception is
+ * caught eventually or changes to a different one, the corrected data will be discarded.
+ * Upon an thrown exception reaching and leaving a join point marked with the acp::fallback attribute the
+ * stack trace will be printed.
+ * The message itself is shaped by the "build_msg()" function. You can replace its content easily by
+ * writing an aspect to replace it.
+ * The preferred printing device, which is provided to the constructor, is used to make an output.
  */
 aspect [[acp::outer_layer]] StackTrace : public CoreAspect {
 
@@ -85,7 +91,7 @@ protected:
 
 	/**
 	 * \function print_stack_trace
-	 * \brief this function handles everything related to printing the stack trace.
+	 * \brief This method handles everything related to printing the stack trace.
 	 *
 	 * In case a developer wants to change the way the stack trace is printed from the ground up,
 	 * they can write an around advice for this function to replace its countent.
@@ -148,11 +154,7 @@ public:
 
 	/**
 	 * \pointcut fallback_func
-	 * \brief This pointcut matches all functions that are marked with the acp::fallback attribute.
-	 *
-	 * Any functions marked with this attribute or the main function will trigger the stack trace to
-	 * be printed if an uncaught exception leaves the function.
-	 *
+	 * \brief The set of all join points that are marked with the acp::fallback attribute plus the main function.
 	 */
 	pointcut virtual fallback_func() = execution(acp::fallback() || acp::main_function());
 
@@ -167,7 +169,7 @@ public:
 
 	/**
 	 * \advice fallback-advice
-	 * \brief Advice handles the StackTrace printing when an uncaught exception leaves the function of the pointcut.
+	 * \brief This advice handles the StackTrace printing when an uncaught exception leaves the function of the pointcut.
 	 */
 	advice fallback_func() && !ignore() : around() {
 
@@ -185,7 +187,7 @@ public:
 			// Exit the program with code 0. Should be something different, but tests otherwise fail.
 			std::exit(0);
 		} catch (...) {
-			// Not implemented yet.
+			// Non std::exceptions not implemented.
 		}
 	}
 
@@ -224,7 +226,7 @@ public:
 			editing_stack_trace_instance() = false;
 			throw;
 		} catch (...) {
-			// Not implemented yet.
+			// Non std::exceptions not implemented.
 		}
 	}
 };

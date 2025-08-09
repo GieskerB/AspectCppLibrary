@@ -9,17 +9,19 @@
 namespace acp {
 
     /**
-     * \attribute cache
-     * \brief Functions annotated with this attribute will be cached based on their arguments.
-     *
-     *  Currently only primitive types and pointers to primitive types are supported.
-     *
+     * \attribute acp::cache
+	 * \brief Triggers a cache usage for marked join points.
+	 *
+	 * This attribute makes a join points, for which a result cache should be used.
      */
     attribute cache();
 
     /**
      * \attribute acp::ignore_cache
-     * \brief Funcitons annoted with this attribute will not be cached based on their arguments.
+     * \brief This attribute can be used to exclude certain join points form being affected by this aspect.
+     *
+     * If a scope already is annotated with this aspect's attribute, individual join points within can be
+     * excluded with this attribute.
      */
     attribute ignore_cache();
 }
@@ -27,14 +29,19 @@ namespace acp {
 /**
  * \aspect ResultCache
  * \file src/functionality/result_cache.ah
- * \brief Caches the result of a function based on its arguments.
+ * \brief This aspect caches the result of a function based on its arguments.
  *
- * Possibly reducing the execution time of functions that are called multiple times with the
- * same arguments.
- *
+ * To potentially reduce runtime this aspects checks a result cache per join point to see if the same inputs
+ * were inserted previously. In that case simple return the value from the cache instead of recalculation it.
+ * Make sure to only use this aspect on functions there the output is only dependent on the arguments and
+ * nothing more like global or member variables.
+ * Unfortunately, it does only work is all operators are standard primitive data types, due to limitations
+ * in the AspectC++ language. It is currently not possible to get the type of each parameter directly which
+ * is necessary for correct hasing.
  */
 aspect [[acp::inner_layer]] ResultCache : public CoreAspect {
 
+    /// Checks if arguments is a primitive based on string representation of tjp->argtype
     constexpr static bool is_primitive(const char type) {
         if(type == 'c' or // char
            type == 'h' or // unsigend char
@@ -54,6 +61,7 @@ aspect [[acp::inner_layer]] ResultCache : public CoreAspect {
         return false;
     }
 
+    /// Calculate hash of every primitive data type by first casting it correctly.
     constexpr static size_t calc_hash(void* arg, const char type) {
         if (type == 'c') {  // char
             return std::hash<char>{}(*static_cast<char*>(arg));
@@ -85,6 +93,8 @@ aspect [[acp::inner_layer]] ResultCache : public CoreAspect {
         return 0;
     }
 
+    /// Calculate hash of every primitive pointer type by first casting it correctly.
+    /// need more functions for more and more nested pointers (int*****)
     constexpr static size_t calc_hash_ptr(void* arg, const char type) {
         if (type == 'c') {  // char
             return std::hash<char>{}(**static_cast<char**>(arg));
@@ -135,13 +145,9 @@ aspect [[acp::inner_layer]] ResultCache : public CoreAspect {
 
     /**
      * \advice caching-advice
-     * \brief Caches the result of a function based on its arguments.
-     *
-     * This advice will only be applied to functions that are annotated with the
-     * acp::cache attribute.
+     * \brief This advice caches the result of a function based on its arguments.
      */
     advice where() && !ignore() : around() {
-        // static JoinPoint::Result result;
         static std::unordered_map<std::size_t, JoinPoint::Result> cache;
 
         bool all_primitive = tjp->args() > 0;
@@ -157,7 +163,6 @@ aspect [[acp::inner_layer]] ResultCache : public CoreAspect {
                 all_primitive = false;
                 break;
             }
-
         }
 
         acp::thread_controller::acquire_global_lock();
