@@ -173,6 +173,23 @@ When calling any constructor of a class annotated with this aspect, a runtime er
 be thrown.</p>
 </div></blockquote>
 <p><em>In file</em> <code class="docutils literal notranslate"><span class="pre">src/design_patterns/singleton.ah</span></code></p>
+<section id="acp-ignore-singleton-attribute">
+<span id="singleton-ah-acpignore-singleton"></span><h2><code class="docutils literal notranslate"><span class="pre">acp::ignore_singleton</span></code> (Attribute)<a class="headerlink" href="#acp-ignore-singleton-attribute" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> This attribute can be used to exclude certain join points form being affected by this aspect.</p>
+<p><strong>Detailed Description:</strong></p>
+<blockquote>
+<div><p>If a scope already is annotated with this aspect’s attribute, individual join points within can be
+excluded with this attribute.</p>
+</div></blockquote>
+</section>
+<section id="acp-singleton-attribute">
+<span id="singleton-ah-acpsingleton"></span><h2><code class="docutils literal notranslate"><span class="pre">acp::singleton</span></code> (Attribute)<a class="headerlink" href="#acp-singleton-attribute" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> Changes all marked class join points into a singleton.</p>
+<p><strong>Detailed Description:</strong></p>
+<blockquote>
+<div><p>This attribute marks a class join point, on which the Singleton aspect should be applied.</p>
+</div></blockquote>
+</section>
 <section id="construction-prevention-advice">
 <span id="singleton-ah-construction-prevention"></span><h2><code class="docutils literal notranslate"><span class="pre">construction-prevention</span></code> (Advice)<a class="headerlink" href="#construction-prevention-advice" title="Link to this heading">¶</a></h2>
 <p><strong>Brief Description:</strong> This advice prevents the construction of a singleton class directly.</p>
@@ -183,15 +200,7 @@ be thrown.</p>
 </section>
 <section id="singleton-slice-advice">
 <span id="singleton-ah-singleton-slice"></span><h2><code class="docutils literal notranslate"><span class="pre">singleton-slice</span></code> (Advice)<a class="headerlink" href="#singleton-slice-advice" title="Link to this heading">¶</a></h2>
-<p><strong>Brief Description:</strong> This advice provides a class slice with all necessary methods and</p>
-<p><strong>Detailed Description:</strong></p>
-<blockquote>
-<div><p>members to implement the Singleton design pattern.</p>
-</div></blockquote>
-</section>
-<section id="singleton-attribute">
-<span id="singleton-ah-singleton"></span><h2><code class="docutils literal notranslate"><span class="pre">singleton</span></code> (Attribute)<a class="headerlink" href="#singleton-attribute" title="Link to this heading">¶</a></h2>
-<p><strong>Brief Description:</strong> This attribute is used to mark classes as singletons.</p>
+<p><strong>Brief Description:</strong> This advice make the target class a singleton by adding the special slice.</p>
 </section>
 <section id="where-pointcut">
 <span id="singleton-ah-where"></span><h2><code class="docutils literal notranslate"><span class="pre">where</span></code> (Pointcut)<a class="headerlink" href="#where-pointcut" title="Link to this heading">¶</a></h2>

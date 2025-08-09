@@ -167,22 +167,31 @@
 <p><strong>Detailed Description:</strong></p>
 <blockquote>
 <div><p>By using an aspect which implements the thread controller interface, an thread exclusive execution
-per function is guaranteed. With the use of a mutex any thread will wait until the previous one
-finished executing the function.
+per function is guaranteed. With the use of a mutex (at least for the two default thread controllers)
+any thread will wait until the previous one finished executing the function.
 There will be no performance loss, if the thread interface is not implemented, but this aspect sill used.</p>
 </div></blockquote>
 <p><em>In file</em> <code class="docutils literal notranslate"><span class="pre">src/functionality/synchronization.ah</span></code></p>
 <section id="threadsafe-execution-aspect">
 <span id="synchronization-ah-threadsafe-execution"></span><h2><code class="docutils literal notranslate"><span class="pre">threadsafe_execution</span></code> (Aspect)<a class="headerlink" href="#threadsafe-execution-aspect" title="Link to this heading">¶</a></h2>
-<p><strong>Brief Description:</strong> Wrapping the intended function execution in a mutex lock.</p>
+<p><strong>Brief Description:</strong> This advice wraps the intended function execution in a mutex lock.</p>
+</section>
+<section id="acp-ignore-synchronized-attribute">
+<span id="synchronization-ah-acpignore-synchronized"></span><h2><code class="docutils literal notranslate"><span class="pre">acp::ignore_synchronized</span></code> (Attribute)<a class="headerlink" href="#acp-ignore-synchronized-attribute" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> This attribute can be used to exclude certain join points form being affected by this aspect.</p>
+<p><strong>Detailed Description:</strong></p>
+<blockquote>
+<div><p>If a scope already is annotated with this aspect’s attribute, individual join points within can be
+excluded with this attribute.</p>
+</div></blockquote>
+</section>
+<section id="acp-synchronized-attribute">
+<span id="synchronization-ah-acpsynchronized"></span><h2><code class="docutils literal notranslate"><span class="pre">acp::synchronized</span></code> (Attribute)<a class="headerlink" href="#acp-synchronized-attribute" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> Triggers an synchronized call to every marked join point.</p>
 </section>
 <section id="ignore-pointcut">
 <span id="synchronization-ah-ignore"></span><h2><code class="docutils literal notranslate"><span class="pre">ignore</span></code> (Pointcut)<a class="headerlink" href="#ignore-pointcut" title="Link to this heading">¶</a></h2>
 <p><em>See:</em> <a class="reference internal" href="core_aspect_ah.html#core-aspect-ah-ignore"><span class="std std-ref">CoreAspect::ignore</span></a></p>
-</section>
-<section id="synchronized-attribute">
-<span id="synchronization-ah-synchronized"></span><h2><code class="docutils literal notranslate"><span class="pre">synchronized</span></code> (Attribute)<a class="headerlink" href="#synchronized-attribute" title="Link to this heading">¶</a></h2>
-<p><strong>Brief Description:</strong> Any function with this attribute can only have one thread at a time executing it</p>
 </section>
 <section id="where-pointcut">
 <span id="synchronization-ah-where"></span><h2><code class="docutils literal notranslate"><span class="pre">where</span></code> (Pointcut)<a class="headerlink" href="#where-pointcut" title="Link to this heading">¶</a></h2>

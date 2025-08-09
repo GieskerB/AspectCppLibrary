@@ -166,26 +166,32 @@
 <p><strong>Brief Description:</strong> This aspect is used to convert error codes from standard library functions into exceptions.</p>
 <p><strong>Detailed Description:</strong></p>
 <blockquote>
-<div><p>It checks if errno is set to a non-zero value after a function call and throws an <cite>acp::ErrnoException</cite> with the current value of errno.
-It is recommended to use this aspect in conjunction with the StackTrace aspect to get a full stack trace.</p>
+<div><p>This advice checks if errno is set to a non-zero value after a function call and throws an
+exception with the current value of errno.</p>
 </div></blockquote>
 <p><em>In file</em> <code class="docutils literal notranslate"><span class="pre">src/error_detection/error_code_converter.ah</span></code></p>
+<p><em>See:</em> <code class="docutils literal notranslate"><span class="pre">ErrnoException</span></code></p>
 <section id="acp-err-code-attribute">
 <span id="error-code-converter-ah-acperr-code"></span><h2><code class="docutils literal notranslate"><span class="pre">acp::err_code</span></code> (Attribute)<a class="headerlink" href="#acp-err-code-attribute" title="Link to this heading">¶</a></h2>
-<p><strong>Brief Description:</strong> This attribute should be used to mark functions from which a function call is checked for errno.</p>
+<p><strong>Brief Description:</strong> Triggers an errno check after function calls.</p>
 <p><strong>Detailed Description:</strong></p>
 <blockquote>
-<div><p>Due to some implementations restrictions with the AspectC++ compiler, this attribute is not used.</p>
+<div><p>This attribute makes every join points with the annotated, on which the
+ErrorCodeConverter should be applied.</p>
+</div></blockquote>
+</section>
+<section id="acp-ignore-err-code-attribute">
+<span id="error-code-converter-ah-acpignore-err-code"></span><h2><code class="docutils literal notranslate"><span class="pre">acp::ignore_err_code</span></code> (Attribute)<a class="headerlink" href="#acp-ignore-err-code-attribute" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> This attribute can be used to exclude certain join points form being affected by this aspect.</p>
+<p><strong>Detailed Description:</strong></p>
+<blockquote>
+<div><p>If a scope already is annotated with this aspect’s attribute, individual join points within can be
+excluded with this attribute.</p>
 </div></blockquote>
 </section>
 <section id="errno-check-advice">
 <span id="error-code-converter-ah-errno-check"></span><h2><code class="docutils literal notranslate"><span class="pre">errno_check</span></code> (Advice)<a class="headerlink" href="#errno-check-advice" title="Link to this heading">¶</a></h2>
-<p><strong>Brief Description:</strong> Advice checks if errno is set to a non-zero value after the function call.</p>
-<p><strong>Detailed Description:</strong></p>
-<blockquote>
-<div><p>If this conditions is met, it throws an <cite>acp::ErrnoException</cite> with the current value of errno.
-It is recommended to use this advice in conjunction with the StackTrace aspect to get a full stack trace.</p>
-</div></blockquote>
+<p><strong>Brief Description:</strong> This advice checks if errno is set to a non-zero value after the function call</p>
 </section>
 <section id="ignore-pointcut">
 <span id="error-code-converter-ah-ignore"></span><h2><code class="docutils literal notranslate"><span class="pre">ignore</span></code> (Pointcut)<a class="headerlink" href="#ignore-pointcut" title="Link to this heading">¶</a></h2>

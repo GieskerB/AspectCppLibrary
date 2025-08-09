@@ -166,33 +166,42 @@
 <p><strong>Brief Description:</strong> Aspect that checks for null pointer dereferences.</p>
 <p><strong>Detailed Description:</strong></p>
 <blockquote>
-<div><p>This aspect provides an advice to check if a pointer is null before dereferencing it.
+<div><p>This aspect is used to detect an nullptr dereferencing, which would lead to a segfault.
+In the case that such an potential segfault an exception will be triggered and the
+dereferencing will not be performed.
 Unfortunately, it does not work with the -&gt; operator, due to limitations in the AspectC++
-language and the way the builtin -&gt; operator is defined.</p>
+language and the way the builtin ‘operator-&gt;’ is defined.</p>
 </div></blockquote>
 <p><em>In file</em> <code class="docutils literal notranslate"><span class="pre">/src/bug_detection/nullptr_check.ah</span></code></p>
+<p><em>See:</em> <code class="docutils literal notranslate"><span class="pre">acp::NullptrException</span></code></p>
+<section id="acp-ignore-null-check-attribute">
+<span id="nullptr-check-ah-acpignore-null-check"></span><h2><code class="docutils literal notranslate"><span class="pre">acp::ignore_null_check</span></code> (Attribute)<a class="headerlink" href="#acp-ignore-null-check-attribute" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> This attribute can be used to exclude certain join points form being affected by this aspect.</p>
+<p><strong>Detailed Description:</strong></p>
+<blockquote>
+<div><p>If a scope already is annotated with this aspect’s attribute, individual join points within can be
+excluded with this attribute.</p>
+</div></blockquote>
+</section>
+<section id="acp-null-check-attribute">
+<span id="nullptr-check-ah-acpnull-check"></span><h2><code class="docutils literal notranslate"><span class="pre">acp::null_check</span></code> (Attribute)<a class="headerlink" href="#acp-null-check-attribute" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> Triggers an nullptr check for all pointer dereferencing operators</p>
+<p><strong>Detailed Description:</strong></p>
+<blockquote>
+<div><p>This attribute marks a join point, on which the Nullptrcheck aspect should be applied.</p>
+</div></blockquote>
+</section>
+<section id="dereferencing-pointer-pointcut">
+<span id="nullptr-check-ah-dereferencing-pointer"></span><h2><code class="docutils literal notranslate"><span class="pre">dereferencing_pointer</span></code> (Pointcut)<a class="headerlink" href="#dereferencing-pointer-pointcut" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> The set of all builtin pointer dereferencing join points.</p>
+</section>
 <section id="ignore-pointcut">
 <span id="nullptr-check-ah-ignore"></span><h2><code class="docutils literal notranslate"><span class="pre">ignore</span></code> (Pointcut)<a class="headerlink" href="#ignore-pointcut" title="Link to this heading">¶</a></h2>
 <p><em>See:</em> <a class="reference internal" href="core_aspect_ah.html#core-aspect-ah-ignore"><span class="std std-ref">CoreAspect::ignore</span></a></p>
 </section>
-<section id="null-check-attribute">
-<span id="nullptr-check-ah-null-check"></span><h2><code class="docutils literal notranslate"><span class="pre">null_check</span></code> (Attribute)<a class="headerlink" href="#null-check-attribute" title="Link to this heading">¶</a></h2>
-<p><strong>Brief Description:</strong> For all pointer dereferencing within any function / class / namespace</p>
-<p><strong>Detailed Description:</strong></p>
-<blockquote>
-<div><p>()
-annotated with this attribute an nullptr check will be performed. In case this
-happens, an exception will be thrown.</p>
-</div></blockquote>
-</section>
 <section id="nullptr-check-advice">
 <span id="nullptr-check-ah-nullptr-check"></span><h2><code class="docutils literal notranslate"><span class="pre">nullptr_check</span></code> (Advice)<a class="headerlink" href="#nullptr-check-advice" title="Link to this heading">¶</a></h2>
-<p><strong>Brief Description:</strong> Advice checks if a pointer is null before dereferencing it.</p>
-<p><strong>Detailed Description:</strong></p>
-<blockquote>
-<div><p>If the pointer is null, it throws a <cite>acp::NullptrException</cite> with a message indicating that
-a null pointer was dereferenced.</p>
-</div></blockquote>
+<p><strong>Brief Description:</strong> This Advice checks if a pointer is null before dereferencing it.</p>
 </section>
 <section id="where-pointcut">
 <span id="nullptr-check-ah-where"></span><h2><code class="docutils literal notranslate"><span class="pre">where</span></code> (Pointcut)<a class="headerlink" href="#where-pointcut" title="Link to this heading">¶</a></h2>

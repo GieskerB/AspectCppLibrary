@@ -12,16 +12,11 @@
  * The remaining non project wide configuration of the StackTrace aspect is the
  * implementation of the printer interface. This aspect provides it with the
  * std::cerr printer interface implementation.
- *
  */
 aspect [[acp::outer_layer]] DefaultStackTrace : public StackTrace {
-
 public:
-
 	DefaultStackTrace() : StackTrace(new acp::CerrPrinter()) {}
-
 	virtual ~DefaultStackTrace() {}
-
 };
 
 #endif // __ACP__DEFAULT_STACK_TRACE_AH__

@@ -167,12 +167,29 @@
 <p><strong>Detailed Description:</strong></p>
 <blockquote>
 <div><p>Creates a grouped list by signature name of all profiled functions and methods. The list is printed
-after the execution of the main function.</p>
+after the execution of the main function.
+The list entries themself are shaped by the “build_msg()” function. You can replace its content
+easily by writing an aspect to replace it.
+The preferred printing device, which is provided to the constructor, is used to make an output.</p>
 </div></blockquote>
 <p><em>In file</em> <code class="docutils literal notranslate"><span class="pre">src/understanding/profiler.ah</span></code></p>
 <section id="constructor-constructor">
 <span id="profiler-ah-constructor"></span><h2><code class="docutils literal notranslate"><span class="pre">Constructor</span></code> (Constructor)<a class="headerlink" href="#constructor-constructor" title="Link to this heading">¶</a></h2>
 <p><strong>Brief Description:</strong> This constructor initializes the profiler with a builder, printer and thread controller.</p>
+</section>
+<section id="acp-ignore-profile-attribute">
+<span id="profiler-ah-acpignore-profile"></span><h2><code class="docutils literal notranslate"><span class="pre">acp::ignore_profile</span></code> (Attribute)<a class="headerlink" href="#acp-ignore-profile-attribute" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> This attribute can be used to exclude certain join points form being affected by this aspect.</p>
+<p><strong>Detailed Description:</strong></p>
+<blockquote>
+<div><p>()
+If a scope already is annotated with this aspect’s attribute, individual join points within can be
+excluded with this attribute.</p>
+</div></blockquote>
+</section>
+<section id="acp-profile-attribute">
+<span id="profiler-ah-acpprofile"></span><h2><code class="docutils literal notranslate"><span class="pre">acp::profile</span></code> (Attribute)<a class="headerlink" href="#acp-profile-attribute" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> This attribute is used to mark join points that should be profiled.</p>
 </section>
 <section id="build-msg-function">
 <span id="profiler-ah-build-msg"></span><h2><code class="docutils literal notranslate"><span class="pre">build_msg</span></code> (Function)<a class="headerlink" href="#build-msg-function" title="Link to this heading">¶</a></h2>
@@ -196,25 +213,21 @@ own implementation. Use a around advice for that.</p>
 </section>
 <section id="profile-advice-advice">
 <span id="profiler-ah-profile-advice"></span><h2><code class="docutils literal notranslate"><span class="pre">profile-advice</span></code> (Advice)<a class="headerlink" href="#profile-advice-advice" title="Link to this heading">¶</a></h2>
-<p><strong>Brief Description:</strong> This advice is executed around the execution of functions or methods marked with the profile attribute.</p>
+<p><strong>Brief Description:</strong> This advice collects relevant data and stores it for later use.</p>
 <p><strong>Detailed Description:</strong></p>
 <blockquote>
 <div><p>It measures the execution time and call count of the function or method.
 It uses a static instance of acp::ProfilerData to store the profiling data.
 The profiling data is updated in a thread-safe manner using the ThreadController.</p>
 </div></blockquote>
-</section>
-<section id="profile-attribute">
-<span id="profiler-ah-profile"></span><h2><code class="docutils literal notranslate"><span class="pre">profile</span></code> (Attribute)<a class="headerlink" href="#profile-attribute" title="Link to this heading">¶</a></h2>
-<p><strong>Brief Description:</strong> This attribute is used to mark functions, classes or namespaces that should be profiled.</p>
+<p><em>See:</em> <code class="docutils literal notranslate"><span class="pre">acp::ProfilerData</span></code></p>
 </section>
 <section id="register-advice-advice">
 <span id="profiler-ah-register-advice"></span><h2><code class="docutils literal notranslate"><span class="pre">register-advice</span></code> (Advice)<a class="headerlink" href="#register-advice-advice" title="Link to this heading">¶</a></h2>
-<p><strong>Brief Description:</strong> This advice is executed after the main function has finished executing and registers the</p>
+<p><strong>Brief Description:</strong> This advice registers the summary function to at_exit to delay the printing as much as possible.</p>
 <p><strong>Detailed Description:</strong></p>
 <blockquote>
-<div><p>summary function to be called at exit.
-Atexit will receive the result of the see summary() function. it expects a function pointer to
+<div><p>Atexit will receive the result of the function. it expects a function pointer to
 a function that returns void and takes no arguments and is not class bound. Using the atexit()
 function, the most amount of information can be gathered about the program before it exits.</p>
 </div></blockquote>

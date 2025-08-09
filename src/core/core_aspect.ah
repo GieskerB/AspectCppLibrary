@@ -71,22 +71,20 @@ public:
 	/**
 	 * \pointcut where
 	 * \file src/core/core_aspect.hh
-	 * \brief A virtual placeholder for the pointcut that is used used in the main
-	 * advice of each aspect.
+	 * \brief A virtual placeholder for the pointcut that is used in the main advice of each aspect.
 	 *
-	 * This pointcut is can be overridden by derived aspects if they want to change it
-	 * form the default implementation.
-	 * The default implementation is the default_where() pointcut.
+	 * This pointcut is can be overridden by derived aspects if they want to change it form the
+	 * default implementation.
 	 */
 	pointcut virtual where() = 0;
 
 	/**
 	 * \pointcut ignore
-	 * \brief A virtual placeholder for the pointcut that describes which join points
-	 * should be ignored by the aspect.
+	 * \brief A virtual placeholder for the pointcut that describes which join points should be ignored by the aspect.
 	 *
 	 * It is recommended to use and extend a pointcut definition like with:
 	 * within("<AspectName>") || within("acp")
+	 * As well as the execution of the aspect specific ignore attributes.
 	 */
 	pointcut virtual ignore() = 0;
 
@@ -98,12 +96,11 @@ public:
 	 * \brief This advice defines the order of the aspects in the weaving process.
 	 *
 	 * Naming of the layers is relative to the "distance" to the function which represents the core.
-	 * In case of before advices the outer layer is weaved first, then the middle layer and finally the inner layer.
-	 * For after advices this is the other way around and for around advice it is a capsulation with results in the
-	 * same order as for the before and after advices combined.
+	 * In case of before advices the outer layer is weaved first, then the middle layer and finally
+	 * the inner layer. For after advices this is the other way around and for around advice it is a
+	 * capsulation with results in the same order as for the before and after advices combined.
 	 */
     advice execution(acp::all_func()) : order(acp::inner_layer(), acp::middle_layer(), acp::outer_layer());
-    // advice execution(acp::all_func()) : order(derived("InnerLayer"),derived("MiddleLayer"),derived("OuterLayer"));
 
 };
 

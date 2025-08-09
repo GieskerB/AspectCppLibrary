@@ -37,6 +37,7 @@
 ``print[c-string]`` (Function)
 ------------------------------
 
+
 *See:* :ref:`Printer::print <printer_hh_printc-string>`
 
 .. _ofstream_printer_hh_printchar:
@@ -44,12 +45,14 @@
 ``print[char]`` (Function)
 --------------------------
 
+
 *See:* :ref:`Printer::print <printer_hh_printchar>`
 
 .. _ofstream_printer_hh_printstdstring:
 
 ``print[std::string]`` (Function)
 ---------------------------------
+
 
 *See:* :ref:`Printer::print <printer_hh_printstdstring>`
 

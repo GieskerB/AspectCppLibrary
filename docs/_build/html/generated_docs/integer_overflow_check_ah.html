@@ -166,47 +166,80 @@
 <p><strong>Brief Description:</strong> Aspect that checks for null pointer dereferences.</p>
 <p><strong>Detailed Description:</strong></p>
 <blockquote>
-<div><p>This aspect provides advices to check if an over- or underflow would occur, when performing
-addition or subtraction on integers. At the moment this check is performed for every standard int
-addition and subtraction operator (all 5 binary and all 5 unary).</p>
+<div><p>This aspect is used to detect an over- od underflow within one of the 10 standard (5 binary and all
+5 unary) integer addition and subtraction operators. In the case that such an over- or underflow will
+occur an exception will be triggered and the operation will not be performed.</p>
 </div></blockquote>
 <p><em>In file</em> <code class="docutils literal notranslate"><span class="pre">/src/bug_detection/integer_overflow_check.ah</span></code></p>
+<p><em>See:</em> <code class="docutils literal notranslate"><span class="pre">acp::OverflowException</span></code></p>
+<section id="acp-ignore-overflow-check-attribute">
+<span id="integer-overflow-check-ah-acpignore-overflow-check"></span><h2><code class="docutils literal notranslate"><span class="pre">acp::ignore_overflow_check</span></code> (Attribute)<a class="headerlink" href="#acp-ignore-overflow-check-attribute" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> This attribute can be used to exclude certain join points form being affected by this aspect.</p>
+<p><strong>Detailed Description:</strong></p>
+<blockquote>
+<div><p>If a scope already is annotated with this aspect’s attribute, individual join points within can be
+excluded with this attribute.</p>
+</div></blockquote>
+</section>
+<section id="acp-overflow-check-attribute">
+<span id="integer-overflow-check-ah-acpoverflow-check"></span><h2><code class="docutils literal notranslate"><span class="pre">acp::overflow_check</span></code> (Attribute)<a class="headerlink" href="#acp-overflow-check-attribute" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> Triggers an integer over- /underflow check for all integer addition and subtraction</p>
+<p><strong>Detailed Description:</strong></p>
+<blockquote>
+<div><p>This attribute marks a join point, on which the IntegerOverflowCheck aspect should be applied.</p>
+</div></blockquote>
+</section>
 <section id="ignore-pointcut">
 <span id="integer-overflow-check-ah-ignore"></span><h2><code class="docutils literal notranslate"><span class="pre">ignore</span></code> (Pointcut)<a class="headerlink" href="#ignore-pointcut" title="Link to this heading">¶</a></h2>
 <p><em>See:</em> <a class="reference internal" href="core_aspect_ah.html#core-aspect-ah-ignore"><span class="std std-ref">CoreAspect::ignore</span></a></p>
 </section>
 <section id="int-add-binary-check-advice">
 <span id="integer-overflow-check-ah-int-add-binary-check"></span><h2><code class="docutils literal notranslate"><span class="pre">int_add_binary_check</span></code> (Advice)<a class="headerlink" href="#int-add-binary-check-advice" title="Link to this heading">¶</a></h2>
-<p><strong>Brief Description:</strong> checks for an overflow in the ‘int += int’ and ‘int + int’ operator.</p>
+<p><strong>Brief Description:</strong> This advice checks for an overflow in the ‘int += int’ and ‘int + int’ operator.</p>
+</section>
+<section id="int-add-binary-pointcut">
+<span id="integer-overflow-check-ah-int-add-binary"></span><h2><code class="docutils literal notranslate"><span class="pre">int_add_binary</span></code> (Pointcut)<a class="headerlink" href="#int-add-binary-pointcut" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> The set of all builtin binary integer addition join points.</p>
 </section>
 <section id="int-add-unary-check-advice">
 <span id="integer-overflow-check-ah-int-add-unary-check"></span><h2><code class="docutils literal notranslate"><span class="pre">int_add_unary_check</span></code> (Advice)<a class="headerlink" href="#int-add-unary-check-advice" title="Link to this heading">¶</a></h2>
-<p><strong>Brief Description:</strong> checks for an overflow in the ‘+int’ operator.</p>
+<p><strong>Brief Description:</strong> This advice checks for an overflow in the ‘+int’ operator.</p>
 </section>
 <section id="int-add-unary-inc-check-advice">
 <span id="integer-overflow-check-ah-int-add-unary-inc-check"></span><h2><code class="docutils literal notranslate"><span class="pre">int_add_unary_inc_check</span></code> (Advice)<a class="headerlink" href="#int-add-unary-inc-check-advice" title="Link to this heading">¶</a></h2>
-<p><strong>Brief Description:</strong> checks for an overflow in the ‘++int’ and ‘int++’ operator.</p>
+<p><strong>Brief Description:</strong> This advice checks for an overflow in the ‘++int’ and ‘int++’ operator.</p>
+</section>
+<section id="int-add-unary-inc-pointcut">
+<span id="integer-overflow-check-ah-int-add-unary-inc"></span><h2><code class="docutils literal notranslate"><span class="pre">int_add_unary_inc</span></code> (Pointcut)<a class="headerlink" href="#int-add-unary-inc-pointcut" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> The set of all builtin integer increment join points.</p>
+</section>
+<section id="int-add-unary-pointcut">
+<span id="integer-overflow-check-ah-int-add-unary"></span><h2><code class="docutils literal notranslate"><span class="pre">int_add_unary</span></code> (Pointcut)<a class="headerlink" href="#int-add-unary-pointcut" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> The set of all builtin unary integer addition join points.</p>
 </section>
 <section id="int-sub-binary-check-advice">
 <span id="integer-overflow-check-ah-int-sub-binary-check"></span><h2><code class="docutils literal notranslate"><span class="pre">int_sub_binary_check</span></code> (Advice)<a class="headerlink" href="#int-sub-binary-check-advice" title="Link to this heading">¶</a></h2>
-<p><strong>Brief Description:</strong> checks for an underflow in the ‘int -= int’ and ‘int - int’ operator.</p>
+<p><strong>Brief Description:</strong> This advice checks for an underflow in the ‘int -= int’ and ‘int - int’ operator.</p>
+</section>
+<section id="int-sub-binary-pointcut">
+<span id="integer-overflow-check-ah-int-sub-binary"></span><h2><code class="docutils literal notranslate"><span class="pre">int_sub_binary</span></code> (Pointcut)<a class="headerlink" href="#int-sub-binary-pointcut" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> The set of all builtin binary integer subtraction join points.</p>
 </section>
 <section id="int-sub-unary-check-advice">
 <span id="integer-overflow-check-ah-int-sub-unary-check"></span><h2><code class="docutils literal notranslate"><span class="pre">int_sub_unary_check</span></code> (Advice)<a class="headerlink" href="#int-sub-unary-check-advice" title="Link to this heading">¶</a></h2>
-<p><strong>Brief Description:</strong> checks for an underflow in the ‘–int’ operator (spoiler: it cant happen :D).</p>
+<p><strong>Brief Description:</strong> This advice checks for an underflow in the ‘–int’ operator (spoiler: it cant happen :D).</p>
 </section>
 <section id="int-sub-unary-inc-check-advice">
 <span id="integer-overflow-check-ah-int-sub-unary-inc-check"></span><h2><code class="docutils literal notranslate"><span class="pre">int_sub_unary_inc_check</span></code> (Advice)<a class="headerlink" href="#int-sub-unary-inc-check-advice" title="Link to this heading">¶</a></h2>
-<p><strong>Brief Description:</strong> checks for an underflow in the ‘–int’ and ‘int–’ operator.</p>
+<p><strong>Brief Description:</strong> This advice checks for an underflow in the ‘–int’ and ‘int–’ operator.</p>
 </section>
-<section id="overflow-check-attribute">
-<span id="integer-overflow-check-ah-overflow-check"></span><h2><code class="docutils literal notranslate"><span class="pre">overflow_check</span></code> (Attribute)<a class="headerlink" href="#overflow-check-attribute" title="Link to this heading">¶</a></h2>
-<p><strong>Brief Description:</strong> For all integer addition and subtraction within any function / class / namespace</p>
-<p><strong>Detailed Description:</strong></p>
-<blockquote>
-<div><p>annotated with this attribute an over- or underflow check will be performed. In case this
-happens, an exception will be thrown.</p>
-</div></blockquote>
+<section id="int-sub-unary-inc-pointcut">
+<span id="integer-overflow-check-ah-int-sub-unary-inc"></span><h2><code class="docutils literal notranslate"><span class="pre">int_sub_unary_inc</span></code> (Pointcut)<a class="headerlink" href="#int-sub-unary-inc-pointcut" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> The set of all builtin integer decrement join points.</p>
+</section>
+<section id="int-sub-unary-pointcut">
+<span id="integer-overflow-check-ah-int-sub-unary"></span><h2><code class="docutils literal notranslate"><span class="pre">int_sub_unary</span></code> (Pointcut)<a class="headerlink" href="#int-sub-unary-pointcut" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> The set of all builtin unary integer subtraction join points.</p>
 </section>
 <section id="where-pointcut">
 <span id="integer-overflow-check-ah-where"></span><h2><code class="docutils literal notranslate"><span class="pre">where</span></code> (Pointcut)<a class="headerlink" href="#where-pointcut" title="Link to this heading">¶</a></h2>

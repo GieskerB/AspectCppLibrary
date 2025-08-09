@@ -12,16 +12,11 @@
  * The remaining non project wide configuration of the Profiler aspect is the
  * implementation of the printer interface. This aspect provides it with the
  * std::cout printer interface implementation.
- *
  */
 aspect [[acp::inner_layer]] DefaultProfiler : public Profiler {
-
 public:
-
 	DefaultProfiler() : Profiler(new acp::CoutPrinter()) {}
-
 	virtual ~DefaultProfiler() {}
-
 };
 
 #endif // __ACP__DEFAULT_PROFILER_AH__

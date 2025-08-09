@@ -15,18 +15,32 @@
 
 *In file* ``src/core/core_aspect.ah``
 
+.. _core_aspect_ah_ignore_everything:
+
+``ignore_everything`` (Attribute)
+---------------------------------
+
+**Brief Description:** This attribute can be used to remove every aspect form a specific join point.
+
+**Detailed Description:**
+
+    Many attributes can be used for an entire class or namespace. In case you want to
+    exclude only a few join points from the weaving process, you can use this attribute.
+    Use this attribute with caution due to its huge impact on EVERY aspect from this library!
+
+
 .. _core_aspect_ah_ignore:
 
 ``ignore`` (Pointcut)
 ---------------------
 
-**Brief Description:** A virtual placeholder for the pointcut that describes which join points
+**Brief Description:** A virtual placeholder for the pointcut that describes which join points should be ignored by the aspect.
 
 **Detailed Description:**
 
-    should be ignored by the aspect.
     It is recommended to use and extend a pointcut definition like with:
     within("<AspectName>") || within("acp")
+    As well as the execution of the aspect specific ignore attributes.
 
 
 .. _core_aspect_ah_inner_layer:
@@ -71,9 +85,9 @@
 **Detailed Description:**
 
     Naming of the layers is relative to the "distance" to the function which represents the core.
-    In case of before advices the outer layer is weaved first, then the middle layer and finally the inner layer.
-    For after advices this is the other way around and for around advice it is a capsulation with results in the
-    same order as for the before and after advices combined.
+    In case of before advices the outer layer is weaved first, then the middle layer and finally
+    the inner layer. For after advices this is the other way around and for around advice it is a
+    capsulation with results in the same order as for the before and after advices combined.
 
 
 .. _core_aspect_ah_outer_layer:
@@ -97,14 +111,12 @@
 ``where`` (Pointcut)
 --------------------
 
-**Brief Description:** A virtual placeholder for the pointcut that is used used in the main
+**Brief Description:** A virtual placeholder for the pointcut that is used in the main advice of each aspect.
 
 **Detailed Description:**
 
-    advice of each aspect.
-    This pointcut is can be overridden by derived aspects if they want to change it
-    form the default implementation.
-    The default implementation is the default_where() pointcut.
+    This pointcut is can be overridden by derived aspects if they want to change it form the
+    default implementation.
 
 *In file* ``src/core/core_aspect.hh``
 

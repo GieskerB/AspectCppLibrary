@@ -166,27 +166,41 @@
 <p><strong>Brief Description:</strong> This aspect is used to handle stack traces and print them when an uncaught exception occurs.</p>
 <p><strong>Detailed Description:</strong></p>
 <blockquote>
-<div><p>This aspect uses the acp::StackTraceMsgBuilder to build the messages for the stack trace and the
-acp::printer to print them.
-By default this aspect will always trigger when an uncaught exception would leave the main function.</p>
+<div><p>This aspect collects the recent call history in the event of a thrown exception. When the exception is
+caught eventually or changes to a different one, the corrected data will be discarded.
+Upon an thrown exception reaching and leaving a join point marked with the acp::fallback attribute the
+stack trace will be printed.
+The message itself is shaped by the “build_msg()” function. You can replace its content easily by
+writing an aspect to replace it.
+The preferred printing device, which is provided to the constructor, is used to make an output.</p>
 </div></blockquote>
 <p><em>In file</em> <code class="docutils literal notranslate"><span class="pre">src/error_handling/stack_trace.ah</span></code></p>
 <section id="acp-fallback-attribute">
 <span id="stack-trace-ah-acpfallback"></span><h2><code class="docutils literal notranslate"><span class="pre">acp::fallback</span></code> (Attribute)<a class="headerlink" href="#acp-fallback-attribute" title="Link to this heading">¶</a></h2>
-<p><strong>Brief Description:</strong> This attribute is used to mark functions that should be used to trigger the stacktrace</p>
+<p><strong>Brief Description:</strong> Triggers the printing of the stacktrace if a thrown exception leaves the scope of a join point.</p>
 <p><strong>Detailed Description:</strong></p>
 <blockquote>
-<div><p>in case this function does not catch an exception.</p>
+<div><p>Specially recommended to use this attribute in multithreaded applications, because the standard fall-
+back function “main()”” is never reached for all but one thread.</p>
+</div></blockquote>
+</section>
+<section id="acp-ignore-trace-attribute">
+<span id="stack-trace-ah-acpignore-trace"></span><h2><code class="docutils literal notranslate"><span class="pre">acp::ignore_trace</span></code> (Attribute)<a class="headerlink" href="#acp-ignore-trace-attribute" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> This attribute can be used to exclude certain join points form being affected by this aspect.</p>
+<p><strong>Detailed Description:</strong></p>
+<blockquote>
+<div><p>If a scope already is annotated with this aspect’s attribute, individual join points within can be
+excluded with this attribute.
+Not recommend to use this, because of the same reason that the trace attribute is currently unused:
+By excluding join points from the stacktrace the resulting stacktrace will be incomplete.</p>
 </div></blockquote>
 </section>
 <section id="acp-trace-attribute">
 <span id="stack-trace-ah-acptrace"></span><h2><code class="docutils literal notranslate"><span class="pre">acp::trace</span></code> (Attribute)<a class="headerlink" href="#acp-trace-attribute" title="Link to this heading">¶</a></h2>
-<p><strong>Brief Description:</strong> This attribute is used to mark functions that should be traced for stack traces.</p>
+<p><strong>Brief Description:</strong> Triggers the appearance of a join point in the case of an uncaught exception in the stacktrace.</p>
 <p><strong>Detailed Description:</strong></p>
 <blockquote>
-<div><p>This attribute is not necessary by default, since the aspect acts globally from the beginning.
-But it can be used, if the developer wants to limit the stack trace to specific functions.
-Then they have to disable the global pointcut first.</p>
+<div><p>Useless by default, since the aspect is applied to every join point by default.</p>
 </div></blockquote>
 </section>
 <section id="build-msg-function">
@@ -209,16 +223,11 @@ own implementation. Use a around advice for that.</p>
 </section>
 <section id="fallback-advice-advice">
 <span id="stack-trace-ah-fallback-advice"></span><h2><code class="docutils literal notranslate"><span class="pre">fallback-advice</span></code> (Advice)<a class="headerlink" href="#fallback-advice-advice" title="Link to this heading">¶</a></h2>
-<p><strong>Brief Description:</strong> Advice handles the StackTrace printing when an uncaught exception leaves the function of the pointcut.</p>
+<p><strong>Brief Description:</strong> This advice handles the StackTrace printing when an uncaught exception leaves the function of the pointcut.</p>
 </section>
 <section id="fallback-func-pointcut">
 <span id="stack-trace-ah-fallback-func"></span><h2><code class="docutils literal notranslate"><span class="pre">fallback_func</span></code> (Pointcut)<a class="headerlink" href="#fallback-func-pointcut" title="Link to this heading">¶</a></h2>
-<p><strong>Brief Description:</strong> This pointcut matches all functions that are marked with the acp::fallback attribute.</p>
-<p><strong>Detailed Description:</strong></p>
-<blockquote>
-<div><p>Any functions marked with this attribute or the main function will trigger the stack trace to
-be printed if an uncaught exception leaves the function.</p>
-</div></blockquote>
+<p><strong>Brief Description:</strong> The set of all join points that are marked with the acp::fallback attribute plus the main function.</p>
 </section>
 <section id="ignore-pointcut">
 <span id="stack-trace-ah-ignore"></span><h2><code class="docutils literal notranslate"><span class="pre">ignore</span></code> (Pointcut)<a class="headerlink" href="#ignore-pointcut" title="Link to this heading">¶</a></h2>
@@ -226,7 +235,7 @@ be printed if an uncaught exception leaves the function.</p>
 </section>
 <section id="print-stack-trace-function">
 <span id="stack-trace-ah-print-stack-trace"></span><h2><code class="docutils literal notranslate"><span class="pre">print_stack_trace</span></code> (Function)<a class="headerlink" href="#print-stack-trace-function" title="Link to this heading">¶</a></h2>
-<p><strong>Brief Description:</strong> this function handles everything related to printing the stack trace.</p>
+<p><strong>Brief Description:</strong> This method handles everything related to printing the stack trace.</p>
 <p><strong>Detailed Description:</strong></p>
 <blockquote>
 <div><p>In case a developer wants to change the way the stack trace is printed from the ground up,

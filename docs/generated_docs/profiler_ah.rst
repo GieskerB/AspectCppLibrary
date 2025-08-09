@@ -9,6 +9,9 @@
 
     Creates a grouped list by signature name of all profiled functions and methods. The list is printed
     after the execution of the main function.
+    The list entries themself are shaped by the "build_msg()" function. You can replace its content
+    easily by writing an aspect to replace it.
+    The preferred printing device, which is provided to the constructor, is used to make an output.
 
 *In file* ``src/understanding/profiler.ah``
 
@@ -18,6 +21,28 @@
 -----------------------------
 
 **Brief Description:** This constructor initializes the profiler with a builder, printer and thread controller.
+
+
+.. _profiler_ah_acpignore_profile:
+
+``acp::ignore_profile`` (Attribute)
+-----------------------------------
+
+**Brief Description:** This attribute can be used to exclude certain join points form being affected by this aspect.
+
+**Detailed Description:**
+
+    ()
+    If a scope already is annotated with this aspect's attribute, individual join points within can be
+    excluded with this attribute.
+
+
+.. _profiler_ah_acpprofile:
+
+``acp::profile`` (Attribute)
+----------------------------
+
+**Brief Description:** This attribute is used to mark join points that should be profiled.
 
 
 .. _profiler_ah_build_msg:
@@ -43,6 +68,7 @@
 ``ignore`` (Pointcut)
 ---------------------
 
+
 *See:* :ref:`CoreAspect::ignore <core_aspect_ah_ignore>`
 
 .. _profiler_ah_profile-advice:
@@ -50,7 +76,7 @@
 ``profile-advice`` (Advice)
 ---------------------------
 
-**Brief Description:** This advice is executed around the execution of functions or methods marked with the profile attribute.
+**Brief Description:** This advice collects relevant data and stores it for later use.
 
 **Detailed Description:**
 
@@ -59,25 +85,18 @@
     The profiling data is updated in a thread-safe manner using the ThreadController.
 
 
-.. _profiler_ah_profile:
-
-``profile`` (Attribute)
------------------------
-
-**Brief Description:** This attribute is used to mark functions, classes or namespaces that should be profiled.
-
+*See:* ``acp::ProfilerData``
 
 .. _profiler_ah_register-advice:
 
 ``register-advice`` (Advice)
 ----------------------------
 
-**Brief Description:** This advice is executed after the main function has finished executing and registers the
+**Brief Description:** This advice registers the summary function to at_exit to delay the printing as much as possible.
 
 **Detailed Description:**
 
-    summary function to be called at exit.
-    Atexit will receive the result of the \see summary() function. it expects a function pointer to
+    Atexit will receive the result of the function. it expects a function pointer to
     a function that returns void and takes no arguments and is not class bound. Using the atexit()
     function, the most amount of information can be gathered about the program before it exits.
 
@@ -111,6 +130,7 @@
 
 ``where`` (Pointcut)
 --------------------
+
 
 *See:* :ref:`CoreAspect::where <core_aspect_ah_where>`
 

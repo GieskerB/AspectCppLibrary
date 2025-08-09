@@ -7,34 +7,52 @@
 
 **Detailed Description:**
 
-    This aspect supports three different attributes: acp::after_logging, acp::around_logging and acp::before_logging.
-    Depending on the choosen attribute the logging happens at the expected point relative to the execution
-    Similar to the `AfterLogging` aspect, this aspect logs the function signature - but only - before the function will execute.
+    With the default configuration of this aspect the function signature will be printed alongside the
+    "action" relative to the function: Entering od leaving.
+    This aspect supports three different attributes: acp::after_logging, acp::around_logging and
+    acp::before_logging. Depending on the choosen attribute the logging happens at the expected point
+    relative to the execution.
+    The messages themself are shaped by the "build_msg()", "build_before_msg()" and "build_after_msg"
+    function. You can replace its content easily by writing an aspect to replace it.
+    The preferred printing device, which is provided to the constructor, is used to make an output.
 
 *In file* ``src/functionality/logging.ah``
 
-.. _logging_ah_after_logging:
+.. _logging_ah_acpafter_logging:
 
-``after_logging`` (Attribute)
------------------------------
+``acp::after_logging`` (Attribute)
+----------------------------------
 
-**Brief Description:** Functions with this attribute will be logged after their execution.
-
-
-.. _logging_ah_around_logging:
-
-``around_logging`` (Attribute)
-------------------------------
-
-**Brief Description:** Functions with this attribute will be logged before and after their execution.
+**Brief Description:** Triggers a join point signature logging after their execution.
 
 
-.. _logging_ah_before_logging:
+.. _logging_ah_acparound_logging:
 
-``before_logging`` (Attribute)
-------------------------------
+``acp::around_logging`` (Attribute)
+-----------------------------------
 
-**Brief Description:** Functions with this attribute will be logged before their execution.
+**Brief Description:** Triggers a join point signature logging before and after their execution.
+
+
+.. _logging_ah_acpbefore_logging:
+
+``acp::before_logging`` (Attribute)
+-----------------------------------
+
+**Brief Description:** Triggers a join point signature logging before their execution.
+
+
+.. _logging_ah_acpignore_logging:
+
+``acp::ignore_logging`` (Attribute)
+-----------------------------------
+
+**Brief Description:** This attribute can be used to exclude certain join points form being affected by this aspect.
+
+**Detailed Description:**
+
+    If a scope already is annotated with this aspect's attribute, individual join points within can be
+    excluded with this attribute.
 
 
 .. _logging_ah_build_after_msg:
@@ -97,6 +115,7 @@
 ``ignore`` (Pointcut)
 ---------------------
 
+
 *See:* :ref:`CoreAspect::ignore <core_aspect_ah_ignore>`
 
 .. _logging_ah_logging-adviceafter:
@@ -104,7 +123,7 @@
 ``logging-advice[after]`` (Advice)
 ----------------------------------
 
-**Brief Description:** This advice handles the logging behavior after the function executes.
+**Brief Description:** This advice handles the logging after the function executes.
 
 
 .. _logging_ah_logging-advicearound:
@@ -112,7 +131,11 @@
 ``logging-advice[around]`` (Advice)
 -----------------------------------
 
-**Brief Description:** This advice handles the logging behavior before and after the function executes.
+**Brief Description:** This advice handles the logging before and after the function executes.
+
+**Detailed Description:**
+
+    Notice that this advice uses the where join point which is by default set to acp::around:logging.
 
 
 .. _logging_ah_logging-advicebefore:
@@ -120,7 +143,7 @@
 ``logging-advice[before]`` (Advice)
 -----------------------------------
 
-**Brief Description:** This advice handles the logging behavior before the function executes.
+**Brief Description:** This advice handles the logging before the function executes.
 
 
 .. _logging_ah_where:
@@ -130,9 +153,10 @@
 
 **Detailed Description:**
 
-    A little bonus for this aspect is that there are 3 attributes [after, around, before]
-    Since, where can no be every attribute at once, the around_logging is the default
-    implementation. However, separate advices for the remaining attributes is provided anyways.
+    This aspect comes with three different attributes all having a similar effect. This is not
+    foreseen in the design idea of this library. Therefore, this aspect only has two always
+    active attributes and only one "configurable": acp::around_logging.
+
 
 *See:* :ref:`CoreAspect::where <core_aspect_ah_where>`
 

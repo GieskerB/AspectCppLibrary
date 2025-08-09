@@ -173,14 +173,24 @@ points (where the aspect should be applied).
 The ignore pointcut is used to define which join points should be ignored by the aspect.</p>
 </div></blockquote>
 <p><em>In file</em> <code class="docutils literal notranslate"><span class="pre">src/core/core_aspect.ah</span></code></p>
-<section id="ignore-pointcut">
-<span id="core-aspect-ah-ignore"></span><h2><code class="docutils literal notranslate"><span class="pre">ignore</span></code> (Pointcut)<a class="headerlink" href="#ignore-pointcut" title="Link to this heading">¶</a></h2>
-<p><strong>Brief Description:</strong> A virtual placeholder for the pointcut that describes which join points</p>
+<section id="ignore-everything-attribute">
+<span id="core-aspect-ah-ignore-everything"></span><h2><code class="docutils literal notranslate"><span class="pre">ignore_everything</span></code> (Attribute)<a class="headerlink" href="#ignore-everything-attribute" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> This attribute can be used to remove every aspect form a specific join point.</p>
 <p><strong>Detailed Description:</strong></p>
 <blockquote>
-<div><p>should be ignored by the aspect.
-It is recommended to use and extend a pointcut definition like with:
-within(“&lt;AspectName&gt;”) || within(“acp”)</p>
+<div><p>Many attributes can be used for an entire class or namespace. In case you want to
+exclude only a few join points from the weaving process, you can use this attribute.
+Use this attribute with caution due to its huge impact on EVERY aspect from this library!</p>
+</div></blockquote>
+</section>
+<section id="ignore-pointcut">
+<span id="core-aspect-ah-ignore"></span><h2><code class="docutils literal notranslate"><span class="pre">ignore</span></code> (Pointcut)<a class="headerlink" href="#ignore-pointcut" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> A virtual placeholder for the pointcut that describes which join points should be ignored by the aspect.</p>
+<p><strong>Detailed Description:</strong></p>
+<blockquote>
+<div><p>It is recommended to use and extend a pointcut definition like with:
+within(“&lt;AspectName&gt;”) || within(“acp”)
+As well as the execution of the aspect specific ignore attributes.</p>
 </div></blockquote>
 </section>
 <section id="inner-layer-attribute">
@@ -213,9 +223,9 @@ same layer is no further order.</p>
 <p><strong>Detailed Description:</strong></p>
 <blockquote>
 <div><p>Naming of the layers is relative to the “distance” to the function which represents the core.
-In case of before advices the outer layer is weaved first, then the middle layer and finally the inner layer.
-For after advices this is the other way around and for around advice it is a capsulation with results in the
-same order as for the before and after advices combined.</p>
+In case of before advices the outer layer is weaved first, then the middle layer and finally
+the inner layer. For after advices this is the other way around and for around advice it is a
+capsulation with results in the same order as for the before and after advices combined.</p>
 </div></blockquote>
 </section>
 <section id="outer-layer-attribute">
@@ -232,13 +242,11 @@ same layer is no further order.</p>
 </section>
 <section id="where-pointcut">
 <span id="core-aspect-ah-where"></span><h2><code class="docutils literal notranslate"><span class="pre">where</span></code> (Pointcut)<a class="headerlink" href="#where-pointcut" title="Link to this heading">¶</a></h2>
-<p><strong>Brief Description:</strong> A virtual placeholder for the pointcut that is used used in the main</p>
+<p><strong>Brief Description:</strong> A virtual placeholder for the pointcut that is used in the main advice of each aspect.</p>
 <p><strong>Detailed Description:</strong></p>
 <blockquote>
-<div><p>advice of each aspect.
-This pointcut is can be overridden by derived aspects if they want to change it
-form the default implementation.
-The default implementation is the default_where() pointcut.</p>
+<div><p>This pointcut is can be overridden by derived aspects if they want to change it form the
+default implementation.</p>
 </div></blockquote>
 <p><em>In file</em> <code class="docutils literal notranslate"><span class="pre">src/core/core_aspect.hh</span></code></p>
 </section>

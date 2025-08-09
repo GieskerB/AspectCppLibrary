@@ -3,6 +3,7 @@
 #include <string>
 #include <cerrno>
 #include <cstring>
+#include <stdexcept>
 
 #include "../core/custom_to_string.hh"
 

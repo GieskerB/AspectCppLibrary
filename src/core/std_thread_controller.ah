@@ -10,7 +10,7 @@
  * \file src/core/std_thread_controller.hh
  * \brief Standard thread controller using std::mutex.
  *
- * This class implements the ThreadController interface using std::mutex for thread safety.
+ * This aspect implements the ThreadController interface using std::mutex for thread safety.
  * It provides methods to acquire and release locks, and to get the unique identifier of the current thread.
  */
 aspect StdThreadController{

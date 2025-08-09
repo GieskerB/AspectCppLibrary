@@ -7,9 +7,13 @@
 
 **Detailed Description:**
 
-    This aspect uses the acp::StackTraceMsgBuilder to build the messages for the stack trace and the
-    acp::printer to print them.
-    By default this aspect will always trigger when an uncaught exception would leave the main function.
+    This aspect collects the recent call history in the event of a thrown exception. When the exception is
+    caught eventually or changes to a different one, the corrected data will be discarded.
+    Upon an thrown exception reaching and leaving a join point marked with the acp::fallback attribute the
+    stack trace will be printed.
+    The message itself is shaped by the "build_msg()" function. You can replace its content easily by
+    writing an aspect to replace it.
+    The preferred printing device, which is provided to the constructor, is used to make an output.
 
 *In file* ``src/error_handling/stack_trace.ah``
 
@@ -18,11 +22,27 @@
 ``acp::fallback`` (Attribute)
 -----------------------------
 
-**Brief Description:** This attribute is used to mark functions that should be used to trigger the stacktrace
+**Brief Description:** Triggers the printing of the stacktrace if a thrown exception leaves the scope of a join point.
 
 **Detailed Description:**
 
-    in case this function does not catch an exception.
+    Specially recommended to use this attribute in multithreaded applications, because the standard fall-
+    back function "main()"" is never reached for all but one thread.
+
+
+.. _stack_trace_ah_acpignore_trace:
+
+``acp::ignore_trace`` (Attribute)
+---------------------------------
+
+**Brief Description:** This attribute can be used to exclude certain join points form being affected by this aspect.
+
+**Detailed Description:**
+
+    If a scope already is annotated with this aspect's attribute, individual join points within can be
+    excluded with this attribute.
+    Not recommend to use this, because of the same reason that the trace attribute is currently unused:
+    By excluding join points from the stacktrace the resulting stacktrace will be incomplete.
 
 
 .. _stack_trace_ah_acptrace:
@@ -30,13 +50,11 @@
 ``acp::trace`` (Attribute)
 --------------------------
 
-**Brief Description:** This attribute is used to mark functions that should be traced for stack traces.
+**Brief Description:** Triggers the appearance of a join point in the case of an uncaught exception in the stacktrace.
 
 **Detailed Description:**
 
-    This attribute is not necessary by default, since the aspect acts globally from the beginning.
-    But it can be used, if the developer wants to limit the stack trace to specific functions.
-    Then they have to disable the global pointcut first.
+    Useless by default, since the aspect is applied to every join point by default.
 
 
 .. _stack_trace_ah_build_msg:
@@ -64,7 +82,7 @@
 ``fallback-advice`` (Advice)
 ----------------------------
 
-**Brief Description:** Advice handles the StackTrace printing when an uncaught exception leaves the function of the pointcut.
+**Brief Description:** This advice handles the StackTrace printing when an uncaught exception leaves the function of the pointcut.
 
 
 .. _stack_trace_ah_fallback_func:
@@ -72,18 +90,14 @@
 ``fallback_func`` (Pointcut)
 ----------------------------
 
-**Brief Description:** This pointcut matches all functions that are marked with the acp::fallback attribute.
-
-**Detailed Description:**
-
-    Any functions marked with this attribute or the main function will trigger the stack trace to
-    be printed if an uncaught exception leaves the function.
+**Brief Description:** The set of all join points that are marked with the acp::fallback attribute plus the main function.
 
 
 .. _stack_trace_ah_ignore:
 
 ``ignore`` (Pointcut)
 ---------------------
+
 
 *See:* :ref:`CoreAspect::ignore <core_aspect_ah_ignore>`
 
@@ -92,7 +106,7 @@
 ``print_stack_trace`` (Function)
 --------------------------------
 
-**Brief Description:** this function handles everything related to printing the stack trace.
+**Brief Description:** This method handles everything related to printing the stack trace.
 
 **Detailed Description:**
 
@@ -117,6 +131,7 @@
 
 ``where`` (Pointcut)
 --------------------
+
 
 *See:* :ref:`CoreAspect::where <core_aspect_ah_where>`
 

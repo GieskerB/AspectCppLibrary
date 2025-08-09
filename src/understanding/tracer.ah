@@ -8,6 +8,8 @@
 #include "../core/custom_to_string.hh"
 #include "tracer_data.hh"
 
+#include <vector>
+
 namespace acp {
 	/**
 	 * \attribute acp::trace

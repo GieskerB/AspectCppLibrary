@@ -1,7 +1,7 @@
 #ifndef __ACP__STACK_TRACE_AH__
 #define __ACP__STACK_TRACE_AH__
 
-#include <exception>
+#include <stdexcept>
 #include <string>
 #include <vector>
 #include <cstdlib>

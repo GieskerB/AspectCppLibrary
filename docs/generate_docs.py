@@ -76,7 +76,7 @@ class DocEntry:
 
         # Add \see information if present
         if self.see_also:
-            rst_content.append('*See:* ')
+            rst_content.append('\n*See:* ')
             formatted_links = []
             for item in self.see_also:
                 formatted_links.append(self._format_see_link(item))
@@ -274,7 +274,7 @@ def process_project_directory(root_dir, output_rst_dir):
                             if main_heading_entity.file_tag:
                                 f.write(f'*In file* ``{main_heading_entity.file_tag}``\n')
                             if main_heading_entity.see_also:
-                                f.write('*See:* ')
+                                f.write('\n*See:* ')
                                 formatted_links = []
                                 for item in main_heading_entity.see_also:
                                     formatted_links.append(main_heading_entity._format_see_link(item))

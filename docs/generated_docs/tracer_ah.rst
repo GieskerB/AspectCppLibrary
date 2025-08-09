@@ -9,6 +9,9 @@
 
     Creates a ordered list of all traced functions and methods. The list is printed after the
     execution of the main function.
+    The list entries themself are shaped by the "build_msg()" function. You can replace its content
+    easily by writing an aspect to replace it.
+    The preferred printing device, which is provided to the constructor, is used to make an output.
 
 *In file* ``src/understanding/tracer.ah``
 
@@ -18,6 +21,27 @@
 -----------------------------
 
 **Brief Description:** This constructor initializes the tracer with a builder, printer and thread controller.
+
+
+.. _tracer_ah_acpignore_trace:
+
+``acp::ignore_trace`` (Attribute)
+---------------------------------
+
+**Brief Description:** This attribute can be used to exclude certain join points form being affected by this aspect.
+
+**Detailed Description:**
+
+    If a scope already is annotated with this aspect's attribute, individual join points within can be
+    excluded with this attribute.
+
+
+.. _tracer_ah_acptrace:
+
+``acp::trace`` (Attribute)
+--------------------------
+
+**Brief Description:** This attribute is used to mark join points that should be traced.
 
 
 .. _tracer_ah_build_msg:
@@ -43,6 +67,7 @@
 ``ignore`` (Pointcut)
 ---------------------
 
+
 *See:* :ref:`CoreAspect::ignore <core_aspect_ah_ignore>`
 
 .. _tracer_ah_register-advice:
@@ -50,12 +75,11 @@
 ``register-advice`` (Advice)
 ----------------------------
 
-**Brief Description:** This advice is executed after the main function has finished executing and registers the
+**Brief Description:** This advice registers the summary function to at_exit to delay the printing as much as possible.
 
 **Detailed Description:**
 
-    summary function to be called at exit.
-    Atexit will receive the result of the \see summary() function. it expects a function pointer to
+    Atexit will receive the result of the summary() function. it expects a function pointer to
     a function that returns void and takes no arguments and is not class bound. Using the atexit()
     function, the most amount of information can be gathered about the program before it exits.
 
@@ -99,18 +123,13 @@
     The tracing data is updated in a thread-safe manner using the ThreadController.
 
 
-.. _tracer_ah_trace:
-
-``trace`` (Attribute)
----------------------
-
-**Brief Description:** This attribute is used to mark functions, classes or namespaces that should be traced.
-
+*See:* ``acp::TracerData``
 
 .. _tracer_ah_where:
 
 ``where`` (Pointcut)
 --------------------
+
 
 *See:* :ref:`CoreAspect::where <core_aspect_ah_where>`
 

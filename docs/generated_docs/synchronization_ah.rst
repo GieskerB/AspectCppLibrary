@@ -8,8 +8,8 @@
 **Detailed Description:**
 
     By using an aspect which implements the thread controller interface, an thread exclusive execution
-    per function is guaranteed. With the use of a mutex any thread will wait until the previous one
-    finished executing the function.
+    per function is guaranteed. With the use of a mutex (at least for the two default thread controllers)
+    any thread will wait until the previous one finished executing the function.
     There will be no performance loss, if the thread interface is not implemented, but this aspect sill used.
 
 *In file* ``src/functionality/synchronization.ah``
@@ -19,7 +19,28 @@
 ``threadsafe_execution`` (Aspect)
 ---------------------------------
 
-**Brief Description:** Wrapping the intended function execution in a mutex lock.
+**Brief Description:** This advice wraps the intended function execution in a mutex lock.
+
+
+.. _synchronization_ah_acpignore_synchronized:
+
+``acp::ignore_synchronized`` (Attribute)
+----------------------------------------
+
+**Brief Description:** This attribute can be used to exclude certain join points form being affected by this aspect.
+
+**Detailed Description:**
+
+    If a scope already is annotated with this aspect's attribute, individual join points within can be
+    excluded with this attribute.
+
+
+.. _synchronization_ah_acpsynchronized:
+
+``acp::synchronized`` (Attribute)
+---------------------------------
+
+**Brief Description:** Triggers an synchronized call to every marked join point.
 
 
 .. _synchronization_ah_ignore:
@@ -27,20 +48,14 @@
 ``ignore`` (Pointcut)
 ---------------------
 
+
 *See:* :ref:`CoreAspect::ignore <core_aspect_ah_ignore>`
-
-.. _synchronization_ah_synchronized:
-
-``synchronized`` (Attribute)
-----------------------------
-
-**Brief Description:** Any function with this attribute can only have one thread at a time executing it
-
 
 .. _synchronization_ah_where:
 
 ``where`` (Pointcut)
 --------------------
+
 
 *See:* :ref:`CoreAspect::where <core_aspect_ah_where>`
 

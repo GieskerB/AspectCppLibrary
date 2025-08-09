@@ -10,7 +10,7 @@
  * \file src/core/p_thread_controller.hh
  * \brief Thread controller using pthreads for synchronization.
  *
- * This class implements the ThreadController interface using pthread mutexes for thread safety.
+ * This aspect implements the ThreadController interface using pthread mutexes for thread safety.
  * It provides methods to acquire and release locks, and to get the unique identifier of the current thread.
  */
 aspect PThreadController {

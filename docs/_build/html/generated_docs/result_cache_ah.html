@@ -163,29 +163,38 @@
                             
   <section id="resultcache">
 <h1><code class="docutils literal notranslate"><span class="pre">ResultCache</span></code><a class="headerlink" href="#resultcache" title="Link to this heading">¶</a></h1>
-<p><strong>Brief Description:</strong> Caches the result of a function based on its arguments.</p>
+<p><strong>Brief Description:</strong> This aspect caches the result of a function based on its arguments.</p>
 <p><strong>Detailed Description:</strong></p>
 <blockquote>
-<div><p>Possibly reducing the execution time of functions that are called multiple times with the
-same arguments.</p>
+<div><p>To potentially reduce runtime this aspects checks a result cache per join point to see if the same inputs
+were inserted previously. In that case simple return the value from the cache instead of recalculation it.
+Make sure to only use this aspect on functions there the output is only dependent on the arguments and
+nothing more like global or member variables.
+Unfortunately, it does only work is all operators are standard primitive data types, due to limitations
+in the AspectC++ language. It is currently not possible to get the type of each parameter directly which
+is necessary for correct hasing.</p>
 </div></blockquote>
 <p><em>In file</em> <code class="docutils literal notranslate"><span class="pre">src/functionality/result_cache.ah</span></code></p>
-<section id="cache-attribute">
-<span id="result-cache-ah-cache"></span><h2><code class="docutils literal notranslate"><span class="pre">cache</span></code> (Attribute)<a class="headerlink" href="#cache-attribute" title="Link to this heading">¶</a></h2>
-<p><strong>Brief Description:</strong> Functions annotated with this attribute will be cached based on their arguments.</p>
+<section id="acp-cache-attribute">
+<span id="result-cache-ah-acpcache"></span><h2><code class="docutils literal notranslate"><span class="pre">acp::cache</span></code> (Attribute)<a class="headerlink" href="#acp-cache-attribute" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> Triggers a cache usage for marked join points.</p>
 <p><strong>Detailed Description:</strong></p>
 <blockquote>
-<div><p>Currently only primitive types and pointers to primitive types are supported.</p>
+<div><p>This attribute makes a join points, for which a result cache should be used.</p>
+</div></blockquote>
+</section>
+<section id="acp-ignore-cache-attribute">
+<span id="result-cache-ah-acpignore-cache"></span><h2><code class="docutils literal notranslate"><span class="pre">acp::ignore_cache</span></code> (Attribute)<a class="headerlink" href="#acp-ignore-cache-attribute" title="Link to this heading">¶</a></h2>
+<p><strong>Brief Description:</strong> This attribute can be used to exclude certain join points form being affected by this aspect.</p>
+<p><strong>Detailed Description:</strong></p>
+<blockquote>
+<div><p>If a scope already is annotated with this aspect’s attribute, individual join points within can be
+excluded with this attribute.</p>
 </div></blockquote>
 </section>
 <section id="caching-advice-advice">
 <span id="result-cache-ah-caching-advice"></span><h2><code class="docutils literal notranslate"><span class="pre">caching-advice</span></code> (Advice)<a class="headerlink" href="#caching-advice-advice" title="Link to this heading">¶</a></h2>
-<p><strong>Brief Description:</strong> Caches the result of a function based on its arguments.</p>
-<p><strong>Detailed Description:</strong></p>
-<blockquote>
-<div><p>This advice will only be applied to functions that are annotated with the
-acp::cache attribute.</p>
-</div></blockquote>
+<p><strong>Brief Description:</strong> This advice caches the result of a function based on its arguments.</p>
 </section>
 <section id="ignore-pointcut">
 <span id="result-cache-ah-ignore"></span><h2><code class="docutils literal notranslate"><span class="pre">ignore</span></code> (Pointcut)<a class="headerlink" href="#ignore-pointcut" title="Link to this heading">¶</a></h2>
