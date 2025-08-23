@@ -1,0 +1,240 @@
+
+
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>DefaultProfiler &mdash; AspectC++ Library 0.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.min.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="DefaultStackTrace" href="default_stack_trace_ah.html" />
+    <link rel="prev" title="DefaultLogging" href="default_logging_ah.html" /> 
+
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <a class="site-nav-toggle hidden-lg-up"><i class="icon-menu"></i></a>
+            <a class="site-title" href="../index.html">
+                AspectC++ Library
+            </a>
+        </div>
+    </header>
+
+
+<div class="breadcrumbs-outer hidden-xs-down">
+    <div class="container">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a></li>
+        
+          <li><a href="../aspects.html">Aspects</a></li>
+        
+      <li><code class="docutils literal notranslate"><span class="pre">DefaultProfiler</span></code></li>
+    
+    
+      <li class="breadcrumbs-aside">
+        
+            
+            <a href="../_sources/generated_docs/default_profiler_ah.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+</div>
+    </div>
+</div>
+    <div class="main-outer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-3 site-nav">
+                    
+<div role="search">
+    <form class="search" action="../search.html" method="get">
+        <div class="icon-input">
+            <input type="text" name="q" placeholder="Search" />
+            <span class="icon-search"></span>
+        </div>
+        <input type="submit" value="Go" class="d-hidden" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+                    <div class="site-nav-tree">
+                        
+                            
+                            
+                                <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../aspects.html">Aspects</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="core_aspect_ah.html"><code class="docutils literal notranslate"><span class="pre">CoreAspect</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="default_logging_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultLogging</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">DefaultProfiler</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="default_stack_trace_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultStackTrace</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="default_tracer_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultTracer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="error_code_converter_ah.html"><code class="docutils literal notranslate"><span class="pre">ErrorCodeConverter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="integer_overflow_check_ah.html"><code class="docutils literal notranslate"><span class="pre">IntegerOverflowCheck</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging_ah.html"><code class="docutils literal notranslate"><span class="pre">Logging</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nullptr_check_ah.html"><code class="docutils literal notranslate"><span class="pre">NullptrCheck</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="p_thread_controller_ah.html"><code class="docutils literal notranslate"><span class="pre">PThreadController</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiler_ah.html"><code class="docutils literal notranslate"><span class="pre">Profiler</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="result_cache_ah.html"><code class="docutils literal notranslate"><span class="pre">ResultCache</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="singleton_ah.html"><code class="docutils literal notranslate"><span class="pre">Singleton</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="stack_trace_ah.html"><code class="docutils literal notranslate"><span class="pre">StackTrace</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="std_thread_controller_ah.html"><code class="docutils literal notranslate"><span class="pre">StdThreadController</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="synchronization_ah.html"><code class="docutils literal notranslate"><span class="pre">Synchronization</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tracer_ah.html"><code class="docutils literal notranslate"><span class="pre">Tracer</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../interfaces.html">Interfaces</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="printer_hh.html"><code class="docutils literal notranslate"><span class="pre">Printer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="thread_controller_hh.html"><code class="docutils literal notranslate"><span class="pre">ThreadController</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../classes.html">Classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cerr_printer_hh.html"><code class="docutils literal notranslate"><span class="pre">CerrPrinter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cout_printer_hh.html"><code class="docutils literal notranslate"><span class="pre">CoutPrinter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ofstream_printer_hh.html"><code class="docutils literal notranslate"><span class="pre">OfstreamPrinter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiler_data_hh.html"><code class="docutils literal notranslate"><span class="pre">ProfilerData</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tracer_data_hh.html"><code class="docutils literal notranslate"><span class="pre">TracerData</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../exceptions.html">Exceptions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="errno_exception_hh.html"><code class="docutils literal notranslate"><span class="pre">ErrnoException</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nullptr_exception_hh.html"><code class="docutils literal notranslate"><span class="pre">NullptrException</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="overflow_exception_hh.html"><code class="docutils literal notranslate"><span class="pre">OverflowException</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../others.html">Other Entities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cerr_printer_hh_src.html">cerr_printer.hh source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_aspect_ah_src.html">core_aspect.ah source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cout_printer_hh_src.html">cout_printer.hh source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="default_logging_ah_src.html">default_logging.ah source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="default_profiler_ah_src.html">default_profiler.ah source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="default_stack_trace_ah_src.html">default_stack_trace.ah source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="default_tracer_ah_src.html">default_tracer.ah source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errno_exception_hh_src.html">errno_exception.hh source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="error_code_converter_ah_src.html">error_code_converter.ah source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integer_overflow_check_ah_src.html">integer_overflow_check.ah source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging_ah_src.html">logging.ah source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nullptr_check_ah_src.html">nullptr_check.ah source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nullptr_exception_hh_src.html">nullptr_exception.hh source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ofstream_printer_hh_src.html">ofstream_printer.hh source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overflow_exception_hh_src.html">overflow_exception.hh source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p_thread_controller_ah_src.html">p_thread_controller.ah source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="predefined_pointcuts_ah.html"><code class="docutils literal notranslate"><span class="pre">PredefinedPointcuts</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="predefined_pointcuts_ah_src.html">predefined_pointcuts.ah source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="printer_hh_src.html">printer.hh source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiler_ah_src.html">profiler.ah source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiler_data_hh_src.html">profiler_data.hh source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="result_cache_ah_src.html">result_cache.ah source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="singleton_ah_src.html">singleton.ah source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stack_trace_ah_src.html">stack_trace.ah source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="std_thread_controller_ah_src.html">std_thread_controller.ah source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="synchronization_ah_src.html">synchronization.ah source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="thread_controller_hh_src.html">thread_controller.hh source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tracer_ah_src.html">tracer.ah source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tracer_data_hh_src.html">tracer_data.hh source code</a></li>
+</ul>
+</li>
+</ul>
+
+                            
+                        
+                    </div>
+                </div>
+                <div class="col-12 col-lg-9">
+                    <div class="document">
+                        
+                            
+  <section id="defaultprofiler">
+<h1><code class="docutils literal notranslate"><span class="pre">DefaultProfiler</span></code><a class="headerlink" href="#defaultprofiler" title="Link to this heading">¶</a></h1>
+<p><a class="reference internal" href="default_profiler_ah_src.html"><span class="doc">Click here to see the source code</span></a></p>
+<p><strong>Brief Description:</strong> DefaultProfiler is the default aspect for profiling in this ACP library.</p>
+<p><strong>Detailed Description:</strong></p>
+<blockquote>
+<div><p>The remaining non project wide configuration of the Profiler aspect is the
+implementation of the printer interface. This aspect provides it with the
+std::cout printer interface implementation.</p>
+</div></blockquote>
+<p><em>In file</em> <code class="docutils literal notranslate"><span class="pre">src/understanding/default_profiler.ah</span></code></p>
+</section>
+
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.1.0',
+            LANGUAGE:'en',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/sphinx_highlight.js"></script>
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+    <div class="footer" role="contentinfo">
+        <div class="container">
+            &#169; Copyright 2025, Bjarne Giesker.
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 7.2.6.
+        </div>
+    </div>  
+
+</body>
+</html>

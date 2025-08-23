@@ -34,6 +34,8 @@ namespace acp {
  * Unfortunately, it does not work with the -> operator, due to limitations in the AspectC++
  * language and the way the builtin 'operator->' is defined.
  *
+ * Make sure to use the '--builtin_operators' console argument when using this aspect
+ *
  * \see acp::NullptrException
  *
  */

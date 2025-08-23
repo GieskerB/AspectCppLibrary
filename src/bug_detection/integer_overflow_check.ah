@@ -34,6 +34,8 @@ namespace acp {
  * 5 unary) integer addition and subtraction operators. In the case that such an over- or underflow will
  * occur an exception will be triggered and the operation will not be performed.
  *
+ * Make sure to use the '--builtin_operators' console argument when using this aspect
+ *
  * \see acp::OverflowException
  */
 aspect [[acp::middle_layer]] IntegerOverflowCheck : public CoreAspect {

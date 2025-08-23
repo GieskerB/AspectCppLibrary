@@ -1,0 +1,327 @@
+
+
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>singleton.ah source code &mdash; AspectC++ Library 0.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.min.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="stack_trace.ah source code" href="stack_trace_ah_src.html" />
+    <link rel="prev" title="result_cache.ah source code" href="result_cache_ah_src.html" /> 
+
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <a class="site-nav-toggle hidden-lg-up"><i class="icon-menu"></i></a>
+            <a class="site-title" href="../index.html">
+                AspectC++ Library
+            </a>
+        </div>
+    </header>
+
+
+<div class="breadcrumbs-outer hidden-xs-down">
+    <div class="container">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a></li>
+        
+          <li><a href="../others.html">Other Entities</a></li>
+        
+      <li>singleton.ah source code</li>
+    
+    
+      <li class="breadcrumbs-aside">
+        
+            
+            <a href="../_sources/generated_docs/singleton_ah_src.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+</div>
+    </div>
+</div>
+    <div class="main-outer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-3 site-nav">
+                    
+<div role="search">
+    <form class="search" action="../search.html" method="get">
+        <div class="icon-input">
+            <input type="text" name="q" placeholder="Search" />
+            <span class="icon-search"></span>
+        </div>
+        <input type="submit" value="Go" class="d-hidden" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+                    <div class="site-nav-tree">
+                        
+                            
+                            
+                                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../aspects.html">Aspects</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="core_aspect_ah.html"><code class="docutils literal notranslate"><span class="pre">CoreAspect</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="default_logging_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultLogging</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="default_profiler_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultProfiler</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="default_stack_trace_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultStackTrace</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="default_tracer_ah.html"><code class="docutils literal notranslate"><span class="pre">DefaultTracer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="error_code_converter_ah.html"><code class="docutils literal notranslate"><span class="pre">ErrorCodeConverter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="integer_overflow_check_ah.html"><code class="docutils literal notranslate"><span class="pre">IntegerOverflowCheck</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging_ah.html"><code class="docutils literal notranslate"><span class="pre">Logging</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nullptr_check_ah.html"><code class="docutils literal notranslate"><span class="pre">NullptrCheck</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="p_thread_controller_ah.html"><code class="docutils literal notranslate"><span class="pre">PThreadController</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiler_ah.html"><code class="docutils literal notranslate"><span class="pre">Profiler</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="result_cache_ah.html"><code class="docutils literal notranslate"><span class="pre">ResultCache</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="singleton_ah.html"><code class="docutils literal notranslate"><span class="pre">Singleton</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="stack_trace_ah.html"><code class="docutils literal notranslate"><span class="pre">StackTrace</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="std_thread_controller_ah.html"><code class="docutils literal notranslate"><span class="pre">StdThreadController</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="synchronization_ah.html"><code class="docutils literal notranslate"><span class="pre">Synchronization</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tracer_ah.html"><code class="docutils literal notranslate"><span class="pre">Tracer</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../interfaces.html">Interfaces</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="printer_hh.html"><code class="docutils literal notranslate"><span class="pre">Printer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="thread_controller_hh.html"><code class="docutils literal notranslate"><span class="pre">ThreadController</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../classes.html">Classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cerr_printer_hh.html"><code class="docutils literal notranslate"><span class="pre">CerrPrinter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cout_printer_hh.html"><code class="docutils literal notranslate"><span class="pre">CoutPrinter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ofstream_printer_hh.html"><code class="docutils literal notranslate"><span class="pre">OfstreamPrinter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiler_data_hh.html"><code class="docutils literal notranslate"><span class="pre">ProfilerData</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tracer_data_hh.html"><code class="docutils literal notranslate"><span class="pre">TracerData</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../exceptions.html">Exceptions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="errno_exception_hh.html"><code class="docutils literal notranslate"><span class="pre">ErrnoException</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nullptr_exception_hh.html"><code class="docutils literal notranslate"><span class="pre">NullptrException</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="overflow_exception_hh.html"><code class="docutils literal notranslate"><span class="pre">OverflowException</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../others.html">Other Entities</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cerr_printer_hh_src.html">cerr_printer.hh source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_aspect_ah_src.html">core_aspect.ah source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cout_printer_hh_src.html">cout_printer.hh source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="default_logging_ah_src.html">default_logging.ah source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="default_profiler_ah_src.html">default_profiler.ah source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="default_stack_trace_ah_src.html">default_stack_trace.ah source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="default_tracer_ah_src.html">default_tracer.ah source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errno_exception_hh_src.html">errno_exception.hh source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="error_code_converter_ah_src.html">error_code_converter.ah source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integer_overflow_check_ah_src.html">integer_overflow_check.ah source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging_ah_src.html">logging.ah source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nullptr_check_ah_src.html">nullptr_check.ah source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nullptr_exception_hh_src.html">nullptr_exception.hh source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ofstream_printer_hh_src.html">ofstream_printer.hh source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overflow_exception_hh_src.html">overflow_exception.hh source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p_thread_controller_ah_src.html">p_thread_controller.ah source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="predefined_pointcuts_ah.html"><code class="docutils literal notranslate"><span class="pre">PredefinedPointcuts</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="predefined_pointcuts_ah_src.html">predefined_pointcuts.ah source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="printer_hh_src.html">printer.hh source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiler_ah_src.html">profiler.ah source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiler_data_hh_src.html">profiler_data.hh source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="result_cache_ah_src.html">result_cache.ah source code</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">singleton.ah source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stack_trace_ah_src.html">stack_trace.ah source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="std_thread_controller_ah_src.html">std_thread_controller.ah source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="synchronization_ah_src.html">synchronization.ah source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="thread_controller_hh_src.html">thread_controller.hh source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tracer_ah_src.html">tracer.ah source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tracer_data_hh_src.html">tracer_data.hh source code</a></li>
+</ul>
+</li>
+</ul>
+
+                            
+                        
+                    </div>
+                </div>
+                <div class="col-12 col-lg-9">
+                    <div class="document">
+                        
+                            
+  <section id="singleton-ah-source-code">
+<h1>singleton.ah source code<a class="headerlink" href="#singleton-ah-source-code" title="Link to this heading">¶</a></h1>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cp">#ifndef __ACP__SINGLETON_AH__</span>
+<span class="linenos"> 2</span><span class="cp">#define __ACP__SINGLETON_AH__</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;../core/core_aspect.ah&quot;</span>
+<span class="linenos"> 5</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;../core/thread_controller.hh&quot;</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="k">namespace</span><span class="w"> </span><span class="nn">acp</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 8</span><span class="w">    </span><span class="cm">/**</span>
+<span class="linenos"> 9</span><span class="cm">     * \attribute acp::singleton</span>
+<span class="linenos">10</span><span class="cm">     * \brief Changes all marked class join points into a singleton.</span>
+<span class="linenos">11</span><span class="cm">     *</span>
+<span class="linenos">12</span><span class="cm">     * This attribute marks a class join point, on which the Singleton aspect should be applied.</span>
+<span class="linenos">13</span><span class="cm">     */</span>
+<span class="linenos">14</span><span class="w">    </span><span class="n">attribute</span><span class="w"> </span><span class="nf">singleton</span><span class="p">();</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="w">    </span><span class="cm">/**</span>
+<span class="linenos">17</span><span class="cm">     * \attribute acp::ignore_singleton</span>
+<span class="linenos">18</span><span class="cm">     * \brief This attribute can be used to exclude certain join points form being affected by this aspect.</span>
+<span class="linenos">19</span><span class="cm">     *</span>
+<span class="linenos">20</span><span class="cm">     * If a scope already is annotated with this aspect&#39;s attribute, individual join points within can be</span>
+<span class="linenos">21</span><span class="cm">     * excluded with this attribute.</span>
+<span class="linenos">22</span><span class="cm">     */</span>
+<span class="linenos">23</span><span class="w">    </span><span class="n">attribute</span><span class="w"> </span><span class="nf">ignore_singleton</span><span class="p">();</span>
+<span class="linenos">24</span><span class="w">    </span><span class="n">slice</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">ACP_Singleton_Slice</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">25</span>
+<span class="linenos">26</span><span class="w">        </span><span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">acp_singleton_allow_construction</span><span class="p">;</span>
+<span class="linenos">27</span>
+<span class="linenos">28</span><span class="w">    </span><span class="k">public</span><span class="o">:</span>
+<span class="linenos">29</span><span class="w">        </span><span class="k">static</span><span class="w"> </span><span class="n">JoinPoint</span><span class="o">::</span><span class="n">That</span><span class="o">&amp;</span><span class="w"> </span><span class="n">get_instance</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">30</span><span class="w">            </span><span class="c1">// This part can not be done 100% thread-safe, but it is sufficient for most use cases.</span>
+<span class="linenos">31</span><span class="w">            </span><span class="n">acp_singleton_allow_construction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="linenos">32</span><span class="w">            </span><span class="k">static</span><span class="w"> </span><span class="n">JoinPoint</span><span class="o">::</span><span class="n">That</span><span class="w"> </span><span class="n">instance</span><span class="p">{};</span>
+<span class="linenos">33</span><span class="w">            </span><span class="n">acp_singleton_allow_construction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="linenos">34</span><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">instance</span><span class="p">;</span>
+<span class="linenos">35</span><span class="w">        </span><span class="p">}</span>
+<span class="linenos">36</span><span class="w">    </span><span class="p">};</span>
+<span class="linenos">37</span>
+<span class="linenos">38</span><span class="w">    </span><span class="n">slice</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">ACP_Singleton_Slice</span><span class="o">::</span><span class="n">acp_singleton_allow_construction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="linenos">39</span><span class="p">}</span>
+<span class="linenos">40</span>
+<span class="linenos">41</span><span class="cm">/**</span>
+<span class="linenos">42</span><span class="cm"> * \aspect Singleton</span>
+<span class="linenos">43</span><span class="cm"> * \file src/design_patterns/singleton.ah</span>
+<span class="linenos">44</span><span class="cm"> * \brief This aspect implements the Singleton design pattern.</span>
+<span class="linenos">45</span><span class="cm"> *</span>
+<span class="linenos">46</span><span class="cm"> * This aspect ensures that any class annotated with this specific attribute can have only</span>
+<span class="linenos">47</span><span class="cm"> * one instance and provides a global access point to that instance. A static get_instance()</span>
+<span class="linenos">48</span><span class="cm"> * method is provided to retrieve the instance, and construction of the singleton instance.</span>
+<span class="linenos">49</span><span class="cm"> *</span>
+<span class="linenos">50</span><span class="cm"> * When calling any constructor of a class annotated with this aspect, a runtime error will</span>
+<span class="linenos">51</span><span class="cm"> * be thrown.</span>
+<span class="linenos">52</span><span class="cm"> */</span>
+<span class="linenos">53</span><span class="n">aspect</span><span class="w"> </span><span class="p">[[</span><span class="n">acp</span><span class="o">::</span><span class="n">inner_layer</span><span class="p">]]</span><span class="w"> </span><span class="n">Singleton</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">CoreAspect</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">54</span>
+<span class="linenos">55</span><span class="w">    </span><span class="k">public</span><span class="o">:</span>
+<span class="linenos">56</span>
+<span class="linenos">57</span><span class="w">     </span><span class="cm">/**</span>
+<span class="linenos">58</span><span class="cm">     * \pointcut where</span>
+<span class="linenos">59</span><span class="cm">     * \see :ref:`CoreAspect::where &lt;core_aspect_ah_where&gt;`</span>
+<span class="linenos">60</span><span class="cm">     */</span>
+<span class="linenos">61</span><span class="w">    </span><span class="n">pointcut</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="n">where</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">acp</span><span class="o">::</span><span class="n">singleton</span><span class="p">();</span>
+<span class="linenos">62</span>
+<span class="linenos">63</span><span class="w">    </span><span class="cm">/**</span>
+<span class="linenos">64</span><span class="cm">     * \pointcut ignore</span>
+<span class="linenos">65</span><span class="cm">     * \see :ref:`CoreAspect::ignore &lt;core_aspect_ah_ignore&gt;`</span>
+<span class="linenos">66</span><span class="cm">     */</span>
+<span class="linenos">67</span><span class="w">    </span><span class="n">pointcut</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="n">ignore</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">acp</span><span class="o">::</span><span class="n">ignore_singleton</span><span class="p">()</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">acp</span><span class="o">::</span><span class="n">ignore_everything</span><span class="p">();</span>
+<span class="linenos">68</span>
+<span class="linenos">69</span><span class="w">    </span><span class="n">Singleton</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+<span class="linenos">70</span><span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="o">~</span><span class="n">Singleton</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
+<span class="linenos">71</span>
+<span class="linenos">72</span><span class="w">    </span><span class="cm">/**</span>
+<span class="linenos">73</span><span class="cm">     * \advice singleton-slice</span>
+<span class="linenos">74</span><span class="cm">     * \brief This advice make the target class a singleton by adding the special slice.</span>
+<span class="linenos">75</span><span class="cm">     */</span>
+<span class="linenos">76</span><span class="w">    </span><span class="n">advice</span><span class="w"> </span><span class="nf">where</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">ignore</span><span class="p">()</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">slice</span><span class="w"> </span><span class="n">acp</span><span class="o">::</span><span class="n">ACP_Singleton_Slice</span><span class="p">;</span>
+<span class="linenos">77</span>
+<span class="linenos">78</span><span class="w">    </span><span class="cm">/**</span>
+<span class="linenos">79</span><span class="cm">     * \advice construction-prevention</span>
+<span class="linenos">80</span><span class="cm">     * \brief This advice prevents the construction of a singleton class directly.</span>
+<span class="linenos">81</span><span class="cm">     */</span>
+<span class="linenos">82</span><span class="w">    </span><span class="n">advice</span><span class="w"> </span><span class="nf">construction</span><span class="p">(</span><span class="n">where</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">ignore</span><span class="p">())</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">around</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">83</span><span class="w">        </span><span class="n">acp</span><span class="o">::</span><span class="n">thread_controller</span><span class="o">::</span><span class="n">acquire_global_lock</span><span class="p">();</span>
+<span class="linenos">84</span><span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">JoinPoint</span><span class="o">::</span><span class="n">That</span><span class="o">::</span><span class="n">acp_singleton_allow_construction</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">85</span><span class="w">            </span><span class="n">tjp</span><span class="o">-&gt;</span><span class="n">proceed</span><span class="p">();</span>
+<span class="linenos">86</span><span class="w">            </span><span class="n">acp</span><span class="o">::</span><span class="n">thread_controller</span><span class="o">::</span><span class="n">release_global_lock</span><span class="p">();</span>
+<span class="linenos">87</span><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">88</span><span class="w">            </span><span class="n">acp</span><span class="o">::</span><span class="n">thread_controller</span><span class="o">::</span><span class="n">release_global_lock</span><span class="p">();</span>
+<span class="linenos">89</span><span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;Singleton construction is not allowed. Use get_instance() instead.&quot;</span><span class="p">);</span>
+<span class="linenos">90</span><span class="w">        </span><span class="p">}</span>
+<span class="linenos">91</span><span class="w">    </span><span class="p">}</span>
+<span class="linenos">92</span><span class="p">};</span>
+<span class="linenos">93</span>
+<span class="linenos">94</span><span class="cp">#endif </span><span class="c1">// __ACP__SINGLETON_AH__</span>
+</pre></div>
+</div>
+</section>
+
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.1.0',
+            LANGUAGE:'en',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/sphinx_highlight.js"></script>
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+    <div class="footer" role="contentinfo">
+        <div class="container">
+            &#169; Copyright 2025, Bjarne Giesker.
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 7.2.6.
+        </div>
+    </div>  
+
+</body>
+</html>
