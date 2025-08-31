@@ -203,37 +203,42 @@ it a proper try.</p>
 providing an implementation for the most common crosscutting concerns as
 so-called aspects.</p>
 </section>
-<section id="how-to-use">
-<h2>How to use<a class="headerlink" href="#how-to-use" title="Link to this heading">¶</a></h2>
 <section id="installation">
-<h3>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h3>
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
+<section id="aspectc">
+<h3>AspectC++<a class="headerlink" href="#aspectc" title="Link to this heading">¶</a></h3>
 <p>Install AspectC++ (ACP) for your current operating system from
 <a class="reference external" href="https://www.aspectc.org/Download.php">here</a>. ACP comes with two
 different executables: ac++ and ag++.</p>
 <p>ac++ is the aspect weaver that converts C++ source code into augmented
 source code, which contains the aspects and their implementations.</p>
 <p>ag++ executes ac++ and also translates the generated source code using
-the standard g++ compiler.</p>
+the local g++ compiler.</p>
+</section>
+<section id="this-library">
+<h3>This Library<a class="headerlink" href="#this-library" title="Link to this heading">¶</a></h3>
+<p>Clone this GitHub repository and move the library folder to your desired
+location. Done!</p>
 </section>
 <section id="implementation">
 <h3>Implementation<a class="headerlink" href="#implementation" title="Link to this heading">¶</a></h3>
 <p>When executing ac++ or ag++ (the latter is recommended), you need to add
-certain command-line flags. The two most important flags are -p | –path
-and -a | –aspect_header. You always need to provide the src/ directory
-of this library with -p as a project path to use its aspects and specify
-with the -a argument which aspect from the library you want to use. The
-last argument is optional but highly recommended because, without it,
-every aspect from the library will be applied by the weaver. The
-documentation contains the file path for each aspect.</p>
-<p>Each aspect is configurable to a certain degree using interfaces, and
-its core depends on only a small set of C++ Standard Library components.
-To use the standard implementation for each aspect, no ACP is required.
-If you want to change the default implementation within the scope of the
-interfaces, that is also possible with minimal effort: Simply create an
-aspect within a .ah file in your project directory and inherit from the
-base implementation of the aspect you want to modify. The syntax is
-nearly identical to C++; just swap the class keyword with aspect.
-Finally, you need to provide the constructor with your own
+certain command-line flags. The two most important flags are
+<code class="docutils literal notranslate"><span class="pre">-p</span> <span class="pre">|</span> <span class="pre">--path</span></code> and <code class="docutils literal notranslate"><span class="pre">-a</span> <span class="pre">|</span> <span class="pre">--aspect_header</span></code>. You always need to provide
+the <code class="docutils literal notranslate"><span class="pre">src</span></code> directory of this library with <code class="docutils literal notranslate"><span class="pre">-p</span></code> as a project path to
+use its aspects and specify with the <code class="docutils literal notranslate"><span class="pre">-a</span></code> argument which aspect from
+the library you want to use. The last argument is optional but highly
+recommended because, without it, every aspect from the library will be
+applied by the weaver. The documentation contains the file path for each
+aspect.</p>
+<p>Each aspect is configurable to a certain degree using interfaces. To use
+the standard implementation for each aspect, no AspectC++ knowledge is
+required. If you want to change the default implementation within the
+scope of the interfaces, that is also possible with minimal effort:
+Simply create an aspect within a .ah file in your project directory and
+inherit from the base implementation of the aspect you want to modify.
+The syntax is nearly identical to C++; just swap the class keyword with
+aspect. Finally, you need to provide the constructor with your own
 implementation of the interfaces from this library.</p>
 </section>
 </section>
